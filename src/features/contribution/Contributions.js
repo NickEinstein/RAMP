@@ -261,7 +261,7 @@ function Contributions(props) {
         <ToDoorSearch />
         <div className="flex justify-between items-center">
           <Typography variant="h5" className="font-bold">
-            MY CONTRIBUTIONS
+            MY DONATIONS
           </Typography>
 
           {/* {section == 2 && (
@@ -286,7 +286,7 @@ function Contributions(props) {
                   className="mr-3"
                   rider={false}
                   big={true}
-                  name="Total Contributions"
+                  name="Total Donations"
                   count={myContributions?.length}
                 />
                 <WallCards
@@ -352,6 +352,18 @@ function Contributions(props) {
                 variant="h6"
                 className="w-1/5 text-center text-[#5C6F7F]"
               >
+                Donated To
+              </Typography>
+              <Typography
+                variant="h6"
+                className="w-1/5 text-center text-[#5C6F7F]"
+              >
+                Title
+              </Typography>
+              <Typography
+                variant="h6"
+                className="w-1/5 text-center text-[#5C6F7F]"
+              >
                 Date
               </Typography>
               {/* <Typography variant="h6" className="w-1/5 text-left ">
@@ -371,9 +383,9 @@ function Contributions(props) {
               <Typography variant="h6" className="w-1/5 text-center ">
                 Status
               </Typography>
-              <Typography variant="h6" className="w-1/5 text-center ">
+              {/* <Typography variant="h6" className="w-1/5 text-center ">
                 Action
-              </Typography>
+              </Typography> */}
             </div>
             {myContributions?.map((e) => (
               <div>
@@ -383,6 +395,24 @@ function Contributions(props) {
                     // onClick={openBelow}
                     className=" mt-2 flex gap-2 w-full  min-h-[50%]"
                   >
+                    <div
+                      className={
+                        props?.jj == "loan"
+                          ? " text-left p-3 w-2/5 "
+                          : " text-center p-3 w-2/5 "
+                      }
+                    >
+                      <Typography variant="">{e?.firstname}</Typography>
+                    </div>
+                    <div
+                      className={
+                        props?.jj == "loan"
+                          ? " text-left p-3 w-2/5 "
+                          : " text-center p-3 w-2/5 "
+                      }
+                    >
+                      <Typography variant="">{e?.title}</Typography>
+                    </div>
                     <div
                       className={
                         props?.jj == "loan"
@@ -446,14 +476,14 @@ function Contributions(props) {
                         {e?.status}
                       </Typography>
                     </div>
-                    <div
+                    {/* <div
                       className={
                         props?.jj == "loan"
                           ? " text-center p-3 w-2/5  hover:text-primary-main cursor-pointer "
                           : " text-center p-3 w-2/5  hover:text-primary-main cursor-pointer  "
                       }
                     >
-                      {/* <Typography
+                      <Typography
                         onClick={() => {
                           setSection(1);
                           setCurrentDetail(e);
@@ -461,8 +491,8 @@ function Contributions(props) {
                         className="font-bold"
                       >
                         View Details
-                      </Typography> */}
-                    </div>
+                      </Typography>
+                    </div> */}
                   </div>
                 </div>
                 {/* )} */}

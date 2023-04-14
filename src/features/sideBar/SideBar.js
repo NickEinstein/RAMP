@@ -113,7 +113,7 @@ export default function PermanentDrawerLeft() {
               color: RouteEnum.DASHBOARD == currentUrl ? true : false,
             },
             {
-              name: "My Contributions",
+              name: "My Donations",
               d: RouteEnum.CONTRIBUTION,
               // image: dashboard,
               color: RouteEnum.CONTRIBUTION == currentUrl ? true : false,
@@ -128,7 +128,7 @@ export default function PermanentDrawerLeft() {
               color: RouteEnum.DASHBOARD == currentUrl ? true : false,
             },
             {
-              name: "Request Donations",
+              name: "Make a request",
               d: RouteEnum.GRANT,
               // image: companies,
               color: RouteEnum.GRANT == currentUrl ? true : false,

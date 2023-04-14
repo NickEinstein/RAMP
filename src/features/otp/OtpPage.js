@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import UserApi from "apis/UserApi";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -19,14 +19,20 @@ import Checkbox from "@mui/material/Checkbox";
 import toDoorLogo from "images/Ellipse 30.png";
 import background from "images/background.png";
 import snake from "images/Mask group.png";
-
+import backgroundImage from "../../images/RampHome1.jpg";
+// import backgroundImage2 from "../../images/rampHome2.jpg";
+import backgroundImage3 from "../../images/ramphome3.jpg";
+import backgroundImage4 from "../../images/ramphome4.jpg";
+import backgroundImage5 from "../../images/ramphome5.jpg";
 // import ReactDOM from 'react-dom';
 // import trustedBy1 from './images/Vector.png'
 import trustedBy2 from "images/Rectangle 7.png";
 import trustedBy3 from "images/Rectangle 106.png";
-// import LoginHeader from './LoginHeader';
-// import trustedBy3 from './images/trustedBy-3.png'
-// import trustedBy4 from './images/trustedBy-4.png'
+import useStepper from "hooks/useStepper";
+import useDataRef from "hooks/useDataRef";
+
+import { useNavigate } from "react-router-dom";
+import { MediaQueryBreakpointEnum } from "constants/Global";
 import {
   Button,
   Divider,
@@ -46,7 +52,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import { post } from "services/fetch";
 
@@ -73,6 +79,29 @@ function OtpPage(props) {
 
     history("/");
   };
+
+  const configs = [
+    {
+      bgColor: "HomeTopSectionBackgroundColor_WomanInRedImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_ManInDreadsImage",
+      textColor: "text-white",
+      image: backgroundImage3,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_headerImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage4,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_headerImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage5,
+    },
+  ];
 
   const pay = async () => {
     console.log(input1Ref.current.value);
@@ -176,6 +205,32 @@ function OtpPage(props) {
     }
   };
 
+   const stepper = useStepper({
+     maxStep: configs.length - 1,
+   });
+
+   const config = configs[stepper.step];
+
+   const dataRef = useDataRef({ stepper });
+
+   useEffect(() => {
+     const intervalId = setInterval(() => {
+       if (dataRef.current.stepper.canNextStep()) {
+         dataRef.current.stepper.nextStep();
+       } else {
+         dataRef.current.stepper.reset();
+       }
+     }, 1000 * 2);
+     return () => {
+       clearInterval(intervalId);
+     };
+
+     //  console.log(stepper)
+   }, [dataRef]);
+
+ 
+
+
   return (
     // <div>
     //  {/* <Typography variant="h6">Hi</Typography> */}
@@ -194,27 +249,51 @@ function OtpPage(props) {
     <div className="">
       <div className="flex ">
         <div
-          className="relative min-h-screen bg-primary-main text-white px-16 py-10 w-2/5"
+          // className="h-screen"
           style={{
-            minWidth: "40%",
-            // minHeight: "100%",
-            position: "relative",
-            // backgroundImage: `url(${snake})`,
-            // minHeight:"500px"
-            // backgroundColor: "green",
+            // background: `url('${configs[stepper.step]?.image}')`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "45%",
           }}
+          className="lg:block items-stretch flex relative min-h-screen bg-transparent text-primary-main px-16 py-10 w-2/5"
         >
-          <div className="flex flex-col gap-16 pt-12">
-            <img className="w-1/5" src={educatiaLogo} />
-            <Typography variant="h4" className=" font-bold">
-              {/* Earn */}
-              Get access to unlimited funds
-            </Typography>
-            <Typography className="text-sm">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit amet,
-            </Typography>
+          <div>
+            <img
+              className="min-h-screen absolute top-0 -z-20 min-w-[105%] left-0 flex self-stretch"
+              src={configs[stepper.step]?.image}
+            />
+            {/* <div className="self-stretch w-1/2 hidden md:flex items-end">
+              <div className="relative w-full" style={{ height: 620 }}>
+                {configs.map((step, index) => (
+                  <Fade
+                    key={index}
+                    in={stepper.step === index}
+                    timeout={500}
+                    className="absolute block top-0 w-full h-full"
+                  >
+                    <img alt={index} src={step.image} />
+                  </Fade>
+                ))}
+              </div>
+            </div> */}
+
+            <div className="flex flex-col gap-16 text-white">
+              {/* <img className="w-1/5" src={educatiaLogo} /> */}
+              <Typography className=" font-bold" variant="h2">
+                RAMP
+              </Typography>
+              <Typography variant="h4" className=" font-bold md:mt-24">
+                {/* Earn */}
+                Get access to unlimited funds
+              </Typography>
+              <Typography className="text-sm">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                aliquam erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit
+                amet,
+              </Typography>
+            </div>
           </div>
         </div>
         <div className="p-8 pr-[12%] pl-[8%] pt-16 w-full">

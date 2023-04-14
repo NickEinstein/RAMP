@@ -200,9 +200,9 @@ function DashboardDonor(props) {
 
   useEffect(() => {
     getGrants();
-    getLoans();
-    getScholarships();
-    getEduInvests();
+    // getLoans();
+    // getScholarships();
+    // getEduInvests();
   }, []);
   const getLoans = async () => {
     const res = await get({
@@ -255,7 +255,7 @@ function DashboardDonor(props) {
     formData.append("to", title);
     formData.append("contributable_id", learnMoreDetails?.id);
     formData.append("attachments[]", attachment);
-    formData.append("amount", learnMoreDetails?.amount);
+    formData.append("amount", amount);
     formData.append("note", "I like you");
 
     const res = await post({
@@ -288,88 +288,93 @@ function DashboardDonor(props) {
       </div>
 
       <div>
-        <div className="flex items-end mr-3 mt-12">
-          <div>
-            <div className="flex gap-4">
-              <div
-                onClick={() => {
-                  setdisplayArray(grants);
-                  setTitle("Donation Requests");
-                  setSection(0);
-                  setlearnMore(false);
-                }}
-              >
-                <WallCards
-                  className="mr-3"
-                  rider={false}
-                  big={true}
-                  name="Total Requests"
-                  count={grants?.length}
-                />
-              </div>
-            
-            </div>
-          </div>
-        </div>
-
-        <Typography variant="h6" className="font-bold mt-8">
-          Available Requests
-        </Typography>
-
-        <Divider className="mb-6 p-1" />
-
         {!learnMore && (
-          <div className="grid grid-cols-3 gap-4">
-            {displayArray?.map((e, index) => (
-              <div key={index}>
-                <div>
-                  <img src={educatialGrantPNG} />
-                </div>
-                <div className="flex flex-col gap-4">
-                  <div className="flex gap-3 mt-4">
-                    <Avatar className="h-12 w-12" src={educatialGrantPNG} />
-
-                    <Typography className="font-bold text-base">
-                      {e?.title}
-                      {/* Grant title to be displayed here for easy caption for
-                      Edufunders{" "} */}
-                    </Typography>
-                  </div>
-
-                  <Typography className="font-bold">
-                    <span className="text-primary-main text-base">
-                      {e?.contributions?.reduce((accumulator, currentValue) => {
-                        return accumulator + currentValue?.amount;
-                      }, 0)}
-                    </span>{" "}
-                    of{" "}
-                    <span className="text-primary-main text-base">
-                      N {e?.amount}
-                    </span>{" "}
-                    Raised
-                  </Typography>
-
-                  <Typography className="font-bold text-[#667085]">
-                    {e?.reason}
-                  </Typography>
-                  <Button
-                    onClick={() => showLearnMore(e)}
-                    className="h-12 bg-white text-[#667085] font-bold"
-                  >
-                    Learn More
-                  </Button>
-                  {/* <Button
+          <div>
+            <div className="">
+              <div>
+                <div className="flex gap-4">
+                  <div
                     onClick={() => {
-                      setLearnMoreDetails(e);
-                      handleOpenBigDialog();
+                      setdisplayArray(grants);
+                      setTitle("Donation Requests");
+                      setSection(0);
+                      setlearnMore(false);
                     }}
-                    className="h-12 text-white font-bold"
                   >
-                    Donate
-                  </Button> */}
+                    <WallCards
+                      className="mr-3"
+                      rider={false}
+                      big={true}
+                      name="Total Requests"
+                      count={grants?.length}
+                    />
+                  </div>
                 </div>
               </div>
-            ))}
+              <Typography variant="h6" className="font-bold mt-8">
+                Available Requests
+              </Typography>
+
+              <Divider className="mb-6 p-1" />
+            </div>
+            <div className="grid grid-cols-3 gap-4">
+              {displayArray?.map((e, index) => (
+                <div key={index}>
+                  <div>
+                    <img src={educatialGrantPNG} />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex gap-2 mt-4 items-center">
+                      <Avatar className="h-12 w-12" src={educatialGrantPNG} />
+                      <div>
+                        <Typography className="font-bold text-sm">
+                          {e?.title}
+                          {/* Grant title to be displayed here for easy caption for
+                          Edufunders{" "} */}
+                        </Typography>
+                        <Typography className="font-bold text-ssm">
+                          {e?.applied_by?.company_name ||
+                            `${e?.applied_by?.firstname} ${e?.applied_by?.lastname}`}
+                        </Typography>
+                        <Typography className="font-bold text-ssm">
+                          {e?.applied_by?.email}
+                        </Typography>
+                      </div>
+                    </div>
+                    {/* <Typography className="font-bold">
+                      <span className="text-primary-main text-base">
+                        {e?.contributions?.reduce((accumulator, currentValue) => {
+                          return accumulator + currentValue?.amount;
+                        }, 0)}
+                      </span>{" "}
+                      of{" "}
+                      <span className="text-primary-main text-base">
+                        N {e?.amount}
+                      </span>{" "}
+                      Raised
+                    </Typography> */}
+                    {/* <Typography className="font-bold text-[#667085]">
+                      {e?.reason}
+                    </Typography> */}
+                    <Button
+                      onClick={() => showLearnMore(e)}
+                      className="h-12 bg-white text-white font-bold bg-primary-main "
+                    >
+                      View Details
+                    </Button>
+                    {/* <Button
+                      onClick={() => {
+                        setLearnMoreDetails(e);
+                        handleOpenBigDialog();
+                      }}
+                      className="h-12 text-white font-bold"
+                    >
+                      Donate
+                    </Button> */}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
@@ -382,22 +387,24 @@ function DashboardDonor(props) {
               <MdArrowBackIosNew className="cursor-pointer" />
               Back
             </div>
-            <div className="flex gap-4 mt-8">
-              <img className="w-2/5" src={educatialGrantPNG} />
+            <div className="flex gap-4 mt-8 items-start">
+              <Avatar
+                className="w-2/5 h-[300px] rounded-lg"
+                src={educatialGrantPNG}
+              />
               <div className="flex flex-col gap-4 text-left">
-                <Button className="rounded-none max-w-[104px] font-bold text-white">
+                <Button className=" max-w-[200px] font-bold text-white rounded-full">
                   {title}
                 </Button>
                 <div className="">
                   <Typography className="font-bold text-base text-left">
-                    Title: {learnMoreDetails.reason}
+                    Title: {learnMoreDetails.title}
                   </Typography>
                   <Typography className="text-[12px]">
-                    Reasons for grants will be displayed in with about few with
-                    about 200 words as an excerpt
+                    {learnMoreDetails.reason}
                   </Typography>
                 </div>
-                <Typography className="font-bold">
+                {/* <Typography className="font-bold">
                   <span className="text-primary-main text-base">
                     {learnMoreDetails?.contributions?.reduce(
                       (accumulator, currentValue) => {
@@ -411,28 +418,39 @@ function DashboardDonor(props) {
                     {learnMoreDetails?.amount}
                   </span>{" "}
                   Raised
-                </Typography>
-                <Typography className="font-bold text-[#667085]">
-                  {learnMoreDetails?.reason}
-                </Typography>
+                </Typography> */}
+
                 <div className="flex gap-3">
-                  <div className="border p-3 text-center border-[#667085]">
+                  <Card className="border rounded-lg p-3 px-8 text-center border-[#667085]">
                     <span className="font-bold">20</span>
-                    <br /> <span className="text-[#667085]"> Donors</span>
-                  </div>
-                  <div className="border p-3 text-center border-[#667085]">
+                    <br /> <span className=""> Donors</span>
+                  </Card>
+                  <Card className="border rounded-lg p-3 px-8 text-center border-[#667085]">
                     <span className="font-bold">25%</span> <br />{" "}
-                    <span className="text-[#667085]">Funded</span>
-                  </div>
-                  <div className="border p-3 text-center border-[#667085]">
+                    <span className="">Funded</span>
+                  </Card>
+                  <Card className="border rounded-lg p-3 px-8 text-center border-[#667085]">
                     <span className="font-bold">20</span> <br />{" "}
-                    <span className="text-[#667085]">Days Left</span>
-                  </div>
+                    <span className="">Days Left</span>
+                  </Card>
                 </div>
-                <Typography className="font-bold">
-                  About the Eduinitiatior
-                </Typography>
-                <div className="flex gap-4 ">
+                <Typography className="font-bold">About the NGO</Typography>
+                {/* <Typography className="text-[10px]">
+                  {learnMoreDetails?.applied_by?.city.replaceAll("/n", "<br/>")}
+                </Typography> */}
+                <Typography className="font-bold mt-8">Milestones</Typography>
+
+                {learnMoreDetails?.applied_by?.city
+                  ?.split(/\n/)
+                  .map((line, index) => {
+                    return (
+                      <div key={index}>
+                        {line}
+                        <br />
+                      </div>
+                    );
+                  })}
+                {/* <div className="flex gap-4 ">
                   <Avatar src="" />
                   <div className="">
                     <div>
@@ -453,8 +471,8 @@ function DashboardDonor(props) {
                       View Attached Documents
                     </a>
                   </div>
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                   <input
                     onChange={onFileChange}
                     style={{ display: "none" }}
@@ -470,9 +488,8 @@ function DashboardDonor(props) {
                       <MdUpload className="text-2xl" />{" "}
                       <Typography>Upload Relevant Documents</Typography>
                     </div>
-                    {/* <img src={uploadPNG} /> */}
                   </label>
-                </div>
+                </div> */}
 
                 {imgData && (
                   <div className="relative w-20">
@@ -492,7 +509,7 @@ function DashboardDonor(props) {
                 <div className="flex gap-4 items-end">
                   <div>
                     <InputLabel className="text-left  mb-2">
-                      Enter Amount
+                      Enter Amount to Donate
                     </InputLabel>
                     <TextField
                       InputProps={{
@@ -564,11 +581,13 @@ function DashboardDonor(props) {
               </Typography>
               <Typography className="font-bold text-3xl">
                 {" "}
-                &#8358; {amount}
+                &#8358; {amount} to{" "}
+                {learnMoreDetails?.applied_by?.company_name ||
+                  `${learnMoreDetails.applied_by?.firstname} ${learnMoreDetails.applied_by?.lastname}`}
               </Typography>
               <Typography>for</Typography>
               <Typography className="font-bold text-base">
-                School Grant
+                {learnMoreDetails?.title}
               </Typography>
             </div>
           </DialogContent>

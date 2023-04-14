@@ -194,7 +194,7 @@ function OtpPage(props) {
     <div className="">
       <div className="flex ">
         <div
-          className="relative min-h-screen bg-primary-main text-white px-16 py-10 w-2/5"
+          className="relative min-h-screen bg-white text-primary-main px-16 py-10 w-2/5"
           style={{
             minWidth: "40%",
             // minHeight: "100%",
@@ -205,7 +205,8 @@ function OtpPage(props) {
           }}
         >
           <div className="flex flex-col gap-16 pt-12">
-            <img className="w-1/5" src={educatiaLogo} />
+            {/* <img className="w-1/5" src={educatiaLogo} /> */}
+            <Typography variant="h4">RAMP</Typography>
             <Typography variant="h4" className=" font-bold">
               {/* Earn */}
               Get access to unlimited funds

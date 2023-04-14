@@ -43,6 +43,7 @@ import {
   DialogContentText,
   DialogTitle,
   Divider,
+  FormControl,
   Input,
   InputAdornment,
   InputLabel,
@@ -75,6 +76,8 @@ function Donation(props) {
   const [currentDetail, setCurrentDetail] = useState([null]);
   const [completed, setCompleted] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [category, setCategory] = React.useState("");
+  const [subCategory, setsubCategory] = React.useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = (val = false) => {
     setOpen(false);
@@ -84,7 +87,7 @@ function Donation(props) {
   const [requestGrantForm, setrequestGrantForm] = React.useState({
     attachment: "",
     reason: "",
-    amount: "",
+    amount: "0",
   });
 
   const history = useNavigate();
@@ -129,6 +132,117 @@ function Donation(props) {
   // if (authUser.accessToken) {
   //   return <Navigate to={RouteEnum.HOME} />;
   // }
+  const ngo = [
+    {
+      value: "cash",
+      label: "Cash",
+    },
+
+    {
+      value: "resources",
+      label: "Resources",
+    },
+    {
+      value: "materials",
+      label: "Materials",
+    },
+  ];
+
+  const subMaterials = [
+    {
+      value: "Laptop",
+      label: "Laptop",
+    },
+
+    {
+      value: "Temporary office space (3months)",
+      label: "Temporary office space (3months)",
+    },
+    {
+      value: "Internet and modem",
+      label: "Internet and modem",
+    },
+
+    {
+      value: "A Table and Chair",
+      label: "A Table and Chair",
+    },
+  ];
+
+  const subResources = [
+    {
+      value: "Non-profit Coaching",
+      label: "Non-profit Coaching",
+    },
+
+    {
+      value: "Sales & Marketing",
+      label: "Sales & Marketing",
+    },
+    {
+      value: "Personal Branding",
+      label: "Personal Branding",
+    },
+
+    {
+      value: "Organizational Branding",
+      label: "Organizational Branding",
+    },
+    {
+      value: "Partnership Building",
+      label: "Partnership Building",
+    },
+    {
+      value: "Fundraising",
+      label: "Fundraising",
+    },
+    {
+      value: "Human Resources",
+      label: "Human Resources",
+    },
+    {
+      value: "Grant writing",
+      label: "Grant writing",
+    },
+    {
+      value: "Audit Account",
+      label: "Audit Account",
+    },
+    {
+      value: "Legal Advice on Taxation etc",
+      label: "Legal Advice on Taxation etc",
+    },
+    {
+      value: "Proposal Writing (This can improve as we progress)",
+      label: "Proposal Writing (This can improve as we progress)",
+    },
+  ];
+
+  const subCash = [
+    {
+      value: 1,
+      label: "A monthly donation ",
+    },
+
+    {
+      value: 2,
+      label: "A one-off donation ",
+    },
+    {
+      value: 3,
+      label: "Unspecified funds",
+    },
+
+    {
+      value: 4,
+      label: "Amount of choice",
+    },
+  ];
+
+  //
+  //
+  // -
+  //
 
   const onFileChange = (event) => {
     // Update the state
@@ -216,77 +330,111 @@ function Donation(props) {
           <MdRefresh />
         </span> */}
         <ToDoorSearch />
-        <div className="flex justify-between items-center mt-12">
+        <div className="flex justify-between items-center my-6">
           <Typography variant="h4" className="font-bold">
-            DONATION
+            Make a request
           </Typography>
 
-          {section == 2 && (
-            <Button
-              className="font-bold text-base text-white"
-              onClick={() => setSection(1)}
-            >
-              Request For Donation
-            </Button>
-          )}
+         
         </div>
       </div>
 
-      {section == 0 && (
-        <div className="md:flex w-full gap-5 mt-8">
-          <div className="flex flex-col gap-4 md:w-3/5 border border-[#F0F6FF] p-4">
-            {!completed ? (
-              <div>
-                <Typography className="mb-4" variant="h6">
-                  Donation - How it works
-                  {/* {!completed ? "One more thing..." : "Getting Started"} */}
-                </Typography>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                  aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-                  nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                  aliquip ex ea
-                </Typography>
-              </div>
-            ) : (
-              <div>You have Successfully completed your Application</div>
-            )}
-            {/* <Typography>One more thing...</Typography> */}
+      
+      
+      
 
-            <Button
-              onClick={() => setSection((prev) => prev + 1)}
-              className="bg-primary-main h-10 text-white rounded-sm w-2/5"
-            >
-              Request Donation
-            </Button>
-          </div>
-          <div className="md:w-2/5 bg-primary-main border p-4  text-white">
-            <Typography className="font-bold pr-[3%]" variant="h5">
-              Get access to unlimited <br /> funds
-            </Typography>
-            <Typography className="mt-5 pr-[10%]">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad{" "}
-            </Typography>
-          </div>
-        </div>
-      )}
-
-      {section == 1 && (
+      
         <div className="flex gap-8">
           <div className="md:w-3/5 w-full">
-            {section == 1 && (
+             
               <div className="flex flex-col gap-2 p-10">
-                <Typography variant="h6" className="font-bold">
-                  Request Donation
-                </Typography>
-                <Typography variant="" className="text-xs">
-                  Make Request
-                </Typography>
-                <Divider className="mb-4" />
                 <div className="w-full flex flex-col gap-3">
+                  <div className="flex gap-3">
+                    <div className="w-full ">
+                      <FormControl className="w-full">
+                        {!category && (
+                          <InputLabel htmlFor="name-multiple">
+                            Request Category
+                          </InputLabel>
+                        )}
+
+                        <TextField
+                          fullWidth
+                          select
+                          placeholder="Type Of Organisation"
+                          name="company_type"
+                          displayEmpty
+                          // name='company_type'
+                          // label="Select"
+                          // value={regData.company_type}
+                          defaultValue="Coorporate Organisation"
+                          onChange={(e) => setCategory(e.target.value)}
+                          id="name-multiple"
+                          // helperText="Please select your currency"
+                        >
+                          {ngo.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                              {option.label}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      </FormControl>
+                    </div>
+                    {category && (
+                      <div className="w-full ">
+                        <FormControl className="w-full">
+                          {!subCategory && (
+                            <InputLabel htmlFor="name-multiple">
+                              Sub-Category
+                            </InputLabel>
+                          )}
+
+                          <TextField
+                            fullWidth
+                            select
+                            placeholder="Type Of Organisation"
+                            name="company_type"
+                            displayEmpty
+                            // name='company_type'
+                            // label="Select"
+                            // value={regData.company_type}
+                            defaultValue="Coorporate Organisation"
+                            onChange={(e) => setsubCategory(e.target.value)}
+                            id="name-multiple"
+
+                            // helperText="Please select your currency"
+                          >
+                            {category == "cash"
+                              ? subCash.map((option) => (
+                                  <MenuItem
+                                    key={option.value}
+                                    value={option.value}
+                                  >
+                                    {option.label}
+                                  </MenuItem>
+                                ))
+                              : category == "resources"
+                              ? subResources.map((option) => (
+                                  <MenuItem
+                                    key={option.value}
+                                    value={option.value}
+                                  >
+                                    {option.label}
+                                  </MenuItem>
+                                ))
+                              : subMaterials.map((option) => (
+                                  <MenuItem
+                                    key={option.value}
+                                    value={option.value}
+                                  >
+                                    {option.label}
+                                  </MenuItem>
+                                ))}
+                          </TextField>
+                        </FormControl>
+                      </div>
+                    )}
+                  </div>
                   <div>
                     <InputLabel className="text-left mb-2">Title</InputLabel>
                     <TextField
@@ -297,16 +445,19 @@ function Donation(props) {
                       name="title"
                     />
                   </div>
-                  <div>
-                    <InputLabel className="text-left mb-2">Amount</InputLabel>
-                    <TextField
-                      // disabled
-                      value={currentDetail?.amount}
-                      onChange={onChange}
-                      fullWidth
-                      name="amount"
-                    />
-                  </div>
+                  {category == "cash" && (
+                    <div>
+                      <InputLabel className="text-left mb-2">Amount</InputLabel>
+                      <TextField
+                        // disabled
+                        value={currentDetail?.amount}
+                        onChange={onChange}
+                        fullWidth
+                        name="amount"
+                        // disabled={subCategory && subCategory==1}
+                      />
+                    </div>
+                  )}
                   <div>
                     <InputLabel className="text-left mb-2">
                       Reasons (Not more than 600 words)
@@ -378,7 +529,7 @@ function Donation(props) {
                   )}
                 </div>
               </div>
-            )}
+            
             <div className="flex gap-5 w-full">
               <Button
                 className="p-3 w-full bg-none text-base mb-10 text-white"
@@ -412,7 +563,9 @@ function Donation(props) {
           </div>
           <div className="md:w-2/5 p-4 hidden md:flex flex-col gap-4 text-black bg-[#F0F6FF]">
             <div className="flex flex-col gap-2 ">
-              <Typography className="text-xs font-bold">About Donation</Typography>
+              <Typography className="text-xs font-bold">
+                About Donation
+              </Typography>
               <Typography>
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
                 diam nonummy nibh euismod tincidunt ut laoreet dolore magna
@@ -431,7 +584,7 @@ function Donation(props) {
 
             <div className="flex flex-col gap-2">
               <Typography className="text-xs font-bold">Amount</Typography>
-              <Typography>Specify the amount needed for Loan</Typography>
+              <Typography>Specify the amount needed</Typography>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -445,118 +598,9 @@ function Donation(props) {
             </div>
           </div>
         </div>
-      )}
+      )
 
-      <div>
-        {section > 1 && (
-          <div>
-            {/* <ToDoorSearch /> */}
-
-            <div className="flex items-end mr-3 mt-12">
-              <div>
-                <div className="flex gap-4">
-                  <WallCards
-                    className="mr-3"
-                    rider={false}
-                    big={true}
-                    name="Total Grants"
-                    count={myGrantApplication?.length}
-                  />
-                  <WallCards
-                    rider={false}
-                    big={true}
-                    name="Pending"
-                    count={
-                      myGrantApplication?.filter((e) => e?.status == "pending")
-                        ?.length
-                    }
-                  />
-                  <WallCards
-                    rider={false}
-                    big={true}
-                    name="Approved"
-                    count={
-                      myGrantApplication?.filter((e) => e?.status == "open")
-                        ?.length
-                    }
-                  />
-                  <WallCards
-                    rider={false}
-                    big={true}
-                    name="FUnded"
-                    count={
-                      myGrantApplication?.filter((e) => e?.status == "approved")
-                        ?.length
-                    }
-                  />
-
-                  <WallCards
-                    rider={false}
-                    big={true}
-                    name="Declined"
-                    count={
-                      myGrantApplication?.filter((e) => e?.status == "delined")
-                        ?.length
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-
-            <Typography variant="h6" className="font-bold mt-8">
-              Donation History
-            </Typography>
-
-            <Divider className="mb-6 p-1" />
-
-            <TextField
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="start">
-                    <MdOutlineSearch />
-                  </InputAdornment>
-                ),
-              }}
-              variant="outlined"
-              className=" mb-5 text-ssm"
-              placeholder="Search Donation "
-            />
-
-            <div className="py-3 w-[800px] md:w-full">
-              <div className="flex gap-2 w-full">
-                <Typography
-                  variant="h6"
-                  className="w-1/5 text-center text-[#5C6F7F]"
-                >
-                  Date
-                </Typography>
-                <Typography variant="h6" className="w-1/5 text-center">
-                  Reasons
-                </Typography>
-                <Typography variant="h6" className="w-1/5 text-center">
-                  Amount
-                </Typography>
-                <Typography variant="h6" className="w-1/5 text-center">
-                  Status
-                </Typography>
-                <Typography variant="h6" className="w-1/5 text-center">
-                  Action
-                </Typography>
-              </div>
-              <div className="overflow-x-scroll w-full">
-                {myGrantApplication?.map((e) => (
-                  <ManageCompaniesTable
-                    tableArray={e}
-                    setSection={setSection}
-                    setCurrentDetail={setCurrentDetail}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+    
 
       <Dialog
         open={open}

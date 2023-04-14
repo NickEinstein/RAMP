@@ -100,9 +100,8 @@ function WallCards(props) {
             : " text-white text-center"
         }
         sx={{
-          minWidth: 155,
-          minHeight: !props.short && 120,
-          maxHeight: props.short && 105,
+          minWidth: 125,
+          maxHeight:  100,
         }}
         // sx={{
         //   minWidth: props.big ? 220 : 155,
@@ -113,7 +112,7 @@ function WallCards(props) {
           className="absolute z-0 top-0 left-0 w-[100%] h-[100%]"
           src={snake}
         /> */}
-        <CardContent className={props.big ? "pr-24" : ""}>
+        <CardContent className={props.big ? "text-center w-44" : ""}>
           <div>
             <Typography
               className={
@@ -130,7 +129,7 @@ function WallCards(props) {
           </div>
           <div>
             <Typography
-              variant={props.small ? "h4" : "h2"}
+              variant={"h3"}
               className={
                 props.green
                   ? "text-white hover:bg-primary-main hover:text-white text-center font-bold z-10"

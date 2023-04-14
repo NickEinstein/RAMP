@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserApi from "apis/UserApi";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -6,6 +6,11 @@ import { useSnackbar } from "notistack";
 import educatiaLogo from "images/RAMP.jpg";
 import educatiaSuccess from "images/EducatiaSuccess.png";
 import { FcGoogle } from "react-icons/fc";
+import backgroundImage from "../../images/RampHome1.jpg";
+// import backgroundImage2 from "../../images/rampHome2.jpg";
+import backgroundImage3 from "../../images/ramphome3.jpg";
+import backgroundImage4 from "../../images/ramphome4.jpg";
+import backgroundImage5 from "../../images/ramphome5.jpg";
 // import { Button, TextField, Typography } from "@mui/material";
 import PasswordTextField from "common/PasswordTextField";
 import { getTextFieldFormikProps } from "utils/FormikUtils";
@@ -50,10 +55,20 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
+  Chip,
+  OutlinedInput,
+  useMediaQuery,
+  Fade,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import useStepper from "hooks/useStepper";
+import useDataRef from "hooks/useDataRef";
+
+import { useNavigate } from "react-router-dom";  import { MediaQueryBreakpointEnum } from "constants/Global";
+
 
 function Home(props) {
+const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
+
   const [age, setAge] = React.useState("");
   const [individual, setindividual] = React.useState(true);
   const [verificationOTP, setVerificationOTP] = React.useState("");
@@ -69,6 +84,7 @@ function Home(props) {
     email: "",
     password: "",
     password_confirmation: "",
+    types: "corporate",
   });
 
   const [regDataCompany, setRegDataCompany] = React.useState({
@@ -83,10 +99,31 @@ function Home(props) {
     password: "",
     password_confirmation: "",
   });
-  const handleChange = (event) => {
-    setAge(event.target.value);
-    console.log(event);
-  };
+ 
+
+   const configs = [
+     {
+       bgColor: "HomeTopSectionBackgroundColor_WomanInRedImage",
+       textColor: "text-secondary-main",
+       image: backgroundImage,
+     },
+     {
+       bgColor: "HomeTopSectionBackgroundColor_ManInDreadsImage",
+       textColor: "text-white",
+       image: backgroundImage3,
+     },
+     {
+       bgColor: "HomeTopSectionBackgroundColor_headerImage",
+       textColor: "text-secondary-main",
+       image: backgroundImage4,
+     },
+     {
+       bgColor: "HomeTopSectionBackgroundColor_headerImage",
+       textColor: "text-secondary-main",
+       image: backgroundImage5,
+     },
+   ];
+
 
   // console.log(localStorage.getItem('authUser'))
   const history = useNavigate();
@@ -96,6 +133,31 @@ function Home(props) {
 
     history("/verify-account");
   };
+
+   const stepper = useStepper({
+     maxStep: configs.length - 1 ,
+   });
+
+   const config = configs[stepper.step];
+
+   const dataRef = useDataRef({ stepper });
+
+   useEffect(() => {
+     const intervalId = setInterval(() => {
+       if (dataRef.current.stepper.canNextStep()) {
+         dataRef.current.stepper.nextStep();
+       } else {
+         dataRef.current.stepper.reset();
+       }
+     }, 1000 * 2);
+     return () => {
+       clearInterval(intervalId);
+     };
+
+    //  console.log(stepper)
+   }, [dataRef]);
+
+
 
   // console.log(localStorage.getItem('authUser'))
 
@@ -107,7 +169,7 @@ function Home(props) {
 
   const { enqueueSnackbar } = useSnackbar();
   const [loginMuation, loginMutationResult] = UserApi.useLoginMutation();
-
+const [personName, setPersonName] = React.useState([]);
   const style = {
     position: "absolute",
     top: "50%",
@@ -121,6 +183,19 @@ function Home(props) {
     p: 4,
   };
 
+const handleChange = (event) => {
+  // console.log(event.target.)
+  const {
+    target: { value },
+  } = event;
+  setPersonName(
+    // On autofill we get a stringified value.
+    typeof value === "string" ? value.split(",") : value
+  );
+};
+
+console.log(stepper.step)
+
   const onChange = (e) => {
     if (e.target.name == "account_type") {
       setindividual((prev) => !prev);
@@ -131,6 +206,7 @@ function Home(props) {
     setRegData({
       ...regData,
       [e.target.name]: e.target.value,
+      account_type: regData.types,
     });
   };
 
@@ -153,7 +229,7 @@ function Home(props) {
       phone: `+234${phoneNumber}`,
       firstname: regData?.firstname,
       lastname: regData?.lastname,
-      account_type: "corporate",
+      account_type: regData.types,
       role: regData?.role,
 
       email: regData?.email,
@@ -163,9 +239,11 @@ function Home(props) {
     };
 
     let payloadCorporate = {
-      phone: `+234${phoneNumber}`,
-
       ...regData,
+      phone: `+234${phoneNumber}`,
+      account_type: regData.types,
+      company_type:
+        regData.role == "edufunder" ? regData.company_type : "corporate_brand",
     };
 
     console.log(payloadIndividual);
@@ -173,7 +251,7 @@ function Home(props) {
 
     const res = await post({
       endpoint: `auth/register`,
-      body:payloadCorporate,
+      body: payloadCorporate,
       auth: false,
     });
     console.log(res);
@@ -207,32 +285,51 @@ function Home(props) {
   //   ,
   //   ,
   //   ;
+  // Health, Education,
+  // Women  & Girls, Community Outreach, Tech & Innovation, Human Capacity
 
-  const currencies = [
+  const ngo = [
     {
       value: "corporate_brand",
-      label: "Corporate Brands",
+      label: "Health",
     },
 
     {
       value: "educational_institution",
-      label: "Educational Institutions",
+      label: "Education",
     },
     {
       value: "alumni",
-      label: "Alumnis",
+      label: "Women  & Girls",
     },
     {
       value: "community",
-      label: "Communities",
+      label: "Community Outreach",
     },
     {
       value: "training_firm",
-      label: " Training Firms",
+      label: "Tech & Innovation",
     },
     {
       value: "vocational_institution",
-      label: "Vocational Institutions",
+      label: "Human Capacity",
+    },
+  ];
+  // CASH RESOURCE MATERIALS
+
+  const donorx = [
+    {
+      value: "corporate_brand",
+      label: "Cash",
+    },
+
+    {
+      value: "educational_institution",
+      label: "Resources",
+    },
+    {
+      value: "alumni",
+      label: "Materials",
     },
   ];
 
@@ -248,7 +345,20 @@ function Home(props) {
     },
   ];
 
+  const types = [
+    {
+      value: "individual",
+      label: "Individual",
+    },
+
+    {
+      value: "corporate",
+      label: "Corporate",
+    },
+  ];
+
   console.log(regData);
+  console.log(personName[0]);
   return (
     // <div>
     //  {/* <Typography variant="h6">Hi</Typography> */}
@@ -267,30 +377,54 @@ function Home(props) {
     <div className="">
       <div className="lg:flex ">
         <div
-          className="hidden lg:block relative min-h-screen bg-white text-primary-main px-16 py-10 w-2/5"
+          // className="h-screen"
           style={{
-            minWidth: "40%",
-            // minHeight: "100%",
-            position: "relative",
-            // backgroundImage: `url(${snake})`,
-            // minHeight:"500px"
-            // backgroundColor: "green",
+            // background: `url('${configs[stepper.step]?.image}')`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "45%",
           }}
+          className="lg:block items-stretch flex relative min-h-screen bg-transparent text-primary-main px-16 py-10 w-2/5"
         >
-          <div className="flex flex-col gap-16">
-            {/* <img className="w-1/5" src={educatiaLogo} /> */}
-            <Typography variant="h4">RAMP</Typography>
-            <Typography variant="h4" className=" font-bold">
-              {/* Earn */}
-              Get access to unlimited funds
-            </Typography>
-            <Typography className="text-sm">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit amet,
-            </Typography>
+          <div>
+            <img
+              className="min-h-screen absolute top-0 -z-20 min-w-[105%] left-0 flex self-stretch"
+              src={configs[stepper.step]?.image}
+            />
+            {/* <div className="self-stretch w-1/2 hidden md:flex items-end">
+              <div className="relative w-full" style={{ height: 620 }}>
+                {configs.map((step, index) => (
+                  <Fade
+                    key={index}
+                    in={stepper.step === index}
+                    timeout={500}
+                    className="absolute block top-0 w-full h-full"
+                  >
+                    <img alt={index} src={step.image} />
+                  </Fade>
+                ))}
+              </div>
+            </div> */}
+
+            <div className="flex flex-col gap-16 text-white">
+              {/* <img className="w-1/5" src={educatiaLogo} /> */}
+              <Typography className=" font-bold" variant="h2">
+                RAMP
+              </Typography>
+              <Typography variant="h4" className=" font-bold md:mt-24">
+                {/* Earn */}
+                Get access to unlimited funds
+              </Typography>
+              <Typography className="text-sm">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                aliquam erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit
+                amet,
+              </Typography>
+            </div>
           </div>
         </div>
+        {/* +++++++++++++++++++++++++++++++++++++++++ */}
         <div className="p-8 pr-[12%] pl-[6%] w-full">
           {/* <LoginHeader /> */}
           <Typography variant="h4">RAMP</Typography>
@@ -340,68 +474,85 @@ function Home(props) {
               </RadioGroup>
             </FormControl> */}
             <Divider className="my-4" />
-            {/* <Typography variant="h6" className="mb-2">
-                Email Address
-              </Typography> */}
-            {
-              <div className="flex flex-col gap-5">
-                <div className="flex gap-6">
-                  <TextField
-                    onChange={onChange}
-                    size="medium"
-                    className="w-full"
-                    placeholder="Enter your first name"
-                    label="First Name"
-                    name="firstname"
-                    value={regData.firstname}
-                  />
-                  <TextField
-                    onChange={onChange}
-                    size="medium"
-                    className="w-full"
-                    placeholder="Enter your last name"
-                    label="Last Name"
-                    name="lastname"
-                    value={regData.lastname}
-                  />
-                </div>
-                {/* <TextField
-                  onChange={onChange}
-                  size="medium"
-                  className="w-full"
-                  placeholder="Enter your email"
-                  label="Email "
-                  name="email"
-                  value={regData.email}
-                /> */}
-                <div className="w-full flex gap-6">
-                  <FormControl className="w-full">
-                    {!regData.role && (
-                      <InputLabel htmlFor="name-multiple">Sign Up As</InputLabel>
+
+            <FormControl className="w-full mb-4">
+              {!regData.role && (
+                <InputLabel htmlFor="name-multiple">Sign Up As</InputLabel>
+              )}
+              <TextField
+                fullWidth
+                select
+                placeholder="Sign Up As"
+                name="role"
+                displayEmpty
+                // label="Select"
+                value={regData.role}
+                // defaultValue="Coorporate Organisation"
+                onChange={onChange}
+                id="name-multiple"
+                // helperText="Please select your currency"
+              >
+                {role.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </FormControl>
+            {regData.role && (
+              <div>
+                <div className="flex flex-col gap-5">
+                  <div className="w-full flex gap-6">
+                    {regData.role == "edufunder" && (
+                      <FormControl className="w-full">
+                        {!regData.types && (
+                          <InputLabel htmlFor="name-multiple">
+                            Organisation Type
+                          </InputLabel>
+                        )}
+                        <TextField
+                          fullWidth
+                          select
+                          placeholder=""
+                          name="types"
+                          displayEmpty
+                          // label="Select"
+                          value={regData.types}
+                          // defaultValue="Coorporate Organisation"
+                          onChange={onChange}
+                          id="name-multiple"
+                          // helperText="Please select your currency"
+                        >
+                          {types.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                              {option.label}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      </FormControl>
                     )}
+                  </div>
+                  <div className="flex gap-6">
                     <TextField
-                      fullWidth
-                      select
-                      placeholder="Sign Up As"
-                      name="role"
-                      displayEmpty
-                      // label="Select"
-                      value={regData.role}
-                      defaultValue="Coorporate Organisation"
                       onChange={onChange}
-                      id="name-multiple"
-
-                      // helperText="Please select your currency"
-                    >
-                      {role.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </FormControl>
-
-                  <TextField
+                      size="medium"
+                      className="w-full"
+                      placeholder="Enter your first name"
+                      label="First Name"
+                      name="firstname"
+                      value={regData.firstname}
+                    />
+                    <TextField
+                      onChange={onChange}
+                      size="medium"
+                      className="w-full"
+                      placeholder="Enter your last name"
+                      label="Last Name"
+                      name="lastname"
+                      value={regData.lastname}
+                    />
+                  </div>
+                  {/* <TextField
                     onChange={onChange}
                     size="medium"
                     className="w-full"
@@ -409,137 +560,186 @@ function Home(props) {
                     label="Email "
                     name="email"
                     value={regData.email}
+                  /> */}
+                  <div className="w-full flex gap-6">
+                    <TextField
+                      onChange={onChange}
+                      size="medium"
+                      className="w-full"
+                      placeholder="Enter your email"
+                      label="Email "
+                      name="email"
+                      value={regData.email}
+                    />
+                  </div>
+                  {regData.types == "corporate" && (
+                    <div className="flex gap-6">
+                      <TextField
+                        size="medium"
+                        className="w-full"
+                        placeholder="Enter your company name"
+                        // title="company Name"
+                        label="Company Name "
+                        name="company_name"
+                        onChange={onChange}
+                        value={regData.company_name}
+                      />
+                      <TextField
+                        size="medium"
+                        className="w-full"
+                        // placeholder="Enter your username"
+                        // title="lastname"
+                        label="Company Registration Number"
+                        name="company_reg_number"
+                        onChange={onChange}
+                        value={regData.company_reg_number}
+                      />
+                    </div>
+                  )}
+                  <TextField
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    size="medium"
+                    className="w-full"
+                    placeholder="Enter your phone number"
+                    label="Phone Number"
+                    name="phone"
+                    value={phoneNumber}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <IconButton className="text-black text-sm">
+                            +234
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  {individual && (
+                    <div className="w-full ">
+                      {regData.role == "edufunder" ? (
+                        <FormControl className="w-full">
+                          {!regData.company_type && (
+                            <InputLabel htmlFor="name-multiple">
+                              Category
+                            </InputLabel>
+                          )}
+                          <TextField
+                            fullWidth
+                            select
+                            placeholder="Type Of Organisation"
+                            name="company_type"
+                            displayEmpty
+                            // name='company_type'
+                            // label="Select"
+                            value={regData.company_type}
+                            defaultValue="Coorporate Organisation"
+                            onChange={onChange}
+                            id="name-multiple"
+                            // helperText="Please select your currency"
+                          >
+                            {donorx.map((option) => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
+                            ))}
+                          </TextField>
+                        </FormControl>
+                      ) : (
+                        <FormControl className=" w-full">
+                          <InputLabel id="demo-multiple-chip-label">
+                            Category
+                          </InputLabel>
+                          <Select
+                            fullWidth
+                            labelId="demo-multiple-chip-label"
+                            id="demo-multiple-chip"
+                            multiple
+                            value={personName}
+                            onChange={handleChange}
+                            input={
+                              <OutlinedInput
+                                id="select-multiple-chip"
+                                label="Chip"
+                              />
+                            }
+                            renderValue={(selected) => (
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexWrap: "wrap",
+                                  gap: 0.5,
+                                }}
+                              >
+                                {selected.map((value) => (
+                                  <Chip key={value} label={value} />
+                                ))}
+                              </Box>
+                            )}
+                            // MenuProps={MenuProps}
+                          >
+                            {ngo.map((name) => (
+                              <MenuItem
+                                key={name.label}
+                                value={name.label}
+                                // style={getStyles(name, personName, theme)}
+                              >
+                                {name.label}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      )}
+                    </div>
+                  )}
+                  <PasswordTextField
+                    onChange={onChange}
+                    className="w-full "
+                    placeholder="Enter your Password"
+                    label="Password"
+                    value={regData.password}
+                    name="password"
+                  />
+                  <PasswordTextField
+                    onChange={onChange}
+                    className="w-full "
+                    placeholder="Confirm your Password"
+                    label="Confirm Password"
+                    name="password_confirmation"
+                    value={regData.password_confirmation}
                   />
                 </div>
-                {individual && (
-                  <div className="flex gap-6">
-                    <TextField
-                      size="medium"
-                      className="w-full"
-                      placeholder="Enter your company name"
-                      // title="company Name"
-                      label="Company Name "
-                      name="company_name"
-                      onChange={onChange}
-                      value={regData.company_name}
-                    />
 
-                    <TextField
-                      size="medium"
-                      className="w-full"
-                      // placeholder="Enter your username"
-                      // title="lastname"
-                      label="Company Registration Number"
-                      name="company_reg_number"
-                      onChange={onChange}
-                      value={regData.company_reg_number}
-                    />
-                  </div>
-                )}
+                <div className="text-white m-b-30 mt-5  ">
+                  <Button
+                    className="p-3 w-full text-base text-white"
+                    type="submit"
+                    onClick={
+                      pay
+                      //   () => {
+                      //   handleOpen();
+                      // }
+                    }
+                    // onClick={() => localStorage.setItem('type', 'CLIENT')}
+                    // className=' '
+                  >
+                    Create an account
+                  </Button>
+                </div>
 
-                <TextField
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  size="medium"
-                  className="w-full"
-                  placeholder="Enter your phone number"
-                  label="Phone Number"
-                  name="phone"
-                  value={phoneNumber}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <IconButton className="text-black text-sm">
-                          +234
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                {individual && (
-                  <div className="w-full ">
-                    <FormControl className="w-full">
-                      {!regData.company_type && (
-                        <InputLabel htmlFor="name-multiple">
-                          Division/Company Type
-                        </InputLabel>
-                      )}
-                      <TextField
-                        fullWidth
-                        select
-                        placeholder="Type Of Organisation"
-                        name="company_type"
-                        displayEmpty
-                        // name='company_type'
-                        // label="Select"
-                        value={regData.company_type}
-                        defaultValue="Coorporate Organisation"
-                        onChange={onChange}
-                        id="name-multiple"
-
-                        // helperText="Please select your currency"
-                      >
-                        {currencies.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
-                    </FormControl>
-                  </div>
-                )}
-                <PasswordTextField
-                  onChange={onChange}
-                  className="w-full "
-                  placeholder="Enter your Password"
-                  label="Password"
-                  value={regData.password}
-                  name="password"
-                />
-
-                <PasswordTextField
-                  onChange={onChange}
-                  className="w-full "
-                  placeholder="Confirm your Password"
-                  label="Confirm Password"
-                  name="password_confirmation"
-                  value={regData.password_confirmation}
-                />
-              </div>
-            }
-
-            {/* <Input placeholder='Location' className='m-b-20'/> */}
-
-            <div className="text-white m-b-30 mt-5  ">
-              <Button
-                className="p-3 w-full text-base text-white"
-                type="submit"
-                onClick={
-                  pay
-                  //   () => {
-                  //   handleOpen();
-                  // }
-                }
-
-                // onClick={() => localStorage.setItem('type', 'CLIENT')}
-                // className=' '
-              >
-                Create an account
-              </Button>
-            </div>
-            {/* </form> */}
-
-            <a className="text-center" href="">
-              <Typography>
-                By signing up you have agreed to terms and conditions of the
-                application
-              </Typography>
-              <Typography className="mt-5">
-                Already have an account?
-                <a href="/" className="ml-1 text-primary-main font-bold ">
-                  Log In
+                <a className="text-center" href="">
+                  <Typography>
+                    By signing up you have agreed to terms and conditions of the
+                    application
+                  </Typography>
+                  <Typography className="mt-5">
+                    Already have an account?
+                    <a href="/" className="ml-1 text-primary-main font-bold ">
+                      Log In
+                    </a>
+                  </Typography>
                 </a>
-              </Typography>
-            </a>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -75,7 +75,7 @@ function Admin(props) {
 
   const handleClose = async (id) => {
     console.log(id);
-    if (title == "Requests") {
+    if (true) {
       const res = await patch({
         endpoint: `users/grants/validate/${id}`,
         body: { status: "open" },
@@ -352,9 +352,9 @@ function Admin(props) {
           </Typography>
 
           <Divider className="mb-6 p-1" />
-          <Typography className="my-6" variant="h4">
+          {/* <Typography className="my-6" variant="h4">
             {title.toUpperCase()} (Pending)
-          </Typography>
+          </Typography> */}
 
           {displayArray?.filter((e) => e.status == "pending").length ? (
             <div>
@@ -374,6 +374,18 @@ function Admin(props) {
 
               <div className="p-3 md:full min-w-[800px]">
                 <div className="flex gap-2">
+                  <Typography
+                    variant="h6"
+                    className="w-1/5 text-center text-[#5C6F7F]"
+                  >
+                    From
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="w-1/5 text-center text-[#5C6F7F]"
+                  >
+                    Title
+                  </Typography>
                   <Typography
                     variant="h6"
                     className="w-1/5 text-center text-[#5C6F7F]"
@@ -410,6 +422,27 @@ function Admin(props) {
                           // onClick={openBelow}
                           className=" mt-2 flex gap-2 w-full items-center  min-h-[50%] "
                         >
+                          <div
+                            className={
+                              props?.jj == "loan"
+                                ? " text-left p-3 w-2/5 "
+                                : " text-center p-3 w-2/5 "
+                            }
+                          >
+                            <Typography variant="">
+                              {e?.applied_by?.firstname}{" "}
+                              {e?.applied_by?.lastname}
+                            </Typography>
+                          </div>
+                          <div
+                            className={
+                              props?.jj == "loan"
+                                ? " text-left p-3 w-2/5 "
+                                : " text-center p-3 w-2/5 "
+                            }
+                          >
+                            <Typography variant="">{e?.title}</Typography>
+                          </div>
                           <div
                             className={
                               props?.jj == "loan"

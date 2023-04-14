@@ -121,7 +121,7 @@ const openBelow =()=>{
           >
             {props?.jj == "loan" ? (
               <Typography variant="">
-                {props?.tableArray?.typeOfLoan||'-'}
+                {props?.tableArray?.typeOfLoan || "-"}
               </Typography>
             ) : (
               <Typography variant="">{props?.tableArray?.reason}</Typography>
@@ -145,7 +145,9 @@ const openBelow =()=>{
                   : " text-center p-3  md:w-1/5 w-full "
               }
             >
-              <Typography variant="">{props?.tableArray?.tenure} years</Typography>
+              <Typography variant="">
+                {props?.tableArray?.tenure} years
+              </Typography>
             </div>
           )}
           {props?.jj == "loan" && (
@@ -157,7 +159,7 @@ const openBelow =()=>{
               }
             >
               <Typography variant="">
-                {props?.tableArray?.amountToReturn||'-'}
+                {props?.tableArray?.amountToReturn || "-"}
               </Typography>
             </div>
           )}
@@ -173,7 +175,7 @@ const openBelow =()=>{
               className="rounded-3xl text-[12px]"
               style={{
                 backgroundColor:
-                  props?.tableArray?.status ==  "approved"
+                  props?.tableArray?.status == "open"
                     ? "#E2FEF0"
                     : props?.tableArray?.status == "declined"
                     ? "#FFF1F0"
@@ -182,7 +184,7 @@ const openBelow =()=>{
                     : "#FFECC7",
 
                 color:
-                  props?.tableArray?.status ==  "approved"
+                  props?.tableArray?.status == "open"
                     ? "#05944F"
                     : props?.tableArray?.status == "declined"
                     ? "#B81500"
@@ -192,13 +194,9 @@ const openBelow =()=>{
               }}
               variant="h6"
             >
-              {props.tableArray?.status == "approved"
+              {props.tableArray?.status == "open"
                 ? "Approved"
-                : props.tableArray?.status == "declined"
-                ? "Declined"
-                : props.tableArray?.status == "disbursed"
-                ? "Disbursed"
-                : "Pending"}
+                : props.tableArray?.status}
             </Typography>
           </div>
           <div
@@ -211,8 +209,7 @@ const openBelow =()=>{
             <Typography
               onClick={() => {
                 props.setSection(1);
-                props.setCurrentDetail(props.tableArray)
-              
+                props.setCurrentDetail(props.tableArray);
               }}
               className="font-bold"
             >
