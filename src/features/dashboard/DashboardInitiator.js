@@ -257,6 +257,8 @@ function DashboardInitiator(props) {
     //  setIsRegCompleted(res?.data?.data?.states);
 
     setIsRegCompleted(res?.data?.data?.user.state_id);
+ 
+
     setIsCorporate(
       res?.data?.data?.user.account_type == "corporate" ? true : false
     );
@@ -285,7 +287,7 @@ function DashboardInitiator(props) {
    if (res?.data?.success) {
      setGrants(res?.data?.data?.grants);
 
-     if (res?.data?.data?.grants.length > 0) {
+     if (res?.data?.data?.grants?.length > 0) {
        setIsLoading(2);
      } else setIsLoading(1);
    }
@@ -333,7 +335,7 @@ function DashboardInitiator(props) {
     // let payload = {
 
     // }
-    const res = "";
+    let res = "";
 
     !isCorporate
       ? (res = await post({
@@ -350,6 +352,7 @@ function DashboardInitiator(props) {
     console.log(res);
 
     if (res.data.success) {
+         enqueueSnackbar("Registration Completed Successfully", { variant: "success" });
       handleClose(true);
     } else {
       console.log(res);
@@ -389,7 +392,7 @@ function DashboardInitiator(props) {
           {!open && isLoading > 0 && (
             <div className="md:flex w-full gap-5 mt-8">
               <div className="flex flex-col gap-4 w-full border border-[#F0F6FF] p-4">
-                {isLoading == 1 ? (
+                {!isRegCompleted && isLoading == 1 ? (
                   <div className="md:w-3/5 ">
                     <Typography className="mb-4" variant="h6">
                       {isLoading == 1 ? "One more thing..." : "Getting Started"}
@@ -551,12 +554,12 @@ function DashboardInitiator(props) {
                   </div>
                 )}
                 {/* <Typography>One more thing...</Typography> */}
-                {isLoading == 1 ? (
+                {!isRegCompleted&&isLoading == 1 ? (
                   <Button
                     onClick={handleOpen}
                     className="bg-primary-main h-10 text-white rounded-sm md:w-2/5"
                   >
-                    Complete application
+                    Complete Registration
                   </Button>
                 ) : (
                   <div className="flex gap-5 w-full text-white">
@@ -575,7 +578,7 @@ function DashboardInitiator(props) {
                   </div>
                 )}
               </div>
-              {isLoading == 1 && (
+              {!isRegCompleted&&isLoading == 1 && (
                 <div className="md:w-2/5 bg-primary-main border p-4  text-white">
                   <Typography className="font-bold pr-[3%]" variant="h5">
                     Get access to unlimited <br /> funds
@@ -589,7 +592,7 @@ function DashboardInitiator(props) {
               )}
             </div>
           )}
-          {open && isLoading == 2 && (
+          {open && isRegCompleted&& isLoading == 2 && (
             <div className="md:hidden">
               <DialogTitle>
                 <div className="flex justify-between items-center">
@@ -771,7 +774,7 @@ function DashboardInitiator(props) {
                     }}
                     // className=' '
                   >
-                    Next
+                    Submit
                   </Button>
                 </div>
               </DialogActions>
@@ -804,7 +807,7 @@ function DashboardInitiator(props) {
               </DialogTitle>
               <DialogContent sx={{ width: "500px" }}>
                 <div className="w-full flex flex-col gap-3">
-                  <div>
+                  {/* <div>
                     <InputLabel className="text-left mb-2">
                       Email Address
                     </InputLabel>
@@ -849,7 +852,7 @@ function DashboardInitiator(props) {
                       fullWidth
                       name="title"
                     />
-                  </div>
+                  </div> */}
                   <div>
                     <InputLabel className="text-left mb-2">
                       Account Information
@@ -986,7 +989,7 @@ function DashboardInitiator(props) {
                     }}
                     // className=' '
                   >
-                    Next
+                    Submit
                   </Button>
                 </div>
               </DialogActions>

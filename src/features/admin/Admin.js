@@ -277,10 +277,10 @@ function Admin(props) {
             <div>
               <div className="flex gap-4">
                 <div
-                  onClick={() => {
-                    setdisplayArray(grants);
-                    setTitle("Requests");
-                  }}
+                // onClick={() => {
+                //   setdisplayArray(grants);
+                //   setTitle("Requests");
+                // }}
                 >
                   <WallCards
                     className="mr-3"
@@ -288,6 +288,50 @@ function Admin(props) {
                     big={true}
                     name="Total Requests"
                     count={grants?.length}
+                  />
+                </div>
+
+                <div
+                // onClick={() => {
+                //   setdisplayArray(grants);
+                //   setTitle("Requests");
+                // }}
+                >
+                  <WallCards
+                    className="mr-3"
+                    rider={false}
+                    big={true}
+                    name="Total Pending Requests"
+                    // count={grants?.length}
+                  />
+                </div>
+
+                <div
+                // onClick={() => {
+                //   setdisplayArray(grants);
+                //   setTitle("Requests");
+                // }}
+                >
+                  <WallCards
+                    className="mr-3"
+                    rider={false}
+                    big={true}
+                    name="Total Approved Requests"
+                    // count={grants?.length}
+                  />
+                </div>
+                <div
+                // onClick={() => {
+                //   setdisplayArray(grants);
+                //   setTitle("Requests");
+                // }}
+                >
+                  <WallCards
+                    className="mr-3"
+                    rider={false}
+                    big={true}
+                    name="Total Funded Requests"
+                    // count={grants?.length}
                   />
                 </div>
                 {/* <div

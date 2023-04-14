@@ -292,7 +292,7 @@ function Contributions(props) {
                 <WallCards
                   rider={false}
                   big={true}
-                  name="Pending"
+                  name="Cash Donations"
                   count={
                     myContributions?.filter((e) => e?.status == "pending")
                       ?.length
@@ -301,7 +301,7 @@ function Contributions(props) {
                 <WallCards
                   rider={false}
                   big={true}
-                  name="Approved"
+                  name="Resource Donations"
                   count={
                     myContributions?.filter((e) => e?.status == "approved")
                       ?.length
@@ -311,7 +311,7 @@ function Contributions(props) {
                 <WallCards
                   rider={false}
                   big={true}
-                  name="Declined"
+                  name="Materials Donations"
                   count={
                     myContributions?.filter((e) => e?.status == "declined")
                       ?.length

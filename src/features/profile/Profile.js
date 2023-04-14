@@ -231,7 +231,7 @@ function Loan(props) {
         <ToDoorSearch />
         <div className="flex justify-between items-center">
           <Typography variant="h4" className="font-bold">
-            Profile
+            Impact/Track Record
           </Typography>
 
           {section == 2 && (
@@ -253,12 +253,12 @@ function Loan(props) {
                 <Typography variant="h6" className="font-bold">
                   {/* Request Loans */}
                 </Typography>
-                <Typography variant="" className="text-xs">
+                {/* <Typography variant="" className="text-xs">
                   Make Request
-                </Typography>
+                </Typography> */}
                 <Divider className="mb-4" />
                 <div className="w-full flex flex-col gap-3">
-                  <div>
+                  {/* <div>
                     <InputLabel className="text-left mb-2">
                       Email Address
                     </InputLabel>
@@ -269,9 +269,9 @@ function Loan(props) {
                       fullWidth
                       name="title"
                     />
-                  </div>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                     <InputLabel className="text-left mb-2">
                       Physical Address
                     </InputLabel>
@@ -282,8 +282,8 @@ function Loan(props) {
                       fullWidth
                       name="title"
                     />
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <InputLabel className="text-left mb-2">Country</InputLabel>
                     <TextField
                       // disabled
@@ -292,8 +292,8 @@ function Loan(props) {
                       fullWidth
                       name="title"
                     />
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <InputLabel className="text-left mb-2">
                       Phone Number
                     </InputLabel>
@@ -304,8 +304,8 @@ function Loan(props) {
                       fullWidth
                       name="title"
                     />
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <InputLabel className="text-left mb-2">
                       Account Information
                     </InputLabel>
@@ -316,8 +316,8 @@ function Loan(props) {
                       fullWidth
                       name="title"
                     />
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <InputLabel className="text-left mb-2">
                       Board Member Information
                     </InputLabel>
@@ -328,7 +328,7 @@ function Loan(props) {
                       fullWidth
                       name="title"
                     />
-                  </div>
+                  </div> */}
                   {/* <div>
                     <InputLabel className="text-left  mb-2">
                       I want to Loan
@@ -351,7 +351,7 @@ function Loan(props) {
                     />
                   </div> */}
 
-                  <div>
+                  {/* <div>
                     <InputLabel className="text-left  mb-2">
                       Category
                     </InputLabel>
@@ -371,7 +371,7 @@ function Loan(props) {
                         </MenuItem>
                       ))}
                     </TextField>
-                  </div>
+                  </div> */}
                   <div>
                     <InputLabel className="text-left mb-2">
                       Impact And Track Record
@@ -385,7 +385,7 @@ function Loan(props) {
                       // value={currentDetail.reason}
                     />
                   </div>
-                  <div>
+                  {/* <div>
                     <InputLabel className="text-left mb-2">
                      About Us (Not more than 600 words)
                     </InputLabel>
@@ -397,7 +397,7 @@ function Loan(props) {
                       rows={6}
                       // value={currentDetail.reason}
                     />
-                  </div>
+                  </div> */}
 
                   <div>
                     <input

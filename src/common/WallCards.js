@@ -112,7 +112,7 @@ function WallCards(props) {
           className="absolute z-0 top-0 left-0 w-[100%] h-[100%]"
           src={snake}
         /> */}
-        <CardContent className={props.big ? "text-center w-44" : ""}>
+        <CardContent className={props.big ? "text-center w-40" : ""}>
           <div>
             <Typography
               className={

@@ -134,7 +134,7 @@ export default function PermanentDrawerLeft() {
               color: RouteEnum.GRANT == currentUrl ? true : false,
             },
             {
-              name: "Profile",
+              name: "Impact & Track record",
               d: RouteEnum.PROFILE,
               // image: rider,
               color: RouteEnum.PROFILE == currentUrl ? true : false,
