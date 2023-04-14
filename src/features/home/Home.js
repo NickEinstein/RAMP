@@ -149,7 +149,7 @@ const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
        } else {
          dataRef.current.stepper.reset();
        }
-     }, 1000 * 2);
+     }, 1000 * 5);
      return () => {
        clearInterval(intervalId);
      };
@@ -377,18 +377,27 @@ console.log(stepper.step)
     <div className="">
       <div className="lg:flex ">
         <div
+          style={{
+            // background: `url('${configs[stepper.step]?.image}')`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "48%",
+          }}
+          className="hidden md:block bg-gray-500/10 z-30 "
+        ></div>
+        <div
           // className="h-screen"
           style={{
             // background: `url('${configs[stepper.step]?.image}')`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            minWidth: "45%",
+            minWidth: "48%",
           }}
-          className="lg:block items-stretch flex relative min-h-screen bg-transparent text-primary-main px-16 py-10 w-2/5"
+          className="lg:block fixed items-stretch flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
         >
           <div>
             <img
-              className="min-h-screen absolute top-0 -z-20 min-w-[105%] left-0 flex self-stretch"
+              className="min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex self-stretch"
               src={configs[stepper.step]?.image}
             />
             {/* <div className="self-stretch w-1/2 hidden md:flex items-end">
@@ -415,7 +424,7 @@ console.log(stepper.step)
                 {/* Earn */}
                 Get access to unlimited funds
               </Typography>
-              <Typography className="text-sm">
+              <Typography className="text-base">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
                 diam nonummy nibh euismod tincidunt ut laoreet dolore magna
                 aliquam erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit
@@ -425,7 +434,7 @@ console.log(stepper.step)
           </div>
         </div>
         {/* +++++++++++++++++++++++++++++++++++++++++ */}
-        <div className="p-8 pr-[12%] pl-[6%] w-full">
+        <div className="p-8 pr-[10%] pl-[6%] w-full">
           {/* <LoginHeader /> */}
           <Typography variant="h4">RAMP</Typography>
           {/* <img

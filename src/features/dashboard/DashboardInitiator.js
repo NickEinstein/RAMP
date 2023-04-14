@@ -386,15 +386,13 @@ function DashboardInitiator(props) {
 
       {
         <div>
-          {!open&&isLoading>0 && (
+          {!open && isLoading > 0 && (
             <div className="md:flex w-full gap-5 mt-8">
               <div className="flex flex-col gap-4 w-full border border-[#F0F6FF] p-4">
-                {isLoading==1 ? (
+                {isLoading == 1 ? (
                   <div className="md:w-3/5 ">
                     <Typography className="mb-4" variant="h6">
-                      {isLoading==1
-                        ? "One more thing..."
-                        : "Getting Started"}
+                      {isLoading == 1 ? "One more thing..." : "Getting Started"}
                     </Typography>
                     <Typography>
                       Proceed by providing the information below to enable you
@@ -421,9 +419,8 @@ function DashboardInitiator(props) {
                                 big={true}
                                 name="Pending"
                                 count={
-                                  grants?.filter(
-                                    (e) => e?.status == "pending"
-                                  )?.length
+                                  grants?.filter((e) => e?.status == "pending")
+                                    ?.length
                                 }
                               />
                               <WallCards
@@ -431,9 +428,8 @@ function DashboardInitiator(props) {
                                 big={true}
                                 name="Approved"
                                 count={
-                                  grants?.filter(
-                                    (e) => e?.status == "open"
-                                  )?.length
+                                  grants?.filter((e) => e?.status == "open")
+                                    ?.length
                                 }
                               />
                               <WallCards
@@ -441,9 +437,8 @@ function DashboardInitiator(props) {
                                 big={true}
                                 name="FUnded"
                                 count={
-                                  grants?.filter(
-                                    (e) => e?.status == "approved"
-                                  )?.length
+                                  grants?.filter((e) => e?.status == "approved")
+                                    ?.length
                                 }
                               />
                               <WallCards
@@ -451,9 +446,8 @@ function DashboardInitiator(props) {
                                 big={true}
                                 name="Declined"
                                 count={
-                                  grants?.filter(
-                                    (e) => e?.status == "delined"
-                                  )?.length
+                                  grants?.filter((e) => e?.status == "delined")
+                                    ?.length
                                 }
                               />
                             </div>
@@ -557,7 +551,7 @@ function DashboardInitiator(props) {
                   </div>
                 )}
                 {/* <Typography>One more thing...</Typography> */}
-                {isLoading==1 ? (
+                {isLoading == 1 ? (
                   <Button
                     onClick={handleOpen}
                     className="bg-primary-main h-10 text-white rounded-sm md:w-2/5"
@@ -581,7 +575,7 @@ function DashboardInitiator(props) {
                   </div>
                 )}
               </div>
-              {isLoading==1 && (
+              {isLoading == 1 && (
                 <div className="md:w-2/5 bg-primary-main border p-4  text-white">
                   <Typography className="font-bold pr-[3%]" variant="h5">
                     Get access to unlimited <br /> funds
@@ -914,6 +908,11 @@ function DashboardInitiator(props) {
                       value={completeRegFormData.city}
                     />
                   </div>
+                  {/* Poverty (SDG 1) Health and well-being (SDG 3), Education (SDG
+                  4), Gender equality (SDG 5) Inclusive economy (SDG 8),
+                  Enabling an environment of peace and security Partnerships
+                  Decent work and economic growth Responsible
+                  consumption and production */}
                   <div>
                     <InputLabel className="text-left mb-2">
                       About Us (Not more than 600 words)

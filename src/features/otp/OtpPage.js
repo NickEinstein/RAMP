@@ -19,7 +19,7 @@ import Checkbox from "@mui/material/Checkbox";
 import toDoorLogo from "images/Ellipse 30.png";
 import background from "images/background.png";
 import snake from "images/Mask group.png";
-import backgroundImage from "../../images/RampHome1.jpg";
+import backgroundImage from "../../images/homeverify.jpg";
 // import backgroundImage2 from "../../images/rampHome2.jpg";
 import backgroundImage3 from "../../images/ramphome3.jpg";
 import backgroundImage4 from "../../images/ramphome4.jpg";
@@ -254,14 +254,14 @@ function OtpPage(props) {
             // background: `url('${configs[stepper.step]?.image}')`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            minWidth: "45%",
+            minWidth: "48%",
           }}
-          className="lg:block items-stretch flex relative min-h-screen bg-transparent text-primary-main px-16 py-10 w-2/5"
+          className="lg:block items-stretch flex relative min-h-screen bg-black/20 text-primary-main px-16 py-10 w-2/5"
         >
           <div>
             <img
-              className="min-h-screen absolute top-0 -z-20 min-w-[105%] left-0 flex self-stretch"
-              src={configs[stepper.step]?.image}
+              className="min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex self-stretch"
+              src={configs[0]?.image}
             />
             {/* <div className="self-stretch w-1/2 hidden md:flex items-end">
               <div className="relative w-full" style={{ height: 620 }}>
@@ -308,44 +308,49 @@ function OtpPage(props) {
               </Typography>
               <Divider className="my-4" />
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 justify-center">
               <input
-                className="w-10 border-2 focus:border-primary-main hover:border-primary-main"
+                className="w-16 border-2 focus:border-primary-main hover:border-primary-main p-3"
                 type="text"
                 maxLength={1}
                 ref={input1Ref}
                 onChange={(e) => handleInput(e, input2Ref)}
               />
               <input
-                className="w-10 border"
+                                className="w-16 border-2 focus:border-primary-main hover:border-primary-main p-3"
+
                 type="text"
                 maxLength={1}
                 ref={input2Ref}
                 onChange={(e) => handleInput(e, input3Ref)}
               />
               <input
-                className="w-10 border"
+                                className="w-16 border-2 focus:border-primary-main hover:border-primary-main p-3"
+
                 type="text"
                 maxLength={1}
                 ref={input3Ref}
                 onChange={(e) => handleInput(e, input4Ref)}
               />
               <input
-                className="w-10 border"
+                                className="w-16 border-2 focus:border-primary-main hover:border-primary-main p-3"
+
                 type="text"
                 maxLength={1}
                 ref={input4Ref}
                 onChange={(e) => handleInput(e, input5Ref)}
               />
               <input
-                className="w-10 border"
+                                className="w-16 border-2 focus:border-primary-main hover:border-primary-main p-3"
+
                 type="text"
                 maxLength={1}
                 ref={input5Ref}
                 onChange={(e) => handleInput(e, input6Ref)}
               />
               <input
-                className="w-10 border"
+                                className="w-16 border-2 focus:border-primary-main hover:border-primary-main p-3"
+
                 type="text"
                 maxLength={1}
                 ref={input6Ref}

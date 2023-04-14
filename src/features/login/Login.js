@@ -217,16 +217,23 @@ function Login(props) {
     <div className="">
       <div className="lg:flex ">
         <div
-          className="relative min-h-screen flex-vertical bg-primary-main text-white pl-10  w-2/5"
           style={{
-            minWidth: "40%",
-            // minHeight: "100%",
-            position: "relative",
+            // background: `url('${configs[0]?.image}')`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            minWidth: "48%",
           }}
+          className="lg:block items-stretch flex relative min-h-screen bg-black/20 text-primary-main px-16 py-10 w-2/5"
+          // className="relative min-h-screen flex-vertical bg-primary-main text-white pl-10  w-2/5"
+          // style={{
+          //   minWidth: "40%",
+          //   // minHeight: "100%",
+          //   position: "relative",
+          // }}
         >
           <img
-            className="absolute min-h-screen z-0 top-0 left-0 w-[100%] h-[100%]"
-            src={snake}
+            className="absolute min-h-screen -z-10 top-0 left-0 w-[100%] h-[100%]"
+            src={configs[0]?.image}
           />
           <div className="flex flex-col gap-16 my-12 text-white">
             {/* <img className="w-1/5" src={educatiaLogo} /> */}
@@ -237,7 +244,7 @@ function Login(props) {
               {/* Earn */}
               Get access to unlimited funds
             </Typography>
-            <Typography className="text-sm">
+            <Typography className="text-base">
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
               nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
               erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit amet,
