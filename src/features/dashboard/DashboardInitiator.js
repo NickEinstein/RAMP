@@ -169,10 +169,8 @@ function DashboardInitiator(props) {
     // Details of the uploaded file
     setRidersPictureName(selectedFile.name);
     setRidersPicture(selectedFile);
-   
   };
 
-  
   const currenciez = [
     {
       value: "corporate_brand",
@@ -210,7 +208,6 @@ function DashboardInitiator(props) {
     userGrants();
   }, []);
 
-  
   const userLoaans = async () => {
     const res = await get({
       endpoint: "users/loans",
@@ -254,10 +251,11 @@ function DashboardInitiator(props) {
       // auth: false,
     });
 
-    //  setIsRegCompleted(res?.data?.data?.states);
+    if (res?.data?.data?.user.state_id) {
+      setIsLoading(2);
+    } else setIsLoading(1);
 
     setIsRegCompleted(res?.data?.data?.user.state_id);
- 
 
     setIsCorporate(
       res?.data?.data?.user.account_type == "corporate" ? true : false
@@ -284,17 +282,11 @@ function DashboardInitiator(props) {
     });
 
     console.log(res?.data?.data?.grants);
-   if (res?.data?.success) {
-     setGrants(res?.data?.data?.grants);
+    if (res?.data?.success) {
+      setGrants(res?.data?.data?.grants);
 
-     if (res?.data?.data?.grants?.length > 0) {
-       setIsLoading(2);
-     } else setIsLoading(1);
-   }
-   else
-       setIsLoading(0);
-
-    console.log(res?.data?.data?.grants);
+      console.log(res?.data?.data?.grants);
+    }
   };
 
   console.log(isCorporate);
@@ -352,7 +344,9 @@ function DashboardInitiator(props) {
     console.log(res);
 
     if (res.data.success) {
-         enqueueSnackbar("Registration Completed Successfully", { variant: "success" });
+      enqueueSnackbar("Registration Completed Successfully", {
+        variant: "success",
+      });
       handleClose(true);
     } else {
       console.log(res);
@@ -392,7 +386,7 @@ function DashboardInitiator(props) {
           {!open && isLoading > 0 && (
             <div className="md:flex w-full gap-5 mt-8">
               <div className="flex flex-col gap-4 w-full border border-[#F0F6FF] p-4">
-                {!isRegCompleted && isLoading == 1 ? (
+                {isLoading == 1 ? (
                   <div className="md:w-3/5 ">
                     <Typography className="mb-4" variant="h6">
                       {isLoading == 1 ? "One more thing..." : "Getting Started"}
@@ -554,7 +548,7 @@ function DashboardInitiator(props) {
                   </div>
                 )}
                 {/* <Typography>One more thing...</Typography> */}
-                {!isRegCompleted&&isLoading == 1 ? (
+                {isLoading == 1 ? (
                   <Button
                     onClick={handleOpen}
                     className="bg-primary-main h-10 text-white rounded-sm md:w-2/5"
@@ -578,7 +572,7 @@ function DashboardInitiator(props) {
                   </div>
                 )}
               </div>
-              {!isRegCompleted&&isLoading == 1 && (
+              {isLoading == 1 && (
                 <div className="md:w-2/5 bg-primary-main border p-4  text-white">
                   <Typography className="font-bold pr-[3%]" variant="h5">
                     Get access to unlimited <br /> funds
@@ -592,7 +586,7 @@ function DashboardInitiator(props) {
               )}
             </div>
           )}
-          {open && isRegCompleted&& isLoading == 2 && (
+          {open && isLoading == 2 && (
             <div className="md:hidden">
               <DialogTitle>
                 <div className="flex justify-between items-center">
