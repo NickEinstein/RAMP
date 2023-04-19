@@ -301,7 +301,7 @@ function Contributions(props) {
                 <WallCards
                   rider={false}
                   big={true}
-                  name="Resource Donations"
+                  name="In-Kind Donations"
                   count={
                     myContributions?.filter((e) => e?.status == "approved")
                       ?.length

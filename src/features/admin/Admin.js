@@ -575,6 +575,10 @@ function Admin(props) {
                               <MenuItem onClick={() => handleClose(e?.id)}>
                                 Approve
                               </MenuItem>
+
+                              <MenuItem onClick={() => handleClose(e?.id)}>
+                                Decline
+                              </MenuItem>
                             </Menu>
                           </div>
                         </div>

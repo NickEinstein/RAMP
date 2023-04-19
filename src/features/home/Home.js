@@ -230,7 +230,7 @@ console.log(stepper.step)
       firstname: regData?.firstname,
       lastname: regData?.lastname,
       account_type: regData.types,
-      role: regData?.role,
+      role: regData?.role == "hi" ? "edufunder" : regData?.role,
 
       email: regData?.email,
       password: regData?.password,
@@ -243,7 +243,10 @@ console.log(stepper.step)
       phone: `+234${phoneNumber}`,
       account_type: regData.types,
       company_type:
-        regData.role == "edufunder" ? regData.company_type : "corporate_brand",
+        regData.role == "eduinitiator"
+          ? "corporate_brand"
+          : regData.company_type,
+      role: regData?.role == "hi" ? "edufunder" : regData?.role,
     };
 
     console.log(payloadIndividual);
@@ -317,6 +320,17 @@ console.log(stepper.step)
   ];
   // CASH RESOURCE MATERIALS
 
+  const donorxK = [
+    {
+      value: "educational_institution",
+      label: "In-Kind",
+    },
+    {
+      value: "alumni",
+      label: "Materials",
+    },
+  ];
+
   const donorx = [
     {
       value: "corporate_brand",
@@ -325,7 +339,7 @@ console.log(stepper.step)
 
     {
       value: "educational_institution",
-      label: "Resources",
+      label: "In-Kind",
     },
     {
       value: "alumni",
@@ -337,11 +351,18 @@ console.log(stepper.step)
     {
       value: "edufunder",
       label: "Donor",
+      key: 1,
     },
 
     {
       value: "eduinitiator",
       label: "NGO",
+      key: 2,
+    },
+    {
+      value: "hi",
+      label: "TECHNICAL EXPERTISE",
+      key: 3,
     },
   ];
 
@@ -625,7 +646,7 @@ console.log(stepper.step)
                   />
                   {individual && (
                     <div className="w-full ">
-                      {regData.role == "edufunder" ? (
+                      {regData.role == "edufunder" || regData.role == "hi" ? (
                         <FormControl className="w-full">
                           {!regData.company_type && (
                             <InputLabel htmlFor="name-multiple">
@@ -646,11 +667,23 @@ console.log(stepper.step)
                             id="name-multiple"
                             // helperText="Please select your currency"
                           >
-                            {donorx.map((option) => (
-                              <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                              </MenuItem>
-                            ))}
+                            {regData.role !== "hi"
+                              ? donorx.map((option) => (
+                                  <MenuItem
+                                    key={option.value}
+                                    value={option.value}
+                                  >
+                                    {option.label}
+                                  </MenuItem>
+                                ))
+                              : donorxK.map((option) => (
+                                  <MenuItem
+                                    key={option.value}
+                                    value={option.value}
+                                  >
+                                    {option.label}
+                                  </MenuItem>
+                                ))}
                           </TextField>
                         </FormControl>
                       ) : (

@@ -139,8 +139,8 @@ function Donation(props) {
     },
 
     {
-      value: "resources",
-      label: "Resources",
+      value: "in-kind",
+      label: "In-Kind",
     },
     {
       value: "materials",
@@ -413,7 +413,7 @@ function Donation(props) {
                                     {option.label}
                                   </MenuItem>
                                 ))
-                              : category == "resources"
+                              : category == "in-kind"
                               ? subResources.map((option) => (
                                   <MenuItem
                                     key={option.value}
