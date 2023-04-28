@@ -146,6 +146,10 @@ function Donation(props) {
       value: "materials",
       label: "Materials",
     },
+    {
+      value: "technicalExpert",
+      label: "Technical Expertise",
+    },
   ];
 
   const subMaterials = [
@@ -236,6 +240,21 @@ function Donation(props) {
     {
       value: 4,
       label: "Amount of choice",
+    },
+  ];
+  const subExpertise = [
+    {
+      value: 1,
+      label: "Content writing",
+    },
+
+    {
+      value: 2,
+      label: "web dev ",
+    },
+    {
+      value: 3,
+      label: "Project Management",
     },
   ];
 
@@ -334,145 +353,133 @@ function Donation(props) {
           <Typography variant="h4" className="font-bold">
             Make a request
           </Typography>
-
-         
         </div>
       </div>
-
-      
-      
-      
-
-      
-        <div className="flex gap-8">
-          <div className="md:w-3/5 w-full">
-             
-              <div className="flex flex-col gap-2 p-10">
-                <div className="w-full flex flex-col gap-3">
-                  <div className="flex gap-3">
-                    <div className="w-full ">
-                      <FormControl className="w-full">
-                        {!category && (
-                          <InputLabel htmlFor="name-multiple">
-                            Request Category
-                          </InputLabel>
-                        )}
-
-                        <TextField
-                          fullWidth
-                          select
-                          placeholder="Type Of Organisation"
-                          name="company_type"
-                          displayEmpty
-                          // name='company_type'
-                          // label="Select"
-                          // value={regData.company_type}
-                          defaultValue="Coorporate Organisation"
-                          onChange={(e) => setCategory(e.target.value)}
-                          id="name-multiple"
-                          // helperText="Please select your currency"
-                        >
-                          {ngo.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </FormControl>
-                    </div>
-                    {category && (
-                      <div className="w-full ">
-                        <FormControl className="w-full">
-                          {!subCategory && (
-                            <InputLabel htmlFor="name-multiple">
-                              Sub-Category
-                            </InputLabel>
-                          )}
-
-                          <TextField
-                            fullWidth
-                            select
-                            placeholder="Type Of Organisation"
-                            name="company_type"
-                            displayEmpty
-                            // name='company_type'
-                            // label="Select"
-                            // value={regData.company_type}
-                            defaultValue="Coorporate Organisation"
-                            onChange={(e) => setsubCategory(e.target.value)}
-                            id="name-multiple"
-
-                            // helperText="Please select your currency"
-                          >
-                            {category == "cash"
-                              ? subCash.map((option) => (
-                                  <MenuItem
-                                    key={option.value}
-                                    value={option.value}
-                                  >
-                                    {option.label}
-                                  </MenuItem>
-                                ))
-                              : category == "in-kind"
-                              ? subResources.map((option) => (
-                                  <MenuItem
-                                    key={option.value}
-                                    value={option.value}
-                                  >
-                                    {option.label}
-                                  </MenuItem>
-                                ))
-                              : subMaterials.map((option) => (
-                                  <MenuItem
-                                    key={option.value}
-                                    value={option.value}
-                                  >
-                                    {option.label}
-                                  </MenuItem>
-                                ))}
-                          </TextField>
-                        </FormControl>
-                      </div>
+      <div className="flex gap-8">
+        <div className="md:w-3/5 w-full">
+          <div className="flex flex-col gap-2 p-10">
+            <div className="w-full flex flex-col gap-3">
+              <div className="flex gap-3">
+                <div className="w-full ">
+                  <FormControl className="w-full">
+                    {!category && (
+                      <InputLabel htmlFor="name-multiple">
+                        Request Category
+                      </InputLabel>
                     )}
-                  </div>
-                  <div>
-                    <InputLabel className="text-left mb-2">Title</InputLabel>
+
                     <TextField
-                      // disabled
-                      value={currentDetail?.title}
-                      onChange={onChange}
                       fullWidth
-                      name="title"
-                    />
-                  </div>
-                  {category == "cash" && (
-                    <div>
-                      <InputLabel className="text-left mb-2">Amount</InputLabel>
+                      select
+                      placeholder="Type Of Organisation"
+                      name="company_type"
+                      displayEmpty
+                      // name='company_type'
+                      // label="Select"
+                      // value={regData.company_type}
+                      defaultValue="Coorporate Organisation"
+                      onChange={(e) => setCategory(e.target.value)}
+                      id="name-multiple"
+                      // helperText="Please select your currency"
+                    >
+                      {ngo.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </FormControl>
+                </div>
+                {category && (
+                  <div className="w-full ">
+                    <FormControl className="w-full">
+                      {!subCategory && (
+                        <InputLabel htmlFor="name-multiple">
+                          Sub-Category
+                        </InputLabel>
+                      )}
+
                       <TextField
-                        // disabled
-                        value={currentDetail?.amount}
-                        onChange={onChange}
                         fullWidth
-                        name="amount"
-                        // disabled={subCategory && subCategory==1}
-                      />
-                    </div>
-                  )}
-                  <div>
-                    <InputLabel className="text-left mb-2">
-                      Reasons (Not more than 600 words)
-                    </InputLabel>
-                    <TextField
-                      name="reason"
-                      onChange={onChange}
-                      fullWidth
-                      multiline
-                      rows={6}
-                      value={currentDetail.reason}
-                      // disabled
-                    />
+                        select
+                        placeholder="Type Of Organisation"
+                        name="company_type"
+                        displayEmpty
+                        // name='company_type'
+                        // label="Select"
+                        // value={regData.company_type}
+                        defaultValue="Coorporate Organisation"
+                        onChange={(e) => setsubCategory(e.target.value)}
+                        id="name-multiple"
+
+                        // helperText="Please select your currency"
+                      >
+                        {category == "cash"
+                          ? subCash.map((option) => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
+                            ))
+                          : category == "in-kind"
+                          ? subResources.map((option) => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
+                            ))
+                          : category == "materials"
+                          ? subMaterials.map((option) => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
+                            ))
+                          : subExpertise.map((option) => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
+                            ))}
+                      </TextField>
+                    </FormControl>
                   </div>
-                  {/* <div>
+                )}
+              </div>
+              <div>
+                <InputLabel className="text-left mb-2">Title</InputLabel>
+                <TextField
+                  // disabled
+                  value={currentDetail?.title}
+                  onChange={onChange}
+                  fullWidth
+                  name="title"
+                />
+              </div>
+              {category == "cash" && (
+                <div>
+                  <InputLabel className="text-left mb-2">Amount</InputLabel>
+                  <TextField
+                    // disabled
+                    value={currentDetail?.amount}
+                    onChange={onChange}
+                    fullWidth
+                    name="amount"
+                    // disabled={subCategory && subCategory==1}
+                  />
+                </div>
+              )}
+              <div>
+                <InputLabel className="text-left mb-2">
+                  Reasons (Not more than 600 words)
+                </InputLabel>
+                <TextField
+                  name="reason"
+                  onChange={onChange}
+                  fullWidth
+                  multiline
+                  rows={6}
+                  value={currentDetail.reason}
+                  // disabled
+                />
+              </div>
+              {/* <div>
                     <InputLabel className="text-left mb-2">
                       Supporting Documents
                     </InputLabel>
@@ -493,115 +500,111 @@ function Donation(props) {
                     </TextField>
                   </div> */}
 
-                  <div>
-                    <input
-                      onChange={onFileChange}
-                      style={{ display: "none" }}
-                      id="contained-button-file"
-                      type="file"
-                    />
-                    <label
-                      htmlFor="contained-button-file"
-                      className="mb-8 cursor-pointer"
-                    >
-                      <div className="text-black bg-yellow-200 mb-5 py-3 rounded-full w-2/3 text-center ">
-                        {" "}
-                        Supporting Documents
-                      </div>
-                      {/* <img src={uploadPNG} /> */}
-                    </label>
+              <div>
+                <input
+                  onChange={onFileChange}
+                  style={{ display: "none" }}
+                  id="contained-button-file"
+                  type="file"
+                />
+                <label
+                  htmlFor="contained-button-file"
+                  className="mb-8 cursor-pointer"
+                >
+                  <div className="text-black bg-yellow-200 mb-5 py-3 rounded-full w-2/3 text-center ">
+                    {" "}
+                    Supporting Documents
                   </div>
-
-                  {imgData && (
-                    <div className="relative w-20">
-                      <Avatar
-                        className="w-32 h-32 border border-blue-300"
-                        src={imgData}
-                      />
-                      {/* <Typography>{ridersPictureName.name}</Typography> */}
-                      <div
-                        onClick={() => setImgData("")}
-                        className="p-1 bg-red-500 absolute w-4 h-4 flex justify-center hover:cursor-pointer items-center top-0 left-32 text-white rounded-full"
-                      >
-                        x
-                      </div>
-                    </div>
-                  )}
-                </div>
+                  {/* <img src={uploadPNG} /> */}
+                </label>
               </div>
-            
-            <div className="flex gap-5 w-full">
-              <Button
-                className="p-3 w-full bg-none text-base mb-10 text-white"
-                type="submit"
-                onClick={() => {
-                  handleClose();
-                  // redirect();
-                }}
-                // disabled={currentDetail}
 
-                // className=' '
-              >
-                Cancel
-              </Button>
-
-              <Button
-                className="p-3 w-full text-base mb-10 text-white"
-                type="submit"
-                // disabled={currentDetail}
-                onClick={() => {
-                  applyForGrant();
-                  //   : setSection((prev) => prev + 1);
-                  // handleClose();
-                  // redirect();
-                }}
-                // className=' '
-              >
-                Submit
-              </Button>
+              {imgData && (
+                <div className="relative w-20">
+                  <Avatar
+                    className="w-32 h-32 border border-blue-300"
+                    src={imgData}
+                  />
+                  {/* <Typography>{ridersPictureName.name}</Typography> */}
+                  <div
+                    onClick={() => setImgData("")}
+                    className="p-1 bg-red-500 absolute w-4 h-4 flex justify-center hover:cursor-pointer items-center top-0 left-32 text-white rounded-full"
+                  >
+                    x
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-          <div className="md:w-2/5 p-4 hidden md:flex flex-col gap-4 text-black bg-[#F0F6FF]">
-            <div className="flex flex-col gap-2 ">
-              <Typography className="text-xs font-bold">
-                About Donation
-              </Typography>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-                nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                aliquip ex ea
-              </Typography>
-            </div>
 
-            <div className="flex flex-col gap-2 ">
-              <Typography className="text-xs font-bold">Reasons</Typography>
-              <Typography>
-                States reasons for donation. Not more than 600words
-              </Typography>
-            </div>
+          <div className="flex gap-5 w-full">
+            <Button
+              className="p-3 w-full bg-none text-base mb-10 text-white"
+              type="submit"
+              onClick={() => {
+                handleClose();
+                // redirect();
+              }}
+              // disabled={currentDetail}
 
-            <div className="flex flex-col gap-2">
-              <Typography className="text-xs font-bold">Amount</Typography>
-              <Typography>Specify the amount needed</Typography>
-            </div>
+              // className=' '
+            >
+              Cancel
+            </Button>
 
-            <div className="flex flex-col gap-2">
-              <Typography className="text-xs font-bold">
-                Supporting Document
-              </Typography>
-              <Typography>
-                Providing supporting document in various media boots your chance
-                of getting donors.
-              </Typography>
-            </div>
+            <Button
+              className="p-3 w-full text-base mb-10 text-white"
+              type="submit"
+              // disabled={currentDetail}
+              onClick={() => {
+                applyForGrant();
+                //   : setSection((prev) => prev + 1);
+                // handleClose();
+                // redirect();
+              }}
+              // className=' '
+            >
+              Submit
+            </Button>
           </div>
         </div>
+        <div className="md:w-2/5 p-4 hidden md:flex flex-col gap-4 text-black bg-[#F0F6FF]">
+          <div className="flex flex-col gap-2 ">
+            <Typography className="text-xs font-bold">
+              About Donation
+            </Typography>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+              tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+            </Typography>
+          </div>
+
+          <div className="flex flex-col gap-2 ">
+            <Typography className="text-xs font-bold">Reasons</Typography>
+            <Typography>
+              States reasons for donation. Not more than 600words
+            </Typography>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Typography className="text-xs font-bold">Amount</Typography>
+            <Typography>Specify the amount needed</Typography>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Typography className="text-xs font-bold">
+              Supporting Document
+            </Typography>
+            <Typography>
+              Providing supporting document in various media boots your chance
+              of getting donors.
+            </Typography>
+          </div>
+        </div>
+      </div>
       )
-
-    
-
       <Dialog
         open={open}
         // sx={{ height: "70/px", border: "2px solid red" }}

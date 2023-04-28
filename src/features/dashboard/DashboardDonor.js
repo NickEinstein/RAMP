@@ -67,6 +67,172 @@ function DashboardDonor(props) {
   const [displayArray, setdisplayArray] = useState([]);
   const [learnMoreDetails, setLearnMoreDetails] = useState([]);
   const [title, setTitle] = useState("Donation Requests");
+  const [firstname, setFirstname] = useState("Donation Requests");
+  const [techReq, setReq] = useState([
+    {
+      id: 14,
+      tech: true,
+      about:
+        "We are a world class group dedicated to growing our brand and becoming the best possible group we can be",
+      milestones: "1. We have a functional website",
+      applied_by: {
+        id: 14,
+        firstname: "Iyodo",
+        lastname: "Nick",
+        account_type: "corporate",
+        company_name: "null",
+        company_reg_number: "null",
+        company_type: "alumni",
+        cac_document:
+          "https://api.educatial.com/public/storage/uploads/Disn7RLYNF493PYhz4C5IeejLYld6q7j4albUT7L.png",
+        phone: "+2348093355343",
+        email: "rampngo1@qa.team",
+        email_verified_at: "2023-04-13T13:33:19.000000Z",
+        avatar: null,
+        status: "active",
+        id_front: null,
+        id_back: null,
+        i_d_type_id: null,
+        street_name: null,
+        state_id: 1,
+        lga_id: 1,
+        city: "1. Grwoth of school\r\n\r\n- Grew a school from zero to 100",
+        deleted_at: null,
+        created_at: "2023-04-13T13:33:00.000000Z",
+        updated_at: "2023-04-13T13:48:59.000000Z",
+      },
+      amount: 0,
+      reason: "I'm building multiple websites for different uses",
+      status: "open",
+      deleted_at: null,
+      created_at: "2023-04-28T05:32:54.000000Z",
+      updated_at: "2023-04-28T06:00:33.000000Z",
+      title: "A need for Web Developement team",
+      attachments: [
+        {
+          id: 14,
+          attachable_id: 14,
+          attachable_type: "App\\Models\\Grant",
+          url: "https://api.educatial.com/public/storage/uploads/M0eZh0xWAfsX0ckGVjEKLYGWjgntGSTJ5u44FZnr.png",
+          deleted_at: null,
+          created_at: "2023-04-28T05:32:54.000000Z",
+          updated_at: "2023-04-28T05:32:54.000000Z",
+        },
+      ],
+      contributions: [],
+    },
+    {
+      id: 14,
+      tech: true,
+      milestones: "None Yet",
+
+      about:
+        "We are a world class group dedicated to growing our brand and becoming the best possible group we can be",
+
+      applied_by: {
+        id: 14,
+        firstname: "Iyodo",
+        lastname: "Nick",
+        account_type: "corporate",
+        company_name: "null",
+        company_reg_number: "null",
+        company_type: "alumni",
+        cac_document:
+          "https://api.educatial.com/public/storage/uploads/Disn7RLYNF493PYhz4C5IeejLYld6q7j4albUT7L.png",
+        phone: "+2348093355343",
+        email: "rampngo1@qa.team",
+        email_verified_at: "2023-04-13T13:33:19.000000Z",
+        avatar: null,
+        status: "active",
+        id_front: null,
+        id_back: null,
+        i_d_type_id: null,
+        street_name: null,
+        state_id: 1,
+        lga_id: 1,
+        city: "1. Grwoth of school\r\n\r\n- Grew a school from zero to 100",
+        deleted_at: null,
+        created_at: "2023-04-13T13:33:00.000000Z",
+        updated_at: "2023-04-13T13:48:59.000000Z",
+      },
+      amount: 0,
+      reason:
+        "I'm building a brand and need someone to take our image to the next level",
+      status: "open",
+      deleted_at: null,
+      created_at: "2023-04-28T05:32:54.000000Z",
+      updated_at: "2023-04-28T06:00:33.000000Z",
+      title: "A need for Content Writer",
+      attachments: [
+        {
+          id: 14,
+          attachable_id: 14,
+          attachable_type: "App\\Models\\Grant",
+          url: "https://api.educatial.com/public/storage/uploads/M0eZh0xWAfsX0ckGVjEKLYGWjgntGSTJ5u44FZnr.png",
+          deleted_at: null,
+          created_at: "2023-04-28T05:32:54.000000Z",
+          updated_at: "2023-04-28T05:32:54.000000Z",
+        },
+      ],
+      contributions: [],
+    },
+    {
+      id: 14,
+      about:
+        "We are a world class group dedicated to growing our brand and becoming the best possible group we can be",
+
+      tech: true,
+      milestones: "1. We have reached out to likely investors",
+
+      applied_by: {
+        id: 14,
+
+        firstname: "Iyodo",
+        lastname: "Nick",
+        account_type: "corporate",
+        company_name: "null",
+        company_reg_number: "null",
+        company_type: "alumni",
+        cac_document:
+          "https://api.educatial.com/public/storage/uploads/Disn7RLYNF493PYhz4C5IeejLYld6q7j4albUT7L.png",
+        phone: "+2348093355343",
+        email: "rampngo1@qa.team",
+        email_verified_at: "2023-04-13T13:33:19.000000Z",
+        avatar: null,
+        status: "active",
+        id_front: null,
+        id_back: null,
+        i_d_type_id: null,
+        street_name: null,
+        state_id: 1,
+        lga_id: 1,
+        city: "1. Grwoth of school\r\n\r\n- Grew a school from zero to 100",
+        deleted_at: null,
+        created_at: "2023-04-13T13:33:00.000000Z",
+        updated_at: "2023-04-13T13:48:59.000000Z",
+      },
+      amount: 0,
+      reason:
+        "I'm need someone to help coordinate my young team on this new project",
+      status: "open",
+      deleted_at: null,
+      created_at: "2023-04-28T05:32:54.000000Z",
+      updated_at: "2023-04-28T06:00:33.000000Z",
+      title: "A need for Project Manager",
+      attachments: [
+        {
+          id: 14,
+          attachable_id: 14,
+          attachable_type: "App\\Models\\Grant",
+          url: "https://api.educatial.com/public/storage/uploads/M0eZh0xWAfsX0ckGVjEKLYGWjgntGSTJ5u44FZnr.png",
+          deleted_at: null,
+          created_at: "2023-04-28T05:32:54.000000Z",
+          updated_at: "2023-04-28T05:32:54.000000Z",
+        },
+      ],
+      contributions: [],
+    },
+  ]);
 
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
 
@@ -199,11 +365,26 @@ function DashboardDonor(props) {
   ];
 
   useEffect(() => {
-    getGrants();
+    getProfile();
     // getLoans();
     // getScholarships();
     // getEduInvests();
   }, []);
+  const getProfile = async () => {
+    const res = await get({
+      endpoint: "users/profile",
+      // body: formData,
+      // auth: false,
+    });
+    console.log(res?.data?.data?.user);
+    setFirstname(res?.data?.data?.user.firstname);
+
+    if (res?.data?.data?.user.firstname !== "Technical") getGrants();
+
+    // setLoans(res.data.data.loans);
+
+    //  setIsRegCompleted(res?.data?.data?.states);
+  };
   const getLoans = async () => {
     const res = await get({
       endpoint: "users/loans/display",
@@ -243,7 +424,7 @@ function DashboardDonor(props) {
       // auth: false,
     });
 
-    setGrants(res.data.data.grants);
+    !firstname == "Technical" && setGrants(res.data.data.grants);
     setdisplayArray(res.data.data.grants);
 
     //  setIsRegCompleted(res?.data?.data?.states);
@@ -293,9 +474,28 @@ function DashboardDonor(props) {
             <div className="">
               <div>
                 <div className="flex gap-4">
+                  {!firstname == "Technical" && (
+                    <div
+                      onClick={() => {
+                        setdisplayArray(grants);
+                        setTitle("Donation Requests");
+                        setSection(0);
+                        setlearnMore(false);
+                      }}
+                    >
+                      <WallCards
+                        className="mr-3"
+                        rider={false}
+                        big={true}
+                        name="Total Requests"
+                        count={grants?.length}
+                      />
+                    </div>
+                  )}
+
                   <div
                     onClick={() => {
-                      setdisplayArray(grants);
+                      setdisplayArray(techReq);
                       setTitle("Donation Requests");
                       setSection(0);
                       setlearnMore(false);
@@ -305,12 +505,10 @@ function DashboardDonor(props) {
                       className="mr-3"
                       rider={false}
                       big={true}
-                      name="Total Requests"
-                      count={grants?.length}
+                      name="Expertise Requests"
+                      count={techReq?.length}
                     />
                   </div>
-
-                 
                 </div>
               </div>
               <Typography variant="h6" className="font-bold mt-8">
@@ -423,35 +621,45 @@ function DashboardDonor(props) {
                 </Typography> */}
 
                 <div className="flex gap-3">
-                  <Card className="border rounded-lg p-3 px-8 text-center border-[#667085]">
-                    <span className="font-bold">20</span>
-                    <br /> <span className=""> Donors</span>
-                  </Card>
-                  <Card className="border rounded-lg p-3 px-8 text-center border-[#667085]">
-                    <span className="font-bold">25%</span> <br />{" "}
-                    <span className="">Funded</span>
-                  </Card>
+                  {firstname !== "Technical" && (
+                    <Card className="border rounded-lg p-3 px-8 text-center border-[#667085]">
+                      <span className="font-bold">20</span>
+                      <br /> <span className=""> Donors</span>
+                    </Card>
+                  )}
+                  {firstname !== "Technical" && (
+                    <Card className="border rounded-lg p-3 px-8 text-center border-[#667085]">
+                      <span className="font-bold">25%</span> <br />{" "}
+                      <span className="">Funded</span>
+                    </Card>
+                  )}
                   <Card className="border rounded-lg p-3 px-8 text-center border-[#667085]">
                     <span className="font-bold">20</span> <br />{" "}
-                    <span className="">Days Left</span>
+                    <span className="">
+                      {firstname !== "Technical"
+                        ? "Days Left"
+                        : "Days Duration"}
+                    </span>
                   </Card>
                 </div>
                 <Typography className="font-bold">About the NGO</Typography>
-                {/* <Typography className="text-[10px]">
-                  {learnMoreDetails?.applied_by?.city.replaceAll("/n", "<br/>")}
-                </Typography> */}
+                <Typography className="text-[12px] w-2/3">
+                  {learnMoreDetails?.about}
+                </Typography>
                 <Typography className="font-bold mt-8">Milestones</Typography>
+                { firstname == "Technical"&& learnMoreDetails?.milestones}
 
-                {learnMoreDetails?.applied_by?.city
-                  ?.split(/\n/)
-                  .map((line, index) => {
-                    return (
-                      <div key={index}>
-                        {line}
-                        <br />
-                      </div>
-                    );
-                  })}
+                {firstname !== "Technical" &&
+                  learnMoreDetails?.applied_by?.city
+                    ?.split(/\n/)
+                    .map((line, index) => {
+                      return (
+                        <div key={index}>
+                          {line}
+                          <br />
+                        </div>
+                      );
+                    })}
                 {/* <div className="flex gap-4 ">
                   <Avatar src="" />
                   <div className="">
@@ -508,45 +716,64 @@ function DashboardDonor(props) {
                     </div>
                   </div>
                 )}
-                <div className="flex gap-4 items-end">
-                  <div>
-                    <InputLabel className="text-left  mb-2">
-                      Enter Amount to Donate
-                    </InputLabel>
-                    <TextField
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            className="font-bold text-black"
-                            position="start"
-                          >
-                            &#8358;
-                          </InputAdornment>
-                        ),
-                      }}
-                      fullWidth
-                      name="amount"
-                      value={amount}
-                      onChange={(e) => {
-                        const regex = /^[0-9\b]+$/;
-                        if (
-                          e.target.value === "" ||
-                          regex.test(e.target.value)
-                        ) {
-                          setAmount(e.target.value);
-                          // setNum(e.target.value);
-                        }
-                      }}
-                    />
+                {firstname !== "Technical" ? (
+                  <div className="flex gap-4 items-end">
+                    <div>
+                      <InputLabel className="text-left  mb-2">
+                        Enter Amount to Donate
+                      </InputLabel>
+                      <TextField
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment
+                              className="font-bold text-black"
+                              position="start"
+                            >
+                              &#8358;
+                            </InputAdornment>
+                          ),
+                        }}
+                        fullWidth
+                        name="amount"
+                        value={amount}
+                        onChange={(e) => {
+                          const regex = /^[0-9\b]+$/;
+                          if (
+                            e.target.value === "" ||
+                            regex.test(e.target.value)
+                          ) {
+                            setAmount(e.target.value);
+                            // setNum(e.target.value);
+                          }
+                        }}
+                      />
+                    </div>
+                    <Button
+                      disabled={amount?.trim() == ""}
+                      onClick={handleOpen}
+                      className="font-bold w-1/2 h-12 text-white"
+                    >
+                      Continue
+                    </Button>
                   </div>
-                  <Button
-                    disabled={amount?.trim() == ""}
-                    onClick={handleOpen}
-                    className="font-bold w-1/2 h-12 text-white"
-                  >
-                    Continue
-                  </Button>
-                </div>
+                ) : (
+                  <div className="flex gap-4 items-end">
+                    <Button
+                      disabled={amount?.trim() == ""}
+                      onClick={handleOpen}
+                      className="font-bold w-1/2 h-12 text-white"
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      disabled={amount?.trim() == ""}
+                      onClick={handleOpen}
+                      className="font-bold w-1/2 h-12 text-white"
+                    >
+                      Decline
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

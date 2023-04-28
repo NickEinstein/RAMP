@@ -493,12 +493,12 @@ function DashboardInitiator(props) {
                             >
                               Status
                             </Typography>
-                            <Typography
+                            {/* <Typography
                               variant="h6"
                               className="w-1/5 text-center"
                             >
                               Action
-                            </Typography>
+                            </Typography> */}
                           </div>
                           <div className="overflow-x-scroll w-full">
                             {grants?.map((e) => (

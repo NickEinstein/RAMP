@@ -56,17 +56,19 @@ function Admin(props) {
   const [imgData, setImgData] = useState(null);
   const [myContributions, setMyContributions] = useState([null]);
   const [currentDetail, setCurrentDetail] = useState([null]);
-  const [completed, setCompleted] = React.useState(false);
+  const [showApproveButton, setShowApproveButton] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [grants, setGrants] = useState([]);
   const [loans, setLoans] = useState([]);
   const [scholoarships, setScholoarships] = useState([]);
   const [eduInvests, setEduInvests] = useState([]);
   const [displayArray, setdisplayArray] = useState([]);
+  const [displayArrayTable, setdisplayArrayTable] = useState([]);
   const [learnMoreDetails, setLearnMoreDetails] = useState([]);
   const [title, setTitle] = useState("REQUESTS");
   const [open, setOpen] = React.useState(false);
   const [count, setCount] = React.useState(0);
+  const [filterStatus, setfilterStatus] = React.useState("pending");
 
   const handleOpen = () => setOpen(true);
   const handleClick = (event) => {
@@ -239,6 +241,7 @@ function Admin(props) {
 
     setGrants(res.data.data.grants);
     setdisplayArray(res.data.data.grants);
+    setdisplayArrayTable(res.data.data.grants);
 
     //  setIsRegCompleted(res?.data?.data?.states);
   };
@@ -253,6 +256,11 @@ function Admin(props) {
     setMyContributions(res?.data?.data?.contributions);
 
     console.log(res?.data?.data?.scholarships);
+  };
+
+  const checkDisplayArray = (stats) => {
+    setdisplayArrayTable(displayArray.filter((e) => e.status == stats));
+    console.log(displayArray.filter((e) => e.status == stats));
   };
 
   return (
@@ -277,10 +285,10 @@ function Admin(props) {
             <div>
               <div className="flex gap-4">
                 <div
-                // onClick={() => {
-                //   setdisplayArray(grants);
-                //   setTitle("Requests");
-                // }}
+                  onClick={() => {
+                    setShowApproveButton(false);
+                    setdisplayArrayTable(grants);
+                  }}
                 >
                   <WallCards
                     className="mr-3"
@@ -292,39 +300,46 @@ function Admin(props) {
                 </div>
 
                 <div
-                // onClick={() => {
-                //   setdisplayArray(grants);
-                //   setTitle("Requests");
-                // }}
+                  onClick={() => {
+                    // setdisplayArray(grants);
+                    setShowApproveButton(true);
+                    setdisplayArrayTable(
+                      grants?.filter((e) => e.status == "pending")
+                    );
+                    // checkDisplayArray("pending");
+                    // setTitle("Requests");
+                  }}
                 >
                   <WallCards
                     className="mr-3"
                     rider={false}
                     big={true}
                     name="Total Pending Requests"
-                    // count={grants?.length}
+                    count={grants?.filter((e) => e.status == "pending")?.length}
                   />
                 </div>
 
                 <div
-                // onClick={() => {
-                //   setdisplayArray(grants);
-                //   setTitle("Requests");
-                // }}
+                  onClick={() => {
+                    checkDisplayArray("open");
+                    // alert('open')
+                    setShowApproveButton(false);
+
+                    // setTitle("Requests");
+                  }}
                 >
                   <WallCards
                     className="mr-3"
                     rider={false}
                     big={true}
                     name="Total Approved Requests"
-                    // count={grants?.length}
+                    count={grants?.filter((e) => e?.status == "open")?.length}
                   />
                 </div>
                 <div
-                // onClick={() => {
-                //   setdisplayArray(grants);
-                //   setTitle("Requests");
-                // }}
+                  onClick={() => {
+                    setShowApproveButton(false);
+                  }}
                 >
                   <WallCards
                     className="mr-3"
@@ -400,7 +415,7 @@ function Admin(props) {
             {title.toUpperCase()} (Pending)
           </Typography> */}
 
-          {displayArray?.filter((e) => e.status == "pending").length ? (
+          {displayArrayTable?.length ? (
             <div>
               <TextField
                 fullWidth
@@ -439,9 +454,9 @@ function Admin(props) {
                   {/* <Typography variant="h6" className="w-1/5 text-left ">
                      Type Of Scholarships
                    </Typography> */}
-                  <Typography variant="h6" className="w-1/5 text-center ">
+                  {/* <Typography variant="h6" className="w-1/5 text-center ">
                     View Attachment
-                  </Typography>
+                  </Typography> */}
                   <Typography variant="h6" className="w-1/5 text-center ">
                     Amount
                   </Typography>
@@ -456,136 +471,135 @@ function Admin(props) {
                   </Typography>
                 </div>
 
-                {displayArray
-                  ?.filter((e) => e.status == "pending")
-                  .map((e) => (
+                {displayArrayTable?.map((e) => (
+                  <div>
+                    {/* { props.tableArray.map((e)=> */}
                     <div>
-                      {/* { props.tableArray.map((e)=> */}
-                      <div>
+                      <div
+                        // onClick={openBelow}
+                        className=" mt-2 flex gap-2 w-full items-center  min-h-[50%] "
+                      >
                         <div
-                          // onClick={openBelow}
-                          className=" mt-2 flex gap-2 w-full items-center  min-h-[50%] "
+                          className={
+                            props?.jj == "loan"
+                              ? " text-left p-3 w-2/5 "
+                              : " text-center p-3 w-2/5 "
+                          }
                         >
-                          <div
-                            className={
-                              props?.jj == "loan"
-                                ? " text-left p-3 w-2/5 "
-                                : " text-center p-3 w-2/5 "
-                            }
+                          <Typography variant="">
+                            {e?.applied_by?.firstname} {e?.applied_by?.lastname}
+                          </Typography>
+                        </div>
+                        <div
+                          className={
+                            props?.jj == "loan"
+                              ? " text-left p-3 w-2/5 "
+                              : " text-center p-3 w-2/5 "
+                          }
+                        >
+                          <Typography variant="">{e?.title}</Typography>
+                        </div>
+                        <div
+                          className={
+                            props?.jj == "loan"
+                              ? " text-left p-3 w-2/5 "
+                              : " text-center p-3 w-2/5 "
+                          }
+                        >
+                          <Typography variant="">
+                            {moment(e?.created_at)?.format("ll")}
+                          </Typography>
+                        </div>
+                        {/* <div
+                          className={
+                            props?.jj == "loan"
+                              ? " text-left p-3 w-2/5 "
+                              : " text-center p-3 w-2/5 "
+                          }
+                        >
+                          <Typography variant="">
+                            {e?.attachments?.map((f) => (
+                              <a target="_blank" href={f?.url}>
+                                View
+                              </a>
+                            ))}
+                          </Typography>
+                        </div> */}
+                        <div
+                          className={
+                            props?.jj == "loan"
+                              ? " text-left p-3 w-2/5 "
+                              : " text-center p-3 w-2/5 "
+                          }
+                        >
+                          <Typography variant="">{e?.amount}</Typography>
+                        </div>
+                        <div
+                          className={
+                            props?.jj == "loan"
+                              ? " text-center p-3 w-2/5 "
+                              : " text-center p-3 w-2/5"
+                          }
+                        >
+                          <Typography
+                            className="rounded-3xl text-[12px] h-10 flex items-center justify-center font-bold"
+                            style={{
+                              backgroundColor:
+                                e?.status == "open"
+                                  ? "#E2FEF0"
+                                  : e?.status == "declined"
+                                  ? "#FFF1F0"
+                                  : e?.status == "disbursed"
+                                  ? "#E2FEF0"
+                                  : "#FFECC7",
+                              color:
+                                e?.status == "open"
+                                  ? "#05944F"
+                                  : e?.status == "declined"
+                                  ? "#B81500"
+                                  : e?.status == "disbursed"
+                                  ? "#05944F"
+                                  : "#A87000",
+                            }}
+                            variant="h6"
                           >
-                            <Typography variant="">
-                              {e?.applied_by?.firstname}{" "}
-                              {e?.applied_by?.lastname}
-                            </Typography>
-                          </div>
-                          <div
-                            className={
-                              props?.jj == "loan"
-                                ? " text-left p-3 w-2/5 "
-                                : " text-center p-3 w-2/5 "
-                            }
-                          >
-                            <Typography variant="">{e?.title}</Typography>
-                          </div>
-                          <div
-                            className={
-                              props?.jj == "loan"
-                                ? " text-left p-3 w-2/5 "
-                                : " text-center p-3 w-2/5 "
-                            }
-                          >
-                            <Typography variant="">
-                              {moment(e?.created_at)?.format("ll")}
-                            </Typography>
-                          </div>
-                          <div
-                            className={
-                              props?.jj == "loan"
-                                ? " text-left p-3 w-2/5 "
-                                : " text-center p-3 w-2/5 "
-                            }
-                          >
-                            <Typography variant="">
-                              {e?.attachments?.map((f) => (
-                                <a target="_blank" href={f?.url}>
-                                  View
-                                </a>
-                              ))}
-                            </Typography>
-                          </div>
-                          <div
-                            className={
-                              props?.jj == "loan"
-                                ? " text-left p-3 w-2/5 "
-                                : " text-center p-3 w-2/5 "
-                            }
-                          >
-                            <Typography variant="">{e?.amount}</Typography>
-                          </div>
-                          <div
-                            className={
-                              props?.jj == "loan"
-                                ? " text-center p-3 w-2/5 "
-                                : " text-center p-3 w-2/5"
-                            }
-                          >
-                            <Typography
-                              className="rounded-3xl text-[12px] h-10 flex items-center justify-center font-bold"
-                              style={{
-                                backgroundColor:
-                                  e?.status == "approved"
-                                    ? "#E2FEF0"
-                                    : e?.status == "declined"
-                                    ? "#FFF1F0"
-                                    : e?.status == "disbursed"
-                                    ? "#E2FEF0"
-                                    : "#FFECC7",
-                                color:
-                                  e?.status == "approved"
-                                    ? "#05944F"
-                                    : e?.status == "declined"
-                                    ? "#B81500"
-                                    : e?.status == "disbursed"
-                                    ? "#05944F"
-                                    : "#A87000",
-                              }}
-                              variant="h6"
-                            >
-                              {e?.status}
-                            </Typography>
-                          </div>
-                          <div
-                            className={
-                              props?.jj == "loan"
-                                ? " text-center p-3 w-2/5  hover:text-primary-main cursor-pointer "
-                                : " text-center p-3 w-2/5  hover:text-primary-main cursor-pointer  "
-                            }
-                          >
+                            {e?.status == "open" ? "Approved" : e?.status}
+                          </Typography>
+                        </div>
+                        <div
+                          className={
+                            props?.jj == "loan"
+                              ? " text-center p-3 w-2/5  hover:text-primary-main cursor-pointer "
+                              : " text-center p-3 w-2/5  hover:text-primary-main cursor-pointer  "
+                          }
+                        >
+                          {showApproveButton && (
                             <Button
                               className="font-bold text-white"
                               onClick={handleClick}
                             >
                               Action Button
                             </Button>
-                            <Menu
-                              anchorEl={anchorEl}
-                              open={Boolean(anchorEl)}
-                              onClose={() => handleClose(e.id)}
-                            >
-                              <MenuItem onClick={() => handleClose(e?.id)}>
-                                Approve
-                              </MenuItem>
+                          )}
+                          <Menu
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={() => handleClose(e.id)}
+                          >
+                            <MenuItem onClick={() => handleClose(e?.id)}>
+                              Approve
+                            </MenuItem>
 
-                              <MenuItem onClick={() => handleClose(e?.id)}>
-                                Decline
-                              </MenuItem>
-                            </Menu>
-                          </div>
+                            <MenuItem onClick={() => handleClose(e?.id)}>
+                              Decline
+                            </MenuItem>
+                          </Menu>
                         </div>
                       </div>
-                      {/* )} */}
                     </div>
-                  ))}
+                    {/* )} */}
+                  </div>
+                ))}
               </div>
             </div>
           ) : (

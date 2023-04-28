@@ -45,12 +45,15 @@ import ManageCompanyCard from "features/manageCompanies/ManageCompanyCard";
 import ManageCompaniesTable from "features/manageCompanies/ManageCompaniesTable";
 import { MediaQueryBreakpointEnum } from "constants/Global";
 import { get, post } from "services/fetchDocuments";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 function Loan(props) {
   const [section, setSection] = React.useState(2);
   const [imgData, setImgData] = useState(null);
   const [myLoanApplication, setMyLoanApplications] = useState([null]);
-  const [currentDetail, setCurrentDetail] = useState([null]);
+  const [startDate, setstartDate] = useState();
+  const [wndDate, setwndDate] = useState();
   const [completed, setCompleted] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -135,10 +138,7 @@ function Loan(props) {
       value: "BTC",
       label: "Human Capacity",
     },
-   
   ];
- 
-
 
   const onFileChange = (event) => {
     // Update the state
@@ -238,9 +238,7 @@ function Loan(props) {
             <Button
               className="font-bold text-base text-white"
               onClick={() => setSection(1)}
-            >
-             
-            </Button>
+            ></Button>
           )}
         </div>
       </div>
@@ -374,7 +372,61 @@ function Loan(props) {
                   </div> */}
                   <div>
                     <InputLabel className="text-left mb-2">
-                      Impact And Track Record
+                      Project Name
+                    </InputLabel>
+                    <TextField
+                      name="name"
+                      onChange={onChange}
+                      fullWidth
+                      // value={currentDetail.reason}
+                    />
+                  </div>
+                  <div>
+                    <InputLabel className="text-left mb-2">
+                      Set Start date
+                    </InputLabel>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <div className="flex-between">
+                        <DatePicker
+                          className=" mr-8 w-full"
+                          // label="Basic example"
+                          value={wndDate}
+                          onChange={(newValue) => {
+                            console.log(newValue);
+                            // setWorkList({ ...workList, start_date: newValue });
+                            setwndDate(newValue);
+                            // setValue(newValue);
+                          }}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </div>
+                    </LocalizationProvider>
+                  </div>
+
+                  <div>
+                    <InputLabel className="text-left mb-2">
+                      Set End date
+                    </InputLabel>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <div className="flex-between">
+                        <DatePicker
+                          className=" mr-8 w-full"
+                          // label="Basic example"
+                          value={startDate}
+                          onChange={(newValue) => {
+                            console.log(newValue);
+                            // setWorkList({ ...workList, start_date: newValue });
+                            setstartDate(newValue);
+                            // setValue(newValue);
+                          }}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </div>
+                    </LocalizationProvider>
+                  </div>
+                  <div>
+                    <InputLabel className="text-left mb-2">
+                      Milestones Achieved
                     </InputLabel>
                     <TextField
                       name="reason"
@@ -412,7 +464,7 @@ function Loan(props) {
                     >
                       <div className="text-black bg-yellow-200 mb-5 py-3 rounded-full w-2/3 text-center ">
                         {" "}
-                        Supporting Documents
+                        Supporting Photo uploads
                       </div>
                       {/* <img src={uploadPNG} /> */}
                     </label>
@@ -454,7 +506,7 @@ function Loan(props) {
                 type="submit"
                 disabled
                 onClick={() => {
-                //   applyForLoan();
+                  //   applyForLoan();
                   // handleOpen(true);
                   //   : setSection((prev) => prev + 1);
                   // handleClose();
@@ -502,8 +554,6 @@ function Loan(props) {
           </div>
         </div>
       )}
-
-      
 
       <Dialog
         open={open}

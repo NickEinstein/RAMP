@@ -199,7 +199,7 @@ const openBelow =()=>{
                 : props.tableArray?.status}
             </Typography>
           </div>
-          <div
+          {/* <div
             className={
               props?.jj == "loan"
                 ? " text-center p-3  md:w-[14%] w-full  hover:text-primary-main cursor-pointer "
@@ -215,7 +215,7 @@ const openBelow =()=>{
             >
               View Details
             </Typography>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* )} */}
