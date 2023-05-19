@@ -63,6 +63,10 @@ import {
   Fade,
   AppBar,
   Toolbar,
+  List,
+  ListItem,
+  ListItemText,
+  Drawer,
 } from "@mui/material";
 import useStepper from "hooks/useStepper";
 import useDataRef from "hooks/useDataRef";
@@ -72,6 +76,8 @@ import { MediaQueryBreakpointEnum } from "constants/Global";
 
 function Home(props) {
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
 
   const [age, setAge] = React.useState("");
   const [individual, setindividual] = React.useState(true);
@@ -82,31 +88,68 @@ function Home(props) {
     <div>
       <AppBar position="static">
         <Toolbar className="flex justify-between bg-white text-black">
-          <Link to={RouteEnum.LANDING}>
-              <Typography variant="h6" component="div">
-                <img src={image} className="max-w-[120px]" />
-              </Typography>
-          </Link>
-          <div className="gap-20 flex items-center">
-            <ul className="flex gap-8 text-base font-bold">
-              <Link to={RouteEnum.ABOUT}>
-                <li className="hover:text-[#da663f]">About</li>
-              </Link>
-              <li className="hover:text-[#da663f]">How it Works</li>
-              <li className="hover:text-[#da663f]">Contact</li>
-            </ul>
-            <div className="flex gap-4">
-              <Link to={RouteEnum.SIGNUP}>
-                <Button className="px-10 py-2">Sign Up</Button>
-              </Link>
-              <Link to={RouteEnum.LOGIN}>
-                <Button className="px-10 py-2">Sign In</Button>
-              </Link>
+          <Typography variant="h6" component="div">
+            <img src={image} className="max-w-[120px]" alt="Logo" />
+          </Typography>
+          <div className="flex items-center cursor-pointer">
+            <div className="md:hidden" onClick={() => setDrawerOpen(true)}>
+              <svg className="w-6 h-6 text-black" viewBox="0 0 24 24">
+                <path
+                  className="fill-current"
+                  d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"
+                />
+              </svg>
+            </div>
+            <div className="hidden md:flex md:items-center">
+              <ul className="md:flex md:gap-8 text-base font-bold">
+                <Link to={RouteEnum.ABOUT}>
+                  <li className="hover:text-[#da663f]">About</li>
+                </Link>
+                <li className="hover:text-[#da663f]">How it Works</li>
+                <li className="hover:text-[#da663f]">Contact</li>
+              </ul>
+              <div className="md:flex md:gap-4">
+                <Link to={RouteEnum.SIGNUP}>
+                  <Button className="px-10 py-2">Sign Up</Button>
+                </Link>
+                <Link to={RouteEnum.LOGIN}>
+                  <Button className="px-10 py-2">Sign In</Button>
+                </Link>
+              </div>
             </div>
           </div>
-          {/* Add your navigation links here */}
         </Toolbar>
       </AppBar>
+
+      <Drawer
+        sx={{
+          display: { xs: "block", sm: "none" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: 240,
+          },
+        }}
+        anchor="left"
+        className="w-64"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <Link to={RouteEnum.LANDING}><img src={image} className="max-w-[128px]" alt="Logo" /></Link>
+
+        <List>
+          <Link to={RouteEnum.ABOUT}>
+            <ListItem button>
+              <ListItemText primary="About" />
+            </ListItem>
+          </Link>
+          <ListItem button>
+            <ListItemText primary="How it Works" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Contact" />
+          </ListItem>
+        </List>
+      </Drawer>
       <div
         className="h-[400px] flex justify-center items-center"
         style={{

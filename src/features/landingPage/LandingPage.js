@@ -2,13 +2,27 @@ import React, { useEffect, useState } from "react";
 import NGO from "images/LandingNGO.jpg";
 import Expertise from "images/LandingExpertise.jpg";
 import Donor from "images/LandingDonate.jpg";
-import { AppBar, Button, TextField, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { MediaQueryBreakpointEnum } from "constants/Global";
 import image from "images/Ramp1.png";
 import { RouteEnum } from "constants/RouteConstants";
 import { Link } from "react-router-dom";
 import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 
 const HomePage = () => {
+  const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
+
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const carouselSlides = [
     {
@@ -120,6 +134,8 @@ const HomePage = () => {
     };
   }, []);
 
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   return (
     <div>
       {/* <div
@@ -144,45 +160,87 @@ const HomePage = () => {
         <AppBar position="static">
           <Toolbar className="flex justify-between bg-white text-black">
             <Typography variant="h6" component="div">
-              <img src={image} className="max-w-[120px]" />
+              <img src={image} className="max-w-[120px]" alt="Logo" />
             </Typography>
-            <div className="gap-20 flex items-center">
-              <ul className="flex gap-8 text-base font-bold">
-                <Link to={RouteEnum.ABOUT}>
-                  <li className="hover:text-[#da663f]">About</li>
-                </Link>
-                <li className="hover:text-[#da663f]">How it Works</li>
-                <li className="hover:text-[#da663f]">Contact</li>
-              </ul>
-              <div className="flex gap-4">
-                <Link to={RouteEnum.SIGNUP}>
-                  <Button className="px-10 py-2">Sign Up</Button>
-                </Link>
-                <Link to={RouteEnum.LOGIN}>
-                  <Button className="px-10 py-2">Sign In</Button>
-                </Link>
+            <div className="flex items-center cursor-pointer">
+              <div className="md:hidden" onClick={() => setDrawerOpen(true)}>
+                <svg className="w-6 h-6 text-black" viewBox="0 0 24 24">
+                  <path
+                    className="fill-current"
+                    d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"
+                  />
+                </svg>
+              </div>
+              <div className="hidden md:flex md:items-center">
+                <ul className="md:flex md:gap-8 text-base font-bold">
+                  <Link to={RouteEnum.ABOUT}>
+                    <li className="hover:text-[#da663f]">About</li>
+                  </Link>
+                  <li className="hover:text-[#da663f]">How it Works</li>
+                  <li className="hover:text-[#da663f]">Contact</li>
+                </ul>
+                <div className="md:flex md:gap-4">
+                  <Link to={RouteEnum.SIGNUP}>
+                    <Button className="px-10 py-2">Sign Up</Button>
+                  </Link>
+                  <Link to={RouteEnum.LOGIN}>
+                    <Button className="px-10 py-2">Sign In</Button>
+                  </Link>
+                </div>
               </div>
             </div>
-            {/* Add your navigation links here */}
           </Toolbar>
         </AppBar>
+
+        <Drawer
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: 240,
+            },
+          }}
+          anchor="left"
+          className="w-64"
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+        >
+          <Link to={RouteEnum.LANDING}>
+            <img src={image} className="max-w-[128px]" alt="Logo" />
+          </Link>
+
+          <List>
+            <Link to={RouteEnum.ABOUT}>
+              <ListItem button>
+                <ListItemText primary="About" />
+              </ListItem>
+            </Link>
+            <ListItem button>
+              <ListItemText primary="How it Works" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Contact" />
+            </ListItem>
+          </List>
+        </Drawer>
+
         <div>
           <div
-            className={`h-[90vh] w-full flex items-center justify-center transition-opacity duration-500  bg-gray-900 bg-opacity-75 `}
+            className={`h-[90vh] w-full flex items-center justify-center transition-opacity duration-500  bg-gray-900 bg-opacity-75`}
           >
-            <div className="w-full h-full mx-auto justify-between p-8 ml-20 flex">
+            <div className="w-full h-full mx-auto justify-between md:p-8 p-4 md:ml-20 flex">
               <div className="w-full flex flex-col mt-32 items-start">
                 <Typography
-                  variant="h1"
-                  className=" font-bold mb-4 text-[#da663f] text-center"
+                  variant={ismd ? "h1" : "h3"}
+                  className=" font-bold mb-4 text-[#da663f] md:text-center text-left"
                 >
                   {carouselSlides[activeSlideIndex].caption}
                 </Typography>
-                <Typography variant="h5" className={`text-white -mt-5`}>
+                <Typography variant="h5" className={`text-white md:-mt-5`}>
                   {carouselSlides[activeSlideIndex].subText}
                 </Typography>
 
-                <Typography variant="h5" className={`text-white mt-5 w-1/2`}>
+                <Typography variant="h5" className={`text-white mt-5 md:w-1/2`}>
                   {carouselSlides[activeSlideIndex].howItWorks}
                 </Typography>
 
@@ -209,7 +267,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>{" "}
-      <div className="flex gap-6 justify-around mt-8">
+      <div className="grid md:grid-cols-4 grid-cols-2 gap-6 justify-around mt-8">
         {[
           "Over 30+ NGOS",
           "Over 50+ DONORS",
@@ -228,7 +286,7 @@ const HomePage = () => {
           </div>
         ))}
       </div>
-      <div className="bg-white py-12 px-12 ">
+      <div className="bg-white py-12 md:px-12 px-4 ">
         <Typography className="text-center py-6 scrollb" variant="h4">
           Featured Campaigns
         </Typography>
@@ -236,48 +294,49 @@ const HomePage = () => {
           {carouselSlides2.map((slides) => (
             <div className="relative">
               <img className="h-[300px] min-w-[400px]" src={slides?.image} />
-              <Button className="absolute bottom-5 right-5 bg-[#da663f]">
+              <Button className="absolute bottom-5 md:right-5 left-5 bg-[#da663f]">
                 {slides?.caption}
               </Button>
             </div>
           ))}
         </div>
       </div>
-      <div className="bg-white py-12 px-12 ">
+      <div className="bg-white md:py-12 md:px-12 p-4 ">
         <Typography className="text-center py-6 scrollb" variant="h4">
           Testimonials
         </Typography>
-        <div className="w-full relative h-[400px]">
+        <div className="w-full relative md:h-[400px]">
           {/* {carouselSlides3.map((slide, index) => ( */}
           <div
-            className={`flex w-full justify-center items-center gap-6 ${
-              activeSlideIndex % 2 !== 0 && "flex-row-reverse"
+            className={`flex flex-col md:flex-row  w-full justify-center items-center gap-6 ${
+              activeSlideIndex % 2 !== 0 &&
+              "md:flex-row-reverse flex-col-reverse"
             }`}
           >
-            <div className="w-1/2">
+            <div className="md:w-1/2 relative">
               <img
                 // key={index}
                 src={carouselSlides3[activeSlideIndex]?.image}
                 alt={carouselSlides3[activeSlideIndex]?.caption}
                 className={`w-full transition-opacity duration-500 h-[400px]`}
               />
+              <div className="absolute bottom-4 left-4 flex space-x-2">
+                {carouselSlides3.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-4 h-4 rounded-full ${
+                      index === activeSlideIndex ? "bg-gray-900" : "bg-gray-400"
+                    }`}
+                    onClick={() => handleSlideChange(index)}
+                  ></button>
+                ))}
+              </div>
             </div>
-            <Typography variant="h6" className="font-bold w-1/2 text-black">
+            <Typography variant="h6" className="font-bold md:w-1/2 text-black">
               {carouselSlides3[activeSlideIndex]?.caption}
             </Typography>
           </div>
           {/* ))} */}
-          <div className="absolute bottom-4 left-4 flex space-x-2">
-            {carouselSlides3.map((_, index) => (
-              <button
-                key={index}
-                className={`w-4 h-4 rounded-full ${
-                  index === activeSlideIndex ? "bg-gray-900" : "bg-gray-400"
-                }`}
-                onClick={() => handleSlideChange(index)}
-              ></button>
-            ))}
-          </div>
         </div>
       </div>
       {/* <footer className="bg-gray-800 py-4 w-full">
@@ -304,14 +363,14 @@ const HomePage = () => {
           Subscribe to Our News Letter
         </Typography>
         <div class="flex justify-center">
-          <div class="flex flex-col justify-center items-center pb-12 gap-5 w-1/2">
+          <div class="flex flex-col justify-center items-center pb-12 gap-5 md:w-1/2 w-full p-4">
             <TextField fullWidth placeholder="Email" className="w-full" />
             <Button className="py-4 px-16">Subscribe</Button>
           </div>
         </div>
       </div>
-      <div className="flex justify-between gap-20 items-center px-20 py-10 bg-primary-main text-white ">
-        <div className="container">
+      <div className="flex md:justify-between flex-col md:flex-row md:gap-20 gap-6 items-center px-20 py-10 bg-primary-main text-white ">
+        <div className="container text-center">
           <p className="">
             &copy; {new Date().getFullYear()} Resource Accessibility and
             Mobilization Program. All rights reserved.
