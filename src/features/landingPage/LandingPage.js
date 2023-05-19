@@ -14,7 +14,7 @@ const HomePage = () => {
     {
       image: NGO,
       backgroundColor: "#9a7b4f",
-      caption: "Welcome To RAMP",
+      caption: "Welcome to RAMP",
       subText: "Resource Accessibility and Mobilization Program",
       color: "#3944bc",
     },
@@ -25,39 +25,22 @@ const HomePage = () => {
       caption: " NGOs",
       // subText: "Resource Accessibility and Mobilization Program",
       // color: "#3944bc",
-      howItWorks: [
-        `Tell us about yourself and your organization.`,
-        `Create your profile.`,
-        ` Once approved, proceed to make a request .`,
-        ` The more complete your profile is, the better chance you'll be approved on time and your most valued need met.`,
-      ],
+      howItWorks:
+        "Register on the platform, add all supporting documents,  wait to be verified and approved and then expect a donation soon",
     },
     {
       image: Expertise,
       backgroundColor: "#b3bdb6",
       caption: " Technical Experts",
-      howItWorks: [
-        ` Create your profile`,
-        `Search our pool of vibrant and vetted NGOs/CSOs`,
-        ` Reach out and connect`,
-        ` When you've found NGO’s |CSO’s you’ll like to provide technical expertise to, introduce yourself! and share how youwish to support them and for what time frame`,
-      ],
+      howItWorks:
+        "You have the free time to deliver on a particular project? This platform is right for you!!. Signup and pick the solution that you can render",
     },
     {
       image: Donor,
       backgroundColor: "white",
       caption: " Donors",
-      howItWorks: [
-        `  Create your profile by sharing who you are, your vision and
-                       useful information .`,
-        ` As a financial donor, search our NGO/CSO profiles to choose
-                        the nonprofit. you will like to fund. You can view their
-                        areas of interest, specialization , country etc.`,
-        `  Choose an amount and how often you wish to make this
-                        donation Once you make a donation.`,
-        `  Look out for an official email from us to guarantee maximum
-                        impact`,
-      ],
+      howItWorks:
+        "Find NGOS that needs your contribution and then make a donation towards the one that best suits your interest",
     },
   ];
 
@@ -188,9 +171,9 @@ const HomePage = () => {
             className={`h-[90vh] w-full flex items-center justify-center transition-opacity duration-500  bg-gray-900 bg-opacity-75 `}
           >
             <div className="w-full h-full mx-auto justify-between p-8 ml-20 flex">
-              <div className="w-1/2 flex flex-col mt-32 items-start">
+              <div className="w-full flex flex-col mt-32 items-start">
                 <Typography
-                  variant="h2"
+                  variant="h1"
                   className=" font-bold mb-4 text-[#da663f] text-center"
                 >
                   {carouselSlides[activeSlideIndex].caption}
@@ -199,48 +182,16 @@ const HomePage = () => {
                   {carouselSlides[activeSlideIndex].subText}
                 </Typography>
 
+                <Typography variant="h5" className={`text-white mt-5 w-1/2`}>
+                  {carouselSlides[activeSlideIndex].howItWorks}
+                </Typography>
+
                 <Link className=" py-2" to="/">
                   <Button className="flex items-start px-20 py-4 mt-8">
                     Sign In
                   </Button>
                 </Link>
               </div>
-              <ul className="w-2/5 flex flex-col mt-32 items-start gap-3 font-bold text-white">
-                {carouselSlides[activeSlideIndex].howItWorks && (
-                  <Typography variant="h3" className="text-white">
-                    How it Works
-                  </Typography>
-                )}
-                {carouselSlides[activeSlideIndex].howItWorks?.map((text) => (
-                  <li className="list-disc">
-                    <Typography
-                      variant="h6"
-                      className=" font-bold  text-white list-disc "
-                    >
-                      {text}
-                    </Typography>
-                  </li>
-                ))}
-                {/* <li className="list-disc">
-                  <Typography variant="h6" className=" font-bold  text-white ">
-                    As a financial donor, search our NGO/CSO profiles to choose
-                    the nonprofit. you will like to fund. You can view their
-                    areas of interest, specialization , country etc.
-                  </Typography>
-                </li>{" "}
-                <li className="list-disc">
-                  <Typography variant="h6" className=" font-bold  text-white ">
-                    Choose an amount and how often you wish to make this
-                    donation Once you make a donation.
-                  </Typography>
-                </li>{" "}
-                <li className="list-disc">
-                  <Typography variant="h6" className=" font-bold  text-white ">
-                    Look out for an official email from us to guarantee maximum
-                    impact
-                  </Typography>
-                </li> */}
-              </ul>
             </div>
           </div>
           <div className="w-1/2 ">
@@ -359,7 +310,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between gap-20 items-center px-20 pb-10">
+      <div className="flex justify-between gap-20 items-center px-20 py-10 bg-primary-main text-white ">
         <div className="container">
           <p className="">
             &copy; {new Date().getFullYear()} Resource Accessibility and
