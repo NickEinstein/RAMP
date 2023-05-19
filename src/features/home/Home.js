@@ -3,7 +3,8 @@ import UserApi from "apis/UserApi";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSnackbar } from "notistack";
-import educatiaLogo from "images/RAMP.jpg";
+import educatiaLogo from "images/Ramp2.png";
+// import educatiaLogo from "images/RAMP.jpg";
 import educatiaSuccess from "images/EducatiaSuccess.png";
 import { FcGoogle } from "react-icons/fc";
 import backgroundImage from "../../images/RampHome1.jpg";
@@ -323,12 +324,12 @@ console.log(stepper.step)
   const donorxK = [
     {
       value: "educational_institution",
-      label: "In-Kind",
+      label: "Expertise",
     },
-    {
-      value: "alumni",
-      label: "Materials",
-    },
+    // {
+    //   value: "alumni",
+    //   label: "Materials",
+    // },
   ];
 
   const donorx = [
@@ -414,11 +415,11 @@ console.log(stepper.step)
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
           }}
-          className="lg:block fixed items-stretch flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
+          className="lg:block hidden fixed items-stretch md:flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
         >
           <div>
             <img
-              className="min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex self-stretch"
+              className=" min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex self-stretch"
               src={configs[stepper.step]?.image}
             />
             {/* <div className="self-stretch w-1/2 hidden md:flex items-end">
@@ -437,10 +438,10 @@ console.log(stepper.step)
             </div> */}
 
             <div className="flex flex-col gap-16 text-white">
-              {/* <img className="w-1/5" src={educatiaLogo} /> */}
-              <Typography className=" font-bold" variant="h2">
+              <img className="w-1/5" src={educatiaLogo} />
+              {/* <Typography className=" font-bold" variant="h2">
                 RAMP
-              </Typography>
+              </Typography> */}
               <Typography variant="h4" className=" font-bold md:mt-24">
                 {/* Earn */}
                 Get access to unlimited funds
@@ -457,11 +458,11 @@ console.log(stepper.step)
         {/* +++++++++++++++++++++++++++++++++++++++++ */}
         <div className="p-8 pr-[10%] pl-[6%] w-full">
           {/* <LoginHeader /> */}
-          <Typography variant="h4">RAMP</Typography>
-          {/* <img
+          {/* <Typography variant="h4">RAMP</Typography> */}
+          <img
             className="w-1/3 lg:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
             src={educatiaLogo}
-          /> */}
+          />
 
           <div className="flex flex-col">
             <div className="">
@@ -775,7 +776,10 @@ console.log(stepper.step)
                   </Typography>
                   <Typography className="mt-5">
                     Already have an account?
-                    <a href="/" className="ml-1 text-primary-main font-bold ">
+                    <a
+                      href="/login"
+                      className="ml-1 text-primary-main font-bold "
+                    >
                       Log In
                     </a>
                   </Typography>

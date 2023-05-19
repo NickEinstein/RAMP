@@ -29,6 +29,7 @@ import { Logout } from "@mui/icons-material";
 import { IconButton, useMediaQuery } from "@mui/material";
 import { AiOutlineMenu } from "react-icons/ai";
 import { get } from "services/fetch";
+import educatiaLogo from "images/Ramp2.png";
 
 const drawerWidth = 240;
 
@@ -42,7 +43,7 @@ export default function PermanentDrawerLeft() {
     setMobileOpen(!mobileOpen);
   };
   const [outcasts, setOutcasts] = React.useState([
-    { name: "Logout", linx: RouteEnum.HOME, image: logouts },
+    { name: "Logout", linx: RouteEnum.LOGIN, image: logouts },
   ]);
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
   const [isCompany, setIsCompany] = React.useState();

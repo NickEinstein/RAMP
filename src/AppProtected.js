@@ -50,9 +50,9 @@ export default AppProtected;
 const ROUTES = configureRoutes([
   {
     path: "*",
-    element: lazy(() => import("features/home/Home")),
+    // element: lazy(() => import("features/home/Home")),
 
-    // element: <Navigate to={RouteEnum.HOME} replace />,
+    element: <Navigate to={RouteEnum.DASHBOARD} replace />,
   },
   {
     path: RouteEnum.DASHBOARD,

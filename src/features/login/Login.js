@@ -3,7 +3,8 @@ import UserApi from "apis/UserApi";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSnackbar } from "notistack";
-import educatiaLogo from "images/educatiaLogoWhite.svg";
+// import educatiaLogo from "images/educatiaLogoWhite.svg";
+import educatiaLogo from "images/Ramp2.png";
 import educatiaSuccess from "images/EducatiaSuccess.png";
 import { FcGoogle } from "react-icons/fc";
 // import { Button, TextField, Typography } from "@mui/material";
@@ -111,59 +112,60 @@ function Login(props) {
       [e.target.name]: e.target.value,
     });
   };
-  
 
-    const configs = [
-      {
-        bgColor: "HomeTopSectionBackgroundColor_WomanInRedImage",
-        textColor: "text-secondary-main",
-        image: backgroundImage,
-      },
-      {
-        bgColor: "HomeTopSectionBackgroundColor_ManInDreadsImage",
-        textColor: "text-white",
-        image: backgroundImage3,
-      },
-      {
-        bgColor: "HomeTopSectionBackgroundColor_headerImage",
-        textColor: "text-secondary-main",
-        image: backgroundImage4,
-      },
-      {
-        bgColor: "HomeTopSectionBackgroundColor_headerImage",
-        textColor: "text-secondary-main",
-        image: backgroundImage5,
-      },
-    ];
+  const configs = [
+    {
+      bgColor: "HomeTopSectionBackgroundColor_WomanInRedImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_ManInDreadsImage",
+      textColor: "text-white",
+      image: backgroundImage3,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_headerImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage4,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_headerImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage5,
+    },
+  ];
 
-    const stepper = useStepper({
-      maxStep: configs.length - 1,
-    });
+  const stepper = useStepper({
+    maxStep: configs.length - 1,
+  });
 
-    const config = configs[stepper.step];
+  const config = configs[stepper.step];
 
-    const dataRef = useDataRef({ stepper });
+  const dataRef = useDataRef({ stepper });
 
-    useEffect(() => {
-      const intervalId = setInterval(() => {
-        if (dataRef.current.stepper.canNextStep()) {
-          dataRef.current.stepper.nextStep();
-        } else {
-          dataRef.current.stepper.reset();
-        }
-      }, 1000 * 2);
-      return () => {
-        clearInterval(intervalId);
-      };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (dataRef.current.stepper.canNextStep()) {
+        dataRef.current.stepper.nextStep();
+      } else {
+        dataRef.current.stepper.reset();
+      }
+    }, 1000 * 2);
+    return () => {
+      clearInterval(intervalId);
+    };
 
-      //  console.log(stepper)
-    }, [dataRef]);
+    //  console.log(stepper)
+  }, [dataRef]);
 
   const pay = async () => {
     // let payload = {
     //   email: "mosesocho+company@gmail.com",
     //   password: "password",
     // };
+
+    localStorage.setItem("tech", regData.email);
 
     const res = await post({
       endpoint: `auth/signin`,
@@ -223,7 +225,7 @@ function Login(props) {
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
           }}
-          className="lg:block items-stretch flex relative min-h-screen bg-black/20 text-primary-main px-16 py-10 w-2/5"
+          className="lg:block hidden items-stretch md:flex relative min-h-screen bg-black/20 text-primary-main px-16 py-10 w-2/5"
           // className="relative min-h-screen flex-vertical bg-primary-main text-white pl-10  w-2/5"
           // style={{
           //   minWidth: "40%",
@@ -232,14 +234,15 @@ function Login(props) {
           // }}
         >
           <img
-            className="absolute min-h-screen -z-10 top-0 left-0 w-[100%] h-[100%]"
+            className=" absolute min-h-screen -z-10 -top-0 left-0 w-[100%] h-[100%]"
             src={configs[0]?.image}
           />
+          <img className="w-1/5 -mt-5" src={educatiaLogo} />
+
           <div className="flex flex-col gap-16 my-12 text-white">
-            {/* <img className="w-1/5" src={educatiaLogo} /> */}
-            <Typography className=" font-bold" variant="h2">
+            {/* <Typography className=" font-bold" variant="h2">
               RAMP
-            </Typography>
+            </Typography> */}
             <Typography variant="h4" className=" font-bold md:mt-24">
               {/* Earn */}
               Get access to unlimited funds
@@ -253,11 +256,11 @@ function Login(props) {
         </div>
         <div className="p-8 pr-[12%] pl-[8%] pt-16 w-full">
           {/* <LoginHeader /> */}
-          {/* <img
-            className="w-1/3 lg:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
+          <img
+            className="w-1/5 lg:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
             src={educatiaLogo}
-          /> */}
-          <Typography variant="h4">RAMP</Typography>
+          />
+          {/* <Typography variant="h4">RAMP</Typography> */}
 
           <div className="flex flex-col">
             <div className="">

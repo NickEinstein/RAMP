@@ -47,10 +47,10 @@ import { RouteEnum } from "constants/RouteConstants";
 import DashboardDonor from "./DashboardDonor";
 import DashboardInitiator from "./DashboardInitiator";
 import Admin from "features/admin/Admin";
+import DashboardTech from "./DashboardTech";
 // import { get } from "services/fetch";
 
 function Dashboard(props) {
-  
   const [isDonor, setIsDonor] = useState(false);
 
   useEffect(() => {
@@ -67,11 +67,13 @@ function Dashboard(props) {
 
     //  setIsRegCompleted(res?.data?.data?.states);
   };
-  
+
   return (
     <div>
-      {localStorage.getItem("role") == ("Super admin" || "Admin") ? (
-       <Admin/>
+      {localStorage.getItem("tech").includes("tech") ? (
+        <DashboardTech />
+      ) : localStorage.getItem("role") == ("Super admin" || "Admin") ? (
+        <Admin />
       ) : localStorage.getItem("role") !== "Eduinitiator" ? (
         <DashboardDonor />
       ) : (

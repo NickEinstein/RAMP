@@ -1,6 +1,7 @@
 export const RouteEnum = {
-  HOME: "/",
+  LANDING: "/",
   // DASHBOARD: "/",
+  // HOME: "/login",
   LOGIN: "/login",
   SCHOLARSHIPS: "/scholarships",
   INVEST: "/invest",
@@ -16,5 +17,5 @@ export const RouteEnum = {
   MANAGE_RIDERS: "/m",
   TRIPS: "/m",
   MAPS: "/m",
-  SUPPORT: "/m",
+  ABOUT: "/about",
 };

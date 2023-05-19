@@ -49,7 +49,7 @@ import ManageCompaniesTable from "features/manageCompanies/ManageCompaniesTable"
 
 function DashboardInitiator(props) {
   const [age, setAge] = React.useState("");
-  const [section, setSection] = React.useState(1);
+  const [section, setSection] = React.useState(2);
   const [show, setshow] = React.useState();
   const [ridersPicture, setRidersPicture] = useState("");
   const [imgData, setImgData] = useState(null);
@@ -87,7 +87,10 @@ function DashboardInitiator(props) {
   });
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    setIsLoading(2);
+  };
   const handleClose = (val = false) => {
     setOpen(false);
     // setCompleted()
@@ -573,7 +576,7 @@ function DashboardInitiator(props) {
                 )}
               </div>
               {isLoading == 1 && (
-                <div className="md:w-2/5 bg-primary-main border p-4  text-white">
+                <div className="md:w-2/5 bg-primary-main  p-4  text-white">
                   <Typography className="font-bold pr-[3%]" variant="h5">
                     Get access to unlimited <br /> funds
                   </Typography>
@@ -586,17 +589,17 @@ function DashboardInitiator(props) {
               )}
             </div>
           )}
-          {open && isLoading == 2 && (
-            <div className="md:hidden">
+          {open && (
+            <div className="md:hidden ">
               <DialogTitle>
                 <div className="flex justify-between items-center">
                   <div className="flex gap-8 items-center">
-                    <MdArrowBackIosNew
+                    {/* <MdArrowBackIosNew
                       className="cursor-pointer"
                       onClick={() =>
                         setSection((prev) => (prev > 1 ? prev - 1 : prev))
                       }
-                    />
+                    /> */}
                     <Typography className="font-bold" variant="h6">
                       Complete Application - {section} of 2
                     </Typography>
@@ -676,69 +679,162 @@ function DashboardInitiator(props) {
                   </div>
                 ) : (
                   /* Section 2 */
-                  <div className="flex flex-col gap-2  items-center p-10">
-                    <Typography className="text-xs text-left text-[#667085">
-                      Enter Physical Address
-                    </Typography>
-                    <div className="w-full flex flex-col gap-3">
-                      <div>
-                        <InputLabel className="text-left mb-2">
-                          Street Name
-                        </InputLabel>
-                        <TextField
-                          fullWidth
-                          name="streetName"
-                          value={completeRegFormData?.street_name}
-                          // label="Select"
-                          onChange={onChange}
-                          // helperText="Please select your currency"
-                        />
-                      </div>
-                      <div></div>
-                      <div className="w-full">
-                        <InputLabel className="text-left mb-2">
-                          {" "}
-                          State Of Residence
-                        </InputLabel>
-                        <TextField
-                          onChange={(e) => {
-                            onChange(e);
-                            getLgas(e.target.value);
-                          }}
-                          fullWidth
-                          id="outlined-select-currency"
-                          select
-                          // label="Select"
-                          name="state_id"
-                          // value={completeRegFormData?.state_id}
-                          // helperText="Please select your currency"
-                        >
-                          {states?.map((option) => (
-                            <MenuItem key={option.id} value={option.id}>
-                              {option.state}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </div>
-                      <div className="w-full">
-                        <InputLabel className="text-left mb-2">
-                          LGA of Residence
-                        </InputLabel>
-                        <TextField
-                          onChange={onChange}
-                          fullWidth
-                          id="outlined-select-currency"
-                          select
-                          name="lga_id"
-                        >
-                          {lgas?.map((option) => (
-                            <MenuItem key={option?.id} value={option?.id}>
-                              {option?.lga}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </div>
+                  <div className="w-full flex flex-col gap-3">
+                    {/* <div>
+                    <InputLabel className="text-left mb-2">
+                      Email Address
+                    </InputLabel>
+                    <TextField
+                      // disabled
+                      // value={currentDetail?.title}
+                      onChange={onChange}
+                      fullWidth
+                      name="title"
+                    />
+                  </div>
+                  <div>
+                    <InputLabel className="text-left mb-2">
+                      Physical Address
+                    </InputLabel>
+                    <TextField
+                      // disabled
+                      // value={currentDetail?.title}
+                      onChange={onChange}
+                      fullWidth
+                      name="title"
+                    />
+                  </div>
+                  <div>
+                    <InputLabel className="text-left mb-2">Country</InputLabel>
+                    <TextField
+                      // disabled
+                      // value={currentDetail?.title}
+                      onChange={onChange}
+                      fullWidth
+                      name="title"
+                    />
+                  </div>
+                  <div>
+                    <InputLabel className="text-left mb-2">
+                      Phone Number
+                    </InputLabel>
+                    <TextField
+                      // disabled
+                      // value={currentDetail?.title}
+                      onChange={onChange}
+                      fullWidth
+                      name="title"
+                    />
+                  </div> */}
+                    <div>
+                      <InputLabel className="text-left mb-2">
+                        Account Information
+                      </InputLabel>
+                      <TextField
+                        className="w-1/2"
+                        // disabled
+                        // value={currentDetail?.title}
+                        onChange={onChange}
+                        name="title"
+                      />
                     </div>
+                    <div>
+                      <InputLabel className="text-left mb-2">
+                        Board Member Information
+                      </InputLabel>
+                      <TextField
+                        className="w-1/2"
+                        // disabled
+                        // value={currentDetail?.title}
+                        onChange={onChange}
+                        name="title"
+                      />
+                    </div>
+                    {/* <div>
+                      <InputLabel className="text-left  mb-2">
+                        I want to Loan
+                      </InputLabel>
+                      <TextField
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment
+                              className="font-bold text-black"
+                              position="start"
+                            >
+                              &#8358;
+                            </InputAdornment>
+                          ),
+                        }}
+                        fullWidth
+                        onChange={onChange}
+                        name="amount"
+                        value={currentDetail?.amount}
+                      />
+                    </div> */}
+                    <div>
+                      <InputLabel className="text-left mb-2">
+                        Impact And Track Record
+                      </InputLabel>
+                      <TextField
+                        name="city"
+                        className="w-1/2"
+                        onChange={onChange}
+                        multiline
+                        rows={6}
+                        value={completeRegFormData.city}
+                      />
+                    </div>
+                    {/* Poverty (SDG 1) Health and well-being (SDG 3), Education (SDG
+                  4), Gender equality (SDG 5) Inclusive economy (SDG 8),
+                  Enabling an environment of peace and security Partnerships
+                  Decent work and economic growth Responsible
+                  consumption and production */}
+                    <div>
+                      <InputLabel className="text-left mb-2">
+                        About Us (Not more than 600 words)
+                      </InputLabel>
+                      <TextField
+                        name="street_name"
+                        onChange={onChange}
+                        multiline
+                        className="w-1/2"
+                        rows={6}
+                        value={completeRegFormData.street_name}
+                      />
+                    </div>
+                    <div>
+                      <input
+                        onChange={onFileChange}
+                        style={{ display: "none" }}
+                        id="contained-button-file"
+                        type="file"
+                      />
+                      <label
+                        htmlFor="contained-button-file"
+                        className="mb-8 cursor-pointer"
+                      >
+                        <div className="text-black bg-yellow-200 mb-5 py-3 rounded-full w-2/3 text-center ">
+                          {" "}
+                          Supporting Documents
+                        </div>
+                        {/* <img src={uploadPNG} /> */}
+                      </label>
+                    </div>
+                    {imgData && (
+                      <div className="relative w-20">
+                        <Avatar
+                          className="w-32 h-32 border border-blue-300"
+                          src={imgData}
+                        />
+                        {/* <Typography>{ridersPictureName.name}</Typography> */}
+                        <div
+                          onClick={() => setImgData("")}
+                          className="p-1 bg-red-500 absolute w-4 h-4 flex justify-center hover:cursor-pointer items-center top-0 left-32 text-white rounded-full"
+                        >
+                          x
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </DialogContent>
@@ -760,9 +856,9 @@ function DashboardInitiator(props) {
                     type="submit"
                     // disabled
                     onClick={() => {
-                      section > 1
-                        ? completeApplication()
-                        : setSection((prev) => prev + 1);
+                      // section > 1
+                         completeApplication()
+                        // : setSection((prev) => prev + 1);
                       // handleClose();
                       // redirect();
                     }}
@@ -975,9 +1071,9 @@ function DashboardInitiator(props) {
                     type="submit"
                     // disabled
                     onClick={() => {
-                      section > 1
-                        ? completeApplication()
-                        : setSection((prev) => prev + 1);
+                      // section > 1
+                        completeApplication()
+                        // : setSection((prev) => prev + 1);
                       // handleClose();
                       // redirect();
                     }}

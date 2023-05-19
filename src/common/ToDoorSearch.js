@@ -103,7 +103,7 @@ function ToDoorSearch(props) {
         {/* (Initiator) */}
       </Typography>
       <div className="flex items-center gap-2">
-        <TextField
+        {/* <TextField
           fullWidth
           InputProps={{
             endAdornment: (
@@ -116,7 +116,7 @@ function ToDoorSearch(props) {
           // style={{ backgroundColor: "#EBEBEB", border: "none" }}
           className=" text-ssm"
           placeholder="Search "
-        />
+        /> */}
         <Avatar />
       </div>
       {/* <Divider className="pb-8" />
