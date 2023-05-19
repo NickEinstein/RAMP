@@ -171,7 +171,7 @@ const HomePage = () => {
                   />
                 </svg>
               </div>
-              <div className="hidden md:flex md:items-center">
+              <div className="hidden md:flex md:items-center gap-20">
                 <ul className="md:flex md:gap-8 text-base font-bold">
                   <Link to={RouteEnum.ABOUT}>
                     <li className="hover:text-[#da663f]">About</li>
