@@ -369,7 +369,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex md:justify-between flex-col md:flex-row md:gap-20 gap-6 items-center px-20 py-10 bg-primary-main text-white ">
+      <div className="flex md:justify-between flex-col md:flex-row md:gap-20 gap-6 items-center px-20 py-5 bg-primary-main text-white ">
         <div className="container text-center">
           <p className="">
             &copy; {new Date().getFullYear()} Resource Accessibility and
@@ -377,9 +377,15 @@ const HomePage = () => {
           </p>
         </div>
         <ul className="flex gap-5 items-center font-bold ">
-          <li>DONORS</li>
-          <li>NGOS</li>
-          <li>EXPERTS</li>
+          <Link to={RouteEnum.LOGIN}>
+            <li>DONORS</li>
+          </Link>
+          <Link to={RouteEnum.LOGIN}>
+            <li>NGOS</li>
+          </Link>
+          <Link to={RouteEnum.LOGIN}>
+            <li>EXPERTS</li>
+          </Link>
         </ul>
         <ul className="flex space-x-4">
           <li>
