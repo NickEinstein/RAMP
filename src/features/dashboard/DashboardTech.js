@@ -521,7 +521,7 @@ function DashboardTech(props) {
                 Available Requests
               </Typography>
 
-              <TextField
+              {/* <TextField
                 onChange={(e) => {
                   const filteredCompanies = techReq?.filter((company) =>
                     company?.applied_by?.company_name
@@ -533,12 +533,12 @@ function DashboardTech(props) {
                   setdisplayArray(filteredCompanies);
                 }}
                 placeholder="search requests"
-              />
+              /> */}
 
               <Divider className="mb-6 p-1" />
             </div>
             <div className="grid grid-cols-3 gap-4">
-              {displayArray?.map((e, index) => (
+              {techReq?.map((e, index) => (
                 <div key={index}>
                   <div>
                     <img

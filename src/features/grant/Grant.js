@@ -242,10 +242,13 @@ function Donation(props) {
       label: "Amount of choice",
     },
   ];
+
+  
+
   const subExpertise = [
     {
       value: 1,
-      label: "Content writing",
+      label: "Fundraising",
     },
 
     {
@@ -255,6 +258,42 @@ function Donation(props) {
     {
       value: 3,
       label: "Project Management",
+    },
+    {
+      value: 4,
+      label: "Strategic Plan/ Strategy",
+    },
+    {
+      value: 5,
+      label: "Management",
+    },
+    {
+      value: 6,
+      label: "Marketing & Brand visibility ",
+    },
+    {
+      value: 7,
+      label: "Running Ad's on Social Media",
+    },
+    {
+      value: 8,
+      label: "Accounting & Finance",
+    },
+    {
+      value: 9,
+      label: "Pitching for Success",
+    },
+    {
+      value: 10,
+      label: "Human Resources ",
+    },
+    {
+      value: 11,
+      label: "Grants and proposal writing ",
+    },
+    {
+      value: 12,
+      label: "Law & Legal ",
     },
   ];
 

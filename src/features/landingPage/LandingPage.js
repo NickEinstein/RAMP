@@ -6,6 +6,7 @@ import { AppBar, Button, TextField, Toolbar, Typography } from "@mui/material";
 import image from "images/Ramp1.png";
 import { RouteEnum } from "constants/RouteConstants";
 import { Link } from "react-router-dom";
+import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 
 const HomePage = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -21,7 +22,7 @@ const HomePage = () => {
     {
       image: NGO,
       backgroundColor: "#9a7b4f",
-      caption: "Register As An NGO",
+      caption: " NGOs",
       // subText: "Resource Accessibility and Mobilization Program",
       // color: "#3944bc",
       howItWorks: [
@@ -34,7 +35,7 @@ const HomePage = () => {
     {
       image: Expertise,
       backgroundColor: "#b3bdb6",
-      caption: "Register As A Technical Expert",
+      caption: " Technical Experts",
       howItWorks: [
         ` Create your profile`,
         `Search our pool of vibrant and vetted NGOs/CSOs`,
@@ -45,7 +46,7 @@ const HomePage = () => {
     {
       image: Donor,
       backgroundColor: "white",
-      caption: "Register As A Donor",
+      caption: " Donors",
       howItWorks: [
         `  Create your profile by sharing who you are, your vision and
                        useful information .`,
@@ -91,32 +92,32 @@ const HomePage = () => {
     {
       image: NGO,
       backgroundColor: "#9a7b4f",
-      caption: "Slide 1",
+      caption: "Save the child",
     },
     {
       image: Expertise,
       backgroundColor: "#b3bdb6",
-      caption: "Slide 2",
+      caption: "Feed the poor",
     },
     {
       image: Donor,
       backgroundColor: "white",
-      caption: "Slide 3",
+      caption: "Build house of Worship",
     },
     {
       image: NGO,
       backgroundColor: "#9a7b4f",
-      caption: "Slide 1",
+      caption: "Educate the girl child",
     },
     {
       image: Expertise,
       backgroundColor: "#b3bdb6",
-      caption: "Slide 2",
+      caption: "Save the environment",
     },
     {
       image: Donor,
       backgroundColor: "white",
-      caption: "Slide 3",
+      caption: "Keep our Oceans safe",
     },
   ];
 
@@ -186,11 +187,11 @@ const HomePage = () => {
           <div
             className={`h-[90vh] w-full flex items-center justify-center transition-opacity duration-500  bg-gray-900 bg-opacity-75 `}
           >
-            <div className="w-full h-full mx-auto justify-between p-8 flex">
+            <div className="w-full h-full mx-auto justify-between p-8 ml-20 flex">
               <div className="w-1/2 flex flex-col mt-32 items-start">
                 <Typography
                   variant="h2"
-                  className=" font-bold mb-4 text-[#da663f]"
+                  className=" font-bold mb-4 text-[#da663f] text-center"
                 >
                   {carouselSlides[activeSlideIndex].caption}
                 </Typography>
@@ -198,7 +199,7 @@ const HomePage = () => {
                   {carouselSlides[activeSlideIndex].subText}
                 </Typography>
 
-                <Link className="px-10 py-2" to="/">
+                <Link className=" py-2" to="/">
                   <Button className="flex items-start px-20 py-4 mt-8">
                     Sign In
                   </Button>
@@ -282,7 +283,12 @@ const HomePage = () => {
         </Typography>
         <div className="flex gap-5 max-w-full overflow-y-scroll scrollbar-hide">
           {carouselSlides2.map((slides) => (
-            <img className="h-[300px] min-w-[400px]" src={slides.image} />
+            <div className="relative">
+              <img className="h-[300px] min-w-[400px]" src={slides?.image} />
+              <Button className="absolute bottom-5 right-5 bg-[#da663f]">
+                {slides?.caption}
+              </Button>
+            </div>
           ))}
         </div>
       </div>
@@ -293,7 +299,9 @@ const HomePage = () => {
         <div className="w-full relative h-[400px]">
           {/* {carouselSlides3.map((slide, index) => ( */}
           <div
-            className={`flex w-full justify-center items-center gap-6 ${activeSlideIndex%2 !==0 && 'flex-row-reverse'}`}
+            className={`flex w-full justify-center items-center gap-6 ${
+              activeSlideIndex % 2 !== 0 && "flex-row-reverse"
+            }`}
           >
             <div className="w-1/2">
               <img
@@ -350,6 +358,57 @@ const HomePage = () => {
             <Button className="py-4 px-16">Subscribe</Button>
           </div>
         </div>
+      </div>
+      <div className="flex justify-between gap-20 items-center px-20 pb-10">
+        <div className="container">
+          <p className="">
+            &copy; {new Date().getFullYear()} Resource Accessibility and
+            Mobilization Program. All rights reserved.
+          </p>
+        </div>
+        <ul className="flex gap-5 items-center font-bold ">
+          <li>DONORS</li>
+          <li>NGOS</li>
+          <li>EXPERTS</li>
+        </ul>
+        <ul className="flex space-x-4">
+          <li>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Twitter fontSize="large" />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Facebook fontSize="large" />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram fontSize="large" />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedIn fontSize="large" />
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   );
