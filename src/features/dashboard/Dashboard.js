@@ -70,7 +70,7 @@ function Dashboard(props) {
 
   return (
     <div>
-      {localStorage.getItem("tech").includes("tech") ? (
+      {localStorage.getItem("tech")?.includes("tech") ? (
         <DashboardTech />
       ) : localStorage.getItem("role") == ("Super admin" || "Admin") ? (
         <Admin />
