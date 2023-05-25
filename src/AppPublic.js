@@ -19,10 +19,7 @@ const ROUTES = configureRoutes([
     path: RouteEnum.SIGNUP,
     element: lazy(() => import("features/home/Home")),
   },
-  // {
-  //   path: RouteEnum.SIGNUP,
-  //   element: lazy(() => import("features/signup/Signup")),
-  // },
+ 
   {
     path: RouteEnum.VERIFYACCOUNT,
     element: lazy(() => import("features/otp/OtpPage")),
@@ -31,26 +28,12 @@ const ROUTES = configureRoutes([
     path: RouteEnum.ABOUT,
     element: lazy(() => import("features/about/About")),
   },
-  // {
-  //   path: RouteEnum.SIGNUPCLIENT,
-  //   element: lazy(() => import("features/signup/SignUpClient")),
-  // },
-  // {
-  //   path: RouteEnum.SIGNUPCLIENT,
-  //   element: lazy(() => import("features/signup/SignUpClientF")),
-  // },
-  // {
-  //   path: RouteEnum.SIGNUPCLIENTF,
-  //   element: lazy(() => import("features/signup/SignUpClientF")),
-  // },
+ 
   {
     path: RouteEnum.LOGIN,
     element: lazy(() => import("features/login/Login")),
   },
-  // {
-  //   path: RouteEnum.HOME,
-  //   element: lazy(() => import("features/login/Login")),
-  // },
+ 
 
   {
     path: RouteEnum.LANDING,
