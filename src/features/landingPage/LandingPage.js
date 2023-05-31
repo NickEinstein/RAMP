@@ -9,7 +9,21 @@ import Rocks from "images/rocks.png";
 import Donate from "images/donate.png";
 import SmilingGirl from "images/smilingGirl.png";
 import Quote from "images/quote.svg";
+import User from "images/user.svg";
+import Cpu from "images/cpu.svg";
+import Briefcase from "images/Briefcase.svg";
 import Donor from "images/LandingDonate.jpg";
+import Outstreched from "images/Outstreched.png";
+import Solutions from "images/Solutions.png";
+import HelpingHands from "images/HelpingHands.png";
+import Flowers from "images/Flowers.png";
+import Preserving from "images/Preserving.png";
+import Empowerment from "images/Empowerment.png";
+import Knowledge from "images/Knowledge.png";
+import Gallery1 from "images/Gallery1.png";
+import Gallery2 from "images/Gallery2.png";
+import Gallery3 from "images/Gallery3.png";
+import RampFooter from "images/RampFooter.svg";
 import {
   AppBar,
   Button,
@@ -29,9 +43,11 @@ import { RouteEnum } from "constants/RouteConstants";
 import { Link } from "react-router-dom";
 import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
 import { AiOutlineArrowRight }  from "react-icons/ai"
+import { MdKeyboardArrowDown }  from "react-icons/md"
 
 const HomePage = () => {
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
+  const islg = useMediaQuery(MediaQueryBreakpointEnum.lg);
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
@@ -47,9 +63,9 @@ const HomePage = () => {
     {
       image: Giving,
       backgroundColor: "#9a7b4f",
-      caption: "Unleash the Power of Giving:",
-      subCaption: "Transform Lives in Africa",
-      subText: "Experience the true impact of your generosity by joining RAMP, the leading platform connecting donors like you with trusted nonprofits in Africa. Together, we can break the chains of poverty, empower communities, and create a sustainable future. Sign up today and be a catalyst for change.",
+      caption: "Welcome to RAMP",
+      subCaption: "For Governments, CSO's, Private and Public Sector Companies, Individuals and International Agencies",
+      // subText: "Experience the true impact of your generosity by joining RAMP, the leading platform connecting donors like you with trusted nonprofits in Africa. Together, we can break the chains of poverty, empower communities, and create a sustainable future. Sign up today and be a catalyst for change.",
       color: "#C654D1" 
     },
 
@@ -142,6 +158,29 @@ const HomePage = () => {
     // },
   ];
 
+  const carouselSlides4 = [
+    {
+      id: 1,
+      image: Gallery1,
+      alt: "Gallery"
+    },
+    {
+      id: 2,
+      image: Gallery2,
+      alt: "Gallery"
+    },
+    {
+      id: 3,
+      image: Gallery3,
+      alt: "Gallery"
+    },
+    {
+      id: 4,
+      image: Gallery1,
+      alt: "Gallery"
+    },
+  ]
+
   const stats = [
     {
       id: 1,
@@ -166,6 +205,29 @@ const HomePage = () => {
       num: "100+",
       subTextBold: "EXPERTS",
       subText: "Registered"
+    },
+  ]
+
+  const donors = [
+    {
+      id: 1,
+      image: Outstreched,
+      alt: "Outstreched"
+    },
+    {
+      id: 2,
+      image: Solutions,
+      alt: "Solutions"
+    },
+    {
+      id: 3,
+      image: HelpingHands,
+      alt: "HelpingHands"
+    },
+    {
+      id: 4,
+      image: Flowers,
+      alt:"Flowers"
     },
   ]
 
@@ -214,7 +276,7 @@ const HomePage = () => {
               <img src={image} className="max-w-[120px]" alt="Logo" />
             </Typography>
             <div className="flex items-center cursor-pointer">
-              <div className="md:hidden" onClick={() => setDrawerOpen(true)}>
+              <div className="lg:hidden" onClick={() => setDrawerOpen(true)}>
                 <svg className="w-6 h-6 text-white" viewBox="0 0 24 24">
                   <path
                     className="fill-current"
@@ -222,20 +284,24 @@ const HomePage = () => {
                   />
                 </svg>
               </div>
-              <div className="hidden md:flex md:items-center gap-20">
+              <div className="hidden lg:flex lg:items-center gap-20">
                 <ul className="md:flex md:gap-8 text-base font-bold">
-                  <Link to={RouteEnum.ABOUT}>
-                    <li className="hover:text-[#C654D1] text-white">About</li>
-                  </Link>
+                  <li className=" text-white flex gap-1 items-center hover:text-[#C654D1]">
+                    {/* <Link to={RouteEnum.ABOUT} className=""> */}
+                        About <span><MdKeyboardArrowDown className="text-white  hover:text-[#C654D1]"/></span>
+                    {/* </Link> */}
+                  </li>
                   <li className="hover:text-[#C654D1] text-white">How it Works</li>
-                  <li className="hover:text-[#C654D1] text-white">Contact</li>
+                  <li className="hover:text-[#C654D1] text-white">Results</li>
+                  <li className="hover:text-[#C654D1] text-white">Blog</li>
+                  <li className="hover:text-[#C654D1] text-white">Resources</li>
                 </ul>
                 <div className="md:flex md:gap-4">
                   <Link to={RouteEnum.SIGNUP}>
-                    <Button className="px-10 py-2 bg-transparent lg:border-solid border-2 rounded-full hover:border-[#C654D1] border-white hover:bg-[#C654D1]">Sign Up</Button>
+                    <Button className="px-10 py-2 bg-transparent lg:border-solid border-2 rounded-full hover:border-[#C654D1] border-white hover:bg-[#C654D1]">Sign Up as CSO/NGO</Button>
                   </Link>
                   <Link to={RouteEnum.LOGIN}>
-                    <Button className="px-10 py-2 bg-transparent lg:border-solid border-2 rounded-full hover:border-[#C654D1] border-white hover:bg-[#C654D1]">Sign In</Button>
+                    <Button className="px-10 py-2 bg-transparent lg:border-solid border-2 rounded-full hover:border-[#C654D1] border-white hover:bg-[#C654D1]">Log In</Button>
                   </Link>
                 </div>
               </div>
@@ -245,7 +311,7 @@ const HomePage = () => {
 
         <Drawer
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block",  sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: 240,
@@ -270,46 +336,63 @@ const HomePage = () => {
               <ListItemText primary="How it Works" />
             </ListItem>
             <ListItem button>
-              <ListItemText primary="Contact" />
+              <ListItemText primary="Results" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Blog" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Resources" />
             </ListItem>
           </List>
         </Drawer>
 
         <div>
           <div
-            className={`h-[90vh] w-full flex items-center justify-center transition-opacity duration-500  bg-gray-900 bg-opacity-75`}
+            className={`h-[60vh] lg:h-[90vh] w-full flex items-center justify-center transition-opacity duration-500  bg-gray-900 bg-opacity-75`}
           >
             <div className="w-full h-full mx-auto justify-center text-center md:p-8 p-4 md:ml-20 flex">
-              <div className="w-full flex flex-col mt-24 lg:mt-16 ">
+              <div className="w-8/12 flex flex-col mt-2 md:mt-10 lg:mt-16 ">
                 <Typography
-                  variant={ismd ? "h2" : "h3"}
+                  variant={islg ? "h2" : ismd ? "h3" : "h4"}
                   className=" font-bold mb-4 text-[#01B6AC] text-center "
                 >
                   {carouselSlides[activeSlideIndex].caption}
                 </Typography>
+
                 <Typography
-                  variant={ismd ? "h2" : "h3"}
-                  className=" font-bold mb-4 text-[#fff] text-center "
+                  variant={islg ? "h3" : ismd ? "h4" : "h5"}
+                  className=" font-medium mb-4 text-[#fff] text-center "
                 >
                   {carouselSlides[activeSlideIndex].subCaption}
                 </Typography>
+                
 
-                <div className="w-full flex justify-center">
+                {/* <div className="w-full flex justify-center">
                   <Typography className={`text-white md:-mt-5 lg:mt-5 md:w-2/3 text-sm md:text-base text-center`}>
                     {carouselSlides[activeSlideIndex].subText}
                   </Typography>
                     
+                </div> */}
+
+                {/* <Typography  className="text-white mt-5 md:w-1/2 text-sm md:text-base">
+                  {carouselSlides[activeSlideIndex].howItWorks}
+                </Typography> */}
+                <div className="flex flex-col md:flex-row gap-5 justify-center items-center">
+
+                  <Link className=" py-2" to="/">
+                    <Button className="flex mx-auto text-[14px] w-44 md:w-full items-center px-4 lg:px-20 lg:py-4 lg:mt-8 border-solid border-2 rounded-full border-white bg-transparent hover:border-[#C654D1] hover:bg-[#C654D1]">
+                      Sign Up as NGO/CSO
+                    </Button>
+                  </Link>
+
+                  <Link className=" py-2" to="/">
+                    <Button className="flex mx-auto text-[14px] w-44 md:w-full items-center px-4 lg:px-20 lg:py-4 lg:mt-8 border-solid border-2 rounded-full border-white bg-transparent hover:border-[#C654D1] hover:bg-[#C654D1]">
+                      Fund a Nonprofit
+                    </Button>
+                  </Link>
                 </div>
 
-                <Typography  className="text-white mt-5 md:w-1/2 text-sm md:text-base">
-                  {carouselSlides[activeSlideIndex].howItWorks}
-                </Typography>
-
-                <Link className=" py-2" to="/">
-                  <Button className="flex mx-auto text-[14px] items-center px-20 lg:py-4 lg:mt-8 border-solid border-2 rounded-full border-[#C654D1] bg-[#C654D1]">
-                    Get Started
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>
@@ -329,7 +412,7 @@ const HomePage = () => {
         </div>
       </div>{" "}
 
-      <div className="relative -top-36  md:-top-14 lg:-top-20 w-full flex justify-center">
+      <div className="relative px-5 lg:px-0 -top-28  md:-top-14 lg:-top-20 w-full flex justify-center">
         <div className="grid md:grid-cols-4 bg-[#FCF6FC] shadow-xl bg-white border-white lg:w-[1000px] rounded-2xl grid-cols-2 gap-6 justify-around mt-8">
           {stats.map((stat) => (
             <div className="flex">
@@ -357,7 +440,7 @@ const HomePage = () => {
         <Typography variant="h4" className="text-center font-medium text-[#555555]">Who we Are</Typography>
         <div className="flex w-full flex-col md:flex-row lg:items-center mt-4 md:mx-10 gap-5">
           <div className="md:w-6/12 mx-5 md:mx-0">
-            <img src={WhoWeAre} className="md:h-[300px] lg:h-auto"/>
+            <img src={WhoWeAre} className="md:h-[300px] lg:h-auto" alt="Who We Are"/>
           </div>
           <div className="flex flex-col gap-4 md:w-5/12 mx-5 items-center md:mt-5 lg:mt-0 lg:items-start md:mx-0">
             <Typography  className="text-sm lg:text-lg">
@@ -376,6 +459,30 @@ const HomePage = () => {
         </div>
       </div>
 
+      <div className="w-full flex gap-5 justify-center items-center mt-10 px-3  md:px-0  md:mt-14">
+        <div className="w-full flex gap-8 justify-center  lg:w-[1010px]">
+
+          <div className="w-[270px] flex flex-col gap-3 items-center text-center">
+            <img src={User} alt="User" className=" w-10 h-10 md:w-[70px] md:h-[70px]" />
+            <p className="text-[#202020] text-sm md:text-[20px] font-semibold">For Donors</p>
+            <p className="text-[#425466] text-xs md:text-base">Collect reviews, Q&A and other content from your customers started.</p>
+          </div>
+          <div className="w-[270px] flex flex-col gap-3 items-center text-center">
+            <img src={Briefcase} alt="Briefcase" className=" w-10 h-10 md:w-[70px] md:h-[70px]" />
+            <p className="text-[#202020] text-sm md:text-[20px] font-semibold">For Non-Profits</p>
+            <p className="text-[#425466] text-xs md:text-base">Use your user-generated content in sales and marketing.</p>
+          </div>
+          <div className="w-[270px] flex flex-col gap-3 items-center text-center">
+            <img src={Cpu} alt="Cpu" className=" w-10 h-10 md:w-[70px] md:h-[70px]" />
+            <p className="text-[#202020] text-sm md:text-[20px] font-semibold">For Admins</p>
+            <p className="text-[#425466] text-xs md:text-base">In the end, it's all about your customers. Build their trust and help.</p>
+          </div>
+
+        </div>
+          
+
+      </div>
+
 
       <div className="bg-white py-12 md:px-12 px-4 ">
         <Typography className="text-center text-[#555555] py-6 scrollb" variant="h4">
@@ -384,8 +491,8 @@ const HomePage = () => {
         <div className="flex gap-5 max-w-full overflow-y-scroll scrollbar-hide">
           {carouselSlides2.map((slides) => (
             <div className="relative">
-              <img className=" md:h-[300px] min-w-[400px]" src={slides?.image} />
-              <Button className="absolute bottom-5 w-[120px] md:w-[200px] h-[40px] mx-auto right-5 left-5 bg-[#3E4095]">
+              <img className=" lg:h-[300px] min-w-[300px] lg:min-w-[400px]" src={slides?.image} alt="Gallery" />
+              <Button className="absolute bottom-5 w-[180px] md:w-[200px] h-[40px] mx-auto right-5 left-5 bg-[#3E4095]">
                 {slides?.caption}
               </Button>
             </div>
@@ -393,9 +500,91 @@ const HomePage = () => {
         </div>
       </div>
 
+      <div className="w-full mt-10 flex flex-col justify-center items-center">
+        <Typography className="text-center text-[#555555] text-semibold py-6 scrollb" variant="h4">
+          Our Donors | Partners
+        </Typography>
+        <Typography className="text-center text-[#555555] py-2 scrollb" variant="h6">
+          Powering Dreams that Fight Poverty and  Transform Communities
+        </Typography>
+          
+          <div className="flex gap-10 px-5 lg:px-0 lg:gap-20 mt-5 max-w-full overflow-y-scroll scrollbar-hide">
+            {donors.map((donor) => (
+              <div key={donor?.id} className="flex gap-5 items-center w-[182px] ">
+                <img src={donor?.image} alt={donor?.alt} className=""/>
+              </div>
+            ))}
+          </div>
+
+      </div>
+
+      <div className="w-full mt-10 flex flex-col justify-center items-center">
+        <Typography className="text-center text-[#555555] text-semibold py-6 scrollb" variant="h4">
+          Our Track Record
+        </Typography>
+          
+          <div className="flex gap-10 mt-5 w-full justify-center items-center">
+            <div className="flex flex-col md:flex-row md:overflow-y-scroll scrollbar-hide  gap-6 lg:w-[1247px] justify-center">
+              <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center">
+                <img src={Preserving} alt="preserving" className="w-[360px] lg:h-[242px]"/>
+                  <Typography variant={islg ? "h5" : "h6"} className="text-[#01B6AC] ml-2 font-bold">
+                    Preserving Nature, Securing Tomorrow
+                  </Typography>
+                <Typography className="text-[#555555] text-sm lg:text-base ml-2">
+                  Together, we are making a positive impact on the environment. 
+                  With your support, RAMP has funded initiatives such as reforestation, 
+                  renewable energy projects, and waste management programs.
+                </Typography>
+              </div> 
+              <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center">
+                <img src={Empowerment} alt="Empowerment" className="w-[360px] lg:h-[242px]"/>
+                <Typography variant={islg ? "h5" : "h6"} className="text-[#01B6AC] ml-2 font-bold">
+                  Empowerment Through Entrepreneurship
+                </Typography>
+                <Typography className="text-[#555555] text-sm lg:text-base ml-2">
+                  By connecting nonprofits to donors, RAMP has empowered women to start their own businesses 
+                  and become self-sufficient. Through training, mentorship, and financial support, 
+                  we are unlocking the entrepreneurial potential of women and fostering economic growth.
+                </Typography>
+              </div>
+              <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center">
+                <img src={Knowledge} alt="Knowledge" className="w-[360px] lg:h-[242px]"/>
+                <Typography variant={islg ? "h5" : "h6"} className="text-[#01B6AC] ml-2 font-bold">
+                  Igniting Knowledge, Empowering Communities
+                </Typography>
+                <Typography className="text-[#555555] text-sm lg:text-base ml-2">
+                  Through RAMP's platform, generous donors like you have funded the construction of schools in 
+                  underserved areas, providing access to education for thousands of children. 
+                  Together, we are creating brighter futures and breaking the cycle of poverty.
+                </Typography>
+              </div>
+            </div>
+            
+          </div>
+
+      </div>
+
+      <div className="bg-white py-12 md:px-12 px-4 ">
+        <Typography className="text-center text-[#555555] py-6 scrollb" variant="h4">
+          Gallery
+        </Typography>
+        <div className="flex gap-5 mt-8 max-w-full overflow-y-scroll scrollbar-hide">
+          {carouselSlides4.map((slides) => (
+            <div className="relative" key={slides?.id}>
+              <img className=" lg:h-[300px] min-w-[300px] lg:min-w-[400px]" src={slides?.image} alt={slides?.alt} />
+              {/* <Button className="absolute bottom-5 w-[120px] md:w-[200px] h-[40px] mx-auto right-5 left-5 bg-[#3E4095]">
+                {slides?.caption}
+              </Button> */}
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+
       <div className="bg-white md:py-12 md:px-12 p-4 ">
         <Typography className="text-center text-[#555555] py-6 scrollb" variant="h4">
-          Our Track Record
+          Testimonials
         </Typography>
         <div className="w-full relative md:h-[400px] mt-5">
           {/* {carouselSlides3.map((slide, index) => ( */}
@@ -478,63 +667,79 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex md:justify-between flex-col md:flex-row md:gap-20 gap-6 items-center px-20 py-5 bg-primary-main text-white ">
-        <div className="container text-center">
-          <p className="">
-            &copy; {new Date().getFullYear()} Resource Accessibility and
-            Mobilization Program. All rights reserved.
-          </p>
+
+      <div className="w-full lg:h-[256px] py-10 bg-[#3E4095]">
+        <div className="flex flex-col justify-center items-center">
+          <img src={RampFooter} alt="Ramp Footer"/>
+          <ul className="flex flex-col items-center lg:flex-row gap-5 lg:justify-center font-normal text-white">
+            <li>About</li>
+            <li>How It Works</li>
+            <li>Blogs</li>
+            <li>Resources</li>
+            <li>Help</li>
+            <li>Privacy Policy</li>
+          </ul>
         </div>
-        <ul className="flex gap-5 items-center font-bold ">
-          <Link to={RouteEnum.LOGIN}>
-            <li>DONORS</li>
-          </Link>
-          <Link to={RouteEnum.LOGIN}>
-            <li>NGOS</li>
-          </Link>
-          <Link to={RouteEnum.LOGIN}>
-            <li>EXPERTS</li>
-          </Link>
-        </ul>
-        <ul className="flex space-x-4">
-          <li>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Twitter fontSize="large" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Facebook fontSize="large" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Instagram fontSize="large" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LinkedIn fontSize="large" />
-            </a>
-          </li>
-        </ul>
+        
+        <div className="flex md:justify-between mt-6  w-full flex-col md:flex-row md:gap-20 gap-6 items-center px-20 py-5 text-white ">
+          <div className="container text-center">
+            <p className="">
+              &copy; {new Date().getFullYear()} Resource Accessibility and
+              Mobilization Program. All rights reserved.
+            </p>
+          </div>
+          <ul className="flex gap-5 items-center font-bold ">
+            <Link to={RouteEnum.LOGIN}>
+              <li>DONORS</li>
+            </Link>
+            <Link to={RouteEnum.LOGIN}>
+              <li>NGOS</li>
+            </Link>
+            <Link to={RouteEnum.LOGIN}>
+              <li>EXPERTS</li>
+            </Link>
+          </ul>
+          <ul className="flex space-x-4">
+            <li>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Twitter fontSize="large" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook fontSize="large" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram fontSize="large" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedIn fontSize="large" />
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
+
     </div>
   );
 };
