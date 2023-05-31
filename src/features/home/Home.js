@@ -7,11 +7,16 @@ import educatiaLogo from "images/Ramp2.png";
 // import educatiaLogo from "images/RAMP.jpg";
 import educatiaSuccess from "images/EducatiaSuccess.png";
 import { FcGoogle } from "react-icons/fc";
-import backgroundImage from "../../images/RampHome1.jpg";
+import backgroundImage from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg-3.svg";
 // import backgroundImage2 from "../../images/rampHome2.jpg";
-import backgroundImage3 from "../../images/ramphome3.jpg";
-import backgroundImage4 from "../../images/ramphome4.jpg";
-import backgroundImage5 from "../../images/ramphome5.jpg";
+import backgroundImage3 from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg.svg";
+import backgroundImage4 from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg-1.svg";
+import backgroundImage5 from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg-2.svg";
+import polygon from "images/homelanding/Polygon 1.svg";
+import polygon1 from "images/homelanding/Polygon 1.svg";
+import vector from "images/homelanding/Vector.svg";
+import vector1 from "images/homelanding/Vector2.svg";
+import userz from "images/homelanding/user.svg";
 // import { Button, TextField, Typography } from "@mui/material";
 import PasswordTextField from "common/PasswordTextField";
 import { getTextFieldFormikProps } from "utils/FormikUtils";
@@ -64,11 +69,12 @@ import {
 import useStepper from "hooks/useStepper";
 import useDataRef from "hooks/useDataRef";
 
-import { useNavigate } from "react-router-dom";  import { MediaQueryBreakpointEnum } from "constants/Global";
-
+import { useNavigate } from "react-router-dom";
+import { MediaQueryBreakpointEnum } from "constants/Global";
+import { BackspaceTwoTone } from "@mui/icons-material";
 
 function Home(props) {
-const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
+  const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
 
   const [age, setAge] = React.useState("");
   const [individual, setindividual] = React.useState(true);
@@ -100,31 +106,29 @@ const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
     password: "",
     password_confirmation: "",
   });
- 
 
-   const configs = [
-     {
-       bgColor: "HomeTopSectionBackgroundColor_WomanInRedImage",
-       textColor: "text-secondary-main",
-       image: backgroundImage,
-     },
-     {
-       bgColor: "HomeTopSectionBackgroundColor_ManInDreadsImage",
-       textColor: "text-white",
-       image: backgroundImage3,
-     },
-     {
-       bgColor: "HomeTopSectionBackgroundColor_headerImage",
-       textColor: "text-secondary-main",
-       image: backgroundImage4,
-     },
-     {
-       bgColor: "HomeTopSectionBackgroundColor_headerImage",
-       textColor: "text-secondary-main",
-       image: backgroundImage5,
-     },
-   ];
-
+  const configs = [
+    {
+      bgColor: "HomeTopSectionBackgroundColor_WomanInRedImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_ManInDreadsImage",
+      textColor: "text-white",
+      image: backgroundImage3,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_headerImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage4,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_headerImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage5,
+    },
+  ];
 
   // console.log(localStorage.getItem('authUser'))
   const history = useNavigate();
@@ -135,30 +139,28 @@ const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
     history("/verify-account");
   };
 
-   const stepper = useStepper({
-     maxStep: configs.length - 1 ,
-   });
+  const stepper = useStepper({
+    maxStep: configs.length - 1,
+  });
 
-   const config = configs[stepper.step];
+  const config = configs[stepper.step];
 
-   const dataRef = useDataRef({ stepper });
+  const dataRef = useDataRef({ stepper });
 
-   useEffect(() => {
-     const intervalId = setInterval(() => {
-       if (dataRef.current.stepper.canNextStep()) {
-         dataRef.current.stepper.nextStep();
-       } else {
-         dataRef.current.stepper.reset();
-       }
-     }, 1000 * 5);
-     return () => {
-       clearInterval(intervalId);
-     };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (dataRef.current.stepper.canNextStep()) {
+        dataRef.current.stepper.nextStep();
+      } else {
+        dataRef.current.stepper.reset();
+      }
+    }, 1000 * 5);
+    return () => {
+      clearInterval(intervalId);
+    };
 
     //  console.log(stepper)
-   }, [dataRef]);
-
-
+  }, [dataRef]);
 
   // console.log(localStorage.getItem('authUser'))
 
@@ -170,7 +172,7 @@ const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
 
   const { enqueueSnackbar } = useSnackbar();
   const [loginMuation, loginMutationResult] = UserApi.useLoginMutation();
-const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState([]);
   const style = {
     position: "absolute",
     top: "50%",
@@ -184,18 +186,18 @@ const [personName, setPersonName] = React.useState([]);
     p: 4,
   };
 
-const handleChange = (event) => {
-  // console.log(event.target.)
-  const {
-    target: { value },
-  } = event;
-  setPersonName(
-    // On autofill we get a stringified value.
-    typeof value === "string" ? value.split(",") : value
-  );
-};
+  const handleChange = (event) => {
+    // console.log(event.target.)
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
 
-console.log(stepper.step)
+  console.log(stepper.step);
 
   const onChange = (e) => {
     if (e.target.name == "account_type") {
@@ -401,11 +403,12 @@ console.log(stepper.step)
         <div
           style={{
             // background: `url('${configs[stepper.step]?.image}')`,
+            minHeight: "100vh",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
           }}
-          className="hidden md:block bg-gray-500/10 z-30 "
+          className="hidden lg:block z-30 "
         ></div>
         <div
           // className="h-screen"
@@ -415,7 +418,7 @@ console.log(stepper.step)
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
           }}
-          className="lg:block hidden fixed items-stretch md:flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
+          className="hidden fixed items-stretch lg:flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
         >
           <div>
             <img
@@ -437,7 +440,7 @@ console.log(stepper.step)
               </div>
             </div> */}
 
-            <div className="flex flex-col gap-16 text-white">
+            <div className="flex flex-col gap-16 relative text-white h-screen">
               <img className="w-1/5" src={educatiaLogo} />
               {/* <Typography className=" font-bold" variant="h2">
                 RAMP
@@ -460,7 +463,7 @@ console.log(stepper.step)
           {/* <LoginHeader /> */}
           {/* <Typography variant="h4">RAMP</Typography> */}
           <img
-            className="w-1/3 lg:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
+            className="w-1/3 md:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
             src={educatiaLogo}
           />
 
@@ -504,9 +507,114 @@ console.log(stepper.step)
                 />
               </RadioGroup>
             </FormControl> */}
+
+            {regData.role && (
+              <div>
+                <div className="flex gap-2 items-center mt-4">
+                  <BackspaceTwoTone
+                    className="cursor-pointer text-primary-main "
+                    onClick={() => {
+                      setRegData({
+                        ...regData,
+                        role: "",
+                      });
+                    }}
+                  />
+                  <Typography className="font-bold">Back</Typography>
+                </div>
+                <TextField
+                  size="medium"
+                  className="w-full mt-6"
+                  value={regData.role == "edufunder" ? "Donor" : "NGO"}
+                />
+              </div>
+            )}
             <Divider className="my-4" />
 
-            <FormControl className="w-full mb-4">
+            {!regData.role && (
+              <div className="w-full my-16 flex flex-col  h-full">
+                <Typography>Choose account type:</Typography>
+                <div className="w-full flex gap-8 my-4 justify-center border-[#F3F4F9]">
+                  <div>
+                    <div
+                      onClick={() => {
+                        setRegData({
+                          ...regData,
+                          role: "edufunder",
+                        });
+                      }}
+                      className="relative w-[100px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
+                    >
+                      <img
+                        className="absolute top-2 left-2 w-[80px]"
+                        src={polygon}
+                      />
+                      <img className="absolute top-10 left-10 " src={vector1} />
+                    </div>
+                    <Typography className="font-bold text-center">
+                      Donor
+                    </Typography>
+                  </div>
+                  <div>
+                    <div
+                      onClick={() => {
+                        setRegData({
+                          ...regData,
+                          role: "eduinitiator",
+                        });
+                      }}
+                      className="relative w-[100px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
+                    >
+                      <img
+                        className="absolute top-2 left-2 w-[80px]"
+                        src={polygon}
+                      />
+                      <img className="absolute top-8 left-8 w-8" src={userz} />
+                    </div>
+                    <Typography className="font-bold text-center">
+                      NGO
+                    </Typography>
+                  </div>
+                  <div>
+                    <div
+                      onClick={() => {
+                        setRegData({
+                          ...regData,
+                          role: "edufunder",
+                        });
+                      }}
+                      className="relative w-[100px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
+                    >
+                      <img
+                        className="absolute top-2 left-2 w-[80px]"
+                        src={polygon}
+                      />
+                      <img className="absolute top-10 left-10 " src={vector1} />
+                    </div>
+                    <Typography className="font-bold text-center">
+                      Technical
+                    </Typography>
+                  </div>
+                </div>
+                <a className="text-center" href="">
+                  <Typography className="mt-12">
+                    Already have an account?
+                    <a
+                      href="/login"
+                      className="ml-1 text-primary-main font-bold "
+                    >
+                      Log In
+                    </a>
+                  </Typography>
+                </a>
+                <Typography className="md:absolute bottom-6 mt-12 lg:mt-0 text-center">
+                  By signing up you have agreed to terms and conditions of the
+                  application
+                </Typography>
+              </div>
+            )}
+
+            {/* <FormControl className="w-full mb-4">
               {!regData.role && (
                 <InputLabel htmlFor="name-multiple">Sign Up As</InputLabel>
               )}
@@ -529,7 +637,7 @@ console.log(stepper.step)
                   </MenuItem>
                 ))}
               </TextField>
-            </FormControl>
+            </FormControl> */}
             {regData.role && (
               <div>
                 <div className="flex flex-col gap-5">
@@ -756,6 +864,7 @@ console.log(stepper.step)
                   <Button
                     className="p-3 w-full text-base text-white"
                     type="submit"
+                    disabled={!regData.role}
                     onClick={
                       pay
                       //   () => {
