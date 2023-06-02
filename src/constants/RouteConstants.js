@@ -8,6 +8,10 @@ export const RouteEnum = {
   SIGNUP: "/signup",
   DASHBOARD: "/dashboard",
   CONTRIBUTION: "/contribution",
+  WHATWEDO: "/what-we-do",
+  OURVALUES: "/our-values",
+  TEAM: "/team",
+  STORY: "/about",
 
   GRANT: "/grant",
   PROFILE: "/profile",

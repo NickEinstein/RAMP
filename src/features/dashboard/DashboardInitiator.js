@@ -400,13 +400,13 @@ function DashboardInitiator(props) {
                     </Typography>
                   </div>
                 ) : (
-                  <div className="flex items-end mr-3">
-                    <div>
-                      <div>
+                  <div className="flex items-end mr-3 w-full">
+                    <div className="w-full">
+                      <div className="w-full">
                         {/* <ToDoorSearch /> */}
-                        <div className="flex items-end mr-3">
-                          <div>
-                            <div className="flex gap-4">
+                        <div className="flex w-full items-end mr-3">
+                          <div className="w-full">
+                            <div className="flex gap-4 w-full border-[#ECEEF7] border-2 rounded-2xl py-6">
                               <WallCards
                                 className="mr-3"
                                 rider={false}
@@ -435,7 +435,7 @@ function DashboardInitiator(props) {
                               <WallCards
                                 rider={false}
                                 big={true}
-                                name="FUnded"
+                                name="Funded"
                                 count={
                                   grants?.filter((e) => e?.status == "approved")
                                     ?.length
@@ -443,7 +443,7 @@ function DashboardInitiator(props) {
                               />
                               <WallCards
                                 rider={false}
-                                big={true}
+                                dashed={true}
                                 name="Declined"
                                 count={
                                   grants?.filter((e) => e?.status == "delined")
@@ -453,56 +453,58 @@ function DashboardInitiator(props) {
                             </div>
                           </div>
                         </div>
-                        <Typography variant="h6" className="font-bold mt-8">
-                          Donation History
-                        </Typography>
-                        <Divider className="mb-6 p-1" />
-                        <TextField
-                          fullWidth
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="start">
-                                <MdOutlineSearch />
-                              </InputAdornment>
-                            ),
-                          }}
-                          variant="outlined"
-                          className=" mb-5 text-ssm"
-                          placeholder="Search Donation "
-                        />
-                        <div className="py-3 w-[800px] md:w-full">
-                          <div className="flex gap-2 w-full">
-                            <Typography
-                              variant="h6"
-                              className="w-1/5 text-center text-[#5C6F7F]"
-                            >
-                              Date
-                            </Typography>
-                            <Typography
-                              variant="h6"
-                              className="w-1/5 text-center"
-                            >
-                              Reasons
-                            </Typography>
-                            <Typography
-                              variant="h6"
-                              className="w-1/5 text-center"
-                            >
-                              Amount
-                            </Typography>
-                            <Typography
-                              variant="h6"
-                              className="w-1/5 text-center"
-                            >
-                              Status
-                            </Typography>
-                            {/* <Typography
+                        <div class="flex items-center justify-between my-8">
+                          <Typography variant="h6" className="font-bold">
+                            History
+                          </Typography>
+                          <TextField
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="start">
+                                  <MdOutlineSearch />
+                                </InputAdornment>
+                              ),
+                            }}
+                            variant="outlined"
+                            className=" w-2/3 text-ssm"
+                            placeholder="Search Donation "
+                          />
+                        </div>
+                        <div className="flex gap-2 w-full mt-8">
+                          <Typography
+                            variant="h6"
+                            className="w-1/5 text-center text-[#5C6F7F]"
+                          >
+                            Date
+                          </Typography>
+                          <Typography
+                            variant="h6"
+                            className="w-1/5 text-center"
+                          >
+                            Reasons
+                          </Typography>
+                          <Typography
+                            variant="h6"
+                            className="w-1/5 text-center"
+                          >
+                            Amount
+                          </Typography>
+                          <Typography
+                            variant="h6"
+                            className="w-1/5 text-center"
+                          >
+                            Status
+                          </Typography>
+                          {/* <Typography
                               variant="h6"
                               className="w-1/5 text-center"
                             >
                               Action
                             </Typography> */}
-                          </div>
+                        </div>
+                        <Divider className="p-1" />
+                        <div className="py- w-[800px] md:w-full">
                           <div className="overflow-x-scroll w-full">
                             {grants?.map((e) => (
                               <ManageCompaniesTable
@@ -601,7 +603,7 @@ function DashboardInitiator(props) {
                       }
                     /> */}
                     <Typography className="font-bold" variant="h6">
-                      Complete Application - {section} of 2
+                      Complete Registration - {section} of 2
                     </Typography>
                   </div>
                   <MdCancel className="cursor-pointer" onClick={handleClose} />
@@ -857,8 +859,8 @@ function DashboardInitiator(props) {
                     // disabled
                     onClick={() => {
                       // section > 1
-                         completeApplication()
-                        // : setSection((prev) => prev + 1);
+                      completeApplication();
+                      // : setSection((prev) => prev + 1);
                       // handleClose();
                       // redirect();
                     }}
@@ -889,7 +891,7 @@ function DashboardInitiator(props) {
                       }
                     />
                     <Typography className="font-bold" variant="h6">
-                      Complete Application - {section} of 2
+                      Complete Registration - {section} of 2
                     </Typography>
                   </div>
                   <MdCancel className="cursor-pointer" onClick={handleClose} />
@@ -1072,8 +1074,8 @@ function DashboardInitiator(props) {
                     // disabled
                     onClick={() => {
                       // section > 1
-                        completeApplication()
-                        // : setSection((prev) => prev + 1);
+                      completeApplication();
+                      // : setSection((prev) => prev + 1);
                       // handleClose();
                       // redirect();
                     }}

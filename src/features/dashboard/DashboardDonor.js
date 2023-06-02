@@ -424,8 +424,9 @@ function DashboardDonor(props) {
       // auth: false,
     });
 
-    !firstname == "Technical" && setGrants(res.data.data.grants);
+    // !firstname == "Technical" && setGrants(res.data.data.grants);
     setdisplayArray(res.data.data.grants);
+    setGrants(res.data.data.grants);
 
     //  setIsRegCompleted(res?.data?.data?.states);
   };
@@ -473,27 +474,26 @@ function DashboardDonor(props) {
           <div>
             <div className="">
               <div>
-                <div className="flex gap-4">
-                  {!firstname == "Technical" && (
-                    <div
-                      onClick={() => {
-                        setdisplayArray(grants);
-                        setTitle("Donation Requests");
-                        setSection(0);
-                        setlearnMore(false);
-                      }}
-                    >
-                      <WallCards
-                        className="mr-3"
-                        rider={false}
-                        big={true}
-                        name="Total Requests"
-                        count={grants?.length}
-                      />
-                    </div>
-                  )}
-
+                <div className="flex gap-4 w-full border-[#ECEEF7] border-2 rounded-2xl py-6">
                   <div
+                    className="w-full"
+                    onClick={() => {
+                      setdisplayArray(grants);
+                      setTitle("Donation Requests");
+                      setSection(0);
+                      setlearnMore(false);
+                    }}
+                  >
+                    <WallCards
+                      className="mr-3"
+                      dashed={true}
+                      name="Total Requests"
+                      count={grants?.length}
+                    />
+                  </div>
+
+                  {/* <div
+                  className="w-full"
                     onClick={() => {
                       setdisplayArray(techReq);
                       setTitle("Donation Requests");
@@ -508,7 +508,7 @@ function DashboardDonor(props) {
                       name="Expertise Requests"
                       count={techReq?.length}
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <Typography variant="h6" className="font-bold mt-8">
@@ -647,7 +647,7 @@ function DashboardDonor(props) {
                   {learnMoreDetails?.about}
                 </Typography>
                 <Typography className="font-bold mt-8">Milestones</Typography>
-                { firstname == "Technical"&& learnMoreDetails?.milestones}
+                {firstname == "Technical" && learnMoreDetails?.milestones}
 
                 {firstname !== "Technical" &&
                   learnMoreDetails?.applied_by?.city

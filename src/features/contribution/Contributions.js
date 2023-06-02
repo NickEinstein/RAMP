@@ -261,7 +261,7 @@ function Contributions(props) {
         <ToDoorSearch />
         <div className="flex justify-between items-center">
           <Typography variant="h5" className="font-bold">
-            MY DONATIONS
+          ANALYTICS
           </Typography>
 
           {/* {section == 2 && (
@@ -279,19 +279,19 @@ function Contributions(props) {
         <div>
           {/* <ToDoorSearch /> */}
 
-          <div className="flex items-end mr-3 mt-12">
-            <div>
-              <div className="flex gap-4">
+          <div className="flex items-end mt-12 w-full">
+            <div className="w-full">
+              <div className="flex gap-4 w-full border-[#ECEEF7] border-2 rounded-2xl py-6">
                 <WallCards
                   className="mr-3"
                   rider={false}
-                  big={true}
+                  // big={true}
                   name="Total Donations"
                   count={myContributions?.length}
                 />
                 <WallCards
                   rider={false}
-                  big={true}
+                  // big={true}
                   name="Cash Donations"
                   count={
                     myContributions?.filter((e) => e?.status == "pending")
@@ -300,7 +300,7 @@ function Contributions(props) {
                 />
                 <WallCards
                   rider={false}
-                  big={true}
+                  // big={true}
                   name="In-Kind Donations"
                   count={
                     myContributions?.filter((e) => e?.status == "approved")
@@ -309,9 +309,9 @@ function Contributions(props) {
                 />
 
                 <WallCards
-                  rider={false}
-                  big={true}
-                  name="Materials Donations"
+                  dashed={true}
+                  // big={true}
+                  name="Expertise Dispensed"
                   count={
                     myContributions?.filter((e) => e?.status == "declined")
                       ?.length
@@ -326,67 +326,69 @@ function Contributions(props) {
           <WallCards name='Earnings' count='3,000,000'/> */}
           </div>
 
-          <Typography variant="h6" className="font-bold mt-8">
-            History
-          </Typography>
+          <div className="flex items-center justify-between my-8">
+            <Typography variant="h6" className="font-bold">
+              History
+            </Typography>
 
-          <Divider className="mb-6 p-1" />
-
-          <TextField
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <MdOutlineSearch />
-                </InputAdornment>
-              ),
-            }}
-            variant="outlined"
-            className=" mb-5 text-ssm"
-            placeholder="Search Scholarships "
-          />
-
-          <div className="p-3 md:full min-w-[800px]">
-            <div className="flex gap-2">
-              <Typography
-                variant="h6"
-                className="w-1/5 text-center text-[#5C6F7F]"
-              >
-                Donated To
-              </Typography>
-              <Typography
-                variant="h6"
-                className="w-1/5 text-center text-[#5C6F7F]"
-              >
-                Title
-              </Typography>
-              <Typography
-                variant="h6"
-                className="w-1/5 text-center text-[#5C6F7F]"
-              >
-                Date
-              </Typography>
-              {/* <Typography variant="h6" className="w-1/5 text-left ">
+            <TextField
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <MdOutlineSearch />
+                  </InputAdornment>
+                ),
+              }}
+              variant="outlined"
+              className=" text-ssm w-2/3 "
+              placeholder="Search "
+            />
+          </div>
+          <div className="flex gap-2">
+            <Typography
+              variant="h6"
+              className="w-1/5 text-left text-[#5C6F7F]"
+            >
+              Recipient
+            </Typography>
+            <Typography
+              variant="h6"
+              className="w-1/5 text-center text-[#5C6F7F]"
+            >
+              Title
+            </Typography>
+            <Typography
+              variant="h6"
+              className="w-1/5 text-center text-[#5C6F7F]"
+            >
+              Date
+            </Typography>
+            {/* <Typography variant="h6" className="w-1/5 text-left ">
                   Type Of Scholarships
                 </Typography> */}
-              <Typography variant="h6" className="w-1/5 text-center ">
-                Note
-              </Typography>
-              <Typography variant="h6" className="w-1/5 text-center ">
-                Amount
-              </Typography>
+            <Typography variant="h6" className="w-1/5 text-center ">
+              Note
+            </Typography>
+            <Typography variant="h6" className="w-1/5 text-center ">
+              Amount
+            </Typography>
 
-              {/* <Typography variant="h6" className="w-1/5 text-left ">
+            {/* <Typography variant="h6" className="w-1/5 text-left ">
                   Amount To Return
                 </Typography> */}
 
-              <Typography variant="h6" className="w-1/5 text-center ">
-                Status
-              </Typography>
-              {/* <Typography variant="h6" className="w-1/5 text-center ">
+            <Typography variant="h6" className="w-1/5 text-center ">
+              Status
+            </Typography>
+            {/* <Typography variant="h6" className="w-1/5 text-center ">
                 Action
               </Typography> */}
-            </div>
+          </div>
+
+          <Divider className="mb-6 p-1" />
+
+          <div className="p-3 md:full min-w-[800px]">
             {myContributions?.map((e) => (
               <div>
                 {/* { props.tableArray.map((e)=> */}

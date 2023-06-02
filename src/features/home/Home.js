@@ -17,6 +17,7 @@ import polygon1 from "images/homelanding/Polygon 1.svg";
 import vector from "images/homelanding/Vector.svg";
 import vector1 from "images/homelanding/Vector2.svg";
 import userz from "images/homelanding/user.svg";
+import Tech from "images/homelanding/cpu.svg";
 // import { Button, TextField, Typography } from "@mui/material";
 import PasswordTextField from "common/PasswordTextField";
 import { getTextFieldFormikProps } from "utils/FormikUtils";
@@ -589,7 +590,7 @@ function Home(props) {
                         className="absolute top-2 left-2 w-[80px]"
                         src={polygon}
                       />
-                      <img className="absolute top-10 left-10 " src={vector1} />
+                      <img className="absolute top-10 left-10 " src={Tech} />
                     </div>
                     <Typography className="font-bold text-center">
                       Technical
