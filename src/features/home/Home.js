@@ -612,8 +612,11 @@ function Home(props) {
                   </Typography>
                 </a>
                 <Typography className="md:absolute bottom-6 mt-12 lg:mt-0 text-center">
-                  By signing up you have agreed to terms and conditions of the
-                  application
+                  By signing up you have agreed to the{" "}
+                  <span class="underline underline-offset-2 text-[#C654D1] cursor-pointer">
+                    terms and conditions
+                  </span>{" "}
+                  of this platform.
                 </Typography>
               </div>
             )}

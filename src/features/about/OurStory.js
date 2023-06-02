@@ -177,16 +177,19 @@ function Home(props) {
               </div>
               <div className="text-base font-bold w-full flex justify-start mt-16">
                 <div className=" ">
-                  <Typography className="text-base font-bold text-center">
+                  <Typography className="text-base font-bold ">
                     Thank You!
                   </Typography>
-                  <Typography className="text-base font-bold text-center my-3">
+                  <Typography className="text-base font-bold  my-3">
                     Signature
+                  </Typography>{" "}
+                  <Typography className="text-base font-bold  my-3">
+                    Chizoba O. Atsu
                   </Typography>
-                  <Typography className="text-base font-bold text-center">
+                  <Typography className="font-bold text-sm">
                     Founder and CEO
                   </Typography>
-                  <Typography className="text-base font-bold text-center">
+                  <Typography className="text-base font-bold ">
                     Donors for Africa Foundation
                   </Typography>
                 </div>

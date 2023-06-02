@@ -399,7 +399,7 @@ const HomePage = () => {
               can build a brighter future and transform lives across the
               continent.
             </Typography>
-            <Link to={RouteEnum.ABOUT}>
+            <Link className="w-full" to={RouteEnum.ABOUT}>
               <Button className="w-6/12  lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 border-solid border-2 rounded-full border-[#3E4095] bg-[#3E4095]">
                 Learn More
               </Button>
@@ -709,13 +709,13 @@ const HomePage = () => {
             </p>
           </div>
           <ul className="flex gap-5 items-center font-bold ">
-            <Link to={RouteEnum.LOGIN}>
+            <Link to={RouteEnum.SIGNUP}>
               <li>DONORS</li>
             </Link>
-            <Link to={RouteEnum.LOGIN}>
+            <Link to={RouteEnum.SIGNUP}>
               <li>NGOS</li>
             </Link>
-            <Link to={RouteEnum.LOGIN}>
+            <Link to={RouteEnum.SIGNUP}>
               <li>EXPERTS</li>
             </Link>
           </ul>

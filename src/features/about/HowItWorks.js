@@ -12,7 +12,10 @@ import {
 } from "@mui/material";
 import useStepper from "hooks/useStepper";
 import useDataRef from "hooks/useDataRef";
-import about from "images/homelanding/howItWorks.jpg";
+import ngo from "images/homelanding/NGO.jpg";
+import inKind from "images/homelanding/in-kind.jpg";
+import donor from "images/homelanding/donate.jpg";
+import techExpert from "images/homelanding/howItWorks.jpg";
 import { useNavigate } from "react-router-dom";
 import { MediaQueryBreakpointEnum } from "constants/Global";
 
@@ -36,6 +39,8 @@ function Home(props) {
         <div>
           {[
             {
+              img: donor,
+              type: "As a Donor:",
               title: "For Donor:",
               text: `Start by deciding if you are donating funds or your technical expertise.
 Create your profile by sharing who you are, your vision and useful information .
@@ -45,17 +50,23 @@ Once you make a donation. Look out for an official email from us to guarantee ma
 `,
             },
             {
-              title: "As a Technical Expert Donor:",
+              img: techExpert,
+              title: "Technical Expert Donor:",
+              type: "As a Technical Expert Donor:",
               text: ` Create your profile, Search our pool of vibrant and vetted NGOs|CSOs, Reach out and connect: When you've found NGO’s |CSO’s you’ll like to provide technical expertise to, introduce yourself! and share how youwish to support them and for what time frame. 
 
 `,
             },
             {
+              img: inKind,
+              type: "As an In Kind Donor",
               title: "For Donors providing in kind donation:",
               text: `Simply click the link, search the pool of vetted NGOs|CSOs, pick a country and confirm what donation you will be making. Confirm your location and we will pick up or you can request delivery details
 `,
             },
             {
+              img: ngo,
+              type: "As NGO",
               title: "For NGO’s:",
               text: `Tell us about yourself and your organization. Create your profile. Once approved, proceed to make a request . The more complete your profile is, the better chance you'll be approved on time and your most valued need met
 `,
@@ -66,17 +77,15 @@ Once you make a donation. Look out for an official email from us to guarantee ma
                 idx % 2 == 0 && "flex-row-reverse"
               }`}
             >
-              
-                <img className="w-2/5" src={about} />
-            
+              <img className="w-2/5 max-h-[350px] min-w-[400px]" src={e?.img} />
+
               <div>
                 <Typography className="font-bold" variant="h5">
                   {e?.title}
                 </Typography>
                 <Typography className="text-base" component={"div"}>
-                  <Typography className="text-base my-2">
-                   {e?.text}
-                  </Typography>
+                  <Typography className="text-base my-2">{e?.text}</Typography>
+                  <Button className="py-3 px-12 my-8">Sign Up {e?.type}</Button>
                 </Typography>
               </div>
             </div>
