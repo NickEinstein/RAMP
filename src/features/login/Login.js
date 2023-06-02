@@ -11,7 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import PasswordTextField from "common/PasswordTextField";
 import { getTextFieldFormikProps } from "utils/FormikUtils";
 import useAuthUser from "hooks/useAuthUser";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { RouteEnum } from "constants/RouteConstants";
 import LoginHeader from "common/LoginHeader";
 import FormGroup from "@mui/material/FormGroup";
@@ -237,29 +237,34 @@ function Login(props) {
             className=" absolute min-h-screen -z-10 -top-0 left-0 w-[100%] h-[100%]"
             src={configs[0]?.image}
           />
-          <img className="w-1/5 -mt-5" src={educatiaLogo} />
+          <Link to={RouteEnum.LANDING}>
+            <img className="w-1/5 -mt-5" src={educatiaLogo} />
+          </Link>
 
           <div className="flex flex-col gap-16 my-12 text-white">
             {/* <Typography className=" font-bold" variant="h2">
               RAMP
             </Typography> */}
-            <Typography variant="h4" className=" font-bold md:mt-24">
-              {/* Earn */}
-              Get access to unlimited funds
-            </Typography>
-            <Typography className="text-base">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit amet,
-            </Typography>
+            <div className="flex flex-col gap-8">
+              <Typography variant="h3" className=" font-bold md:mt-24">
+                {/* Earn */}
+                Welcome to RAMP{" "}
+              </Typography>
+              <Typography variant="h5" className="">
+                For Governments, CSO's, Private and Public Sector Companies,
+                Individuals and International Agencies
+              </Typography>
+            </div>
           </div>
         </div>
         <div className="p-8 pr-[12%] pl-[8%] pt-16 w-full">
           {/* <LoginHeader /> */}
-          <img
-            className="w-1/5 lg:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
-            src={educatiaLogo}
-          />
+          <Link to={RouteEnum.LANDING}>
+            <img
+              className="w-1/5 lg:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
+              src={educatiaLogo}
+            />
+          </Link>
           {/* <Typography variant="h4">RAMP</Typography> */}
 
           <div className="flex flex-col">

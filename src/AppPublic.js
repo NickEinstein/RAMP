@@ -50,6 +50,11 @@ const ROUTES = configureRoutes([
     path: RouteEnum.TEAM,
     element: lazy(() => import("features/about/Team")),
   },
+
+  {
+    path: RouteEnum.HOWITWORKS,
+    element: lazy(() => import("features/about/HowItWorks")),
+  },
 ]);
 
 export default AppPublic;

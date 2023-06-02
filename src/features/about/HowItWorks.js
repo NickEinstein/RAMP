@@ -1,81 +1,21 @@
 import React, { useEffect, useState } from "react";
-import UserApi from "apis/UserApi";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { useSnackbar } from "notistack";
-import educatiaLogo from "images/Ramp2.png";
-// import educatiaLogo from "images/RAMP.jpg";
-import educatiaSuccess from "images/EducatiaSuccess.png";
-import { FcGoogle } from "react-icons/fc";
-import backgroundImage from "../../images/RampHome1.jpg";
-// import backgroundImage2 from "../../images/rampHome2.jpg";
-import backgroundImage3 from "../../images/ramphome3.jpg";
-import backgroundImage4 from "../../images/ramphome4.jpg";
-import backgroundImage5 from "../../images/ramphome5.jpg";
-// import { Button, TextField, Typography } from "@mui/material";
-import PasswordTextField from "common/PasswordTextField";
-import { getTextFieldFormikProps } from "utils/FormikUtils";
-// import { Typography, Container, Box, Tab, Tabs, Paper, Button } from "@mui/material";
-import ourStory from "images/homelanding/LandingNGO.6976716afed3705df208.jpg.svg";
-// import { Link } from "react-router-dom";
 
-import useAuthUser from "hooks/useAuthUser";
-import { Link, Navigate } from "react-router-dom";
-import { RouteEnum } from "constants/RouteConstants";
-import image from "images/Ramp1.png";
+// import image from "images/homelanding/howItWorks.jpg";
 import LoginHeader from "common/LoginHeader";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import toDoorLogo from "images/Ellipse 30.png";
-import background from "images/background.png";
-import snake from "images/Mask group.png";
-import { post } from "services/fetch";
 
-// import ReactDOM from 'react-dom';
-// import trustedBy1 from './images/Vector.png'
-import trustedBy2 from "images/Rectangle 7.png";
-import trustedBy3 from "images/Rectangle 106.png";
-// import LoginHeader from './LoginHeader';
-// import trustedBy3 from './images/trustedBy-3.png'
-// import trustedBy4 from './images/trustedBy-4.png'
 import {
   Box,
   Button,
-  Divider,
-  FormControl,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormLabel,
-  Input,
-  MenuItem,
-  Modal,
-  Radio,
-  RadioGroup,
-  Select,
-  TextField,
+ 
   Typography,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  Chip,
-  OutlinedInput,
+  
   useMediaQuery,
-  Fade,
-  AppBar,
-  Toolbar,
-  List,
-  ListItem,
-  ListItemText,
-  Drawer,
+  
   Container,
 } from "@mui/material";
 import useStepper from "hooks/useStepper";
 import useDataRef from "hooks/useDataRef";
-import about from 'images/homelanding/ourStory.jpg'
+import about from "images/homelanding/howItWorks.jpg";
 import { useNavigate } from "react-router-dom";
 import { MediaQueryBreakpointEnum } from "constants/Global";
 
@@ -91,120 +31,46 @@ function Home(props) {
     <div>
       <LoginHeader color={true} />
 
-      <div
-        className="h-[400px] flex justify-center items-center"
-        style={{
-          backgroundImage: `url(${about})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          width: "100%",
-          // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
-        }}
-      >
-        <Typography className="text-white" variant="h1" gutterBottom>
-          Our Story
-        </Typography>
-      </div>
+      <Typography className="text-center my-12" variant="h1" gutterBottom>
+        How It Works
+      </Typography>
 
       <Container className="py-12" maxWidth="xl">
-        <Box>
-          <div className="w-10/12 text-base">
-            <Typography
-              className="underline-offset-2 font-bold underline mb-5"
-              variant="h5"
-            >
-              The Power of a Table and Chair
-            </Typography>
-            <div class="flex flex-col gap-4 text-base">
-              <Typography className="text-base">
-                In 2017 our founder, sat on her sons chair with her laptop
-                placed on the bed, working on the new vision that is to become
-                Donors for Africa Foundation. As she bemoaned the growing pain
-                on her waist as a result of her posture, she took a break to
-                scroll through instagram.
-              </Typography>
-              <Typography className="text-base">
-                Few minutes later she read a post asking people to ‘’Make an
-                Ask’’. She did.
-              </Typography>
-              <Typography className="text-base">
-                She asked for a Table and Chair.
-              </Typography>
-              <Typography className="text-base">
-                The next day, Chizoba O. Atsu delivered a brown mahogany table
-                to her home and the rest they say is history. Since then, she
-                has gone on to;
-              </Typography>
-              <ul className="list-inside list-disc pl-8">
-                <li>Birth the DFA Vision</li>
-                <li>
-                  Trained over 5000+ nonprofits who have raised over $30M in
-                  funding
-                </li>
-                <li>
-                  Funds have been used to launch school libraries, back to
-                  school programs, women empowerment campaigns and so much more
-                  which has directly transformed the lives of so many Africans
-                  reaching over 51,000 people weekly with life changing stories,
-                  learning and solutions. and so many more results.
-                </li>
-                <img src={ourStory} />
-              </ul>
-              <Typography className="text-base">
-                With experience gathered from over 14years designing accelerator
-                programs, leading changemakers from 20 African countries and
-                different continents; RAMP is designed to help organizations
-                scale up their impact in the communities they serve and
-                transform their countries.
-              </Typography>
-              <div>
-                <span className="text-base mr-2">
-                  You can make direct donations as
-                </span>
-                <span className="text-base font-bold mr-2">An Individual,</span>
-                <span className="text-base font-bold mr-2">A Government,</span>
-                <span className="text-base font-bold mr-2">
-                  A Technical Expert,
-                </span>
-                <span className="text-base font-bold mr-2">
-                  A Growing Business,
-                </span>
-                <span className="text-base font-bold mr-2">
-                  A multinational or private sector company, to trusted
-                  organizations across Africa.
-                </span>
-              </div>
-              <div className="text-base font-bold w-full flex justify-start mt-16">
-                <div className=" ">
-                  <Typography className="text-base font-bold text-center">
-                    Thank You!
-                  </Typography>
-                  <Typography className="text-base font-bold text-center my-3">
-                    Signature
-                  </Typography>
-                  <Typography className="text-base font-bold text-center">
-                    Founder and CEO
-                  </Typography>
-                  <Typography className="text-base font-bold text-center">
-                    Donors for Africa Foundation
-                  </Typography>
-                </div>
-              </div>
+        <div>
+          <div className="flex gap-20">
+            <div className="w-2/5">
+              <img src={about} />
             </div>
-            <div className="my-8 flex flex-col justify-center items-center">
-              <Typography
-                variant="h4"
-                className="text-primary-main font-bold text-center"
-              >
-                SIGN UP TODAY TO MAKE A DONATION
+            <div>
+              <Typography className="font-bold" variant="h5">For Donors</Typography>
+              <Typography className="text-base" component={'div'}>
+               <Typography className="text-base my-2">
+                 Start by deciding if you are donating funds or your
+                  technical expertise.
+               </Typography>
+                <Typography className="text-base my-2">
+                  Create your profile by sharing who you are,
+                  your vision and useful information .
+                </Typography>
+                <Typography className="text-base my-2">
+                  As a financial donor,
+                  search our NGO/CSO profiles to choose the nonprofit. you will
+                  like to fund. You can view their areas of interest,
+                  specialization , country etc.
+                </Typography>
+                <Typography className="text-base my-2">
+                  Choose an amount and how often you
+                  wish to make this donation
+                </Typography>
+                <Typography className="text-base my-2">
+                  Once you make a donation. Look out
+                  for an official email from us to guarantee maximum impact
+                </Typography>
               </Typography>
-              <Link to={RouteEnum.SIGNUP}>
-                <Button className="text-base py-3 px-12 my-5">SIGN UP</Button>
-              </Link>
             </div>
           </div>
-        </Box>
+          <div></div>
+        </div>
       </Container>
     </div>
   );

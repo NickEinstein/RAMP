@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSnackbar } from "notistack";
 import educatiaLogo from "images/Ramp2.png";
-// import educatiaLogo from "images/RAMP.jpg";
+// import educatiaLogo2 from "images/RAMP.jpg";
 import educatiaSuccess from "images/EducatiaSuccess.png";
 import { FcGoogle } from "react-icons/fc";
 import backgroundImage from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg-3.svg";
@@ -20,17 +20,10 @@ import userz from "images/homelanding/user.svg";
 import Tech from "images/homelanding/cpu.svg";
 // import { Button, TextField, Typography } from "@mui/material";
 import PasswordTextField from "common/PasswordTextField";
-import { getTextFieldFormikProps } from "utils/FormikUtils";
-import useAuthUser from "hooks/useAuthUser";
-import { Navigate } from "react-router-dom";
+
+import { Link, Navigate } from "react-router-dom";
 import { RouteEnum } from "constants/RouteConstants";
-import LoginHeader from "common/LoginHeader";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import toDoorLogo from "images/Ellipse 30.png";
-import background from "images/background.png";
-import snake from "images/Mask group.png";
+
 import { post } from "services/fetch";
 
 // import ReactDOM from 'react-dom';
@@ -48,14 +41,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormLabel,
-  Input,
   MenuItem,
-  Modal,
-  Radio,
-  RadioGroup,
   Select,
   TextField,
   Typography,
@@ -409,7 +395,7 @@ function Home(props) {
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
           }}
-          className="hidden lg:block z-30 "
+          className="hidden lg:block"
         ></div>
         <div
           // className="h-screen"
@@ -442,20 +428,23 @@ function Home(props) {
             </div> */}
 
             <div className="flex flex-col gap-16 relative text-white h-screen">
-              <img className="w-1/5" src={educatiaLogo} />
+              <Link to={RouteEnum.LANDING}>
+                <img className="w-1/5" src={educatiaLogo} />
+              </Link>
+
               {/* <Typography className=" font-bold" variant="h2">
                 RAMP
               </Typography> */}
-              <Typography variant="h4" className=" font-bold md:mt-24">
-                {/* Earn */}
-                Get access to unlimited funds
-              </Typography>
-              <Typography className="text-base">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit
-                amet,
-              </Typography>
+              <div className="flex flex-col gap-8">
+                <Typography variant="h3" className=" font-bold md:mt-24">
+                  {/* Earn */}
+                  Welcome to RAMP{" "}
+                </Typography>
+                <Typography variant="h5" className="">
+                  For Governments, CSO's, Private and Public Sector Companies,
+                  Individuals and International Agencies
+                </Typography>
+              </div>
             </div>
           </div>
         </div>
@@ -463,18 +452,23 @@ function Home(props) {
         <div className="p-8 pr-[10%] pl-[6%] w-full">
           {/* <LoginHeader /> */}
           {/* <Typography variant="h4">RAMP</Typography> */}
-          <img
-            className="w-1/3 md:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
-            src={educatiaLogo}
-          />
+          <Link to={RouteEnum.LANDING}>
+            <img
+              className="w-1/3 md:hidden max-w-[120px] max-h-[130px] p-4"
+              src={educatiaLogo}
+            />
+          </Link>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col mt-24">
             <div className="">
-              <Typography variant="h4" className="mb-2 mt-3 font-bold">
+              <Typography
+                variant="h4"
+                className="mb-2 mt-3 font-bold text-center"
+              >
                 Get Started
               </Typography>
 
-              <Typography>Sign up to have access to our application</Typography>
+              {/* <Typography>Sign up to have access to our application</Typography> */}
               {/* <p>Enter your credentials to create your account.</p> */}
             </div>
 
@@ -530,11 +524,11 @@ function Home(props) {
                 />
               </div>
             )}
-            <Divider className="my-4" />
+            {/* <Divider className="my-4" /> */}
 
             {!regData.role && (
-              <div className="w-full my-16 flex flex-col  h-full">
-                <Typography>Choose account type:</Typography>
+              <div className="w-full mb-16 flex flex-col my-6 h-full ">
+                <Typography className="text-center">Sign up As:</Typography>
                 <div className="w-full flex gap-8 my-4 justify-center border-[#F3F4F9]">
                   <div>
                     <div
@@ -544,13 +538,16 @@ function Home(props) {
                           role: "edufunder",
                         });
                       }}
-                      className="relative w-[100px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
+                      className="relative w-[150px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
                     >
                       <img
-                        className="absolute top-2 left-2 w-[80px]"
+                        className="absolute top-2 left-8 w-[88px]"
                         src={polygon}
                       />
-                      <img className="absolute top-10 left-10 " src={vector1} />
+                      <img
+                        className="absolute top-11 left-[68px] "
+                        src={vector1}
+                      />
                     </div>
                     <Typography className="font-bold text-center">
                       Donor
@@ -564,13 +561,16 @@ function Home(props) {
                           role: "eduinitiator",
                         });
                       }}
-                      className="relative w-[100px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
+                      className="relative w-[150px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
                     >
                       <img
-                        className="absolute top-2 left-2 w-[80px]"
+                        className="absolute top-2 left-8 w-[88px]"
                         src={polygon}
                       />
-                      <img className="absolute top-8 left-8 w-8" src={userz} />
+                      <img
+                        className="absolute top-9 left-[60px] w-8"
+                        src={userz}
+                      />
                     </div>
                     <Typography className="font-bold text-center">
                       NGO
@@ -584,16 +584,16 @@ function Home(props) {
                           role: "edufunder",
                         });
                       }}
-                      className="relative w-[100px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
+                      className="relative w-[150px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
                     >
                       <img
-                        className="absolute top-2 left-2 w-[80px]"
+                        className="absolute top-2 left-6 w-[88px] mx-auto"
                         src={polygon}
                       />
-                      <img className="absolute top-10 left-10 " src={Tech} />
+                      <img className="absolute top-10 left-14 " src={Tech} />
                     </div>
                     <Typography className="font-bold text-center">
-                      Technical
+                      Technical Expert
                     </Typography>
                   </div>
                 </div>

@@ -22,7 +22,7 @@ import trips from "images/routing.png";
 import rider from "images/profile-2user.png";
 import logouts from "images/logout.png";
 import { MediaQueryBreakpointEnum } from "constants/Global";
-import LoginHeader from "common/LoginHeader";
+import LoginHeaderInner from "common/LoginHeaderInner";
 import { RouteEnum } from "constants/RouteConstants";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Logout } from "@mui/icons-material";
@@ -283,7 +283,7 @@ export default function PermanentDrawerLeft() {
       >
         {/* <Toolbar /> */}
         <div className="px-3 py-5">
-          <LoginHeader />
+          <LoginHeaderInner />
         </div>
         {/* <Divider /> */}
         <List>

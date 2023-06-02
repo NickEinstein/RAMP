@@ -12,6 +12,7 @@ export const RouteEnum = {
   OURVALUES: "/our-values",
   TEAM: "/team",
   STORY: "/about",
+  HOWITWORKS: "/how-it-works",
 
   GRANT: "/grant",
   PROFILE: "/profile",
