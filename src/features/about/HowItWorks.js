@@ -6,11 +6,8 @@ import LoginHeader from "common/LoginHeader";
 import {
   Box,
   Button,
- 
   Typography,
-  
   useMediaQuery,
-  
   Container,
 } from "@mui/material";
 import useStepper from "hooks/useStepper";
@@ -31,44 +28,59 @@ function Home(props) {
     <div>
       <LoginHeader color={true} />
 
-      <Typography className="text-center my-12" variant="h1" gutterBottom>
+      <Typography className="text-center mt-12" variant="h3" gutterBottom>
         How It Works
       </Typography>
 
-      <Container className="py-12" maxWidth="xl">
+      <Container className="pb-12" maxWidth="xl">
         <div>
-          <div className="flex gap-20">
-            <div className="w-2/5">
-              <img src={about} />
+          {[
+            {
+              title: "For Donor:",
+              text: `Start by deciding if you are donating funds or your technical expertise.
+Create your profile by sharing who you are, your vision and useful information .
+As a financial donor, search our NGO/CSO profiles to choose the nonprofit. you will like to fund. You can view their areas of interest, specialization , country etc.
+Choose an amount and how often you wish to make this donation
+Once you make a donation. Look out for an official email from us to guarantee maximum impact
+`,
+            },
+            {
+              title: "As a Technical Expert Donor:",
+              text: ` Create your profile, Search our pool of vibrant and vetted NGOs|CSOs, Reach out and connect: When you've found NGO’s |CSO’s you’ll like to provide technical expertise to, introduce yourself! and share how youwish to support them and for what time frame. 
+
+`,
+            },
+            {
+              title: "For Donors providing in kind donation:",
+              text: `Simply click the link, search the pool of vetted NGOs|CSOs, pick a country and confirm what donation you will be making. Confirm your location and we will pick up or you can request delivery details
+`,
+            },
+            {
+              title: "For NGO’s:",
+              text: `Tell us about yourself and your organization. Create your profile. Once approved, proceed to make a request . The more complete your profile is, the better chance you'll be approved on time and your most valued need met
+`,
+            },
+          ].map((e, idx) => (
+            <div
+              className={`flex  gap-20 my-16 ${
+                idx % 2 == 0 && "flex-row-reverse"
+              }`}
+            >
+              
+                <img className="w-2/5" src={about} />
+            
+              <div>
+                <Typography className="font-bold" variant="h5">
+                  {e?.title}
+                </Typography>
+                <Typography className="text-base" component={"div"}>
+                  <Typography className="text-base my-2">
+                   {e?.text}
+                  </Typography>
+                </Typography>
+              </div>
             </div>
-            <div>
-              <Typography className="font-bold" variant="h5">For Donors</Typography>
-              <Typography className="text-base" component={'div'}>
-               <Typography className="text-base my-2">
-                 Start by deciding if you are donating funds or your
-                  technical expertise.
-               </Typography>
-                <Typography className="text-base my-2">
-                  Create your profile by sharing who you are,
-                  your vision and useful information .
-                </Typography>
-                <Typography className="text-base my-2">
-                  As a financial donor,
-                  search our NGO/CSO profiles to choose the nonprofit. you will
-                  like to fund. You can view their areas of interest,
-                  specialization , country etc.
-                </Typography>
-                <Typography className="text-base my-2">
-                  Choose an amount and how often you
-                  wish to make this donation
-                </Typography>
-                <Typography className="text-base my-2">
-                  Once you make a donation. Look out
-                  for an official email from us to guarantee maximum impact
-                </Typography>
-              </Typography>
-            </div>
-          </div>
+          ))}
           <div></div>
         </div>
       </Container>

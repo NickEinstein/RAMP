@@ -315,13 +315,13 @@ const HomePage = () => {
                   {carouselSlides[activeSlideIndex].howItWorks}
                 </Typography> */}
                 <div className="flex flex-col md:flex-row gap-5 justify-center items-center">
-                  <Link className=" py-2" to="/">
+                  <Link className=" py-2" to={RouteEnum.SIGNUP}>
                     <Button className="flex mx-auto text-[14px] w-44 md:w-full items-center px-4 lg:px-20 lg:py-4 lg:mt-8 border-solid border-2 rounded-full border-white bg-transparent hover:border-[#C654D1] hover:bg-[#C654D1]">
                       Sign Up as NGO/CSO
                     </Button>
                   </Link>
 
-                  <Link className=" py-2" to="/">
+                  <Link  className=" py-2" to={RouteEnum.SIGNUP}>
                     <Button className="flex mx-auto text-[14px] w-44 md:w-full items-center px-4 lg:px-20 lg:py-4 lg:mt-8 border-solid border-2 rounded-full border-white bg-transparent hover:border-[#C654D1] hover:bg-[#C654D1]">
                       Fund a Nonprofit
                     </Button>
@@ -399,9 +399,11 @@ const HomePage = () => {
               can build a brighter future and transform lives across the
               continent.
             </Typography>
-            <Button className="w-6/12  lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 border-solid border-2 rounded-full border-[#3E4095] bg-[#3E4095]">
-              Learn More
-            </Button>
+            <Link to={RouteEnum.ABOUT}>
+              <Button className="w-6/12  lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 border-solid border-2 rounded-full border-[#3E4095] bg-[#3E4095]">
+                Learn More
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

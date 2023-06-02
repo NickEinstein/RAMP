@@ -7,9 +7,9 @@ import educatiaLogo from "images/Ramp2.png";
 // import educatiaLogo2 from "images/RAMP.jpg";
 import educatiaSuccess from "images/EducatiaSuccess.png";
 import { FcGoogle } from "react-icons/fc";
-import backgroundImage from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg-3.svg";
+import backgroundImage from "../../images/homelanding/vexingChildren.jpg";
 // import backgroundImage2 from "../../images/rampHome2.jpg";
-import backgroundImage3 from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg.svg";
+import backgroundImage3 from "../../images/homelanding/pexels-liza-summer-6347730.jpg";
 import backgroundImage4 from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg-1.svg";
 import backgroundImage5 from "../../images/RampHome1.384e8f4ca8e12fd2e190.jpg-2.svg";
 import polygon from "images/homelanding/Polygon 1.svg";
@@ -386,11 +386,11 @@ function Home(props) {
     //   </form>
     // </div>
     <div className="">
-      <div className="lg:flex ">
+      <div className="lg:flex">
         <div
           style={{
             // background: `url('${configs[stepper.step]?.image}')`,
-            minHeight: "100vh",
+            // minHeight: "100vh",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
@@ -409,7 +409,7 @@ function Home(props) {
         >
           <div>
             <img
-              className=" min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex self-stretch"
+              className=" min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex"
               src={configs[stepper.step]?.image}
             />
             {/* <div className="self-stretch w-1/2 hidden md:flex items-end">
@@ -529,8 +529,8 @@ function Home(props) {
             {!regData.role && (
               <div className="w-full mb-16 flex flex-col my-6 h-full ">
                 <Typography className="text-center">Sign up As:</Typography>
-                <div className="w-full flex gap-8 my-4 justify-center border-[#F3F4F9]">
-                  <div>
+                <div className=" w-full flex items-center gap-8 my-4 justify-center border-[#F3F4F9]">
+                  <div className="bg-[#C654D1]/75 rounded-2xl py-4">
                     <div
                       onClick={() => {
                         setRegData({
@@ -538,7 +538,7 @@ function Home(props) {
                           role: "edufunder",
                         });
                       }}
-                      className="relative w-[150px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
+                      className="relative w-[150px] flex   rounded-lg mb-2 cursor-pointer py-12 px-6 hover:shadow-lg "
                     >
                       <img
                         className="absolute top-2 left-8 w-[88px]"
@@ -553,30 +553,7 @@ function Home(props) {
                       Donor
                     </Typography>
                   </div>
-                  <div>
-                    <div
-                      onClick={() => {
-                        setRegData({
-                          ...regData,
-                          role: "eduinitiator",
-                        });
-                      }}
-                      className="relative w-[150px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
-                    >
-                      <img
-                        className="absolute top-2 left-8 w-[88px]"
-                        src={polygon}
-                      />
-                      <img
-                        className="absolute top-9 left-[60px] w-8"
-                        src={userz}
-                      />
-                    </div>
-                    <Typography className="font-bold text-center">
-                      NGO
-                    </Typography>
-                  </div>
-                  <div>
+                  <div className="bg-[#01B6AC]/75 rounded-2xl py-4">
                     <div
                       onClick={() => {
                         setRegData({
@@ -584,13 +561,39 @@ function Home(props) {
                           role: "edufunder",
                         });
                       }}
-                      className="relative w-[150px] flex border-[#3E4095] border rounded-lg mb-2 cursor-pointer py-12 px-6"
+                      className="relative w-[150px] flex   rounded-lg mb-2 cursor-pointer py-12 px-6 hover:shadow-lg "
                     >
                       <img
-                        className="absolute top-2 left-6 w-[88px] mx-auto"
+                        className="absolute top-2 left-8 w-[88px]"
                         src={polygon}
                       />
-                      <img className="absolute top-10 left-14 " src={Tech} />
+                      <img
+                        className="absolute top-11 left-[68px] "
+                        src={userz}
+                      />
+                    </div>
+                    <Typography className="font-bold text-center">
+                      NGO
+                    </Typography>
+                  </div>
+                  <div className="bg-[#f0c046]/75 rounded-2xl py-4">
+                    <div
+                      onClick={() => {
+                        setRegData({
+                          ...regData,
+                          role: "edufunder",
+                        });
+                      }}
+                      className="relative w-[150px] flex   rounded-lg mb-2 cursor-pointer py-12 px-6 hover:shadow-lg "
+                    >
+                      <img
+                        className="absolute top-2 left-8 w-[88px]"
+                        src={polygon}
+                      />
+                      <img
+                        className="absolute top-11 left-[64px] "
+                        src={Tech}
+                      />
                     </div>
                     <Typography className="font-bold text-center">
                       Technical Expert
@@ -644,7 +647,7 @@ function Home(props) {
                 <div className="flex flex-col gap-5">
                   <div className="w-full flex gap-6">
                     {regData.role == "edufunder" && (
-                      <FormControl className="w-full">
+                      <FormControl className="w-full my-4">
                         {!regData.types && (
                           <InputLabel htmlFor="name-multiple">
                             Organisation Type
