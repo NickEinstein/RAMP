@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import "./App.css";
 import AppThemeProvider from "AppThemeProvider";
 import { Icon, IconButton } from "@mui/material";
@@ -6,9 +6,18 @@ import { SnackbarProvider } from "notistack";
 import { notistackRef } from "constants/RefConstants";
 import Suspense from "common/Suspense";
 import useAuthUser from "hooks/useAuthUser";
+import { useLocation, useNavigate } from "react-router-dom";
+import { RouteEnum } from "constants/RouteConstants";
 
 function App() {
   const authUser = useAuthUser();
+  const history = useNavigate();
+
+  // if (localStorage.getItem("token")) {
+  //   history(RouteEnum.DASHBOARD);
+  // } else {
+  //   history(RouteEnum.HOME);
+  // }
 
   return (
     <AppThemeProvider>
@@ -29,12 +38,7 @@ function App() {
         )}
       >
         <Suspense>
-          {/* { */}
-            {/* // !!authUser?.accessToken &&
-            // localStorage.getItem('authUser') == 'true' && */}
-            <AppProtected /> 
-            <AppPublic />
-          {/* } */}
+          {localStorage.getItem("token") ? <AppProtected /> : <AppPublic />}
         </Suspense>
       </SnackbarProvider>
     </AppThemeProvider>

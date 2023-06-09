@@ -38,115 +38,22 @@ import {
 import { useNavigate } from "react-router-dom";
 
 function WallCards(props) {
-  const [age, setAge] = React.useState("");
-  const handleChange = (event) => {
-    setAge(event.target.value);
-    console.log(event);
-  };
-  const history = useNavigate();
-
-  const redirect = () => {
-    history("/complete-signUp");
-  };
-
-  const authUser = useAuthUser();
-
-  const { enqueueSnackbar } = useSnackbar();
-  const [loginMuation, loginMutationResult] = UserApi.useLoginMutation();
-
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    validationSchema: yup.object({
-      username: yup.string().trim().required(),
-      password: yup.string().trim().required(),
-    }),
-    onSubmit: async (values) => {
-      console.log(values);
-      // localStorage.setItem('location', values.location)
-      redirect();
-
-      try {
-        const data = await loginMuation({ data: values }).unwrap();
-        // TODO extra login
-        // redirect()
-        enqueueSnackbar("Logged in successful", { variant: "success" });
-      } catch (error) {
-        enqueueSnackbar(error?.data?.message, "Failed to login", {
-          variant: "error",
-        });
-      }
-    },
-  });
-
-  // if (authUser.accessToken) {
-  //   return <Navigate to={RouteEnum.HOME} />;
-  // }
-
   return (
-    <div className="relative cursor-pointer ">
-      <Card
-        className={
-          props.rider
-            ? "riders-bg hover:bg-primary-main hover:text-white text-white text-center mr-3"
-            : props.plain
-            ? "plain-bg hover:bg-primary-main hover:text-white"
-            : props.green
-            ? "bg-primary-main hover:bg-primary-main hover:text-white text-white"
-            : props.big
-            ? "text-left border hover:bg-primary-main hover:text-white border-[#F0F6FF] "
-            : " text-white text-center"
-        }
-        sx={{
-          minWidth: 125,
-          maxHeight:  100,
-        }}
-        // sx={{
-        //   minWidth: props.big ? 220 : 155,
-        //   minHeight: props.big ? 160 : 120,
-        // }}
-      >
-        {/* <img
-          className="absolute z-0 top-0 left-0 w-[100%] h-[100%]"
-          src={snake}
-        /> */}
-        <CardContent className={props.big ? "text-center w-40" : ""}>
-          <div>
-            <Typography
-              className={
-                props.plain || props.green
-                  ? " text-center text-white z-10 hover:bg-primary-main hover:text-white"
-                  : props.dashboard
-                  ? "text-center text-secondary-light z-10 hover:bg-primary-main hover:text-white"
-                  : "text-center  font-bold z-10 hover:bg-primary-main hover:text-white"
-              }
-              style={{ fontSize: 12, zIndex: 100 }}
-            >
+    <div className="relative cursor-pointer w-full text-center">
+      <div className={`w-full ${!props.dashed && "border-dashed border-r-2 "}`}>
+        <div className={"w-full"}>
+          <div className="w-full">
+            <Typography className={""} style={{ fontSize: 12, zIndex: 100 }}>
               {props.name || "Total Companies"}
             </Typography>
           </div>
           <div>
-            <Typography
-              variant={"h3"}
-              className={
-                props.green
-                  ? "text-white hover:bg-primary-main hover:text-white text-center font-bold z-10"
-                  : props.short
-                  ? "text-center hover:bg-primary-main hover:text-white font-bold text-primary-main mb-3 z-10"
-                  : props.small
-                  ? "text-center hover:bg-primary-main hover:text-white font-bold  mt-4"
-                  : "text-center hover:bg-primary-main hover:text-white font-bold  z-10 "
-              }
-            >
+            <Typography variant={"h3"} className={""}>
               {props.count || 0}
             </Typography>
           </div>
-        </CardContent>
-
-        {/* <Button size="small">Learn More</Button> */}
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

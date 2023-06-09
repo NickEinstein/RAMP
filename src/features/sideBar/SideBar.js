@@ -22,7 +22,7 @@ import trips from "images/routing.png";
 import rider from "images/profile-2user.png";
 import logouts from "images/logout.png";
 import { MediaQueryBreakpointEnum } from "constants/Global";
-import LoginHeader from "common/LoginHeader";
+import LoginHeader from "common/LoginHeaderInner";
 import { RouteEnum } from "constants/RouteConstants";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Logout } from "@mui/icons-material";
@@ -42,12 +42,11 @@ export default function PermanentDrawerLeft() {
     setMobileOpen(!mobileOpen);
   };
   const [outcasts, setOutcasts] = React.useState([
-    { name: "Logout", linx: RouteEnum.HOME, image: logouts },
+    { name: "Logout", linx: RouteEnum.LOGIN, image: logouts },
   ]);
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
   const [isCompany, setIsCompany] = React.useState();
 
-  console.log(isCompany);
   const [pat, setPat] = React.useState([
     {
       name: "Dashboard",
@@ -94,120 +93,7 @@ export default function PermanentDrawerLeft() {
 
     setIsCompany(res?.data?.data?.user.account_type);
 
-    setPat(
-      localStorage.getItem("role") == ("Super admin" || "Admin")
-        ? [
-            {
-              name: "Dashboard",
-              d: RouteEnum.DASHBOARD,
-              // image: dashboard,
-              color: RouteEnum.DASHBOARD == currentUrl ? true : false,
-            },
-          ]
-        : localStorage.getItem("role") == "Edufunder"
-        ? [
-            {
-              name: "Dashboard",
-              d: RouteEnum.DASHBOARD,
-              // image: dashboard,
-              color: RouteEnum.DASHBOARD == currentUrl ? true : false,
-            },
-            {
-              name: "My Donations",
-              d: RouteEnum.CONTRIBUTION,
-              // image: dashboard,
-              color: RouteEnum.CONTRIBUTION == currentUrl ? true : false,
-            },
-          ]
-        : res?.data?.data?.user.account_type == "corporate"
-        ? [
-            {
-              name: "Dashboard",
-              d: RouteEnum.DASHBOARD,
-              // image: dashboard,
-              color: RouteEnum.DASHBOARD == currentUrl ? true : false,
-            },
-            {
-              name: "Make a request",
-              d: RouteEnum.GRANT,
-              // image: companies,
-              color: RouteEnum.GRANT == currentUrl ? true : false,
-            },
-            {
-              name: "Impact & Track record",
-              d: RouteEnum.PROFILE,
-              // image: rider,
-              color: RouteEnum.PROFILE == currentUrl ? true : false,
-            },
-            // {
-            //   name: "Scholarships",
-            //   d: RouteEnum.SCHOLARSHIPS,
-            //   // image: trips,
-            //   color: RouteEnum.SCHOLARSHIPS == currentUrl ? true : false,
-            // },
-            // {
-            //   name: "Edu-Invest",
-            //   d: RouteEnum.INVEST,
-            //   // image: trips,
-            //   color: RouteEnum.INVEST == currentUrl ? true : false,
-            // },
-
-            // {name:'Support', d:RouteEnum.SUPPORT}
-          ]
-        : res?.data?.data?.user.account_type == "individual"
-        ? [
-            {
-              name: "Dashboard",
-              d: RouteEnum.DASHBOARD,
-              // image: dashboard,
-              color: RouteEnum.DASHBOARD == currentUrl ? true : false,
-            },
-            {
-              name: "Grants",
-              d: RouteEnum.GRANT,
-              // image: companies,
-              color: RouteEnum.GRANT == currentUrl ? true : false,
-            },
-            {
-              name: "Loan",
-              d: RouteEnum.LOAN,
-              // image: rider,
-              color: RouteEnum.LOAN == currentUrl ? true : false,
-            },
-            {
-              name: "Scholarships",
-              d: RouteEnum.SCHOLARSHIPS,
-              // image: trips,
-              color: RouteEnum.SCHOLARSHIPS == currentUrl ? true : false,
-            },
-            // {
-            //   name: "Edu-Invest",
-            //   d: RouteEnum.INVEST,
-            //   // image: trips,
-            //   color: false,
-            // },
-          ]
-        : [
-            {
-              name: "Dashboard",
-              d: RouteEnum.DASHBOARD,
-              // image: dashboard,
-              color: RouteEnum.DASHBOARD == currentUrl ? true : false,
-            },
-            {
-              name: "Grants",
-              d: RouteEnum.GRANT,
-              // image: companies,
-              color: RouteEnum.GRANT == currentUrl ? true : false,
-            },
-            {
-              name: "Profile",
-              d: RouteEnum.PROFILE,
-              // image: rider,
-              color: RouteEnum.PROFILE == currentUrl ? true : false,
-            },
-          ]
-    );
+  
   };
 
   const redirect = (push) => {
@@ -217,14 +103,91 @@ export default function PermanentDrawerLeft() {
     // localStorage.clear();
   };
   React.useEffect(() => {
+      setPat(
+        localStorage.getItem("role") == ("Super admin" || "Admin")
+          ? [
+              {
+                name: "Dashboard",
+                d: RouteEnum.DASHBOARD,
+                // image: dashboard,
+                color: RouteEnum.DASHBOARD == currentUrl ? true : false,
+              },
+            ]
+          : localStorage.getItem("role") == "Donor"
+          ? [
+              {
+                name: "Dashboard",
+                d: RouteEnum.DASHBOARD,
+                // image: dashboard,
+                color: RouteEnum.DASHBOARD == currentUrl ? true : false,
+              },
+              {
+                name: "My Donations",
+                d: RouteEnum.CONTRIBUTION,
+                // image: dashboard,
+                color: RouteEnum.CONTRIBUTION == currentUrl ? true : false,
+              },
+            ]
+          : localStorage.getItem("role") == "Nonprofit"
+          ? [
+              {
+                name: "Dashboard",
+                d: RouteEnum.DASHBOARD,
+                // image: dashboard,
+                color: RouteEnum.DASHBOARD == currentUrl ? true : false,
+              },
+              {
+                name: "Make a request",
+                d: RouteEnum.GRANT,
+                // image: companies,
+                color: RouteEnum.GRANT == currentUrl ? true : false,
+              },
+              {
+                name: "Impact & Track record",
+                d: RouteEnum.PROFILE,
+                // image: rider,
+                color: RouteEnum.PROFILE == currentUrl ? true : false,
+              },
+              // {
+              //   name: "Scholarships",
+              //   d: RouteEnum.SCHOLARSHIPS,
+              //   // image: trips,
+              //   color: RouteEnum.SCHOLARSHIPS == currentUrl ? true : false,
+              // },
+              // {
+              //   name: "Edu-Invest",
+              //   d: RouteEnum.INVEST,
+              //   // image: trips,
+              //   color: RouteEnum.INVEST == currentUrl ? true : false,
+              // },
+
+              // {name:'Support', d:RouteEnum.SUPPORT}
+            ]
+          : localStorage.getItem("role") == "Technical"
+          ? [
+              {
+                name: "Dashboard",
+                d: RouteEnum.DASHBOARD,
+                // image: dashboard,
+                color: RouteEnum.DASHBOARD == currentUrl ? true : false,
+              },
+              {
+                name: "My Donations",
+                d: RouteEnum.CONTRIBUTION,
+                // image: dashboard,
+                color: RouteEnum.CONTRIBUTION == currentUrl ? true : false,
+              },
+            ]
+          : []
+      );
     // changeColorOnActive();
-    getUser();
+    // getUser();
   }, [currentUrl]);
 
   const logout = (push) => {
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
     localStorage.clear();
-    console.log("hi");
+    // console.log("hi");
     history(push);
   };
 

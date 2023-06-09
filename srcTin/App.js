@@ -32,8 +32,8 @@ function App() {
           {/* { */}
             {/* // !!authUser?.accessToken &&
             // localStorage.getItem('authUser') == 'true' && */}
-            <AppProtected /> 
-            <AppPublic />
+            {/* <AppProtected />  */}
+            {/* <AppPublic /> */}
           {/* } */}
         </Suspense>
       </SnackbarProvider>

@@ -50,9 +50,7 @@ export default AppProtected;
 const ROUTES = configureRoutes([
   {
     path: "*",
-    element: lazy(() => import("features/home/Home")),
-
-    // element: <Navigate to={RouteEnum.HOME} replace />,
+    element: <Navigate to={RouteEnum.DASHBOARD} replace />,
   },
   {
     path: RouteEnum.DASHBOARD,
@@ -62,19 +60,7 @@ const ROUTES = configureRoutes([
     path: RouteEnum.GRANT,
     element: lazy(() => import("features/grant/Grant")),
   },
-  {
-    path: RouteEnum.LOAN,
-    element: lazy(() => import("features/loan/Loan")),
-  },
-  {
-    path: RouteEnum.SCHOLARSHIPS,
-    element: lazy(() => import("features/scholarships/Scholarships")),
-  },
-  {
-    path: RouteEnum.CONTRIBUTION,
-    element: lazy(() => import("features/contribution/Contributions")),
-  },
-
+ 
   {
     path: RouteEnum.PROFILE,
     element: lazy(() => import("features/profile/Profile")),
@@ -83,26 +69,5 @@ const ROUTES = configureRoutes([
   {
     path: RouteEnum.INVEST,
     element: lazy(() => import("features/invest/Invest")),
-  },
-
-  {
-    path: RouteEnum.MANAGE_COMPANIES,
-    element: lazy(() => import("features/manageCompanies/ManageCompanies")),
-  },
-  {
-    path: RouteEnum.MANAGE_RIDERS,
-    element: lazy(() => import("features/manageRider/ManageRiders")),
-  },
-  {
-    path: RouteEnum.TRIPS,
-    element: lazy(() => import("features/trips/Trips")),
-  },
-  {
-    path: RouteEnum.MAPS,
-    element: lazy(() => import("features/maps/Maps")),
-  },
-  {
-    path: RouteEnum.SUPPORT,
-    element: lazy(() => import("features/support/Support")),
   },
 ]);

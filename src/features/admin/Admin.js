@@ -18,6 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import {
   Avatar,
+  Box,
   Button,
   Card,
   CardActions,
@@ -32,6 +33,7 @@ import {
   InputAdornment,
   InputLabel,
   MenuItem,
+  Modal,
   Select,
   Slider,
   Stack,
@@ -53,34 +55,34 @@ import { patch } from "services/fetch";
 
 function Admin(props) {
   const [section, setSection] = React.useState(2);
+  const [currentDetail, setCurrentDetail] = useState();
+  const [user, setUser] = React.useState();
+
   const [imgData, setImgData] = useState(null);
   const [myContributions, setMyContributions] = useState([null]);
-  const [currentDetail, setCurrentDetail] = useState([null]);
   const [showApproveButton, setShowApproveButton] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [grants, setGrants] = useState([]);
   const [loans, setLoans] = useState([]);
-  const [scholoarships, setScholoarships] = useState([]);
-  const [eduInvests, setEduInvests] = useState([]);
   const [displayArray, setdisplayArray] = useState([]);
   const [displayArrayTable, setdisplayArrayTable] = useState([]);
   const [learnMoreDetails, setLearnMoreDetails] = useState([]);
   const [title, setTitle] = useState("REQUESTS");
-  const [open, setOpen] = React.useState(false);
+  const [opens, setOpens] = React.useState(false);
   const [count, setCount] = React.useState(0);
   const [filterStatus, setfilterStatus] = React.useState("pending");
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpens(true);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = async (id) => {
+  const handleClose = async (id, status) => {
     console.log(id);
     if (true) {
       const res = await patch({
-        endpoint: `users/grants/validate/${id}`,
-        body: { status: "open" },
+        endpoint: `requests/validate/${id}`,
+        body: { status },
         // auth: false,
       });
 
@@ -99,69 +101,29 @@ function Admin(props) {
       }
     }
 
-    if (title == "loan") {
-      const res = await patch({
-        endpoint: `users/loans/validate/${id}`,
-        body: { status: "open" },
-        // auth: false,
-      });
-
-      if (res.data.success) {
-        enqueueSnackbar("Approved", { variant: "success" });
-        getLoans();
-        setdisplayArray(loans);
-
-        // handleClose(true);
-      } else {
-        console.log(res);
-      }
-    }
-
-    if (title == "scholarship") {
-      const res = await patch({
-        endpoint: `users/scholarships/validate/${id}`,
-        body: { status: "open" },
-        // auth: false,
-      });
-
-      if (res.data.success) {
-        enqueueSnackbar("Approved", { variant: "success" });
-        getScholarships();
-        // handleClose(true);
-        setdisplayArray(scholoarships);
-      } else {
-        console.log(res);
-      }
-    }
-
-    if (title == "eduinvest") {
-      const res = await patch({
-        endpoint: `users/eduinvests/validate/${id}`,
-        body: { status: "open" },
-        // auth: false,
-      });
-
-      if (res.data.success) {
-        enqueueSnackbar("Approved", { variant: "success" });
-        getEduInvests();
-        setdisplayArray(eduInvests);
-
-        // handleClose(true);
-      } else {
-        console.log(res);
-      }
-    }
-
     setAnchorEl(null);
   };
-  const [scholarshipRequestForm, setScholarshipRequestForm] = React.useState({
-    attachment: "",
-    reason: "",
-    amount: "",
-    tenure: 1,
-  });
 
-  const [value, setValue] = React.useState(0);
+  const handleView = () => {
+    setOpens(true);
+    setShowApproveButton(false);
+    setAnchorEl(null);
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "50%",
+    minHeight: "520px",
+    bgcolor: "background.paper",
+    borderRadius: "3%",
+    boxShadow: 24,
+    p: 4,
+  };
+
+ 
 
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
 
@@ -178,84 +140,20 @@ function Admin(props) {
 
   useEffect(() => {
     getGrants();
-    getLoans();
-    getScholarships();
-    getEduInvests();
-    setCount((p) => p + 1);
   }, []);
-  useEffect(() => {
-    if (title == "Requests") {
-      displayArray(grants);
-      return;
-    }
-    if (title == "loans") {
-      displayArray(loans);
-      return;
-    }
-    if (title == "scholarship") {
-      displayArray(scholoarships);
-      return;
-    }
-    if (title == "eduinvests") {
-      displayArray(eduInvests);
-      return;
-    }
-  }, [grants, loans, scholoarships, eduInvests]);
-  const getLoans = async () => {
-    const res = await get({
-      endpoint: "users/loans",
-      // body: formData,
-      // auth: false,
-    });
-    setLoans(res.data.data.loans);
-
-    //  setIsRegCompleted(res?.data?.data?.states);
-  };
-  const getEduInvests = async () => {
-    const res = await get({
-      endpoint: "users/eduinvests",
-      // body: formData,
-      // auth: false,
-    });
-    setEduInvests(res.data.data.eduInvests);
-
-    //  setIsRegCompleted(res?.data?.data?.states);
-  };
-  const getScholarships = async () => {
-    const res = await get({
-      endpoint: "users/scholarships",
-      // body: formData,
-      // auth: false,
-    });
-    setScholoarships(res.data.data.scholarships);
-
-    //  setIsRegCompleted(res?.data?.data?.states);
-  };
 
   const getGrants = async () => {
     const res = await get({
-      endpoint: "users/grants",
+      endpoint: "requests",
       // body: formData,
       // auth: false,
     });
 
-    setGrants(res.data.data.grants);
-    setdisplayArray(res.data.data.grants);
-    setdisplayArrayTable(res.data.data.grants);
+    setGrants(res.data.data.requests);
+    setdisplayArray(res.data.data.requests);
+    setdisplayArrayTable(res.data.data.requests);
 
     //  setIsRegCompleted(res?.data?.data?.states);
-  };
-
-  const userContributions = async () => {
-    const res = await get({
-      endpoint: "users/contributions",
-      // body: formData,
-      // auth: false,
-    });
-
-    setMyContributions(res?.data?.data?.contributions);
-
-    console.log(res?.data?.data?.scholarships);
   };
 
   const checkDisplayArray = (stats) => {
@@ -266,9 +164,6 @@ function Admin(props) {
   return (
     <div>
       <div className="">
-        {/* <span className="text-xs mr-1 opacity-50">
-          <MdRefresh />
-        </span> */}
         <ToDoorSearch />
         <div className="flex justify-between items-center">
           <Typography variant="h5" className="font-bold">
@@ -281,10 +176,11 @@ function Admin(props) {
         <div>
           {/* <ToDoorSearch /> */}
 
-          <div className="flex items-end mr-3 mt-12">
-            <div>
-              <div className="flex gap-4">
+          <div className="flex items-end mr-3 mt-12" w-full>
+            <div className="w-full">
+              <div className="flex gap-4 w-full border-[#ECEEF7] border-2 rounded-2xl py-6">
                 <div
+                  className="w-full"
                   onClick={() => {
                     setShowApproveButton(false);
                     setdisplayArrayTable(grants);
@@ -300,6 +196,7 @@ function Admin(props) {
                 </div>
 
                 <div
+                  className="w-full"
                   onClick={() => {
                     // setdisplayArray(grants);
                     setShowApproveButton(true);
@@ -320,6 +217,7 @@ function Admin(props) {
                 </div>
 
                 <div
+                  className="w-full"
                   onClick={() => {
                     checkDisplayArray("open");
                     // alert('open')
@@ -337,6 +235,7 @@ function Admin(props) {
                   />
                 </div>
                 <div
+                  className="w-full"
                   onClick={() => {
                     setShowApproveButton(false);
                   }}
@@ -349,59 +248,6 @@ function Admin(props) {
                     // count={grants?.length}
                   />
                 </div>
-                {/* <div
-                  onClick={() => {
-                    setdisplayArray(loans);
-                    setTitle("loan");
-                  }}
-                >
-                  <WallCards
-                    rider={false}
-                    big={true}
-                    name="Total Loans"
-                    count={loans?.length}
-                  />
-                </div> */}
-                {/* <div
-                  onClick={() => {
-                    setdisplayArray(scholoarships);
-                    setTitle("scholarship");
-                  }}
-                >
-                  <WallCards
-                    rider={false}
-                    big={true}
-                    name="Scholarships"
-                    count={scholoarships?.length}
-                  />
-                </div> */}
-
-                {/* <div
-                  onClick={() => {
-                    setdisplayArray(eduInvests);
-                    setTitle("eduinvest");
-                  }}
-                >
-                  <WallCards
-                    rider={false}
-                    big={true}
-                    name="Eduinvest"
-                    count={eduInvests?.length}
-                  />
-                </div> */}
-                {/* <div
-                  onClick={() => {
-                    setdisplayArray(myContributions);
-                    setTitle("Contributions");
-                  }}
-                >
-                  <WallCards
-                    rider={false}
-                    big={true}
-                    name="Contributions"
-                    count={myContributions?.length}
-                  />
-                </div> */}
               </div>
             </div>
           </div>
@@ -428,7 +274,7 @@ function Admin(props) {
                 }}
                 variant="outlined"
                 className=" mb-5 text-ssm"
-                placeholder="Search Scholarships "
+                placeholder="Search "
               />
 
               <div className="p-3 md:full min-w-[800px]">
@@ -451,9 +297,7 @@ function Admin(props) {
                   >
                     Date
                   </Typography>
-                  {/* <Typography variant="h6" className="w-1/5 text-left ">
-                     Type Of Scholarships
-                   </Typography> */}
+                
                   {/* <Typography variant="h6" className="w-1/5 text-center ">
                     View Attachment
                   </Typography> */}
@@ -514,7 +358,7 @@ function Admin(props) {
                           className={
                             props?.jj == "loan"
                               ? " text-left p-3 w-2/5 "
-                              : " text-center p-3 w-2/5 "
+                              : " text-center p-3 w-2/5 "get
                           }
                         >
                           <Typography variant="">
@@ -586,12 +430,26 @@ function Admin(props) {
                             open={Boolean(anchorEl)}
                             onClose={() => handleClose(e.id)}
                           >
-                            <MenuItem onClick={() => handleClose(e?.id)}>
+                            <MenuItem
+                              onClick={() => handleClose(e?.id, "open")}
+                            >
                               Approve
                             </MenuItem>
 
-                            <MenuItem onClick={() => handleClose(e?.id)}>
+                            <MenuItem
+                              onClick={() => handleClose(e?.id, "cancelled")}
+                            >
                               Decline
+                            </MenuItem>
+
+                            <MenuItem
+                              onClick={() => {
+                                handleView(e?.id, "cancelled");
+                                setUser(e?.applied_by);
+                                setCurrentDetail(e);
+                              }}
+                            >
+                              view Details
                             </MenuItem>
                           </Menu>
                         </div>
@@ -607,6 +465,90 @@ function Admin(props) {
           )}
         </div>
       </div>
+      <Modal
+        // open={true}
+        open={opens}
+        onClose={() => setOpens(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <Box sx={style}>
+            <div>
+              <div className="flex gap-8">
+                <div className="flex">
+                  <Avatar
+                    sx={{ width: 100, height: 100 }}
+                    src={user?.profileUrl || "/broken-image.jpg"}
+                  />
+                </div>
+                <div className="mt-4">
+                  <Typography className="font-bold" variant="h5">
+                    {`  ${user?.firstname} ${user?.lastname} `}
+                  </Typography>
+                  <Typography>{user?.email}</Typography>
+                  <Typography className="font-bold text-[#e65100]">
+                    {user?.phone}
+                  </Typography>
+                  <Typography>{user?.address}</Typography>
+                </div>
+              </div>
+              <Divider className="my-8" />
+              <div class="flex gap-20">
+                <div className=" gap-16 font-semibold">
+                  <Typography className="my-3 font-semibold">
+                    Donation Type
+                  </Typography>
+                  <Typography className="font-semibold text-primary-main">
+                    {currentDetail?.request_type_item?.request_type_id == "1"
+                      ? "Cash Donation"
+                      : currentDetail?.request_type_item?.request_type_id == "2"
+                      ? "Expertise Donation"
+                      : "Inkind Donation"}
+                  </Typography>
+                </div>
+                <div className=" font-semibold">
+                  <Typography className="my-3 font-semibold">
+                    Item Donated
+                  </Typography>
+                  <Typography className="font-semibold text-primary-main">
+                    {`Provided ${currentDetail?.request_type_item?.item_name}`}
+                  </Typography>
+                </div>
+              </div>
+              <Divider className="my-8" />
+              <div class="flex gap-16 ">
+                <div className="flex flex-col gap-3 font-semibold">
+                  <div class="flex gap-5 align-center">
+                    <Typography className="font-semibold">
+                      Company City:
+                    </Typography>
+                    <Typography>{user?.city}</Typography>
+                  </div>
+                </div>
+              </div>{" "}
+              <div class="flex flex-col align-center text-center w-full mt-8">
+                <Typography
+                  variant="h5"
+                  className="font-semibold text-center w-full"
+                >
+                  About Company:
+                </Typography>
+                <Typography className="text-center">{user?.about}</Typography>
+              </div>
+              <div class="flex flex-col align-center text-center w-full mt-8">
+                <Typography
+                  variant="h5"
+                  className="font-semibold text-center w-full"
+                >
+                  Previous Projects:
+                </Typography>
+                <Typography className="text-center">{user?.about}</Typography>
+              </div>
+            </div>
+          </Box>
+        </div>
+      </Modal>
     </div>
   );
 }

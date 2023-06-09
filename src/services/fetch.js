@@ -61,7 +61,7 @@ const fetchBackend = async (
   console.log(body);
   const path = paths[endpoint] || endpoint;
   //nehpets-backend.onrender.com/form
-  let url = `https://api.educatial.com/public/api/${path}`;
+  let url = `https://api.rampng.com/public/api/${path}`;
   // let url = `https://staging.tryba.io/api/v2/${path}`;
   // let url = `https://tryba.io/api/v2/${path}`;
   //  `${process.env.TRYBA_API}/${path}`;

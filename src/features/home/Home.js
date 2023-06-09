@@ -3,7 +3,7 @@ import UserApi from "apis/UserApi";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSnackbar } from "notistack";
-import educatiaLogo from "images/RAMP.jpg";
+import educatiaLogo from "images/Ramp2.png";
 import educatiaSuccess from "images/EducatiaSuccess.png";
 import { FcGoogle } from "react-icons/fc";
 import backgroundImage from "../../images/RampHome1.jpg";
@@ -15,15 +15,13 @@ import backgroundImage5 from "../../images/ramphome5.jpg";
 import PasswordTextField from "common/PasswordTextField";
 import { getTextFieldFormikProps } from "utils/FormikUtils";
 import useAuthUser from "hooks/useAuthUser";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { RouteEnum } from "constants/RouteConstants";
 import LoginHeader from "common/LoginHeader";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import toDoorLogo from "images/Ellipse 30.png";
-import background from "images/background.png";
-import snake from "images/Mask group.png";
+import polygon from "images/homelanding/Polygon 1.svg";
+import vector1 from "images/homelanding/Vector2.svg";
+import userz from "images/homelanding/user.svg";
+import Tech from "images/homelanding/cpu.svg";
 import { post } from "services/fetch";
 
 // import ReactDOM from 'react-dom';
@@ -59,15 +57,17 @@ import {
   OutlinedInput,
   useMediaQuery,
   Fade,
+  FormControlLabel,
 } from "@mui/material";
 import useStepper from "hooks/useStepper";
 import useDataRef from "hooks/useDataRef";
 
-import { useNavigate } from "react-router-dom";  import { MediaQueryBreakpointEnum } from "constants/Global";
-
+import { useNavigate } from "react-router-dom";
+import { MediaQueryBreakpointEnum } from "constants/Global";
+import { BackspaceTwoTone } from "@mui/icons-material";
 
 function Home(props) {
-const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
+  const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
 
   const [age, setAge] = React.useState("");
   const [individual, setindividual] = React.useState(true);
@@ -76,7 +76,7 @@ const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
   const [regData, setRegData] = React.useState({
     firstname: "",
     lastname: "",
-    account_type: "corporate",
+    account_type: "individual",
     company_name: null,
     company_reg_number: null,
     company_type: null,
@@ -99,31 +99,29 @@ const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
     password: "",
     password_confirmation: "",
   });
- 
 
-   const configs = [
-     {
-       bgColor: "HomeTopSectionBackgroundColor_WomanInRedImage",
-       textColor: "text-secondary-main",
-       image: backgroundImage,
-     },
-     {
-       bgColor: "HomeTopSectionBackgroundColor_ManInDreadsImage",
-       textColor: "text-white",
-       image: backgroundImage3,
-     },
-     {
-       bgColor: "HomeTopSectionBackgroundColor_headerImage",
-       textColor: "text-secondary-main",
-       image: backgroundImage4,
-     },
-     {
-       bgColor: "HomeTopSectionBackgroundColor_headerImage",
-       textColor: "text-secondary-main",
-       image: backgroundImage5,
-     },
-   ];
-
+  const configs = [
+    {
+      bgColor: "HomeTopSectionBackgroundColor_WomanInRedImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_ManInDreadsImage",
+      textColor: "text-white",
+      image: backgroundImage3,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_headerImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage4,
+    },
+    {
+      bgColor: "HomeTopSectionBackgroundColor_headerImage",
+      textColor: "text-secondary-main",
+      image: backgroundImage5,
+    },
+  ];
 
   // console.log(localStorage.getItem('authUser'))
   const history = useNavigate();
@@ -134,30 +132,28 @@ const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
     history("/verify-account");
   };
 
-   const stepper = useStepper({
-     maxStep: configs.length - 1 ,
-   });
+  const stepper = useStepper({
+    maxStep: configs.length - 1,
+  });
 
-   const config = configs[stepper.step];
+  const config = configs[stepper.step];
 
-   const dataRef = useDataRef({ stepper });
+  const dataRef = useDataRef({ stepper });
 
-   useEffect(() => {
-     const intervalId = setInterval(() => {
-       if (dataRef.current.stepper.canNextStep()) {
-         dataRef.current.stepper.nextStep();
-       } else {
-         dataRef.current.stepper.reset();
-       }
-     }, 1000 * 5);
-     return () => {
-       clearInterval(intervalId);
-     };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (dataRef.current.stepper.canNextStep()) {
+        dataRef.current.stepper.nextStep();
+      } else {
+        dataRef.current.stepper.reset();
+      }
+    }, 1000 * 5);
+    return () => {
+      clearInterval(intervalId);
+    };
 
     //  console.log(stepper)
-   }, [dataRef]);
-
-
+  }, [dataRef]);
 
   // console.log(localStorage.getItem('authUser'))
 
@@ -169,7 +165,7 @@ const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
 
   const { enqueueSnackbar } = useSnackbar();
   const [loginMuation, loginMutationResult] = UserApi.useLoginMutation();
-const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState([]);
   const style = {
     position: "absolute",
     top: "50%",
@@ -183,113 +179,65 @@ const [personName, setPersonName] = React.useState([]);
     p: 4,
   };
 
-const handleChange = (event) => {
-  // console.log(event.target.)
-  const {
-    target: { value },
-  } = event;
-  setPersonName(
-    // On autofill we get a stringified value.
-    typeof value === "string" ? value.split(",") : value
-  );
-};
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(typeof value === "string" ? value.split(",") : value);
+  };
 
-console.log(stepper.step)
+  console.log(stepper.step);
 
   const onChange = (e) => {
     if (e.target.name == "account_type") {
-      setindividual((prev) => !prev);
+      setRegData({
+        ...regData,
+        [e.target.name]: e.target.value,
+        firstname: '',
+        lastname: '',
+      });
     }
-
-    console.log(e.target.name);
-    console.log(e.target.value);
+    else
     setRegData({
       ...regData,
       [e.target.name]: e.target.value,
-      account_type: regData.types,
     });
   };
 
-  // const onChangeCompany = (e) => {
-  //   // console.log(e?.target?.value);
-  //   // console.log(e);
-  //   // console.log(name);
-
-  //   console.log(e.target.name);
-  //   console.log(e.target.value);
-  //   setRegDataCompany({
-  //     ...regDataCompany,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  //  console.log(regData)
   const pay = async () => {
-    let payloadIndividual = {
+    let payloadRamp = {
+      firstname: regData.firstname,
+      lastname: regData.account_type=='individual'?regData.lastname : "Company",
+      account_type: regData.account_type,
       phone: `+234${phoneNumber}`,
-      firstname: regData?.firstname,
-      lastname: regData?.lastname,
-      account_type: regData.types,
-      role: regData?.role == "hi" ? "edufunder" : regData?.role,
-
       email: regData?.email,
       password: regData?.password,
       password_confirmation: regData?.password_confirmation,
-      // ...regData,
+      role: regData?.role,
     };
-
-    let payloadCorporate = {
-      ...regData,
-      phone: `+234${phoneNumber}`,
-      account_type: regData.types,
-      company_type:
-        regData.role == "eduinitiator"
-          ? "corporate_brand"
-          : regData.company_type,
-      role: regData?.role == "hi" ? "edufunder" : regData?.role,
-    };
-
-    console.log(payloadIndividual);
-    console.log(payloadCorporate);
 
     const res = await post({
       endpoint: `auth/register`,
-      body: payloadCorporate,
+      body: payloadRamp,
       auth: false,
     });
     console.log(res);
     if (res.status == 200 || res.status == 201) {
       setVerificationOTP(res?.data?.data?.otp);
-      //  () => {
       handleOpen();
-      //    // localStorage.setItem("il", true);
-      //  redirect();
-      //  };
+
       enqueueSnackbar(
         res?.data?.message || "Please wait while we re-direct you to Paystack",
         {
           variant: "success",
         }
       );
-      // setTimeout(
-      //    redirect()
-
-      // , 2000);
     } else {
       enqueueSnackbar(res?.data?.message || "Something went Wrond", {
         variant: "error",
       });
     }
   };
-
-  // ,
-  //   ,
-  //   ,
-  //   ,
-  //   ,
-  //   ;
-  // Health, Education,
-  // Women  & Girls, Community Outreach, Tech & Innovation, Human Capacity
 
   const ngo = [
     {
@@ -349,18 +297,18 @@ console.log(stepper.step)
 
   const role = [
     {
-      value: "edufunder",
+      value: "donor",
       label: "Donor",
       key: 1,
     },
 
     {
-      value: "eduinitiator",
+      value: "nonprofit",
       label: "NGO",
       key: 2,
     },
     {
-      value: "hi",
+      value: "technical",
       label: "TECHNICAL EXPERTISE",
       key: 3,
     },
@@ -381,20 +329,6 @@ console.log(stepper.step)
   console.log(regData);
   console.log(personName[0]);
   return (
-    // <div>
-    //  {/* <Typography variant="h6">Hi</Typography> */}
-    //   <form onSubmit={formik.handleSubmit}>
-    //     <TextField
-    //       label="Username"
-    //
-    //     />
-    //     <PasswordTextField
-    //       label="Password"
-    //       {...getTextFieldFormikProps(formik, "password")}
-    //     />
-    //     <Button type="submit">Submit</Button>
-    //   </form>
-    // </div>
     <div className="">
       <div className="lg:flex ">
         <div
@@ -404,7 +338,8 @@ console.log(stepper.step)
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
           }}
-          className="hidden md:block bg-gray-500/10 z-30 "
+          className="hidden lg:block"
+          // className="hidden md:block bg-gray-500/10 z-30 "
         ></div>
         <div
           // className="h-screen"
@@ -414,7 +349,8 @@ console.log(stepper.step)
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
           }}
-          className="lg:block fixed items-stretch flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
+          className="hidden fixed items-stretch lg:flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
+          // className="lg:block fixed items-stretch flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
         >
           <div>
             <img
@@ -436,161 +372,216 @@ console.log(stepper.step)
               </div>
             </div> */}
 
-            <div className="flex flex-col gap-16 text-white">
-              {/* <img className="w-1/5" src={educatiaLogo} /> */}
-              <Typography className=" font-bold" variant="h2">
-                RAMP
-              </Typography>
-              <Typography variant="h4" className=" font-bold md:mt-24">
-                {/* Earn */}
-                Get access to unlimited funds
-              </Typography>
-              <Typography className="text-base">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit
-                amet,
-              </Typography>
+            <div className="flex flex-col gap-16 relative text-white h-screen">
+              <Link to={RouteEnum.LANDING}>
+                <img className="w-1/5" src={educatiaLogo} />
+              </Link>
+
+              <div className="flex flex-col gap-8">
+                <Typography variant="h3" className=" font-bold md:mt-24">
+                  {/* Earn */}
+                  Welcome to RAMP{" "}
+                </Typography>
+                <Typography variant="h5" className="">
+                  For Governments, CSO's, Private and Public Sector Companies,
+                  Individuals and International Agencies
+                </Typography>
+              </div>
             </div>
           </div>
         </div>
         {/* +++++++++++++++++++++++++++++++++++++++++ */}
-        <div className="p-8 pr-[10%] pl-[6%] w-full">
-          {/* <LoginHeader /> */}
-          <Typography variant="h4">RAMP</Typography>
-          {/* <img
-            className="w-1/3 lg:hidden max-w-[120px] max-h-[130px] bg-primary-main p-4"
-            src={educatiaLogo}
-          /> */}
-
+        <div className="p-8 pr-[10%] pl-[6%] mt-8 w-full">
+          <Link to={RouteEnum.LANDING}>
+            <img className="w-1/5 -mt-5" src={educatiaLogo} />
+          </Link>
           <div className="flex flex-col">
             <div className="">
-              <Typography variant="h4" className="mb-2 mt-3 font-bold">
+              <Typography
+                variant="h4"
+                className="mb-2 mt-3 font-bold text-center"
+              >
                 Get Started
               </Typography>
-
-              <Typography>Sign up to have access to our application</Typography>
-              {/* <p>Enter your credentials to create your account.</p> */}
             </div>
 
             {/* <form
 
             // onSubmit={formik.handleSubmit}
             > */}
-            {/* <FormControl className="w-full">
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="individual"
-                name="account_type"
-                row
-                onChange={(e) => {
-                  onChange(e);
-                  // onChangeCompany(e);
-                }}
-                className="flex gap-4"
-              >
-                <FormControlLabel
-                  value="individual"
-                  control={<Radio />}
-                  label="Individual"
-                  className=""
+            {regData.role && (
+              <div>
+                <div className="flex gap-2 items-center my-4">
+                  <BackspaceTwoTone
+                    className="cursor-pointer text-primary-main "
+                    onClick={() => {
+                      setRegData({
+                        ...regData,
+                        role: "",
+                      });
+                    }}
+                  />
+                  <Typography className="font-bold">Back</Typography>
+                </div>
+                {regData.role !== "ngo" && (
+                  <div className="w-full flex justify-center">
+                    <FormControl>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="individual"
+                        name="account_type"
+                        row
+                        onChange={(e) => {
+                          onChange(e);
+                          // onChangeCompany(e);
+                        }}
+                        className="flex gap-4"
+                      >
+                        <FormControlLabel
+                          value="individual"
+                          control={<Radio />}
+                          label="Individual"
+                          className=""
+                        />
+                        <FormControlLabel
+                          value="corporate"
+                          control={<Radio />}
+                          label="Corporate"
+                          className=" "
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </div>
+                )}
+                <TextField
+                  size="medium"
+                  className="w-full mt-6"
+                  value={regData?.role?.toUpperCase()}
                 />
-                <FormControlLabel
-                  value="corporate"
-                  control={<Radio />}
-                  label="Corporate"
-                  className=" "
-                />
-              </RadioGroup>
-            </FormControl> */}
-            <Divider className="my-4" />
+              </div>
+            )}
 
-            <FormControl className="w-full mb-4">
-              {!regData.role && (
-                <InputLabel htmlFor="name-multiple">Sign Up As</InputLabel>
-              )}
-              <TextField
-                fullWidth
-                select
-                placeholder="Sign Up As"
-                name="role"
-                displayEmpty
-                // label="Select"
-                value={regData.role}
-                // defaultValue="Coorporate Organisation"
-                onChange={onChange}
-                id="name-multiple"
-                // helperText="Please select your currency"
-              >
-                {role.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </FormControl>
+            {!regData.role && (
+              <div className="w-full mb-16 flex flex-col my-6 h-full ">
+                <Typography className="text-center">Sign up As:</Typography>
+                <div className=" w-full flex items-center gap-8 my-4 justify-center border-[#F3F4F9]">
+                  <div className="bg-[#C654D1]/75 rounded-2xl py-4 hover:shadow-lg">
+                    <div
+                      onClick={() => {
+                        setRegData({
+                          ...regData,
+                          role: "donor",
+                        });
+                      }}
+                      className="relative w-[150px] flex rounded-lg mb-2 cursor-pointer py-12 px-6  "
+                    >
+                      <img
+                        className="absolute top-2 left-8 w-[88px]"
+                        src={polygon}
+                      />
+                      <img
+                        className="absolute top-11 left-[68px] "
+                        src={vector1}
+                      />
+                    </div>
+                    <Typography className="font-bold text-center">
+                      Donor
+                    </Typography>
+                  </div>
+                  <div className="bg-[#01B6AC]/75 rounded-2xl py-4 hover:shadow-lg">
+                    <div
+                      onClick={() => {
+                        setRegData({
+                          ...regData,
+                          role: "ngo",
+                        });
+                      }}
+                      className="relative w-[150px] flex rounded-lg mb-2 cursor-pointer py-12 px-6  "
+                    >
+                      <img
+                        className="absolute top-2 left-8 w-[88px]"
+                        src={polygon}
+                      />
+                      <img
+                        className="absolute top-11 left-[68px] "
+                        src={userz}
+                      />
+                    </div>
+                    <Typography className="font-bold text-center">
+                      NGO
+                    </Typography>
+                  </div>
+                  <div className="bg-[#f0c046]/75 rounded-2xl py-4 hover:shadow-lg">
+                    <div
+                      onClick={() => {
+                        setRegData({
+                          ...regData,
+                          role: "technical",
+                        });
+                      }}
+                      className="relative w-[150px] flex   rounded-lg mb-2 cursor-pointer py-12 px-6  "
+                    >
+                      <img
+                        className="absolute top-2 left-8 w-[88px]"
+                        src={polygon}
+                      />
+                      <img
+                        className="absolute top-11 left-[64px] "
+                        src={Tech}
+                      />
+                    </div>
+                    <Typography className="font-bold text-center">
+                      Technical Expert
+                    </Typography>
+                  </div>
+                </div>
+                <a className="text-center" href="">
+                  <Typography className="mt-12">
+                    Already have an account?
+                    <a
+                      href="/login"
+                      className="ml-1 text-primary-main font-bold "
+                    >
+                      Log In
+                    </a>
+                  </Typography>
+                </a>
+                <Typography className="md:absolute bottom-6 mt-12 lg:mt-0 text-center">
+                  By signing up you have agreed to the{" "}
+                  <span class="underline underline-offset-2 text-[#C654D1] cursor-pointer">
+                    terms and conditions
+                  </span>{" "}
+                  of this platform.
+                </Typography>
+              </div>
+            )}
+
             {regData.role && (
               <div>
                 <div className="flex flex-col gap-5">
-                  <div className="w-full flex gap-6">
-                    {regData.role == "edufunder" && (
-                      <FormControl className="w-full">
-                        {!regData.types && (
-                          <InputLabel htmlFor="name-multiple">
-                            Organisation Type
-                          </InputLabel>
-                        )}
-                        <TextField
-                          fullWidth
-                          select
-                          placeholder=""
-                          name="types"
-                          displayEmpty
-                          // label="Select"
-                          value={regData.types}
-                          // defaultValue="Coorporate Organisation"
-                          onChange={onChange}
-                          id="name-multiple"
-                          // helperText="Please select your currency"
-                        >
-                          {types.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </FormControl>
-                    )}
-                  </div>
-                  <div className="flex gap-6">
-                    <TextField
-                      onChange={onChange}
-                      size="medium"
-                      className="w-full"
-                      placeholder="Enter your first name"
-                      label="First Name"
-                      name="firstname"
-                      value={regData.firstname}
-                    />
-                    <TextField
-                      onChange={onChange}
-                      size="medium"
-                      className="w-full"
-                      placeholder="Enter your last name"
-                      label="Last Name"
-                      name="lastname"
-                      value={regData.lastname}
-                    />
-                  </div>
-                  {/* <TextField
-                    onChange={onChange}
-                    size="medium"
-                    className="w-full"
-                    placeholder="Enter your email"
-                    label="Email "
-                    name="email"
-                    value={regData.email}
-                  /> */}
+                  <div className="w-full flex gap-6"></div>
+                  {regData.account_type == "individual" && (
+                    <div className="flex gap-6">
+                      <TextField
+                        onChange={onChange}
+                        size="medium"
+                        className="w-full"
+                        placeholder="Enter your first name"
+                        label="First Name"
+                        name="firstname"
+                        value={regData.firstname}
+                      />
+                      <TextField
+                        onChange={onChange}
+                        size="medium"
+                        className="w-full"
+                        placeholder="Enter your last name"
+                        label="Last Name"
+                        name="lastname"
+                        value={regData.lastname}
+                      />
+                    </div>
+                  )}
                   <div className="w-full flex gap-6">
                     <TextField
                       onChange={onChange}
@@ -602,23 +593,20 @@ console.log(stepper.step)
                       value={regData.email}
                     />
                   </div>
-                  {regData.types == "corporate" && (
+                  {regData.account_type == "corporate" && (
                     <div className="flex gap-6">
                       <TextField
                         size="medium"
                         className="w-full"
                         placeholder="Enter your company name"
-                        // title="company Name"
                         label="Company Name "
-                        name="company_name"
+                        name="firstname"
                         onChange={onChange}
                         value={regData.company_name}
                       />
                       <TextField
                         size="medium"
                         className="w-full"
-                        // placeholder="Enter your username"
-                        // title="lastname"
                         label="Company Registration Number"
                         name="company_reg_number"
                         onChange={onChange}
@@ -644,95 +632,7 @@ console.log(stepper.step)
                       ),
                     }}
                   />
-                  {individual && (
-                    <div className="w-full ">
-                      {regData.role == "edufunder" || regData.role == "hi" ? (
-                        <FormControl className="w-full">
-                          {!regData.company_type && (
-                            <InputLabel htmlFor="name-multiple">
-                              Category
-                            </InputLabel>
-                          )}
-                          <TextField
-                            fullWidth
-                            select
-                            placeholder="Type Of Organisation"
-                            name="company_type"
-                            displayEmpty
-                            // name='company_type'
-                            // label="Select"
-                            value={regData.company_type}
-                            defaultValue="Coorporate Organisation"
-                            onChange={onChange}
-                            id="name-multiple"
-                            // helperText="Please select your currency"
-                          >
-                            {regData.role !== "hi"
-                              ? donorx.map((option) => (
-                                  <MenuItem
-                                    key={option.value}
-                                    value={option.value}
-                                  >
-                                    {option.label}
-                                  </MenuItem>
-                                ))
-                              : donorxK.map((option) => (
-                                  <MenuItem
-                                    key={option.value}
-                                    value={option.value}
-                                  >
-                                    {option.label}
-                                  </MenuItem>
-                                ))}
-                          </TextField>
-                        </FormControl>
-                      ) : (
-                        <FormControl className=" w-full">
-                          <InputLabel id="demo-multiple-chip-label">
-                            Category
-                          </InputLabel>
-                          <Select
-                            fullWidth
-                            labelId="demo-multiple-chip-label"
-                            id="demo-multiple-chip"
-                            multiple
-                            value={personName}
-                            onChange={handleChange}
-                            input={
-                              <OutlinedInput
-                                id="select-multiple-chip"
-                                label="Chip"
-                              />
-                            }
-                            renderValue={(selected) => (
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  flexWrap: "wrap",
-                                  gap: 0.5,
-                                }}
-                              >
-                                {selected.map((value) => (
-                                  <Chip key={value} label={value} />
-                                ))}
-                              </Box>
-                            )}
-                            // MenuProps={MenuProps}
-                          >
-                            {ngo.map((name) => (
-                              <MenuItem
-                                key={name.label}
-                                value={name.label}
-                                // style={getStyles(name, personName, theme)}
-                              >
-                                {name.label}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      )}
-                    </div>
-                  )}
+
                   <PasswordTextField
                     onChange={onChange}
                     className="w-full "
@@ -755,14 +655,7 @@ console.log(stepper.step)
                   <Button
                     className="p-3 w-full text-base text-white"
                     type="submit"
-                    onClick={
-                      pay
-                      //   () => {
-                      //   handleOpen();
-                      // }
-                    }
-                    // onClick={() => localStorage.setItem('type', 'CLIENT')}
-                    // className=' '
+                    onClick={pay}
                   >
                     Create an account
                   </Button>
@@ -775,9 +668,11 @@ console.log(stepper.step)
                   </Typography>
                   <Typography className="mt-5">
                     Already have an account?
-                    <a href="/" className="ml-1 text-primary-main font-bold ">
-                      Log In
-                    </a>
+                    <Link to={RouteEnum.LOGIN}>
+                      <a className="ml-1 text-primary-main font-bold ">
+                        Log In
+                      </a>
+                    </Link>
                   </Typography>
                 </a>
               </div>
@@ -786,16 +681,7 @@ console.log(stepper.step)
         </div>
       </div>
 
-      <Dialog
-        open={open}
-        // sx={{ height: "70/px", border: "2px solid red" }}
-        maxWidth="lg"
-
-        // fullWidth={true}
-        // sx={{padding:"40px 0", border:'2px solid red'}}
-        // TransitionComponent={Transition}
-      >
-        {/* <DialogTitle>Add Drug</DialogTitle> */}
+      <Dialog open={open} maxWidth="lg">
         <DialogContent sx={{ width: "500px" }}>
           <div className="flex flex-col gap-6 justify-center items-center text-center p-20">
             <img src={educatiaSuccess} />
@@ -817,10 +703,8 @@ console.log(stepper.step)
             className="p-3 w-full text-base mx-20 mb-10 text-white"
             type="submit"
             onClick={() => {
-              // handleClose();
               redirect();
             }}
-            // className=' '
           >
             Login to continue
           </Button>

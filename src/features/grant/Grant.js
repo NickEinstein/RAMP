@@ -72,12 +72,16 @@ function Donation(props) {
     console.log(event);
   };
   const [imgData, setImgData] = useState(null);
-  const [myGrantApplication, setMyGrantApplications] = useState([null]);
+  const [MyRequests, setMyRequestss] = useState([null]);
   const [currentDetail, setCurrentDetail] = useState([null]);
   const [completed, setCompleted] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [category, setCategory] = React.useState("");
-  const [subCategory, setsubCategory] = React.useState("");
+  const [category2, setCategory2] = React.useState("");
+  const [subCategory, setsubCategory] = React.useState([]);
+  const [idTypes, setIdTypes] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const handleOpen = () => setOpen(true);
   const handleClose = (val = false) => {
     setOpen(false);
@@ -258,10 +262,39 @@ function Donation(props) {
     },
   ];
 
-  //
-  //
-  // -
-  //
+  const getRequestTypes = async () => {
+    const res = await get({
+      endpoint: "request_types",
+      // body: formData,
+      // auth: false,
+    });
+
+    setIdTypes(res?.data?.data?.request_types);
+  };
+
+  const requestTypeItemz = async (val) => {
+    const res = await get({
+      endpoint: `request_type_items`,
+      // body: formData,
+      // auth: false,
+    });
+
+    // setLgas(res?.data?.data?.lgas);
+
+    setsubCategory(res?.data?.data?.request_type_items);
+  };
+
+  // useEffect(() => {;}, [requestGrantForm.request_type_id]);
+
+  const getCategories = async () => {
+    const res = await get({
+      endpoint: "categories",
+      // body: formData,
+      // auth: false,
+    });
+
+    setCategories(res?.data?.data?.categories);
+  };
 
   const onFileChange = (event) => {
     // Update the state
@@ -296,20 +329,23 @@ function Donation(props) {
   console.log(requestGrantForm);
 
   useEffect(() => {
-    userGrant();
+    getRequests();
+    getRequestTypes();
+    getCategories();
+    requestTypeItemz();
   }, []);
   useEffect(() => {
     setCurrentDetail([section]);
-  });
+  }, []);
 
-  const userGrant = async () => {
+  const getRequests = async () => {
     const res = await get({
-      endpoint: "users/grants",
+      endpoint: "requests",
       // body: formData,
       // auth: false,
     });
 
-    setMyGrantApplications(res?.data?.data?.grants);
+    setMyRequestss(res?.data?.data?.grants);
     if (res?.data?.data?.grants.length == 0) {
       setSection(0);
     }
@@ -318,21 +354,26 @@ function Donation(props) {
 
   const applyForGrant = async () => {
     const formData = new FormData();
-
     formData.append("reason", requestGrantForm.reason);
     formData.append("title", requestGrantForm.title);
-    formData.append("amount", requestGrantForm.amount);
+    formData.append("request_type_id", requestGrantForm.request_type_id);
+    formData.append(
+      "request_type_item_id",
+      requestGrantForm.request_type_item_id
+    );
+    formData.append("category_id", requestGrantForm.category_id);
+    formData.append("attachments[]", requestGrantForm.attachment);
     formData.append("attachments[]", requestGrantForm.attachment);
 
     const res = await post({
-      endpoint: "users/grants/apply",
+      endpoint: "requests",
       body: formData,
       // auth: false,
     });
 
     if (res.data.success) {
       handleOpen(true);
-      userGrant();
+      getRequests();
 
       // handleClose(true);
     } else {
@@ -362,9 +403,9 @@ function Donation(props) {
               <div className="flex gap-3">
                 <div className="w-full ">
                   <FormControl className="w-full">
-                    {!category && (
+                    {!requestGrantForm?.request_type_id && (
                       <InputLabel htmlFor="name-multiple">
-                        Request Category
+                        Request Type
                       </InputLabel>
                     )}
 
@@ -372,30 +413,26 @@ function Donation(props) {
                       fullWidth
                       select
                       placeholder="Type Of Organisation"
-                      name="company_type"
+                      name="request_type_id"
                       displayEmpty
-                      // name='company_type'
-                      // label="Select"
-                      // value={regData.company_type}
-                      defaultValue="Coorporate Organisation"
-                      onChange={(e) => setCategory(e.target.value)}
+                      onChange={onChange}
                       id="name-multiple"
                       // helperText="Please select your currency"
                     >
-                      {ngo.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
+                      {idTypes?.map((option) => (
+                        <MenuItem key={option?.id} value={option?.id}>
+                          {option.type == "Materials" ? "In kind" : option.type}
                         </MenuItem>
                       ))}
                     </TextField>
                   </FormControl>
                 </div>
-                {category && (
+                {requestGrantForm.request_type_id && (
                   <div className="w-full ">
                     <FormControl className="w-full">
-                      {!subCategory && (
+                      {!requestGrantForm.request_type_item_id && (
                         <InputLabel htmlFor="name-multiple">
-                          Sub-Category
+                          Request Item
                         </InputLabel>
                       )}
 
@@ -403,68 +440,67 @@ function Donation(props) {
                         fullWidth
                         select
                         placeholder="Type Of Organisation"
-                        name="company_type"
+                        name="request_type_item_id"
                         displayEmpty
                         // name='company_type'
                         // label="Select"
                         // value={regData.company_type}
-                        defaultValue="Coorporate Organisation"
-                        onChange={(e) => setsubCategory(e.target.value)}
+                        defaultValue=""
+                        onChange={onChange}
                         id="name-multiple"
 
                         // helperText="Please select your currency"
                       >
-                        {category == "cash"
-                          ? subCash.map((option) => (
-                              <MenuItem key={option.value} value={option.value}>
-                                {option.label}
+                        {subCategory?.map(
+                          (option) =>
+                            option.request_type_id ==
+                              requestGrantForm.request_type_id && (
+                              <MenuItem key={option?.id} value={option?.id}>
+                                {option.item_name}
                               </MenuItem>
-                            ))
-                          : category == "in-kind"
-                          ? subResources.map((option) => (
-                              <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                              </MenuItem>
-                            ))
-                          : category == "materials"
-                          ? subMaterials.map((option) => (
-                              <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                              </MenuItem>
-                            ))
-                          : subExpertise.map((option) => (
-                              <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                              </MenuItem>
-                            ))}
+                            )
+                        )}
                       </TextField>
                     </FormControl>
                   </div>
                 )}
               </div>
+              <div className="w-full ">
+                <FormControl className="w-full">
+                  {!requestGrantForm.category_id && (
+                    <InputLabel htmlFor="name-multiple">
+                      Request Category
+                    </InputLabel>
+                  )}
+
+                  <TextField
+                    fullWidth
+                    select
+                    placeholder="Type Of Organisation"
+                    onChange={onChange}
+                    name="category_id"
+                    defaultValue="Coorporate Organisation"
+                    id="name-multiple"
+                  >
+                    {categories?.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </FormControl>
+              </div>
               <div>
                 <InputLabel className="text-left mb-2">Title</InputLabel>
                 <TextField
                   // disabled
-                  value={currentDetail?.title}
+                  // value={currentDetail?.title}
                   onChange={onChange}
                   fullWidth
                   name="title"
                 />
               </div>
-              {category == "cash" && (
-                <div>
-                  <InputLabel className="text-left mb-2">Amount</InputLabel>
-                  <TextField
-                    // disabled
-                    value={currentDetail?.amount}
-                    onChange={onChange}
-                    fullWidth
-                    name="amount"
-                    // disabled={subCategory && subCategory==1}
-                  />
-                </div>
-              )}
+
               <div>
                 <InputLabel className="text-left mb-2">
                   Reasons (Not more than 600 words)
@@ -475,7 +511,7 @@ function Donation(props) {
                   fullWidth
                   multiline
                   rows={6}
-                  value={currentDetail.reason}
+                  // value={currentDetail.reason}
                   // disabled
                 />
               </div>
@@ -574,10 +610,10 @@ function Donation(props) {
               About Donation
             </Typography>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-              tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+              Tell us about yourself and your organization. Create your profile.
+              Once approved, proceed to make a request . The more complete your
+              profile is, the better chance you'll be approved on time and your
+              most valued need met.
             </Typography>
           </div>
 
@@ -604,7 +640,7 @@ function Donation(props) {
           </div>
         </div>
       </div>
-      )
+
       <Dialog
         open={open}
         // sx={{ height: "70/px", border: "2px solid red" }}

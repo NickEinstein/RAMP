@@ -15,6 +15,7 @@ import VolumeUp from "@mui/icons-material/VolumeUp";
 
 import {
   Avatar,
+  Box,
   Button,
   Card,
   CardActions,
@@ -29,6 +30,7 @@ import {
   InputAdornment,
   InputLabel,
   MenuItem,
+  Modal,
   Select,
   Slider,
   Stack,
@@ -51,14 +53,12 @@ function Contributions(props) {
   const [section, setSection] = React.useState(2);
   const [imgData, setImgData] = useState(null);
   const [myContributions, setMyContributions] = useState([null]);
-  const [currentDetail, setCurrentDetail] = useState([null]);
-  const [completed, setCompleted] = React.useState(false);
+  const [opens, setOpens] = React.useState(false);
+  const [currentDetail, setCurrentDetail] = useState();
+  const [user, setUser] = React.useState();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = (val = false) => {
-    setOpen(false);
-    setCompleted(val);
-  };
+
   const [scholarshipRequestForm, setScholarshipRequestForm] = React.useState({
     attachment: "",
     reason: "",
@@ -77,6 +77,25 @@ function Contributions(props) {
   };
 
   const authUser = useAuthUser();
+  const handleClickOpen = () => {
+    setOpens(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "50%",
+    minHeight: "520px",
+    bgcolor: "background.paper",
+    borderRadius: "3%",
+    boxShadow: 24,
+    p: 4,
+  };
 
   const { enqueueSnackbar } = useSnackbar();
   const [loginMuation, loginMutationResult] = UserApi.useLoginMutation();
@@ -217,12 +236,12 @@ function Contributions(props) {
 
   const userContributions = async () => {
     const res = await get({
-      endpoint: "users/contributions",
+      endpoint: "donations",
       // body: formData,
       // auth: false,
     });
 
-    setMyContributions(res?.data?.data?.contributions);
+    setMyContributions(res?.data?.data?.donations);
     if (res?.data?.data?.contributions.length == 0) {
       setSection(0);
     }
@@ -261,7 +280,7 @@ function Contributions(props) {
         <ToDoorSearch />
         <div className="flex justify-between items-center">
           <Typography variant="h5" className="font-bold">
-            MY DONATIONS
+            ANALYTICS
           </Typography>
 
           {/* {section == 2 && (
@@ -279,19 +298,19 @@ function Contributions(props) {
         <div>
           {/* <ToDoorSearch /> */}
 
-          <div className="flex items-end mr-3 mt-12">
-            <div>
-              <div className="flex gap-4">
+          <div className="flex items-end mt-12 w-full">
+            <div className="w-full">
+              <div className="flex gap-4 w-full border-[#ECEEF7] border-2 rounded-2xl py-6">
                 <WallCards
                   className="mr-3"
                   rider={false}
-                  big={true}
+                  // big={true}
                   name="Total Donations"
                   count={myContributions?.length}
                 />
                 <WallCards
                   rider={false}
-                  big={true}
+                  // big={true}
                   name="Cash Donations"
                   count={
                     myContributions?.filter((e) => e?.status == "pending")
@@ -300,7 +319,7 @@ function Contributions(props) {
                 />
                 <WallCards
                   rider={false}
-                  big={true}
+                  // big={true}
                   name="In-Kind Donations"
                   count={
                     myContributions?.filter((e) => e?.status == "approved")
@@ -309,9 +328,9 @@ function Contributions(props) {
                 />
 
                 <WallCards
-                  rider={false}
-                  big={true}
-                  name="Materials Donations"
+                  dashed={true}
+                  // big={true}
+                  name="Expertise Dispensed"
                   count={
                     myContributions?.filter((e) => e?.status == "declined")
                       ?.length
@@ -326,67 +345,66 @@ function Contributions(props) {
           <WallCards name='Earnings' count='3,000,000'/> */}
           </div>
 
-          <Typography variant="h6" className="font-bold mt-8">
-            History
-          </Typography>
+          <div className="flex items-center justify-between my-8">
+            <Typography variant="h6" className="font-bold">
+              History
+            </Typography>
 
-          <Divider className="mb-6 p-1" />
-
-          <TextField
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <MdOutlineSearch />
-                </InputAdornment>
-              ),
-            }}
-            variant="outlined"
-            className=" mb-5 text-ssm"
-            placeholder="Search Scholarships "
-          />
-
-          <div className="p-3 md:full min-w-[800px]">
-            <div className="flex gap-2">
-              <Typography
-                variant="h6"
-                className="w-1/5 text-center text-[#5C6F7F]"
-              >
-                Donated To
-              </Typography>
-              <Typography
-                variant="h6"
-                className="w-1/5 text-center text-[#5C6F7F]"
-              >
-                Title
-              </Typography>
-              <Typography
-                variant="h6"
-                className="w-1/5 text-center text-[#5C6F7F]"
-              >
-                Date
-              </Typography>
-              {/* <Typography variant="h6" className="w-1/5 text-left ">
+            <TextField
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <MdOutlineSearch />
+                  </InputAdornment>
+                ),
+              }}
+              variant="outlined"
+              className=" text-ssm w-2/3 "
+              placeholder="Search "
+            />
+          </div>
+          <div className="flex gap-2">
+            <Typography variant="h6" className="w-1/5 text-left text-[#5C6F7F]">
+              Recipient
+            </Typography>
+            <Typography
+              variant="h6"
+              className="w-1/5 text-center text-[#5C6F7F]"
+            >
+              Title
+            </Typography>
+            <Typography
+              variant="h6"
+              className="w-1/5 text-center text-[#5C6F7F]"
+            >
+              Date
+            </Typography>
+            {/* <Typography variant="h6" className="w-1/5 text-left ">
                   Type Of Scholarships
                 </Typography> */}
-              <Typography variant="h6" className="w-1/5 text-center ">
-                Note
-              </Typography>
-              <Typography variant="h6" className="w-1/5 text-center ">
-                Amount
-              </Typography>
+            <Typography variant="h6" className="w-2/5 text-center ">
+              Note
+            </Typography>
+            {/* <Typography variant="h6" className="w-1/5 text-center ">
+              Amount
+            </Typography> */}
 
-              {/* <Typography variant="h6" className="w-1/5 text-left ">
+            {/* <Typography variant="h6" className="w-1/5 text-left ">
                   Amount To Return
                 </Typography> */}
 
-              <Typography variant="h6" className="w-1/5 text-center ">
-                Status
-              </Typography>
-              {/* <Typography variant="h6" className="w-1/5 text-center ">
-                Action
-              </Typography> */}
-            </div>
+            <Typography variant="h6" className="w-1/5 text-center ">
+              Status
+            </Typography>
+            <Typography variant="h6" className="w-1/5 text-center ">
+              Action
+            </Typography>
+          </div>
+
+          <Divider className="mb-6 p-1" />
+
+          <div className="p-3 md:full min-w-[800px]">
             {myContributions?.map((e) => (
               <div>
                 {/* { props.tableArray.map((e)=> */}
@@ -399,10 +417,13 @@ function Contributions(props) {
                       className={
                         props?.jj == "loan"
                           ? " text-left p-3 w-2/5 "
-                          : " text-center p-3 w-2/5 "
+                          : " text-left p-3 w-2/5 "
                       }
                     >
-                      <Typography variant="">{e?.firstname}</Typography>
+                      <Typography variant="">
+                        {e?.request?.applied_by?.lastname}{" "}
+                        {e?.request?.applied_by?.firstname}
+                      </Typography>
                     </div>
                     <div
                       className={
@@ -411,7 +432,9 @@ function Contributions(props) {
                           : " text-center p-3 w-2/5 "
                       }
                     >
-                      <Typography variant="">{e?.title}</Typography>
+                      <Typography variant="">
+                        {e?.request?.applied_by?.title}
+                      </Typography>
                     </div>
                     <div
                       className={
@@ -427,13 +450,13 @@ function Contributions(props) {
                     <div
                       className={
                         props?.jj == "loan"
-                          ? " text-left p-3 w-2/5 "
-                          : " text-center p-3 w-2/5 "
+                          ? " text-left p-3 w-4/5 "
+                          : " text-center p-3 w-4/5 "
                       }
                     >
                       <Typography variant="">{e?.note}</Typography>
                     </div>
-                    <div
+                    {/* <div
                       className={
                         props?.jj == "loan"
                           ? " text-left p-3 w-2/5 "
@@ -441,7 +464,7 @@ function Contributions(props) {
                       }
                     >
                       <Typography variant="">{e?.amount}</Typography>
-                    </div>
+                    </div> */}
 
                     <div
                       className={
@@ -476,7 +499,7 @@ function Contributions(props) {
                         {e?.status}
                       </Typography>
                     </div>
-                    {/* <div
+                    <div
                       className={
                         props?.jj == "loan"
                           ? " text-center p-3 w-2/5  hover:text-primary-main cursor-pointer "
@@ -486,13 +509,15 @@ function Contributions(props) {
                       <Typography
                         onClick={() => {
                           setSection(1);
+                          setUser(e?.request?.applied_by);
                           setCurrentDetail(e);
+                          handleClickOpen();
                         }}
                         className="font-bold"
                       >
                         View Details
                       </Typography>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
                 {/* )} */}
@@ -507,6 +532,91 @@ function Contributions(props) {
           </div>
         </div>
       </div>
+      <Modal
+        // open={true}
+        open={opens}
+        onClose={() => setOpens(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <Box sx={style}>
+            <div>
+              <div className="flex gap-8">
+                <div className="flex">
+                  <Avatar
+                    sx={{ width: 100, height: 100 }}
+                    src={user?.profileUrl || "/broken-image.jpg"}
+                  />
+                </div>
+                <div className="mt-4">
+                  <Typography className="font-bold" variant="h5">
+                    {`  ${user?.firstname} ${user?.lastname} `}
+                  </Typography>
+                  <Typography>{user?.email}</Typography>
+                  <Typography className="font-bold text-[#e65100]">
+                    {user?.phone}
+                  </Typography>
+                  <Typography>{user?.address}</Typography>
+                </div>
+              </div>
+              <Divider className="my-8" />
+              <div class="flex gap-20">
+                <div className=" gap-16 font-semibold">
+                  <Typography className="my-3 font-semibold">
+                    Donation Type
+                  </Typography>
+                  <Typography className="font-semibold text-primary-main">
+                    {currentDetail?.request_type_item?.request_type_id == "1"
+                      ? "Cash Donation"
+                      : currentDetail?.request_type_item?.request_type_id == "2"
+                      ? "Expertise Donation"
+                      : "Inkind Donation"}
+                  </Typography>
+                </div>
+                <div className=" font-semibold">
+                  <Typography className="my-3 font-semibold">
+                    Item Donated
+                  </Typography>
+                  <Typography className="font-semibold text-primary-main">
+                    {`Provided ${currentDetail?.request_type_item?.item_name}`}
+                  </Typography>
+                </div>
+              </div>
+              <Divider className="my-8" />
+              <div class="flex gap-16 ">
+                <div className="flex flex-col gap-3 font-semibold">
+                 
+                  <div class="flex gap-5 align-center">
+                    <Typography className="font-semibold">
+                      Company City:
+                    </Typography>
+                    <Typography>{user?.city}</Typography>
+                  </div>
+                </div>
+              </div>{" "}
+              <div class="flex flex-col align-center text-center w-full mt-8">
+                <Typography
+                  variant="h5"
+                  className="font-semibold text-center w-full"
+                >
+                  About Company:
+                </Typography>
+                <Typography className="text-center">{user?.about}</Typography>
+              </div>
+                <div class="flex flex-col align-center text-center w-full mt-8">
+                <Typography
+                  variant="h5"
+                  className="font-semibold text-center w-full"
+                >
+                  Previous Projects:
+                </Typography>
+                <Typography className="text-center">{user?.about}</Typography>
+              </div>
+            </div>
+          </Box>
+        </div>
+      </Modal>
 
       <Dialog
         open={open}

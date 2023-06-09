@@ -54,8 +54,8 @@ function Dashboard(props) {
   const [isDonor, setIsDonor] = useState(false);
 
   useEffect(() => {
-    console.log(!localStorage.getItem("role") == "Eduinitiator");
-    getUser();
+    // console.log(!localStorage.getItem("role") == "Eduinitiator");
+    // getUser();
   }, []);
 
   const getUser = async () => {
@@ -72,7 +72,7 @@ function Dashboard(props) {
     <div>
       {localStorage.getItem("role") == ("Super admin" || "Admin") ? (
        <Admin/>
-      ) : localStorage.getItem("role") !== "Eduinitiator" ? (
+      ) : localStorage.getItem("role") !== "Nonprofit" ? (
         <DashboardDonor />
       ) : (
         <DashboardInitiator />
