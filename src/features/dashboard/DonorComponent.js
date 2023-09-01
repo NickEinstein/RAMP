@@ -217,17 +217,25 @@ function DashboardDonor(props) {
     setGrants(res.data.data.requests);
   };
 
-  const toContribute = async () => {
+  const postToBackend = async (e) => {
     const formData = new FormData();
 
-    formData.append("to", title);
-    formData.append("contributable_id", learnMoreDetails?.id);
+    formData.append("request_id", learnMoreDetails?.request_type_id);
     formData.append("attachments[]", attachment);
-    formData.append("amount", amount);
-    formData.append("note", "I like you");
+    formData.append(
+      "request_type_item_id",
+      learnMoreDetails?.request_type_item_id
+    );
+    formData.append("note", "Good");
+    formData.append("payment_channel", "paystack");
+    formData.append(
+      "pledge_date",
+      moment(new Date()).add(1, "day").format("YYYY-MM-DD")
+    );
+    formData.append("payment_response", JSON.stringify(e));
 
     const res = await post({
-      endpoint: "users/contributions/make",
+      endpoint: "donations",
       body: formData,
       // auth: false,
     });
@@ -263,24 +271,6 @@ function DashboardDonor(props) {
                       count={grants?.length}
                     />
                   </div>
-
-                  {/* <div
-                  className="w-full"
-                    onClick={() => {
-                      setdisplayArray(techReq);
-                      setTitle("Donation Requests");
-                      setSection(0);
-                      setlearnMore(false);
-                    }}
-                  >
-                    <WallCards
-                      className="mr-3"
-                      rider={false}
-                      big={true}
-                      name="Expertise Requests"
-                      count={techReq?.length}
-                    />
-                  </div> */}
                 </div>
               </div>
               <Typography variant="h6" className="font-bold mt-8">
@@ -330,7 +320,7 @@ function DashboardDonor(props) {
                     </Typography> */}
                     <Button
                       onClick={() => showLearnMore(e)}
-                      className="h-12 bg-white text-white font-bold bg-primary-main "
+                      className="h-12 bg- text-white font-bold bg-primary-main "
                     >
                       View Details
                     </Button>
@@ -354,17 +344,17 @@ function DashboardDonor(props) {
           <div>
             <div
               onClick={() => setlearnMore(false)}
-              className="flex cursor-pointer gap-3 font-bold items-center"
+              className="flex cursor-pointer gap-3 font-bold items-center w-full"
             >
               <MdArrowBackIosNew className="cursor-pointer" />
               Back
             </div>
-            <div className="flex gap-4 mt-8 items-start">
+            <div className="flex gap-4 mt-8 items-start w-full">
               <Avatar
                 className="w-2/5 h-[300px] rounded-lg"
                 src={educatialGrantPNG}
               />
-              <div className="flex flex-col gap-4 text-left">
+              <div className="flex flex-col gap-4 text-left w-4/5">
                 <Button className=" max-w-[200px] font-bold text-white rounded-full">
                   {`${learnMoreDetails?.request_type?.type} Requests`}
                 </Button>
@@ -392,7 +382,7 @@ function DashboardDonor(props) {
                   Raised
                 </Typography> */}
 
-                <div className="flex gap-3">
+                <div className="flex gap-3 w-full">
                   <div className="border w-full rounded-lg p-3 text-center border-[#667085]">
                     <span className="font-bold">
                       {learnMoreDetails?.donations?.length}
@@ -494,7 +484,7 @@ function DashboardDonor(props) {
                   )}
                 </div>
 
-                {firstname !== "Technical" ? (
+                {learnMoreDetails?.request_type?.id == 1 ? (
                   <div className="flex gap-4 items-end">
                     <div>
                       <InputLabel className="text-left  mb-2">
@@ -537,14 +527,14 @@ function DashboardDonor(props) {
                 ) : (
                   <div className="flex gap-4 items-end">
                     <Button
-                      disabled={amount?.trim() == ""}
+                      //   disabled={amount?.trim() == ""}
                       onClick={handleOpen}
                       className="font-bold w-1/2 h-12 text-white"
                     >
                       Accept
                     </Button>
                     <Button
-                      disabled={amount?.trim() == ""}
+                      //   disabled={amount?.trim() == ""}
                       onClick={handleOpen}
                       className="font-bold w-1/2 h-12 text-white"
                     >
@@ -586,12 +576,28 @@ function DashboardDonor(props) {
               <Typography className="text-[#667085]">
                 You are about to donate{" "}
               </Typography>
-              <Typography className="font-bold text-3xl">
-                {" "}
-                &#8358; {amount} to{" "}
-                {learnMoreDetails?.applied_by?.company_name ||
-                  `${learnMoreDetails.applied_by?.firstname} ${learnMoreDetails.applied_by?.lastname}`}
-              </Typography>
+              {learnMoreDetails.request_type_item == 1 ? (
+                <Typography className="font-bold text-3xl">
+                  {" "}
+                  &#8358; {amount} to{" "}
+                  {learnMoreDetails?.applied_by?.company_name ||
+                    `${learnMoreDetails.applied_by?.firstname} ${learnMoreDetails.applied_by?.lastname}`}
+                </Typography>
+              ) : (
+                <Typography className="font-bold text-xl">
+                  {" "}
+                  <Typography variant="h4" className="text-[#db8a43] my-3 font-bold">
+                    {learnMoreDetails?.request_type?.type}{" "}
+                  </Typography>
+                  in the form of
+                  <Typography variant="h5" className="text-[#db8a43] my-3 font-bold">
+                    {learnMoreDetails?.request_type_item?.item_name}{" "}
+                  </Typography>
+                  to{" "}
+                  {learnMoreDetails?.applied_by?.company_name ||
+                    `${learnMoreDetails.applied_by?.firstname} ${learnMoreDetails.applied_by?.lastname}`}
+                </Typography>
+              )}
               <Typography>for</Typography>
               <Typography className="font-bold text-base">
                 {learnMoreDetails?.title}
@@ -611,27 +617,25 @@ function DashboardDonor(props) {
                 Cancel
               </Button>
 
-              {/* <Button
-                className="p-3 w-full text-base mb-10 text-white"
-                type="submit"
-                // disabled
-                onClick={() => {
-                  toContribute(amount);
-                  //   section > 1
-                  //     ? completeApplication()
-                  //     : setSection((prev) => prev + 1);
-                  // handleClose();
-                  //   // redirect();
-                }}
-                // className=' '
-              >
-                Yes, Continue
-              </Button> */}
-              <PaymentHook
-                details={learnMoreDetails}
-                fee={amount}
-                attachment={attachment}
-              />
+              {learnMoreDetails?.request_type?.id !== 1 ? (
+                <Button
+                  className="p-3 w-full text-base text-white"
+                  type="submit"
+                  // disabled
+                  onClick={() => {
+                    postToBackend();
+                  }}
+                  // className=' '
+                >
+                  Donate
+                </Button>
+              ) : (
+                <PaymentHook
+                  details={learnMoreDetails}
+                  fee={amount}
+                  attachment={attachment}
+                />
+              )}
             </div>
           </DialogActions>
         </Dialog>

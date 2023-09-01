@@ -52,7 +52,7 @@ const fetchBackend = async (
     // "X-API-KEY": process.env.VUE_APP_API_KEY,
     // 'content-type': 'multipart/form-data',
     // "Content-Type": "application/json; charset=utf-8",
-    // "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "x-requested-with",
     // "Access-Control-Allow-Methods": "POST",
     // "Access-Control-Allow-Methods": "POST GET OPTIONS",
@@ -61,8 +61,8 @@ const fetchBackend = async (
   console.log(body);
   const path = paths[endpoint] || endpoint;
   //nehpets-backend.onrender.com/form
-  let url = `https://api.rampng.com/public/api/${path}`;
-  // let url = `https://staging.tryba.io/api/v2/${path}`;
+  let url = `https://api.rampng.com/api/${path}`;
+  // let url = `http://165.227.235.154/${path}`;
   // let url = `https://tryba.io/api/v2/${path}`;
   //  `${process.env.TRYBA_API}/${path}`;
   // let url = `${process.env.TRYBA_API}${path}`;

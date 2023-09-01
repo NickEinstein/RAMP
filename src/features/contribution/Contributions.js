@@ -242,7 +242,7 @@ function Contributions(props) {
     });
 
     setMyContributions(res?.data?.data?.donations);
-    if (res?.data?.data?.contributions.length == 0) {
+    if (res?.data?.data?.contributions?.length == 0) {
       setSection(0);
     }
     console.log(res?.data?.data?.scholarships);
@@ -384,7 +384,7 @@ function Contributions(props) {
                   Type Of Scholarships
                 </Typography> */}
             <Typography variant="h6" className="w-2/5 text-center ">
-              Note
+              Donation Type
             </Typography>
             {/* <Typography variant="h6" className="w-1/5 text-center ">
               Amount
@@ -432,9 +432,7 @@ function Contributions(props) {
                           : " text-center p-3 w-2/5 "
                       }
                     >
-                      <Typography variant="">
-                        {e?.request?.applied_by?.title}
-                      </Typography>
+                      <Typography variant="">{e?.request?.title}</Typography>
                     </div>
                     <div
                       className={
@@ -454,7 +452,9 @@ function Contributions(props) {
                           : " text-center p-3 w-4/5 "
                       }
                     >
-                      <Typography variant="">{e?.note}</Typography>
+                      <Typography variant="">
+                        {e?.request_type_item?.item_name}
+                      </Typography>
                     </div>
                     {/* <div
                       className={
@@ -586,7 +586,6 @@ function Contributions(props) {
               <Divider className="my-8" />
               <div class="flex gap-16 ">
                 <div className="flex flex-col gap-3 font-semibold">
-                 
                   <div class="flex gap-5 align-center">
                     <Typography className="font-semibold">
                       Company City:
@@ -604,7 +603,7 @@ function Contributions(props) {
                 </Typography>
                 <Typography className="text-center">{user?.about}</Typography>
               </div>
-                <div class="flex flex-col align-center text-center w-full mt-8">
+              <div class="flex flex-col align-center text-center w-full mt-8">
                 <Typography
                   variant="h5"
                   className="font-semibold text-center w-full"

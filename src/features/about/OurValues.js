@@ -75,7 +75,7 @@ import {
 } from "@mui/material";
 import useStepper from "hooks/useStepper";
 import useDataRef from "hooks/useDataRef";
-import about from "images/homelanding/whatwedo.jpg";
+import about from "images/homelanding/kevin-bhagat-zNRITe8NPqY-unsplash.jpg";
 import { useNavigate } from "react-router-dom";
 import { MediaQueryBreakpointEnum } from "constants/Global";
 
@@ -91,7 +91,7 @@ function Home(props) {
     <div>
 <LoginHeader/>
       <div
-        className="h-[400px] flex justify-center items-center"
+        className="h-[400px] flex justify-center items-center relative"
         style={{
           backgroundImage: `url(${about})`,
           backgroundSize: "cover",
@@ -101,16 +101,16 @@ function Home(props) {
           // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
         }}
       >
-        <Typography className="text-white" variant="h1" gutterBottom>
+        <Typography className="text-white bg-black/40 w-full text-center h-[400px] flex items-center justify-center mt-7" variant="h1" gutterBottom>
           Our Values
         </Typography>
       </div>
 
-      <Container className="py-12" maxWidth="xl">
+      <Container className="py-12 text-lg" maxWidth="xl">
         <Box>
          
-          <div className="flex flex-col gap-5 w-8/12">
-            <Typography className="text-base">
+          <div className="flex flex-col gap-5 w-8/12 text-lg">
+            <Typography className="text-lg">
               <span class="font-bold">Intergrity:</span> We maintain the highest
               standards of professional and ethical behavior and value
               transparency and honesty in our communications, relationships, and
@@ -119,33 +119,33 @@ function Home(props) {
               verify
             </Typography>
 
-            <Typography className="text-base">
+            <Typography className="text-lg">
               <span class="font-bold">Excellence:</span> We don’t settle for
               anything less. We do it right the first time, ensuring that all
               reports, request and needs once filed are automatically reviewed
               and feedback providied
             </Typography>
 
-            <Typography className="text-base">
+            <Typography className="text-lg">
               <span class="font-bold">Professionalism:</span> Our team of
               developers, staff, board and champions are ‘’trustworthy,
               competent, direct, a self-starter, and a constant professional.”
             </Typography>
 
-            <Typography className="text-base">
+            <Typography className="text-lg">
               <span class="font-bold"> Our Recepient’s:</span> First You are
               guaranteed that the needs of all our beneficiaries are prioritized
               and delivered. We ensure that all
             </Typography>
 
-            <Typography className="text-base">
+            <Typography className="text-lg">
               <span class="font-bold">Collaboration:</span> We leverage the
               power of many to achieve our results. We do not work in silos.
               Team spirit, healthy work environment and increased partnership
               with internal and external stakeholders.
             </Typography>
 
-            <Typography className="text-base">
+            <Typography className="text-lg">
               <span class="font-bold">Impact/Solution Driven:</span> We are not
               weighed down by problems. We strongly believe in solving problems
               one at a time. We are result driven
@@ -204,7 +204,7 @@ export default Home;
 //                 <Typography variant="h2" gutterBottom>
 //                   Our Values
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Intergrity:</span> We maintain the
 //                   highest standards of professional and ethical behavior and
 //                   value transparency and honesty in our communications,
@@ -212,30 +212,30 @@ export default Home;
 //                   donation reports are tracked and delivered straight to your
 //                   inbox with opportunity to verify
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Excellence:</span> We don’t settle for
 //                   anything less. We do it right the first time, ensuring that
 //                   all reports, request and needs once filed are automatically
 //                   reviewed and feedback providied
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Professionalism:</span> Our team of
 //                   developers, staff, board and champions are ‘’trustworthy,
 //                   competent, direct, a self-starter, and a constant
 //                   professional.”
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                  <span class="font-bold"> Our Recepient’s:</span> First You are
 //                   guaranteed that the needs of all our beneficiaries are
 //                   prioritized and delivered. We ensure that all{" "}
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Collaboration:</span> We leverage the
 //                   power of many to achieve our results. We do not work in silos.
 //                   Team spirit, healthy work environment and increased
 //                   partnership with internal and external stakeholders.
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Impact/Solution Driven:</span> We are
 //                   not weighed down by problems. We strongly believe in solving
 //                   problems one at a time. We are result driven

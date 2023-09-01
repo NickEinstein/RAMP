@@ -6,12 +6,15 @@ import { useSnackbar } from "notistack";
 import educatiaLogo from "images/Ramp2.png";
 import educatiaSuccess from "images/EducatiaSuccess.png";
 import { FcGoogle } from "react-icons/fc";
-import backgroundImage from "../../images/RampHome1.jpg";
+import backgroundImage from "../../images/homepagefirstsection/pexels-curtis-loy-5196014.jpg";
 // import backgroundImage2 from "../../images/rampHome2.jpg";
-import backgroundImage3 from "../../images/ramphome3.jpg";
-import backgroundImage4 from "../../images/ramphome4.jpg";
-import backgroundImage5 from "../../images/ramphome5.jpg";
+import backgroundImage3 from "../../images/homepagefirstsection/smartworks-coworking-cW4lLTavU80-unsplash.jpg";
+// import backgroundImage4 from "../../images/ramphome4.jpg";
+import backgroundImage5 from "../../images/homepagefirstsection/doug-linstedt-jEEYZsaxbH4-unsplash.jpg";
 // import { Button, TextField, Typography } from "@mui/material";
+import carouselpic2 from "images/homepagefirstsection/pexels-curtis-loy-5196014.jpg";
+
+
 import PasswordTextField from "common/PasswordTextField";
 import { getTextFieldFormikProps } from "utils/FormikUtils";
 import useAuthUser from "hooks/useAuthUser";
@@ -76,7 +79,7 @@ function Home(props) {
   const [regData, setRegData] = React.useState({
     firstname: "",
     lastname: "",
-    account_type: "individual",
+    account_type: "corporate",
     company_name: null,
     company_reg_number: null,
     company_type: null,
@@ -111,11 +114,11 @@ function Home(props) {
       textColor: "text-white",
       image: backgroundImage3,
     },
-    {
-      bgColor: "HomeTopSectionBackgroundColor_headerImage",
-      textColor: "text-secondary-main",
-      image: backgroundImage4,
-    },
+    // {
+    //   bgColor: "HomeTopSectionBackgroundColor_headerImage",
+    //   textColor: "text-secondary-main",
+    //   image: backgroundImage4,
+    // },
     {
       bgColor: "HomeTopSectionBackgroundColor_headerImage",
       textColor: "text-secondary-main",
@@ -209,7 +212,7 @@ function Home(props) {
       firstname: regData.firstname,
       lastname: regData.account_type=='individual'?regData.lastname : "Company",
       account_type: regData.account_type,
-      phone: `+234${phoneNumber}`,
+      phone: `${phoneNumber}`,
       email: regData?.email,
       password: regData?.password,
       password_confirmation: regData?.password_confirmation,
@@ -233,6 +236,7 @@ function Home(props) {
         }
       );
     } else {
+      
       enqueueSnackbar(res?.data?.message || "Something went Wrond", {
         variant: "error",
       });
@@ -349,14 +353,26 @@ function Home(props) {
             backgroundRepeat: "no-repeat",
             minWidth: "48%",
           }}
-          className="hidden fixed items-stretch lg:flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
+          className="hidden fixed items-stretch lg:flex  min-h-screen text-primary-main  w-2/5"
           // className="lg:block fixed items-stretch flex  min-h-screen text-primary-main px-16 py-10 w-2/5"
         >
-          <div>
-            <img
-              className="min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex self-stretch"
+          <div className="bg-black/30 text-center px-16 py-10">
+            <div
+              // className="relative"
+              className="min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex bg-cover "
+              style={{
+                backgroundImage: `url(${configs[stepper.step].image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                width: "100%",
+                // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
+              }}
+            ></div>
+            {/* <img
+              className="min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex bg-cover"
               src={configs[stepper.step]?.image}
-            />
+            /> */}
             {/* <div className="self-stretch w-1/2 hidden md:flex items-end">
               <div className="relative w-full" style={{ height: 620 }}>
                 {configs.map((step, index) => (
@@ -423,12 +439,12 @@ function Home(props) {
                   />
                   <Typography className="font-bold">Back</Typography>
                 </div>
-                {regData.role !== "ngo" && (
+                {regData.role !== "nonprofit" && (
                   <div className="w-full flex justify-center">
                     <FormControl>
                       <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="individual"
+                        defaultValue="corporate"
                         name="account_type"
                         row
                         onChange={(e) => {
@@ -493,7 +509,7 @@ function Home(props) {
                       onClick={() => {
                         setRegData({
                           ...regData,
-                          role: "ngo",
+                          role: "nonprofit",
                         });
                       }}
                       className="relative w-[150px] flex rounded-lg mb-2 cursor-pointer py-12 px-6  "
@@ -511,7 +527,7 @@ function Home(props) {
                       NGO
                     </Typography>
                   </div>
-                  <div className="bg-[#f0c046]/75 rounded-2xl py-4 hover:shadow-lg">
+                  {/* <div className="bg-[#f0c046]/75 rounded-2xl py-4 hover:shadow-lg">
                     <div
                       onClick={() => {
                         setRegData({
@@ -533,7 +549,7 @@ function Home(props) {
                     <Typography className="font-bold text-center">
                       Technical Expert
                     </Typography>
-                  </div>
+                  </div> */}
                 </div>
                 <a className="text-center" href="">
                   <Typography className="mt-12">
@@ -604,14 +620,14 @@ function Home(props) {
                         onChange={onChange}
                         value={regData.company_name}
                       />
-                      <TextField
+                      {/* <TextField
                         size="medium"
                         className="w-full"
                         label="Company Registration Number"
                         name="company_reg_number"
                         onChange={onChange}
                         value={regData.company_reg_number}
-                      />
+                      /> */}
                     </div>
                   )}
                   <TextField
@@ -669,9 +685,9 @@ function Home(props) {
                   <Typography className="mt-5">
                     Already have an account?
                     <Link to={RouteEnum.LOGIN}>
-                      <a className="ml-1 text-primary-main font-bold ">
+                      <Typography clTypographyssName="ml-1 text-primary-main font-bold ">
                         Log In
-                      </a>
+                      </Typography>
                     </Link>
                   </Typography>
                 </a>

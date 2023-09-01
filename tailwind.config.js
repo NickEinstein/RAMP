@@ -11,8 +11,6 @@ module.exports = {
           lighter: "var(--color-primary-lighter)",
           dark: "var(--color-primary-dark)",
           contrastText: "var(--color-primary-contrastText)",
-          
-         
         },
         secondary: {
           main: "var(--color-secondary-main)",
@@ -66,7 +64,6 @@ module.exports = {
           disabledBackground: "var(--color-action-disabledBackground)",
           focus: "var(--color-action-focus)",
         },
-
       },
       fontFamily: {
         inherit: ["inherit"],
@@ -82,14 +79,15 @@ module.exports = {
         tooltip: 1500,
       },
       padding: {
-        general: '1% 7%',
+        general: "1% 7%",
       },
       fontSize: {
-        ssm: '0.6rem',
-        
-      }
-     
+        ssm: "0.6rem",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-animate"),
+    // ...
+  ],
 };

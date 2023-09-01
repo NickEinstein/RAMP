@@ -53,7 +53,7 @@ function DashboardInitiator(props) {
   const [loading, setLoading] = React.useState(false);
   const [ridersPicture, setRidersPicture] = useState("");
   const [imgData, setImgData] = useState(null);
-  const [ridersPictureName, setRidersPictureName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [states, setStates] = useState([]);
   const [idTypes, setIdTypes] = useState([]);
   const [lgas, setLgas] = useState([]);
@@ -71,9 +71,9 @@ function DashboardInitiator(props) {
 
   const [completed, setCompleted] = React.useState(false);
   const [completeRegFormData, setcompleteRegFormData] = React.useState({
-    board_member_information: "",
-    organization_structure: "",
-    account_information: "",
+    board_member_information: [],
+    organization_structure: [],
+    account_information: [],
     state_id: "",
     lga_id: "",
     city: "",
@@ -103,33 +103,6 @@ function DashboardInitiator(props) {
   const { enqueueSnackbar } = useSnackbar();
   const [loginMuation, loginMutationResult] = UserApi.useLoginMutation();
 
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    validationSchema: yup.object({
-      username: yup.string().trim().required(),
-      password: yup.string().trim().required(),
-    }),
-    onSubmit: async (values) => {
-      console.log(values);
-      // localStorage.setItem('location', values.location)
-      // redirect();
-
-      try {
-        const data = await loginMuation({ data: values }).unwrap();
-        // TODO extra login
-        // redirect()
-        enqueueSnackbar("Logged in successful", { variant: "success" });
-      } catch (error) {
-        enqueueSnackbar(error?.data?.message, "Failed to login", {
-          variant: "error",
-        });
-      }
-    },
-  });
-
   const onChange = (e) => {
     setcompleteRegFormData({
       ...completeRegFormData,
@@ -137,48 +110,49 @@ function DashboardInitiator(props) {
     });
   };
 
-  const onFileChange = (event) => {
+  const onFileChange = (event, name) => {
     // Update the state
     // setSelectedFile(event.target.files[0]);
-    console.log(event.target.files[0]);
-    if (event.target.files[0]) {
-      console.log("picture: ", event.target.files);
-      //  setPicture(event.target.files[0]);
-      const reader = new FileReader();
-      reader.addEventListener("load", () => {
-        setImgData(reader.result);
+    console.log(event.target.files);
+
+    if (name == 1) {
+      setcompleteRegFormData({
+        ...completeRegFormData,
+        board_member_information: event.target.files,
       });
-      reader.readAsDataURL(event.target.files[0]);
+      return;
     }
-    onFileUpload(event.target.files[0]);
-
-    setcompleteRegFormData({
-      ...completeRegFormData,
-      id_front: event.target.files[0],
-      id_back: event.target.files[0],
-    });
+    if (name == 2) {
+      setcompleteRegFormData({
+        ...completeRegFormData,
+        organization_structure: event.target.files,
+      });
+      return;
+    }
+    if (name == 3) {
+      setcompleteRegFormData({
+        ...completeRegFormData,
+        account_information: event.target.files,
+      });
+      return;
+    }
+    if (name == 4) {
+      setcompleteRegFormData({
+        ...completeRegFormData,
+        avatar: event.target.files[0],
+      });
+      if (event.target.files) {
+        console.log("picture: ", event.target.files);
+        //  setPicture(event.target.files[0]);
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          setImgData(reader.result);
+        });
+        reader.readAsDataURL(event.target.files[0]);
+      }
+      return;
+    }
   };
-
-  const onFileUpload = async (selectedFile) => {
-    // Create an object of formData
-
-    // Details of the uploaded file
-    setRidersPictureName(selectedFile.name);
-    setRidersPicture(selectedFile);
-    // onUpload();
-    // Request made to the backend api
-    // Send formData object
-    // const res = await put({
-    //   endpoint: `api/users/upload`,
-    //    body: formData,
-    //   auth: true,
-    // });
-    // axios.post("api/uploadfile", formData);
-  };
-
-  // if (authUser.accessToken) {
-  //   return <Navigate to={RouteEnum.HOME} />;
-  // }
 
   const currenciez = [
     {
@@ -209,14 +183,13 @@ function DashboardInitiator(props) {
   ];
 
   useEffect(() => {
-    // getStates();
-    // getCategories();
-    // getSdgs();
-    // getCountries();
-    // getRequestTypes();
+    getStates();
+    getCategories();
+    getSdgs();
+    getCountries();
+    getRequestTypes();
     getUser();
-    // requestTypeItemz();
-    // userScholarships();
+    requestTypeItemz();
     allRequests();
     userGrants();
   }, []);
@@ -243,18 +216,6 @@ function DashboardInitiator(props) {
 
     setAllUsersRequests(res?.data?.data?.requests);
     setmyContributions(res?.data?.data?.requests);
-    setLoading(true);
-  };
-
-  const userScholarships = async () => {
-    setLoading(false);
-    const res = await get({
-      endpoint: "users/scholarships",
-      // body: formData,
-      // auth: false,
-    });
-
-    setScholarships(res?.data?.data?.scholarships);
     setLoading(true);
   };
 
@@ -356,44 +317,36 @@ function DashboardInitiator(props) {
   };
 
   const completeApplication = async (isCompany) => {
+    setIsLoading(true);
     const formData = new FormData();
     const formDataCorporate = new FormData();
 
-    // Update the formData object
-    // formData.append("image", ridersPicture);
-    // formData.append(
-    //   "board_member_information",
-    //   completeRegFormData.board_member_information
-    // );
-    // formData.append(
-    //   "organization_structure",
-    //   completeRegFormData.organization_structure
-    // );
-    // formData.append(
-    //   "account_information",
-    //   completeRegFormData.account_information
-    // );
+    console.log(completeRegFormData);
+    formData.append(
+      "board_member_information",
+      completeRegFormData.board_member_information[0]
+    );
+    formData.append(
+      "organization_structure",
+      completeRegFormData.organization_structure[0]
+    );
+    formData.append(
+      "account_information",
+      completeRegFormData.account_information[0]
+    );
 
     formData.append("state_id", completeRegFormData.state_id);
     formData.append("lga_id", completeRegFormData.lga_id);
     formData.append("city", completeRegFormData.city);
-    formData.append("address", completeRegFormData.address_name);
+    formData.append("address", completeRegFormData.address);
     formData.append("about", completeRegFormData.about);
     formData.append("category_id", completeRegFormData.category_id);
     formData.append("s_d_g_id", completeRegFormData.s_d_g_id);
     formData.append("request_type_id", completeRegFormData.request_type_id);
-    // formData.append("avatar", completeRegFormData.avatar);
+    formData.append("avatar", completeRegFormData.avatar);
     formData.append("country_id", completeRegFormData.country_id);
-    // formData.append("cac_document", completeRegFormData.cac_document);
 
-    // formDataCorporate = {...formData}
-
-    // let payload = {
-
-    // }
-    const res = "";
-
-    res = await post({
+    const res = await post({
       endpoint: "users/complete-profile",
       body: formData,
       // auth: false,
@@ -403,10 +356,22 @@ function DashboardInitiator(props) {
 
     if (res.data.success) {
       handleClose(true);
+      setIsLoading(false);
+      enqueueSnackbar(
+        res?.data?.message || "Submitted successfully went Wrong",
+        {
+          variant: "success",
+        }
+      );
     } else {
       console.log(res);
+      enqueueSnackbar(res?.data?.message || "Something went Wrong", {
+        variant: "error",
+      });
+      setIsLoading(false);
     }
   };
+
   const currencies = [
     {
       value: "Driver's Licence",
@@ -434,6 +399,446 @@ function DashboardInitiator(props) {
         </span> */}
         <ToDoorSearch />
       </div>
+
+      {open && (
+        <div className="w-full">
+          <DialogTitle>
+            {section > 1 && (
+              <div
+                onClick={() =>
+                  setSection((prev) => (prev > 1 ? prev - 1 : prev))
+                }
+                class="flex items-center gap-3 mb-4"
+              >
+                <MdArrowBackIosNew className="cursor-pointer" />
+                <Typography className="font-bold" variant="h6">
+                  Back
+                </Typography>
+              </div>
+            )}
+            <div className="flex justify-between items-center">
+              <div className="flex gap-8 items-center">
+                <Typography className="font-bold text-center" variant="h6">
+                  Complete Registration - {section} of 3
+                </Typography>
+              </div>
+
+              <MdCancel className="cursor-pointer" onClick={handleClose} />
+            </div>
+          </DialogTitle>
+          <DialogContent className="mx-auto md:w-[700px]">
+            {/* Section 1 */}
+            {section == 3 && (
+              <div>
+                <div className="w-full flex flex-col items-center justify-center gap-5">
+                  <div className="flex flex-col gap-2 justify-center  items-center text-center p-10">
+                    <div>
+                      <Typography className="text-left mb-2">
+                        Upload Company Logo
+                      </Typography>
+                      {!ridersPicture && (
+                        <div>
+                          <input
+                            onChange={(e) => onFileChange(e, 4)}
+                            style={{ display: "none" }}
+                            id="contained-button-file"
+                            type="file"
+                          />
+                          <label
+                            htmlFor="contained-button-file"
+                            className="mb-8 cursor-pointer"
+                          >
+                            <Avatar
+                              className="w-32 h-32 border border-blue-300"
+                              src={imgData}
+                            />
+                          </label>
+                        </div>
+                      )}
+                      {ridersPicture && (
+                        <div className="relative w-20">
+                          <Avatar
+                            className="w-32 h-32 border border-blue-300"
+                            src={imgData}
+                          />
+                          {/* <Typography>{ridersPictureName.name}</Typography> */}
+                          <div
+                            onClick={() => setRidersPicture("")}
+                            className="p-1 bg-red-500 absolute w-4 h-4 flex justify-center hover:cursor-pointer items-center top-0 left-32 text-white rounded-full"
+                          >
+                            x
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="w-full flex flex-col items-center justify-center">
+                    <InputLabel className="text-left mb-4">
+                      {" "}
+                      Board Member Information
+                    </InputLabel>
+
+                    <div className="mb-5">
+                      <input
+                        onChange={(e) => onFileChange(e, 1)}
+                        style={{ display: "none" }}
+                        id="board_member_information-file"
+                        type="file"
+                        multiple
+                      />
+                      <label
+                        htmlFor="board_member_information-file"
+                        className="mb-8 cursor-pointer bg-primary-main p-4 w-1/2 text-white rounded-full"
+                      >
+                        Upload Board Member Information
+                      </label>
+                    </div>
+
+                    <div>
+                      {Array.from(completeRegFormData?.board_member_information)
+                        .map((file) => file.name)
+                        ?.map((e) => (
+                          <div>
+                            <Typography variant="h6">{e}</Typography>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                  <div className="w-full flex flex-col items-center justify-center">
+                    <InputLabel className="text-left mb-4">
+                      {" "}
+                      Organizational Structure
+                    </InputLabel>
+
+                    <div className="mb-5">
+                      <input
+                        onChange={(e) => onFileChange(e, 2)}
+                        style={{ display: "none" }}
+                        id="organization_structure-file"
+                        type="file"
+                        multiple
+                      />
+                      <label
+                        htmlFor="organization_structure-file"
+                        className="mb-8 cursor-pointer bg-primary-main p-4 w-1/2 text-white rounded-full"
+                      >
+                        Upload Organisational Structure
+                      </label>
+                    </div>
+
+                    <div>
+                      {Array.from(completeRegFormData?.organization_structure)
+                        .map((file) => file.name)
+                        ?.map((e) => (
+                          <div>
+                            <Typography variant="h6">{e}</Typography>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+
+                  <div className="w-full flex flex-col items-center justify-center">
+                    <InputLabel className="text-left mb-4">
+                      {" "}
+                      Account Information
+                    </InputLabel>
+
+                    <div className="mb-5">
+                      <input
+                        onChange={(e) => onFileChange(e, 3)}
+                        style={{ display: "none" }}
+                        id="account_information-file"
+                        type="file"
+                        multiple
+                      />
+                      <label
+                        htmlFor="account_information-file"
+                        className="mb-8 cursor-pointer bg-primary-main p-4 w-1/2 text-white rounded-full"
+                      >
+                        Upload Organisational Structure
+                      </label>
+                    </div>
+
+                    <div>
+                      {Array.from(completeRegFormData?.account_information)
+                        .map((file) => file.name)
+                        ?.map((e) => (
+                          <div>
+                            <Typography variant="h6">{e}</Typography>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {
+              /* Section 2 */
+              section == 1 && (
+                <div className="flex flex-col gap-2  items-center p-10">
+                  <Typography
+                    variant="h6"
+                    className="font-bold text-left text-[#667085"
+                  >
+                    Enter Physical Address
+                  </Typography>
+                  <div className="w-full flex flex-col gap-3">
+                    <div className="md:flex justify-between gap-5">
+                      <div className="w-full">
+                        <InputLabel className="text-left mb-2">
+                          {" "}
+                          Country
+                        </InputLabel>
+                        <TextField
+                          onChange={(e) => {
+                            onChange(e);
+                            // getLgas(e.target.value);
+                          }}
+                          fullWidth
+                          id="outlined-select-currency"
+                          select
+                          // label="Select"
+                          name="country_id"
+                          // value={completeRegFormData?.state_id}
+
+                          // helperText="Please select your currency"
+                        >
+                          {countriez?.map((option) => (
+                            <MenuItem key={option.id} value={option.id}>
+                              {option.country_name}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      </div>
+                      <div className="w-full">
+                        <InputLabel className="text-left mb-2">
+                          {" "}
+                          State Of Residence
+                        </InputLabel>
+                        <TextField
+                          onChange={(e) => {
+                            onChange(e);
+                            getLgas(e.target.value);
+                          }}
+                          fullWidth
+                          id="outlined-select-currency"
+                          select
+                          // label="Select"
+                          name="state_id"
+                          // value={completeRegFormData?.state_id}
+
+                          // helperText="Please select your currency"
+                        >
+                          {states?.map((option) => (
+                            <MenuItem key={option.id} value={option.id}>
+                              {option.state}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      </div>
+                    </div>
+
+                    <div className="md:flex gap-5">
+                      <div className="w-full">
+                        <InputLabel className="text-left mb-2">
+                          LGA of Residence
+                        </InputLabel>
+                        <TextField
+                          onChange={onChange}
+                          fullWidth
+                          id="outlined-select-currency"
+                          select
+                          name="lga_id"
+                        >
+                          {lgas?.map((option) => (
+                            <MenuItem key={option?.id} value={option?.id}>
+                              {option?.lga}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      </div>
+                      <div className="w-full">
+                        <InputLabel className="text-left mb-2">
+                          {" "}
+                          City
+                        </InputLabel>
+                        <TextField
+                          fullWidth
+                          onChange={onChange}
+                          name="city"
+                          value={completeRegFormData?.city}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="w-full">
+                      <InputLabel className="text-left mb-2">
+                        {" "}
+                        Address
+                      </InputLabel>
+                      <TextField
+                        multiline
+                        rows={2}
+                        fullWidth
+                        name="address"
+                        value={completeRegFormData?.address}
+                        // label="Select"
+                        onChange={onChange}
+                        // helperText="Please select your currency"
+                      />
+                    </div>
+                    <div className="w-full">
+                      <InputLabel className="text-left mb-2">
+                        {" "}
+                        About Us
+                      </InputLabel>
+                      <TextField
+                        multiline
+                        rows={4}
+                        fullWidth
+                        name="about"
+                        value={completeRegFormData?.about}
+                        // label="Select"
+                        onChange={onChange}
+                        // helperText="Please select your currency"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+
+            {section == 2 && (
+              <div className="flex flex-col gap-5">
+                <div className="w-full">
+                  <InputLabel className="text-left mb-2">
+                    {" "}
+                    Select NGO Category
+                  </InputLabel>
+                  <TextField
+                    onChange={(e) => {
+                      onChange(e);
+                    }}
+                    fullWidth
+                    id="outlined-select-currency"
+                    select
+                    name="category_id"
+                  >
+                    {categoriez?.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </div>
+                <div className="w-full">
+                  <InputLabel className="text-left mb-2">
+                    {" "}
+                    Select NGO SDG
+                  </InputLabel>
+                  <TextField
+                    onChange={(e) => {
+                      onChange(e);
+                    }}
+                    fullWidth
+                    id="outlined-select-currency"
+                    select
+                    // label="Select"
+                    name="s_d_g_id"
+                  >
+                    {sdgz?.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.goal}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </div>
+                <div className="w-full">
+                  <InputLabel className="text-left mb-2">
+                    {" "}
+                    Select Donation Category
+                  </InputLabel>
+                  <TextField
+                    onChange={(e) => {
+                      onChange(e);
+                    }}
+                    fullWidth
+                    id="outlined-select-currency"
+                    select
+                    // label="Select"
+                    name="request_type_id"
+                  >
+                    {idTypes?.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.type && option.type == "Materials"
+                          ? "In Kind"
+                          : option.type}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </div>
+                <div className="w-full">
+                  <InputLabel className="text-left mb-2">
+                    {" "}
+                    Select Donation Sub-Category
+                  </InputLabel>
+                  <TextField
+                    onChange={(e) => {
+                      onChange(e);
+                    }}
+                    fullWidth
+                    id="outlined-select-currency"
+                    select
+                    name="sub_request_type_id"
+                  >
+                    {subcategory
+                      ?.filter(
+                        (e) =>
+                          e.request_type_id ==
+                          completeRegFormData?.request_type_id
+                      )
+
+                      .map((option) => (
+                        <MenuItem key={option.id} value={option.id}>
+                          {option.item_name}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+          <DialogActions>
+            <div className="flex gap-5 w-full  md:mx-20">
+              <Button
+                className="p-3 w-full bg-none text-base mb-10 text-white"
+                type="submit"
+                onClick={() => {
+                  handleClose();
+                }}
+              >
+                Cancel
+              </Button>
+
+              <Button
+                className="p-3 w-full text-base mb-10 text-white flex justify-center items-center gap-4"
+                type="submit"
+                onClick={() => {
+                  section > 2
+                    ? completeApplication()
+                    : setSection((prev) => prev + 1);
+                }}
+              >
+                {isLoading && (
+                  <div class="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+                )}
+                {section > 2 ? "Submit" : "Next"}
+              </Button>
+            </div>
+          </DialogActions>
+        </div>
+      )}
 
       {!open && (
         <div className="md:flex w-full gap-5 mt-8">
@@ -731,476 +1136,17 @@ function DashboardInitiator(props) {
             "...Loading"
           )}
           {!isRegCompleted && loading && (
-            <div className="md:w-2/5 bg-primary-main border p-4  text-white">
+            <div className="md:w-3/5 bg-primary-main  p-4  text-white">
               <Typography className="font-bold pr-[3%]" variant="h5">
                 Get access to unlimited <br /> funds
               </Typography>
               <Typography className="mt-5 pr-[10%]">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad{" "}
+                Create your profile. Once approved, proceed to make a request .
+                The more complete your profile is, the better chance you'll be
+                approved on time and your most valued need met
               </Typography>
             </div>
           )}
-        </div>
-      )}
-      {open && (
-        <div className="">
-          <DialogTitle>
-            <div className="flex justify-between items-center">
-              <div className="flex gap-8 items-center">
-                <MdArrowBackIosNew
-                  className="cursor-pointer"
-                  onClick={() =>
-                    setSection((prev) => (prev > 1 ? prev - 1 : prev))
-                  }
-                />
-                <Typography className="font-bold" variant="h6">
-                  Complete Registration - {section} of 2
-                </Typography>
-              </div>
-
-              <MdCancel className="cursor-pointer" onClick={handleClose} />
-            </div>
-          </DialogTitle>
-          <DialogContent sx={{ width: "500px" }}>
-            {/* Section 1 */}
-            {section == 3 && (
-              <div>
-                <div className="w-full flex flex-col gap-3">
-                  <div>
-                    <InputLabel className="text-left mb-2">
-                      Board Member Information
-                    </InputLabel>
-                    <TextField
-                      fullWidth
-                      name="board_member_information"
-                      value={completeRegFormData?.board_member_information}
-                      // label="Select"
-                      onChange={onChange}
-                      // helperText="Please select your currency"
-                    />
-                  </div>
-                  <div></div>
-                  <div className="w-full">
-                    <InputLabel className="text-left mb-2">
-                      {" "}
-                      Organizational Structure
-                    </InputLabel>
-                    <TextField
-                      fullWidth
-                      name="organization_structure"
-                      value={completeRegFormData?.organization_structure}
-                      // label="Select"
-                      onChange={onChange}
-                      // helperText="Please select your currency"
-                    />
-                  </div>
-                  <div className="w-full">
-                    <InputLabel className="text-left mb-2">
-                      {" "}
-                      Account Information
-                    </InputLabel>
-                    <TextField
-                      fullWidth
-                      name="account_information"
-                      value={completeRegFormData?.account_information}
-                      // label="Select"
-                      onChange={onChange}
-                      // helperText="Please select your currency"
-                    />
-                  </div>
-
-                  {/* <div className="w-full">
-                    <InputLabel className="text-left mb-2">
-                      {" "}
-                      Organizational Structure
-                    </InputLabel>
-                    <TextField
-                      fullWidth
-                      name="streetName"
-                      value={completeRegFormData?.street_name}
-                      // label="Select"
-                      onChange={onChange}
-                      // helperText="Please select your currency"
-                    />
-                  </div> */}
-                </div>
-                <div className="flex flex-col gap-2  items-center text-center p-10">
-                  <Typography className="text-xs">
-                    Upload Gov’t approved ID (Voter’s card, NIN, Int’l Passport,
-                    Driver’s License)
-                  </Typography>
-
-                  {/* <div className="w-full">
-                    <InputLabel className="text-left mb-2">Id Type</InputLabel>
-                    <TextField
-                      fullWidth
-                      id="outlined-select-currency"
-                      select
-                      onChange={onChange}
-                      // label="Select"
-                      // helperText="Please select your currency"
-                    >
-                      {idTypes?.map((option) => (
-                        <MenuItem key={option.id} value={option.id}>
-                          {option.type}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </div> */}
-
-                  <div>
-                    <Typography className="text-left mb-2">
-                      Front Of Id
-                    </Typography>
-                    {!ridersPicture && (
-                      <div>
-                        <input
-                          onChange={onFileChange}
-                          style={{ display: "none" }}
-                          id="contained-button-file"
-                          type="file"
-                        />
-                        <label
-                          htmlFor="contained-button-file"
-                          className="mb-8 cursor-pointer"
-                        >
-                          <img src={uploadPNG} />
-                        </label>
-                      </div>
-                    )}
-                    {ridersPicture && (
-                      <div className="relative w-20">
-                        <Avatar
-                          className="w-32 h-32 border border-blue-300"
-                          src={imgData}
-                        />
-                        {/* <Typography>{ridersPictureName.name}</Typography> */}
-                        <div
-                          onClick={() => setRidersPicture("")}
-                          className="p-1 bg-red-500 absolute w-4 h-4 flex justify-center hover:cursor-pointer items-center top-0 left-32 text-white rounded-full"
-                        >
-                          x
-                        </div>
-                      </div>
-                    )}
-                    {/* <Typography className="text-left mb-2 mt-4">
-                    Back Of Id
-                  </Typography>
-                  <img src={uploadPNG} /> */}
-                  </div>
-                </div>
-              </div>
-            )}
-            {
-              /* Section 2 */
-              section == 1 && (
-                <div className="flex flex-col gap-2  items-center p-10">
-                  <Typography className="text-xs text-left text-[#667085">
-                    Enter Physical Address
-                  </Typography>
-                  <div className="w-full flex flex-col gap-3">
-                    <div className="flex justify-between gap-5">
-                      <div className="w-full">
-                        <InputLabel className="text-left mb-2">
-                          {" "}
-                          Country
-                        </InputLabel>
-                        <TextField
-                          onChange={(e) => {
-                            onChange(e);
-                            // getLgas(e.target.value);
-                          }}
-                          fullWidth
-                          id="outlined-select-currency"
-                          select
-                          // label="Select"
-                          name="country_id"
-                          // value={completeRegFormData?.state_id}
-
-                          // helperText="Please select your currency"
-                        >
-                          {countriez?.map((option) => (
-                            <MenuItem key={option.id} value={option.id}>
-                              {option.country_name}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </div>
-                      <div className="w-full">
-                        <InputLabel className="text-left mb-2">
-                          {" "}
-                          State Of Residence
-                        </InputLabel>
-                        <TextField
-                          onChange={(e) => {
-                            onChange(e);
-                            getLgas(e.target.value);
-                          }}
-                          fullWidth
-                          id="outlined-select-currency"
-                          select
-                          // label="Select"
-                          name="state_id"
-                          // value={completeRegFormData?.state_id}
-
-                          // helperText="Please select your currency"
-                        >
-                          {states?.map((option) => (
-                            <MenuItem key={option.id} value={option.id}>
-                              {option.state}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-5">
-                      <div className="w-full">
-                        <InputLabel className="text-left mb-2">
-                          LGA of Residence
-                        </InputLabel>
-                        <TextField
-                          onChange={onChange}
-                          fullWidth
-                          id="outlined-select-currency"
-                          select
-                          name="lga_id"
-                        >
-                          {lgas?.map((option) => (
-                            <MenuItem key={option?.id} value={option?.id}>
-                              {option?.lga}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </div>
-                      <div className="w-full">
-                        <InputLabel className="text-left mb-2">
-                          {" "}
-                          City
-                        </InputLabel>
-                        <TextField
-                          onChange={onChange}
-                          name="city"
-                          value={completeRegFormData?.city}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="w-full">
-                      <InputLabel className="text-left mb-2">
-                        {" "}
-                        Address
-                      </InputLabel>
-                      <TextField
-                        multiline
-                        rows={2}
-                        fullWidth
-                        name="address"
-                        value={completeRegFormData?.address}
-                        // label="Select"
-                        onChange={onChange}
-                        // helperText="Please select your currency"
-                      />
-                    </div>
-                    <div className="w-full">
-                      <InputLabel className="text-left mb-2">
-                        {" "}
-                        About Us
-                      </InputLabel>
-                      <TextField
-                        multiline
-                        rows={4}
-                        fullWidth
-                        name="about"
-                        value={completeRegFormData?.about}
-                        // label="Select"
-                        onChange={onChange}
-                        // helperText="Please select your currency"
-                      />
-                    </div>
-
-                    {/* <div className="w-full">
-                    <InputLabel className="text-left mb-2">
-                      {" "}
-                      Countries
-                    </InputLabel>
-                    <TextField
-                      onChange={(e) => {
-                        onChange(e);
-                        getLgas(e.target.value);
-                      }}
-                      fullWidth
-                      id="outlined-select-currency"
-                      select
-                      // label="Select"
-                      name="state_id"
-                      // value={completeRegFormData?.state_id}
-
-                      // helperText="Please select your currency"
-                    >
-                      {countriez?.map((option) => (
-                        <MenuItem key={option.id} value={option.id}>
-                          {option.goal}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </div> */}
-                  </div>
-                </div>
-              )
-            }
-
-            {section == 2 && (
-              <div>
-                <div className="w-full">
-                  <InputLabel className="text-left mb-2">
-                    {" "}
-                    Select NGO Category
-                  </InputLabel>
-                  <TextField
-                    onChange={(e) => {
-                      onChange(e);
-                      // getLgas(e.target.value);
-                    }}
-                    fullWidth
-                    id="outlined-select-currency"
-                    select
-                    // label="Select"
-                    name="category_id"
-                    // value={completeRegFormData?.state_id}
-
-                    // helperText="Please select your currency"
-                  >
-                    {categoriez?.map((option) => (
-                      <MenuItem key={option.id} value={option.id}>
-                        {option.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-                <div className="w-full">
-                  <InputLabel className="text-left mb-2">
-                    {" "}
-                    Select NGO SDG
-                  </InputLabel>
-                  <TextField
-                    onChange={(e) => {
-                      onChange(e);
-                      // getLgas(e.target.value);
-                    }}
-                    fullWidth
-                    id="outlined-select-currency"
-                    select
-                    // label="Select"
-                    name="s_d_g_id"
-                    // value={completeRegFormData?.state_id}
-
-                    // helperText="Please select your currency"
-                  >
-                    {sdgz?.map((option) => (
-                      <MenuItem key={option.id} value={option.id}>
-                        {option.goal}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-                <div className="w-full">
-                  <InputLabel className="text-left mb-2">
-                    {" "}
-                    Select Donation Category
-                  </InputLabel>
-                  <TextField
-                    onChange={(e) => {
-                      onChange(e);
-                      // getLgas(e.target.value);
-                    }}
-                    fullWidth
-                    id="outlined-select-currency"
-                    select
-                    // label="Select"
-                    name="request_type_id"
-                    // value={completeRegFormData?.state_id}
-
-                    // helperText="Please select your currency"
-                  >
-                    {idTypes?.map((option) => (
-                      <MenuItem key={option.id} value={option.id}>
-                        {option.type && option.type == "Materials"
-                          ? "In Kind"
-                          : option.type}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-                <div className="w-full">
-                  <InputLabel className="text-left mb-2">
-                    {" "}
-                    Select Donation Sub-Category
-                  </InputLabel>
-                  <TextField
-                    onChange={(e) => {
-                      onChange(e);
-                      // getLgas(e.target.value);
-                    }}
-                    fullWidth
-                    id="outlined-select-currency"
-                    select
-                    // label="Select"
-                    name="sub_request_type_id"
-                    // value={completeRegFormData?.state_id}
-
-                    // helperText="Please select your currency"
-                  >
-                    {subcategory
-                      ?.filter(
-                        (e) =>
-                          e.request_type_id ==
-                          completeRegFormData?.request_type_id
-                      )
-
-                      .map((option) => (
-                        <MenuItem key={option.id} value={option.id}>
-                          {option.item_name}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                </div>
-              </div>
-            )}
-          </DialogContent>
-          <DialogActions>
-            <div className="flex gap-5 w-full  mx-20">
-              <Button
-                className="p-3 w-full bg-none text-base mb-10 text-white"
-                type="submit"
-                onClick={() => {
-                  handleClose();
-                  // redirect();
-                }}
-                // className=' '
-              >
-                Cancel
-              </Button>
-
-              <Button
-                className="p-3 w-full text-base mb-10 text-white"
-                type="submit"
-                // disabled
-                onClick={() => {
-                  section > 2
-                    ? completeApplication()
-                    : setSection((prev) => prev + 1);
-                  // handleClose();
-                  // redirect();
-                }}
-                // className=' '
-              >
-                Next
-              </Button>
-            </div>
-          </DialogActions>
         </div>
       )}
     </div>

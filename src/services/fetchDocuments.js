@@ -39,7 +39,7 @@ const fetchBackend = async (
   console.log(endpoint);
   console.log(body);
   const path = paths[endpoint] || endpoint;
-  let url = `https://api.rampng.com/public/api/${path}`;
+  let url = `https://api.rampng.com/api/${path}`;
   // let url = `https://api.educatial.com/public/api/${path}`;
   // let url = `https://tryba.io/api/v2/${path}`;
   //  `${process.env.TRYBA_API}/${path}`;

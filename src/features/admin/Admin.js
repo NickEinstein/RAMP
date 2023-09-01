@@ -59,7 +59,7 @@ function Admin(props) {
   const [user, setUser] = React.useState();
 
   const [imgData, setImgData] = useState(null);
-  const [myContributions, setMyContributions] = useState([null]);
+  const [myProjects, setmyProjects] = useState([null]);
   const [showApproveButton, setShowApproveButton] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [grants, setGrants] = useState([]);
@@ -73,9 +73,16 @@ function Admin(props) {
   const [filterStatus, setfilterStatus] = React.useState("pending");
 
   const handleOpen = () => setOpens(true);
-  const handleClick = (event) => {
+  const handleClick = (event, e) => {
     setAnchorEl(event.currentTarget);
+    setUser(e?.applied_by)
+
   };
+
+  const viewUser = (e)=>{
+    console.log(e)
+
+  }
 
   const handleClose = async (id, status) => {
     console.log(id);
@@ -123,8 +130,6 @@ function Admin(props) {
     p: 4,
   };
 
- 
-
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
 
   const history = useNavigate();
@@ -153,7 +158,22 @@ function Admin(props) {
     setdisplayArray(res.data.data.requests);
     setdisplayArrayTable(res.data.data.requests);
 
+    console.log(res.data.data.requests);
+
     //  setIsRegCompleted(res?.data?.data?.states);
+  };
+
+  const getDD = async (e) => {
+    console.log(e);
+    const res = await get({
+      endpoint: `projects`,
+      // body: formData,
+      // auth: false,
+    });
+
+    console.log(res);
+
+    setmyProjects(res?.data?.data?.projects);
   };
 
   const checkDisplayArray = (stats) => {
@@ -297,7 +317,7 @@ function Admin(props) {
                   >
                     Date
                   </Typography>
-                
+
                   {/* <Typography variant="h6" className="w-1/5 text-center ">
                     View Attachment
                   </Typography> */}
@@ -420,7 +440,9 @@ function Admin(props) {
                           {showApproveButton && (
                             <Button
                               className="font-bold text-white"
-                              onClick={handleClick}
+                              onClick={(event) => {
+                                handleClick(event, e);
+                              }}
                             >
                               Action Button
                             </Button>
@@ -445,8 +467,8 @@ function Admin(props) {
                             <MenuItem
                               onClick={() => {
                                 handleView(e?.id, "cancelled");
-                                setUser(e?.applied_by);
                                 setCurrentDetail(e);
+                                getDD(e);
                               }}
                             >
                               view Details
@@ -479,7 +501,7 @@ function Admin(props) {
                 <div className="flex">
                   <Avatar
                     sx={{ width: 100, height: 100 }}
-                    src={user?.profileUrl || "/broken-image.jpg"}
+                    src={user?.avatar || "/broken-image.jpg"}
                   />
                 </div>
                 <div className="mt-4">
@@ -541,9 +563,21 @@ function Admin(props) {
                   variant="h5"
                   className="font-semibold text-center w-full"
                 >
-                  Previous Projects:
+                  Campaigns:
                 </Typography>
-                <Typography className="text-center">{user?.about}</Typography>
+                <div className="flex align-center text-center ">
+                  {myProjects.map((e) => (
+                    <div className="flex flex-col items-center justify-center text-center ">
+                      <img
+                        className="w-[200px] "
+                        src={e?.attachments[0]?.url?.replace(/\/public/g, "")}
+                      />
+                      <Typography className="text-center">
+                        {e?.title}{" "}
+                      </Typography>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </Box>

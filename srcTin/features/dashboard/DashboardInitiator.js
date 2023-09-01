@@ -453,7 +453,7 @@ setLoading(true)
                 onClick={handleOpen}
                 className="bg-primary-main h-10 text-white rounded-sm md:w-2/5"
               >
-                Complete application
+                Complete Registration
               </Button>
             ) : (
               <div className="flex gap-5 w-full text-white">
@@ -498,7 +498,7 @@ setLoading(true)
                   }
                 />
                 <Typography className="font-bold" variant="h6">
-                  Complete Application - {section} of 2
+                  Complete Registration - {section} of 2
                 </Typography>
               </div>
 
@@ -697,7 +697,7 @@ setLoading(true)
                   }
                 />
                 <Typography className="font-bold" variant="h6">
-                  Complete Application - {section} of 2
+                  Complete Registration - {section} of 2
                 </Typography>
               </div>
 

@@ -17,12 +17,14 @@ import PasswordTextField from "common/PasswordTextField";
 import { getTextFieldFormikProps } from "utils/FormikUtils";
 // import { Typography, Container, Box, Tab, Tabs, Paper, Button } from "@mui/material";
 import ourStory from "images/homelanding/LandingNGO.6976716afed3705df208.jpg.svg";
+import miriam from "images/homelanding/MiriamElegbedeDFA.jpg";
 // import { Link } from "react-router-dom";
 
 import useAuthUser from "hooks/useAuthUser";
 import { Link, Navigate } from "react-router-dom";
 import { RouteEnum } from "constants/RouteConstants";
-import image from "images/Ramp1.png";
+import image from "images/homelanding/annie-spratt-0cgpyigyIkM-unsplash.jpg";
+import image2 from "images/homelanding/annie-spratt-GaLzDCnA5EI-unsplash.jpg";
 import LoginHeader from "common/LoginHeader";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -78,8 +80,59 @@ import useDataRef from "hooks/useDataRef";
 import about from "images/homelanding/whatwedo.jpg";
 import { useNavigate } from "react-router-dom";
 import { MediaQueryBreakpointEnum } from "constants/Global";
+// import React, { useEffect, useState } from 'react';
+
+const Header = () => {
+  const [scrollPos, setScrollPos] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+
+      setIsScrolled(currentScrollPos > 0);
+      setScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-500 ${
+        isScrolled ? 'opacity-0' : 'opacity-100'
+      }`}
+    >
+      <nav className="bg-gray-900 py-4">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
+            <h1 className="text-white text-lg font-semibold">My Website</h1>
+            <ul className="flex space-x-4">
+              <li>
+                <a href="#" className="text-white hover:text-gray-300">Home</a>
+              </li>
+              <li>
+                <a href="#" className="text-white hover:text-gray-300">About</a>
+              </li>
+              <li>
+                <a href="#" className="text-white hover:text-gray-300">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+
+
 
 function Home(props) {
+
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -89,11 +142,13 @@ function Home(props) {
 
   return (
     <div>
-      <LoginHeader/>
+      <LoginHeader />
+      {/* <Header /> */}
+
       <div
         className="h-[400px] flex justify-center items-center"
         style={{
-          backgroundImage: `url(${about})`,
+          backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -108,17 +163,17 @@ function Home(props) {
 
       <Container className="py-12" maxWidth="xl">
         <Box>
-          <div className="w-10/12 text-base">
-            <div className="flex flex-col gap-5">
+          <div className="w-full  text-lg flex gap-12">
+            <div className="flex flex-col gap-3 w-3/5">
               <Typography
-                className="text-base
+                className="text-lg
                   "
               >
                 We are the only platform that provides a one stop solution to
                 all nonprofit and donor needs.
               </Typography>
               <Typography
-                className="text-base
+                className="text-lg
                   "
               >
                 We connect nonprofits across Africa to all the valuable
@@ -127,7 +182,7 @@ function Home(props) {
               </Typography>
 
               <Typography
-                className="text-base
+                className="text-lg
                   "
               >
                 RAMP is a platform that lets donors like you send money,
@@ -139,7 +194,7 @@ function Home(props) {
               </Typography>
 
               <Typography
-                className="text-base
+                className="text-lg
                   "
               >
                 We provide resource mobilization, capacity building and a rich
@@ -147,7 +202,7 @@ function Home(props) {
               </Typography>
 
               <Typography
-                className="text-base
+                className="text-lg
                   "
               >
                 We believe that for many Africans to stay out of poverty then
@@ -155,7 +210,7 @@ function Home(props) {
               </Typography>
 
               <Typography
-                className="text-base
+                className="text-lg
                   "
               >
                 Since 2018, we’ve delivered $30M+ to nonprofits in Nigeria,
@@ -168,13 +223,15 @@ function Home(props) {
               </Typography>
 
               <Typography
-                className="text-base
+                className="text-lg
                   "
               >
                 RAMP is funded by individual donors, foundations, businesses,
                 and institutions.
               </Typography>
             </div>
+
+            <img className="w-2/5" src={miriam}/>
           </div>
         </Box>
       </Container>
@@ -229,7 +286,7 @@ export default Home;
 //                 <Typography variant="h2" gutterBottom>
 //                   Our Values
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Intergrity:</span> We maintain the
 //                   highest standards of professional and ethical behavior and
 //                   value transparency and honesty in our communications,
@@ -237,30 +294,30 @@ export default Home;
 //                   donation reports are tracked and delivered straight to your
 //                   inbox with opportunity to verify
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Excellence:</span> We don’t settle for
 //                   anything less. We do it right the first time, ensuring that
 //                   all reports, request and needs once filed are automatically
 //                   reviewed and feedback providied
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Professionalism:</span> Our team of
 //                   developers, staff, board and champions are ‘’trustworthy,
 //                   competent, direct, a self-starter, and a constant
 //                   professional.”
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                  <span class="font-bold"> Our Recepient’s:</span> First You are
 //                   guaranteed that the needs of all our beneficiaries are
 //                   prioritized and delivered. We ensure that all{" "}
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Collaboration:</span> We leverage the
 //                   power of many to achieve our results. We do not work in silos.
 //                   Team spirit, healthy work environment and increased
 //                   partnership with internal and external stakeholders.
 //                 </Typography>
-//                 <Typography className='text-base'>
+//                 <Typography className='text-lg'>
 //                   <span class="font-bold">Impact/Solution Driven:</span> We are
 //                   not weighed down by problems. We strongly believe in solving
 //                   problems one at a time. We are result driven

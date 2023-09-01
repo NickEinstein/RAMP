@@ -30,9 +30,12 @@ body,
   margin: 0 !important;
 } */
 
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Montserrat', sans-serif !important;
+/* font-family: 'Teko', sans-serif; */
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
 }
 .login-top-border{
   border-bottom:2.29px solid #C4C4C4;

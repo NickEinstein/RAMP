@@ -16,8 +16,9 @@ import ngo from "images/homelanding/NGO.jpg";
 import inKind from "images/homelanding/in-kind.jpg";
 import donor from "images/homelanding/donate.jpg";
 import techExpert from "images/homelanding/howItWorks.jpg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MediaQueryBreakpointEnum } from "constants/Global";
+import { RouteEnum } from "constants/RouteConstants";
 
 function Home(props) {
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
@@ -36,10 +37,20 @@ function Home(props) {
       </Typography>
 
       <Container className="pb-12" maxWidth="xl">
+        <Typography variant="h5" className="text-center">
+          There are a plethora of ways that an individual or corporation can
+          give back to the community. You can donate funds, merchandise,
+          appliances, pledge volunteer hours with non-profits, technical
+          expertise or give your employees up to 7 days off a year to volunteer.
+          You can also give back by making matching staff and employee
+          donations.
+        </Typography>
+
         <div>
           {[
             {
               img: donor,
+              link: RouteEnum.SIGNUP,
               type: "As a Donor:",
               title: "For Donor:",
               text: `Start by deciding if you are donating funds or your technical expertise.
@@ -52,6 +63,7 @@ Once you make a donation. Look out for an official email from us to guarantee ma
             {
               img: techExpert,
               title: "Technical Expert Donor:",
+              link: RouteEnum.SIGNUP,
               type: "As a Technical Expert Donor:",
               text: ` Create your profile, Search our pool of vibrant and vetted NGOs|CSOs, Reach out and connect: When you've found NGO’s |CSO’s you’ll like to provide technical expertise to, introduce yourself! and share how youwish to support them and for what time frame. 
 
@@ -59,6 +71,7 @@ Once you make a donation. Look out for an official email from us to guarantee ma
             },
             {
               img: inKind,
+              link: RouteEnum.SIGNUP,
               type: "As an In Kind Donor",
               title: "For Donors providing in kind donation:",
               text: `Simply click the link, search the pool of vetted NGOs|CSOs, pick a country and confirm what donation you will be making. Confirm your location and we will pick up or you can request delivery details
@@ -66,6 +79,7 @@ Once you make a donation. Look out for an official email from us to guarantee ma
             },
             {
               img: ngo,
+              link: RouteEnum.SIGNUP,
               type: "As NGO",
               title: "For NGO’s:",
               text: `Tell us about yourself and your organization. Create your profile. Once approved, proceed to make a request . The more complete your profile is, the better chance you'll be approved on time and your most valued need met
@@ -85,7 +99,11 @@ Once you make a donation. Look out for an official email from us to guarantee ma
                 </Typography>
                 <Typography className="text-base" component={"div"}>
                   <Typography className="text-base my-2">{e?.text}</Typography>
-                  <Button className="py-3 px-12 my-8">Sign Up {e?.type}</Button>
+                  <Link to={e?.link}>
+                    <Button className="py-3 px-12 my-8">
+                      Sign Up {e?.type}
+                    </Button>
+                  </Link>
                 </Typography>
               </div>
             </div>

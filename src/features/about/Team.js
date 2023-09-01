@@ -22,7 +22,10 @@ import ourStory from "images/homelanding/LandingNGO.6976716afed3705df208.jpg.svg
 import useAuthUser from "hooks/useAuthUser";
 import { Link, Navigate } from "react-router-dom";
 import { RouteEnum } from "constants/RouteConstants";
-import image from "images/Ramp1.png";
+import amarchi from "images/homelanding/AmechiKoldsweat.jpeg";
+import chidi from "images/homelanding/CHIDI2023new.jpg";
+import hajara from "images/homelanding/HajaraPitan.png";
+import miriam from "images/homelanding/MiriamElegbedeDFA.jpg";
 import LoginHeader from "common/LoginHeader";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -97,7 +100,7 @@ function Home(props) {
 
   return (
     <div>
-     <LoginHeader/>
+      <LoginHeader />
       <div
         className="h-[400px] flex justify-center items-center"
         style={{
@@ -122,17 +125,17 @@ function Home(props) {
           <div className="col-span-2 w-full">
             <div className=" w-10/12 flex flex-col gap-6 ml-auto">
               <Typography variant="h5">
-                RAMP is a team of dynamic individuals with a passion for
-                change management and depth in their respective areas of
-                expertise. Our dedicated employees bring energy, fresh ideas and
-                pride to their work.
+                RAMP is a team of dynamic individuals with a passion for change
+                management and depth in their respective areas of expertise. Our
+                dedicated employees bring energy, fresh ideas and pride to their
+                work.
               </Typography>
               <Typography variant="h5">
-                We view RAMP’s culture as a competitive advantage and strive
-                to create an environment where smart, motivated and creative
-                people succeed. We think big and work hard. We strive for
-                excellence in everyday interactions. We constantly push to be
-                better. We shoot each other with Nerf guns.
+                We view RAMP’s culture as a competitive advantage and strive to
+                create an environment where smart, motivated and creative people
+                succeed. We think big and work hard. We strive for excellence in
+                everyday interactions. We constantly push to be better. We shoot
+                each other with Nerf guns.
               </Typography>
             </div>
           </div>
@@ -149,32 +152,37 @@ function Home(props) {
             centered
           >
             <Tab label="Executives" className="font-bold text-base" />
-            <Tab label="Tech" className="font-bold text-base" />
-            <Tab label="Managers" className="font-bold text-base" />
+            {/* <Tab label="Tech" className="font-bold text-base" />
+            <Tab label="Managers" className="font-bold text-base" /> */}
           </Tabs>
         </Paper>
+        {/* <img src={amarchi}/> */}
         <Box className="w-full justify-between grid grid-cols-4 gap-8 px-10">
-          {[
-            {
-              role: "Managing Director",
-              name: "Abraham Lincoln",
-              img: "Abraham Lincoln",
-            },
-            { role: "CEO", name: "Abraham Lincoln", img: "Abraham Lincoln" },
-            {
-              role: "Tech Lead",
-              name: "Abraham Lincoln",
-              img: "Abraham Lincoln",
+          {[ {
+              role: " Executive Director",
+              name: " Chidi Koldsweat",
+              img: chidi,
             },
             {
-              role: "Project Manager",
-              name: "Abraham Lincoln",
-              img: "Abraham Lincoln",
+              role: "Director,  Brands, Marketing & Partnerships  - Nigeria",
+              name: "Amaechi Koldsweat",
+              img: amarchi,
+            },
+            {
+              role: "Director , Saudi Arabia",
+              name: " Miriam Elegbede",
+              img: miriam,
+            },
+           
+            {
+              role: " Director - Nigeria",
+              name: "Hajara Pitan Lincoln",
+              img: hajara,
             },
           ].map((e) => (
             <div
               style={{
-                backgroundImage: `url(${about})`,
+                backgroundImage: `url(${e.img})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",

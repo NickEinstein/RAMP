@@ -65,6 +65,8 @@ function Dashboard(props) {
       // auth: false,
     });
 
+    console.log(res)
+
     //  setIsRegCompleted(res?.data?.data?.states);
   };
   

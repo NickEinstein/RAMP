@@ -16,7 +16,8 @@ import backgroundImage5 from "../../images/ramphome5.jpg";
 import PasswordTextField from "common/PasswordTextField";
 import { getTextFieldFormikProps } from "utils/FormikUtils";
 // import { Typography, Container, Box, Tab, Tabs, Paper, Button } from "@mui/material";
-import ourStory from "images/homelanding/LandingNGO.6976716afed3705df208.jpg.svg";
+import ourStory from "images/Chizoba-Okpala-Atsu.jpg";
+import chidi from "images/homelanding/CHIDI2023new.jpg";
 // import { Link } from "react-router-dom";
 
 import useAuthUser from "hooks/useAuthUser";
@@ -24,6 +25,9 @@ import { Link, Navigate } from "react-router-dom";
 import { RouteEnum } from "constants/RouteConstants";
 import image from "images/Ramp1.png";
 import LoginHeader from "common/LoginHeader";
+import lineElipse from "images/homelanding/Ellipse 2.svg";
+import svg1 from "images/homelanding/Frame 84.svg";
+
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -75,9 +79,12 @@ import {
 } from "@mui/material";
 import useStepper from "hooks/useStepper";
 import useDataRef from "hooks/useDataRef";
-import about from 'images/homelanding/ourStory.jpg'
+// import about from "images/Chizoba-Okpala-Atsu.jpg";
+import about from "images/homelanding/ourStory.jpg";
+
 import { useNavigate } from "react-router-dom";
 import { MediaQueryBreakpointEnum } from "constants/Global";
+import Footer from "common/Footer";
 
 function Home(props) {
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
@@ -94,7 +101,7 @@ function Home(props) {
       <div
         className="h-[400px] flex justify-center items-center"
         style={{
-          backgroundImage: `url(${about})`,
+          backgroundImage: `url(${ourStory})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -108,424 +115,228 @@ function Home(props) {
       </div>
 
       <Container className="py-12" maxWidth="xl">
-        <Box>
-          <div className="w-10/12 text-base">
-            <Typography
-              className="underline-offset-2 font-bold underline mb-5"
-              variant="h5"
-            >
+        <Box className="">
+          <Typography className="text-center px-32 pb-16" variant="h4">
+            “With experience gathered from over 14years designing accelerator
+            programs, leading changemakers from 20 African countries and
+            different continents; RAMP is designed to help organizations scale
+            up their impact in the communities they serve and transform their
+            countries.”
+          </Typography>
+          <div className="w-full  text-base">
+            <Typography className=" font-bold mb-5" variant="h4">
               The Power of a Table and Chair
             </Typography>
-            <div class="flex flex-col gap-4 text-base">
-              <Typography className="text-base">
-                In 2017 our founder, sat on her sons chair with her laptop
-                placed on the bed, working on the new vision that is to become
-                Donors for Africa Foundation. As she bemoaned the growing pain
-                on her waist as a result of her posture, she took a break to
-                scroll through instagram.
-              </Typography>
-              <Typography className="text-base">
-                Few minutes later she read a post asking people to ‘’Make an
-                Ask’’. She did.
-              </Typography>
-              <Typography className="text-base">
-                She asked for a Table and Chair.
-              </Typography>
-              <Typography className="text-base">
-                The next day, Chizoba O. Atsu delivered a brown mahogany table
-                to her home and the rest they say is history. Since then, she
-                has gone on to;
-              </Typography>
-              <ul className="list-inside list-disc pl-8">
-                <li>Birth the DFA Vision</li>
-                <li>
-                  Trained over 5000+ nonprofits who have raised over $30M in
-                  funding
-                </li>
-                <li>
-                  Funds have been used to launch school libraries, back to
-                  school programs, women empowerment campaigns and so much more
-                  which has directly transformed the lives of so many Africans
-                  reaching over 51,000 people weekly with life changing stories,
-                  learning and solutions. and so many more results.
-                </li>
-                <img src={ourStory} />
-              </ul>
-              <Typography className="text-base">
-                With experience gathered from over 14years designing accelerator
-                programs, leading changemakers from 20 African countries and
-                different continents; RAMP is designed to help organizations
-                scale up their impact in the communities they serve and
-                transform their countries.
-              </Typography>
-              <div>
-                <span className="text-base mr-2">
-                  You can make direct donations as
-                </span>
-                <span className="text-base font-bold mr-2">An Individual,</span>
-                <span className="text-base font-bold mr-2">A Government,</span>
-                <span className="text-base font-bold mr-2">
-                  A Technical Expert,
-                </span>
-                <span className="text-base font-bold mr-2">
-                  A Growing Business,
-                </span>
-                <span className="text-base font-bold mr-2">
-                  A multinational or private sector company, to trusted
-                  organizations across Africa.
-                </span>
+            <div className="grid grid-cols-2 items-start justify-between gap-16 w-full">
+              <div class="flex flex-col gap- text-base w-full">
+                <Typography className="text-base">
+                  In 2017 our founder, sat on her sons chair with her laptop
+                  placed on the bed, working on the new vision that is to become
+                  Donors for Africa Foundation. As she bemoaned the growing pain
+                  on her waist as a result of her posture, she took a break to
+                  scroll through instagram.
+                </Typography>
+                <Typography className="text-base">
+                  Few minutes later she read a post asking people to ‘’Make an
+                  Ask’’. She did.
+                </Typography>
+                <Typography className="text-base">
+                  She asked for a Table and Chair.
+                </Typography>
+                <Typography className="text-base">
+                  The next day, Chizoba O. Atsu delivered a brown mahogany table
+                  to her home and the rest they say is history. Since then, she
+                  has gone on to;
+                </Typography>
+                <ul className="list-inside list-disc pl-8">
+                  <li>Birth the DFA Vision</li>
+                  <li>
+                    Trained over 5000+ nonprofits who have raised over $30M in
+                    funding
+                  </li>
+                  <li>
+                    Funds have been used to launch school libraries, back to
+                    school programs, women empowerment campaigns and so much
+                    more which has directly transformed the lives of so many
+                    Africans reaching over 51,000 people weekly with life
+                    changing stories, learning and solutions. and so many more
+                    results.
+                  </li>
+                </ul>
+                <Typography className="text-base">
+                  With experience gathered from over 14years designing
+                  accelerator programs, leading changemakers from 20 African
+                  countries and different continents; RAMP is designed to help
+                  organizations scale up their impact in the communities they
+                  serve and transform their countries.
+                </Typography>
+                <div>
+                  <span className="text-base mr-2">
+                    You can make direct donations as
+                  </span>
+                  <span className="text-base font-bold mr-2">
+                    An Individual,
+                  </span>
+                  <span className="text-base font-bold mr-2">
+                    A Government,
+                  </span>
+                  <span className="text-base font-bold mr-2">
+                    A Technical Expert,
+                  </span>
+                  <span className="text-base font-bold mr-2">
+                    A Growing Business,
+                  </span>
+                  <span className="text-base font-bold mr-2">
+                    A multinational or private sector company, to trusted
+                    organizations across Africa.
+                  </span>
+                </div>
+                {/* <div className="text-base font-bold w-full flex justify-start mt-16">
+                  <div className=" ">
+                    <Typography className="text-base font-bold ">
+                      Thank You!
+                    </Typography>
+                    <Typography className="text-base font-bold  my-3">
+                      Signature
+                    </Typography>{" "}
+                    <Typography className="text-base font-bold  my-3">
+                      Chidi Koldsweat (Founder and CEO)
+                    </Typography>
+                    <Typography className="text-base font-bold ">
+                      Donors for Africa Foundation
+                    </Typography>
+                  </div>
+                </div> */}
               </div>
-              <div className="text-base font-bold w-full flex justify-start mt-16">
-                <div className=" ">
-                  <Typography className="text-base font-bold ">
-                    Thank You!
+              <div>
+                <div
+                  className="h-[500px] w-full pl-40 flex justify-center items-center rounded-3xl"
+                  style={{
+                    backgroundImage: `url(${chidi})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    // width: "100%",
+                    // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
+                  }}
+                >
+                  {/* <img className="w-5/12 h-[400px] rounded-3xl" src={ourStory} /> */}
+                </div>
+                <div className="p-3 ">
+                  <Typography className="text-base font-bold">
+                    Chidi Koldsweat
                   </Typography>
-                  <Typography className="text-base font-bold  my-3">
-                    Signature
-                  </Typography>{" "}
-                  <Typography className="text-base font-bold  my-3">
-                    Chizoba O. Atsu
-                  </Typography>
-                  <Typography className="font-bold text-sm">
+                  <Typography className="text-sm italic">
                     Founder and CEO
                   </Typography>
-                  <Typography className="text-base font-bold ">
+                  <Typography className="text-base font-bold italic">
                     Donors for Africa Foundation
                   </Typography>
                 </div>
               </div>
+              {/* <img src={girlpic} /> */}
             </div>
-            <div className="my-8 flex flex-col justify-center items-center">
-              <Typography
-                variant="h4"
-                className="text-primary-main font-bold text-center"
-              >
-                SIGN UP TODAY TO MAKE A DONATION
+
+            <div className="my-16">
+              <Typography className="text-center font-bold mb-8" variant="h3">
+                Our Values
               </Typography>
-              <Link to={RouteEnum.SIGNUP}>
-                <Button className="text-base py-3 px-12 my-5">SIGN UP</Button>
-              </Link>
+              <div class="grid grid-cols-3 gap-16">
+                <div>
+                  <img src={svg1} />
+                  <Typography
+                    variant="h4"
+                    className="mt-5 mb-2 font-bold text-[#01B6AC]"
+                  >
+                    Intergrity
+                  </Typography>
+                  <Typography className="mt-2 text-base">
+                    We maintain the highest standards of professional and ethical
+                    behavior and value transparency and honesty in our
+                    communications, relationships, and action with donors and
+                    beneficiaries. All donation reports are tracked and delivered
+                    straight to your inbox with opportunity to verify
+                  </Typography>
+                </div>
+                <div className="">
+                  <img src={svg1} />
+                  <Typography
+                    variant="h4"
+                    className="mt-5 mb-2 font-bold text-[#01B6AC]"
+                  >
+                    Excellence
+                  </Typography>
+                  <Typography className="mt-2 text-base">
+                    We don’t settle for anything less. We do it right the first
+                    time, ensuring that all reports, request and needs once filed
+                    are automatically reviewed and feedback providied
+                  </Typography>
+                </div>
+                <div>
+                  <img src={svg1} />
+                  <Typography
+                    variant="h4"
+                    className="mt-5 mb-2 font-bold text-[#01B6AC]"
+                  >
+                    Professionalism
+                  </Typography>
+                  <Typography className="mt-2 text-base">
+                    Our team of developers, staff, board and champions are
+                    ‘’trustworthy, competent, direct, a self-starter, and a
+                    constant professional.”
+                  </Typography>
+                </div>
+                <div>
+                  <img src={svg1} />
+                  <Typography
+                    variant="h4"
+                    className="mt-5 mb-2 font-bold text-[#01B6AC]"
+                  >
+                    Our Recepient’s
+                  </Typography>
+                  <Typography className="mt-2 text-base">
+                    First You are guaranteed that the needs of all our
+                    beneficiaries are prioritized and delivered. We ensure that
+                    all
+                  </Typography>
+                </div>
+                <div>
+                  <img src={svg1} />
+                  <Typography
+                    variant="h4"
+                    className="mt-5 mb-2 font-bold text-[#01B6AC]"
+                  >
+                    Collaboration
+                  </Typography>
+                  <Typography className="mt-2 text-base">
+                    We leverage the power of many to achieve our results. We do
+                    not work in silos. Team spirit, healthy work environment and
+                    increased partnership with internal and external stakeholders.
+                  </Typography>
+                </div>
+                <div>
+                  <img src={svg1} />
+                  <Typography
+                    variant="h4"
+                    className="mt-5 mb-2 font-bold text-[#01B6AC]"
+                  >
+                    Impact/Solution Driven:
+                  </Typography>
+                  <Typography className="mt-2 text-base">
+                    We are not weighed down by problems. We strongly believe in
+                    solving problems one at a time. We are result driven
+                  </Typography>
+                </div>
+              </div>
             </div>
+
+            
           </div>
         </Box>
       </Container>
+      <Footer change={true}/>
     </div>
   );
 }
 
 export default Home;
-
-// import React, { useState } from "react";
-// import { Typography, Container, Box, Tab, Tabs, Paper, Button } from "@mui/material";
-// import ourStory from "images/homelanding/LandingNGO.6976716afed3705df208.jpg.svg";
-// import { RouteEnum } from "constants/RouteConstants";
-// import { Link } from "react-router-dom";
-
-// function AboutPage() {
-//   const [selectedTab, setSelectedTab] = useState(0);
-
-//   const handleTabChange = (event, newValue) => {
-//     setSelectedTab(newValue);
-//   };
-
-//   return (
-//     <div class=" w-full py-10">
-//       <Container className="" maxWidth="xl">
-//         <Box sx={{ display: "flex", alignItems: "top" }}>
-//           <Paper sx={{ marginRight: 4 }} className="w-3/12 h-full px-5">
-//             <Typography className="text-center mb-6" variant="h3">
-//               About Us
-//             </Typography>
-//             <Tabs
-//               value={selectedTab}
-//               onChange={handleTabChange}
-//               orientation="vertical"
-//               variant="scrollable"
-//               scrollButtons="auto"
-//               aria-label="Vertical tabs"
-//             >
-//               <Tab label="Our Story" />
-//               <Tab label="What we do" />
-//               <Tab label="Our Values" />
-//               <Tab label="Our Team" />
-//               <Tab label="Careers" />
-//               <Tab label="FAQ" />
-//             </Tabs>
-//           </Paper>
-//           <Typography className="w-full" component="div">
-//             <Box hidden={selectedTab !== 0}>
-//               <div className="w-10/12 text-base">
-//                 <Typography variant="h2" gutterBottom>
-//                   Our Story
-//                 </Typography>
-//                 <Typography
-//                   className="underline-offset-2 font-bold underline mb-5"
-//                   variant="h5"
-//                 >
-//                   The Power of a Table and Chair
-//                 </Typography>
-
-//                 <div class="flex flex-col gap-4 text-base">
-//                   <Typography className="text-base">
-//                     In 2017 our founder, sat on her sons chair with her laptop
-//                     placed on the bed, working on the new vision that is to
-//                     become Donors for Africa Foundation. As she bemoaned the
-//                     growing pain on her waist as a result of her posture, she
-//                     took a break to scroll through instagram.
-//                   </Typography>
-//                   <Typography className="text-base">
-//                     Few minutes later she read a post asking people to ‘’Make an
-//                     Ask’’. She did.
-//                   </Typography>
-//                   <Typography className="text-base">
-//                     She asked for a Table and Chair.
-//                   </Typography>
-//                   <Typography className="text-base">
-//                     The next day, Chizoba O. Atsu delivered a brown mahogany
-//                     table to her home and the rest they say is history. Since
-//                     then, she has gone on to;
-//                   </Typography>
-//                   <ul className="list-inside list-disc pl-8">
-//                     <li>Birth the DFA Vision</li>
-//                     <li>
-//                       Trained over 5000+ nonprofits who have raised over $30M in
-//                       funding
-//                     </li>
-//                     <li>
-//                       Funds have been used to launch school libraries, back to
-//                       school programs, women empowerment campaigns and so much
-//                       more which has directly transformed the lives of so many
-//                       Africans reaching over 51,000 people weekly with life
-//                       changing stories, learning and solutions. and so many more
-//                       results.
-//                     </li>
-
-//                     <img src={ourStory} />
-//                   </ul>
-
-//                   <Typography className="text-base">
-//                     With experience gathered from over 14years designing
-//                     accelerator programs, leading changemakers from 20 African
-//                     countries and different continents; RAMP is designed to help
-//                     organizations scale up their impact in the communities they
-//                     serve and transform their countries.
-//                   </Typography>
-
-//                   <Typography className="text-base">
-//                     You can make direct donations as;
-//                   </Typography>
-
-//                   <Typography className="text-base font-bold">
-//                     An Individual
-//                   </Typography>
-//                   <Typography className="text-base font-bold">
-//                     A Government
-//                   </Typography>
-//                   <Typography className="text-base font-bold">
-//                     A Technical Expert
-//                   </Typography>
-//                   <Typography className="text-base font-bold">
-//                     A Growing Business
-//                   </Typography>
-//                   <Typography className="text-base font-bold">
-//                     A multinational or private sector company, to trusted
-//                     organizations across Africa.
-//                   </Typography>
-//                 </div>
-
-//                 <div className="my-8 flex flex-col justify-center items-center">
-//                   <Typography
-//                     variant="h4"
-//                     className="text-primary-main font-bold text-center"
-//                   >
-//                     SIGN UP TODAY TO MAKE A DONATION
-//                   </Typography>
-//                   <Link to={RouteEnum.SIGNUP}>
-//                     <Button className="text-base py-3 px-12 my-5">
-//                       SING UP
-//                     </Button>
-//                   </Link>
-//                 </div>
-
-//                 <div className="text-base font-bold w-full flex justify-end mt-16">
-//                   <div className="">
-//                     <Typography className="text-base font-bold text-center">
-//                       Thank You!
-//                     </Typography>
-//                     <Typography className="text-base font-bold text-center my-3">
-//                       Signature
-//                     </Typography>
-//                     <Typography className="text-base font-bold text-center">
-//                       Founder and CEO
-//                     </Typography>
-//                     <Typography className="text-base font-bold text-center">
-//                       Donors for Africa Foundation
-//                     </Typography>
-//                   </div>
-//                 </div>
-//               </div>
-//             </Box>
-//             <Box hidden={selectedTab !== 1}>
-//               <div className="w-10/12 text-base">
-//                 <Typography variant="h2" gutterBottom>
-//                   What we do
-//                 </Typography>
-//                 <div className="flex flex-col gap-5">
-//                   <Typography
-//                     className="text-base
-//                  "
-//                   >
-//                     We are the only platform that provides a one stop solution
-//                     to all nonprofit and donor needs.
-//                   </Typography>
-//                   <Typography
-//                     className="text-base
-//                  "
-//                   >
-//                     We connect nonprofits across Africa to all the valuable
-//                     resources that they need to be sustainable and improve the
-//                     lives of people living in poverty.{" "}
-//                   </Typography>
-
-//                   <Typography
-//                     className="text-base
-//                  "
-//                   >
-//                     RAMP is a platform that lets donors like you send money,
-//                     technical expertise and in-kind donations directly to
-//                     trusted and vetted organizations tackling life threatening
-//                     issues (SDGs) in Africa; improving the world’s poorest
-//                     households and ensuring they remain out of the poverty line
-//                     by ensuring their solutions are sustainable.{" "}
-//                   </Typography>
-
-//                   <Typography
-//                     className="text-base
-//                  "
-//                   >
-//                     We provide resource mobilization, capacity building and a
-//                     rich pool of diverse funding needs for nonprofit
-//                     organizations
-//                   </Typography>
-
-//                   <Typography
-//                     className="text-base
-//                  "
-//                   >
-//                     We believe that for many Africans to stay out of poverty
-//                     then investment must be sustainable.{" "}
-//                   </Typography>
-
-//                   <Typography
-//                     className="text-base
-//                  "
-//                   >
-//                     Since 2018, we’ve delivered $30M+ to nonprofits in Nigeria,
-//                     Ghana and Tanzania and other countries . These funds were
-//                     used to build libraries in garbage centered communities,
-//                     empower young people in tech, enroll thousands of children
-//                     back in school, empower over 5000 women from extremely poor
-//                     communities with business skills and grants to enable them
-//                     consistently support their families amongst many others
-//                   </Typography>
-
-//                   <Typography
-//                     className="text-base
-//                  "
-//                   >
-//                     RAMP is funded by individual donors, foundations,
-//                     businesses, and institutions.
-//                   </Typography>
-//                 </div>
-//               </div>
-//             </Box>
-//             <Box hidden={selectedTab !== 2}>
-//               <div className="flex flex-col gap-5 w-8/12">
-//                 <Typography variant="h2" gutterBottom>
-//                   Our Values
-//                 </Typography>
-//                 <Typography className='text-base'>
-//                   <span class="font-bold">Intergrity:</span> We maintain the
-//                   highest standards of professional and ethical behavior and
-//                   value transparency and honesty in our communications,
-//                   relationships, and action with donors and beneficiaries. All
-//                   donation reports are tracked and delivered straight to your
-//                   inbox with opportunity to verify
-//                 </Typography>
-//                 <Typography className='text-base'>
-//                   <span class="font-bold">Excellence:</span> We don’t settle for
-//                   anything less. We do it right the first time, ensuring that
-//                   all reports, request and needs once filed are automatically
-//                   reviewed and feedback providied
-//                 </Typography>
-//                 <Typography className='text-base'>
-//                   <span class="font-bold">Professionalism:</span> Our team of
-//                   developers, staff, board and champions are ‘’trustworthy,
-//                   competent, direct, a self-starter, and a constant
-//                   professional.”
-//                 </Typography>
-//                 <Typography className='text-base'>
-//                  <span class="font-bold"> Our Recepient’s:</span> First You are
-//                   guaranteed that the needs of all our beneficiaries are
-//                   prioritized and delivered. We ensure that all{" "}
-//                 </Typography>
-//                 <Typography className='text-base'>
-//                   <span class="font-bold">Collaboration:</span> We leverage the
-//                   power of many to achieve our results. We do not work in silos.
-//                   Team spirit, healthy work environment and increased
-//                   partnership with internal and external stakeholders.
-//                 </Typography>
-//                 <Typography className='text-base'>
-//                   <span class="font-bold">Impact/Solution Driven:</span> We are
-//                   not weighed down by problems. We strongly believe in solving
-//                   problems one at a time. We are result driven
-//                 </Typography>
-//               </div>
-//             </Box>
-//             <Box hidden={selectedTab !== 3}>
-//               <div>
-//                 <Typography variant="h2" gutterBottom>
-//                   Our Team
-//                 </Typography>
-//                 <p>Add your content for "Our Team" here...</p>
-//               </div>
-//             </Box>
-//             <Box hidden={selectedTab !== 4}>
-//               <div>
-//                 <Typography variant="h2" gutterBottom>
-//                   Careers
-//                 </Typography>
-//                 <p>Add your content for "Careers" here...</p>
-//               </div>
-//             </Box>
-//             <Box hidden={selectedTab !== 5}>
-//               <div>
-//                 <Typography variant="h2" gutterBottom>
-//                   FAQ
-//                 </Typography>
-//                 <div>
-//                   <button className="w-full py-2 px-4 bg-blue-500 text-white rounded-md shadow-md">
-//                     Question 1?
-//                   </button>
-//                   <div className="bg-white p-4 mt-2 shadow-md">
-//                     <p className="text-gray-700">Answer 1...</p>
-//                   </div>
-//                 </div>
-//                 <div>
-//                   <button className="w-full py-2 px-4 bg-blue-500 text-white rounded-md shadow-md">
-//                     Question 2?
-//                   </button>
-//                   <div className="bg-white p-4 mt-2 shadow-md">
-//                     <p className="text-gray-700">Answer 2...</p>
-//                   </div>
-//                 </div>
-//               </div>
-//             </Box>
-//           </Typography>
-//         </Box>
-//       </Container>
-//     </div>
-//   );
-// }
-
-// export default AboutPage;

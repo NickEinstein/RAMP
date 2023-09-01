@@ -13,6 +13,7 @@ export const RouteEnum = {
   TEAM: "/team",
   STORY: "/about",
   HOWITWORKS: "/how-it-works",
+  CAREERS: "/careers",
 
   GRANT: "/grant",
   PROFILE: "/profile",

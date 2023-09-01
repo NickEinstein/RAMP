@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserApi from "apis/UserApi";
 import { useFormik } from "formik";
 import { MdRefresh, MdOutlineSearch, MdSearch } from "react-icons/md";
@@ -42,9 +42,12 @@ import {
 import { useNavigate } from "react-router-dom";
 import WallCards from "common/WallCards";
 import { AccountCircle } from "@mui/icons-material";
+import { get } from "services/fetch";
 
 function ToDoorSearch(props) {
   const [age, setAge] = React.useState("");
+  const [userProfile, setUserProfile] = React.useState("");
+
   const handleChange = (event) => {
     setAge(event.target.value);
     console.log(event);
@@ -60,32 +63,46 @@ function ToDoorSearch(props) {
   const { enqueueSnackbar } = useSnackbar();
   const [loginMuation, loginMutationResult] = UserApi.useLoginMutation();
 
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    validationSchema: yup.object({
-      username: yup.string().trim().required(),
-      password: yup.string().trim().required(),
-    }),
-    onSubmit: async (values) => {
-      console.log(values);
-      // localStorage.setItem('location', values.location)
-      redirect();
+  // const formik = useFormik({
+  //   initialValues: {
+  //     username: "",
+  //     password: "",
+  //   },
+  //   validationSchema: yup.object({
+  //     username: yup.string().trim().required(),
+  //     password: yup.string().trim().required(),
+  //   }),
+  //   onSubmit: async (values) => {
+  //     console.log(values);
+  //     // localStorage.setItem('location', values.location)
+  //     redirect();
 
-      try {
-        const data = await loginMuation({ data: values }).unwrap();
-        // TODO extra login
-        // redirect()
-        enqueueSnackbar("Logged in successful", { variant: "success" });
-      } catch (error) {
-        enqueueSnackbar(error?.data?.message, "Failed to login", {
-          variant: "error",
-        });
-      }
-    },
-  });
+  //     try {
+  //       const data = await loginMuation({ data: values }).unwrap();
+  //       // TODO extra login
+  //       // redirect()
+  //       enqueueSnackbar("Logged in successful", { variant: "success" });
+  //     } catch (error) {
+  //       enqueueSnackbar(error?.data?.message, "Failed to login", {
+  //         variant: "error",
+  //       });
+  //     }
+  //   },
+  // });
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    const res = await get({
+      endpoint: "users/profile",
+      // body: formData,
+      // auth: false,
+    });
+
+    setUserProfile(res?.data?.data?.user);
+  };
 
   // if (authUser.accessToken) {
   //   return <Navigate to={RouteEnum.HOME} />;
@@ -114,10 +131,10 @@ function ToDoorSearch(props) {
           }}
           variant="outlined"
           // style={{ backgroundColor: "#EBEBEB", border: "none" }}
-          className=" text-ssm"
+          className=" text-ssm md:block hidden"
           placeholder="Search "
         />
-        <Avatar />
+        <Avatar src={userProfile?.avatar} />
       </div>
       {/* <Divider className="pb-8" />
       <Divider/> */}

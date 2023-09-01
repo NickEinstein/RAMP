@@ -31,8 +31,8 @@ body,
 } */
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Montserrat', sans-serif;
+font-family: 'Teko', sans-serif;
 }
 .login-top-border{
   border-bottom:2.29px solid #C4C4C4;

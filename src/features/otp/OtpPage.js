@@ -77,7 +77,7 @@ function OtpPage(props) {
 
     // localStorage.setItem('authUser', 'true')
 
-    history("/");
+    history(RouteEnum.LOGIN);
   };
 
   const configs = [

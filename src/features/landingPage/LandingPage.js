@@ -1,24 +1,59 @@
 import React, { useEffect, useState } from "react";
 import NGO from "images/LandingNGO.jpg";
 import Giving from "images/Giving.png";
+import Hands from "images/homelanding/hand-g6c49b2fb9_1280.jpg";
+import Kidss from "images/homelanding/kids-g92fbd2d9c_1280.jpg";
+import Africa from "images/homelanding/africa-g354936ced_1280.jpg";
 import Expertise from "images/LandingExpertise.jpg";
-import WhoWeAre from "images/whoWeAre.png";
+import WhoWeAre from "images/homelanding/whowearee.svg";
+import WhoWeAreNGO from "images/homelanding/NGOpic.svg";
+// import WhoWeAre from "images/whoWeAre.png";
 import Kids from "images/children.png";
 import Office from "images/office.png";
 import Rocks from "images/rocks.png";
 import Donate from "images/donate.png";
-import SmilingGirl from "images/smilingGirl.png";
+import SmilingGirl from "images/Bukola Bamiduro, Founder, Karis & Eleos Foundation..png";
 import Quote from "images/quote.svg";
 import User from "images/user.svg";
 import Cpu from "images/cpu.svg";
+// import Carousel from "react-multi-carousel";
+
+import carouselpic from "images/homepagefirstsection/doug-linstedt-jEEYZsaxbH4-unsplash.jpg";
+import carouselpic2 from "images/homepagefirstsection/pexels-curtis-loy-5196014.jpg";
+import videoz from "images/featuredCampaign/MVI_9411 (1).mp4";
+
+import ReactPlayer from "react-player";
+
 import Briefcase from "images/Briefcase.svg";
-import Donor from "images/LandingDonate.jpg";
+import SDG from "images/SDGs (1).png";
+import SDG1 from "images/sdg/E-WEB-Goal-01.png";
+import SDG2 from "images/sdg/E-WEB-Goal-02.png";
+import SDG3 from "images/sdg/E-WEB-Goal-03.png";
+import SDG4 from "images/sdg/E-WEB-Goal-04.png";
+import SDG5 from "images/sdg/E-WEB-Goal-05.png";
+import SDG6 from "images/sdg/E-WEB-Goal-06.png";
+import SDG7 from "images/sdg/E-WEB-Goal-07.png";
+import SDG9 from "images/sdg/E-WEB-Goal-08.png";
+import SDG8 from "images/sdg/E-WEB-Goal-09.png";
+import SDG10 from "images/sdg/E-WEB-Goal-10.png";
+import SDG11 from "images/sdg/E-WEB-Goal-11.png";
+import SDG12 from "images/sdg/E-WEB-Goal-12.png";
+import SDG13 from "images/sdg/E-WEB-Goal-13.png";
+import SDG14 from "images/sdg/E-WEB-Goal-14.png";
+import SDG15 from "images/sdg/E-WEB-Goal-15.png";
+import SDG16 from "images/sdg/E-WEB-Goal-16.png";
+import SDG17 from "images/sdg/E-WEB-Goal-17.png";
+import FEATUREDCAMP1 from "images/featuredCampaign/WhatsApp Image 2023-06-26 at 5.28.07 PM.jpeg";
+import FEATUREDCAMP2 from "images/featuredCampaign/WhatsApp Image 2023-06-28 at 11.53.13 AM (1).jpeg";
+import FEATUREDCAMP3 from "images/featuredCampaign/WhatsApp Image 2023-07-01 at 2.41.22 PM.jpeg";
 import Outstreched from "images/Outstreched.png";
 import Solutions from "images/Solutions.png";
 import HelpingHands from "images/HelpingHands.png";
 import Flowers from "images/Flowers.png";
 import Preserving from "images/Preserving.png";
 import Empowerment from "images/Empowerment.png";
+import Gallery from "images/homelanding/bina.PNG";
+import NewSide from "images/homelanding/NewToSide.svg";
 import Knowledge from "images/Knowledge.png";
 import Gallery1 from "images/Gallery1.png";
 import Gallery2 from "images/Gallery2.png";
@@ -38,30 +73,179 @@ import {
   Toolbar,
   Typography,
   useMediaQuery,
+  LinearProgress,
+  Rating,
 } from "@mui/material";
 import { MediaQueryBreakpointEnum } from "constants/Global";
 import image from "images/logo2.svg";
 // import image from "images/Ramp1.png";
 import { RouteEnum } from "constants/RouteConstants";
 import { Link } from "react-router-dom";
-import { Twitter, Facebook, Instagram, LinkedIn } from "@mui/icons-material";
-import { AiOutlineArrowRight }  from "react-icons/ai"
-import { MdKeyboardArrowDown }  from "react-icons/md"
+import {
+  Twitter,
+  Facebook,
+  Instagram,
+  LinkedIn,
+  ArrowBackIosNewOutlined,
+  ArrowLeft,
+  ArrowRight,
+  ArrowRightOutlined,
+  ArrowForward,
+  ArrowBack,
+} from "@mui/icons-material";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import LoginHeader from "common/LoginHeader";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Footer from "common/Footer";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const HomePage = () => {
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
   const islg = useMediaQuery(MediaQueryBreakpointEnum.lg);
 
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-   const [anchorEl, setAnchorEl] = React.useState(null);
-   const open = Boolean(anchorEl);
-   const handleClick = (event) => {
-     setAnchorEl(event.currentTarget);
-   };
-   const handleClose = () => {
-     setAnchorEl(null);
-   };
+  const [activeSlideIndex3, setActiveSlideIndex3] = useState(0);
+  const [activeSlideIndex4, setActiveSlideIndex4] = useState(0);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 2,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 2,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    // dots: true,
+    // infinite: true,
+    //  fade: true,
+    //  speed: 100,
+    // slidesToShow: 3,
+    // slidesToScroll: 2,
+    autoplay: true,
+    // speed: 2000,
+    autoplaySpeed: 7000,
+    cssEase: "linear",
+    //  pauseOnHover: true,
+    responsive: [
+      // {
+      //   breakpoint: 1024,
+      //   settings: {
+      //     slidesToShow: 3,
+      //     slidesToScroll: 3,
+      //     infinite: true,
+      //     dots: true,
+      //   },
+      // },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  const settings2 = {
+    dots: true,
+    infinite: true,
+    fade: true,
+    //  speed: 100,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 5000,
+    cssEase: "linear",
+    //  pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
+    const {
+      carouselState: { currentSlide },
+    } = rest;
+    // remember to give it position:absolute
+
+    return (
+      <div className="absolute top-0 right-0 mb-10 gap-3">
+        <Button
+          className={
+            currentSlide === 0 ? "disable p-2 mb-4 mr-4" : "p-2 mb-4 mr-4"
+          }
+          onClick={() => previous()}
+        >
+          {<ArrowBack className="text-lg" />}
+        </Button>
+        <Button className="p-2 mb-4" onClick={() => next()}>
+          {<ArrowForward className="text-lg" />}
+        </Button>
+      </div>
+    );
+  };
 
   const carouselSlides = [
     // {
@@ -73,36 +257,45 @@ const HomePage = () => {
     // },
 
     {
-      image: Giving,
+      image: NewSide,
       backgroundColor: "#9a7b4f",
-      caption: "Welcome to RAMP",
-      subCaption: "For Governments, CSO's, Private and Public Sector Companies, Individuals and International Agencies",
+      caption: "Welcome to",
+      caption2: "RAMP",
+      subCaption:
+        "For Governments, CSO's, Private and Public Sector Companies, Individuals and International Agencies",
+      //  "Resource Acceleration & Mobilization Platform",
       // subText: "Experience the true impact of your generosity by joining RAMP, the leading platform connecting donors like you with trusted nonprofits in Africa. Together, we can break the chains of poverty, empower communities, and create a sustainable future. Sign up today and be a catalyst for change.",
-      color: "#C654D1" 
+      color: "#C654D1",
     },
+    // {
+    //   image: carouselpic,
+    //   backgroundColor: "#9a7b4f",
+    //   caption: "Welcome to",
+    //   caption2: "RAMP",
+    //   subCaption: "Resource Acceleration & Mobilization Platform",
+    //   // subText: "Experience the true impact of your generosity by joining RAMP, the leading platform connecting donors like you with trusted nonprofits in Africa. Together, we can break the chains of poverty, empower communities, and create a sustainable future. Sign up today and be a catalyst for change.",
+    //   color: "#C654D1",
+    // },
 
     // {
-    //   image: NGO,
+    //   image: Kidss,
     //   backgroundColor: "#9a7b4f",
-    //   caption: " NGOs",
-    //   // subText: "Resource Accessibility and Mobilization Program",
-    //   // color: "#3944bc",
-    //   howItWorks:
-    //     "Register on the platform, add all supporting documents,  wait to be verified and approved and then expect a donation soon",
+    //   caption: "Send Support Directly to ",
+    //   caption2: " Those in Need!",
+    //   subCaption:
+    //     "For Governments, CSO's, Private and Public Sector Companies, Individuals and International Agencies",
+    //   // subText: "Experience the true impact of your generosity by joining RAMP, the leading platform connecting donors like you with trusted nonprofits in Africa. Together, we can break the chains of poverty, empower communities, and create a sustainable future. Sign up today and be a catalyst for change.",
+    //   color: "#C654D1",
     // },
     // {
-    //   image: Expertise,
-    //   backgroundColor: "#b3bdb6",
-    //   caption: " Technical Experts",
-    //   howItWorks:
-    //     "You have the free time to deliver on a particular project? This platform is right for you!!. Signup and pick the solution that you can render",
-    // },
-    // {
-    //   image: Donor,
-    //   backgroundColor: "white",
-    //   caption: " Donors",
-    //   howItWorks:
-    //     "Find NGOS that needs your contribution and then make a donation towards the one that best suits your interest",
+    //   image: carouselpic2,
+    //   backgroundColor: "#9a7b4f",
+    //   caption: "Send Support Directly to ",
+    //   caption2: " Those in Need!",
+    //   subCaption:
+    //     "For Governments, CSO's, Private and Public Sector Companies, Individuals and International Agencies",
+    //   // subText: "Experience the true impact of your generosity by joining RAMP, the leading platform connecting donors like you with trusted nonprofits in Africa. Together, we can break the chains of poverty, empower communities, and create a sustainable future. Sign up today and be a catalyst for change.",
+    //   color: "#C654D1",
     // },
   ];
 
@@ -110,14 +303,26 @@ const HomePage = () => {
     {
       image: SmilingGirl,
       backgroundColor: "#9a7b4f",
+      name: "Bukola Bamiduro, Founder, Karis Eleos.",
+      company: "",
       captionHeader: "A GAME CHANGER",
-      caption: `RAMP has been an absolute game-changer for our nonprofit organization. 
-                Their platform connected us with generous donors and invaluable resources 
-                that have allowed us to expand our impact and make a real difference in 
-                the lives of marginalized communities. Thanks to RAMP, we've been able to 
-                implement sustainable solutions, provide education, and empower individuals 
-                to break free from the cycle of poverty. We are forever grateful for their 
-                unwavering support and commitment to creating lasting change`,
+      caption: `We have leveraged DFA’s expertise to access our first grant of $300,000 and since then we continue to grow in leaps and bounds. Indeed, DFA  is tested and trusted. They deliver with top-notch excellence."`,
+    },
+    {
+      image: SmilingGirl,
+      backgroundColor: "#9a7b4f",
+      name: "Bukola Bamiduro, Founder, Karis Eleos.",
+      company: "",
+      captionHeader: "A GAME CHANGER",
+      caption: `We have leveraged DFA’s expertise to access our first grant of $300,000 and since then we continue to grow in leaps and bounds. Indeed, DFA  is tested and trusted. They deliver with top-notch excellence."`,
+    },
+    {
+      image: SmilingGirl,
+      backgroundColor: "#9a7b4f",
+      name: "Bukola Bamiduro, Founder, Karis Eleos.",
+      company: "",
+      captionHeader: "A GAME CHANGER",
+      caption: `We have leveraged DFA’s expertise to access our first grant of $300,000 and since then we continue to grow in leaps and bounds. Indeed, DFA  is tested and trusted. They deliver with top-notch excellence."`,
     },
     // {
     //   image: Expertise,
@@ -135,6 +340,54 @@ const HomePage = () => {
     //           erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
     //           tation ullamcorper suscipit lobortis nisl ut aliquip ex ea 3`,
     // },
+  ];
+
+  const sdg = [
+    {
+      sdg: SmilingGirl,
+      caption: `We have leveraged DFA’s expertise to access our first grant of $300,000 and since then we continue to grow in leaps and bounds. Indeed, DFA  is tested and trusted. They deliver with top-notch excellence."`,
+    },
+    {
+      sdg: SmilingGirl,
+      caption: `We have leveraged DFA’s expertise to access our first grant of $300,000 and since then we continue to grow in leaps and bounds. Indeed, DFA  is tested and trusted. They deliver with top-notch excellence."`,
+    },
+    {
+      sdg: SmilingGirl,
+      caption: `We have leveraged DFA’s expertise to access our first grant of $300,000 and since then we continue to grow in leaps and bounds. Indeed, DFA  is tested and trusted. They deliver with top-notch excellence."`,
+    },
+    {
+      sdg: SmilingGirl,
+      caption: `We have leveraged DFA’s expertise to access our first grant of $300,000 and since then we continue to grow in leaps and bounds. Indeed, DFA  is tested and trusted. They deliver with top-notch excellence."`,
+    },
+    {
+      sdg: SmilingGirl,
+      caption: `We have leveraged DFA’s expertise to access our first grant of $300,000 and since then we continue to grow in leaps and bounds. Indeed, DFA  is tested and trusted. They deliver with top-notch excellence."`,
+    },
+    // { sdg: SDG6 },
+    // { sdg: SDG7 },
+    // { sdg: SDG9 },
+    // { sdg: SDG8 },
+    // { sdg: SDG10 },
+    // { sdg: SDG11 },
+    // { sdg: SDG12 },
+    // { sdg: SDG13 },
+    // { sdg: SDG14 },
+    // { sdg: SDG15 },
+    // { sdg: SDG16 },
+    // { sdg: SDG17 },
+  ];
+
+  const FeaturedCampaign = [
+    {
+      featuredCamp: FEATUREDCAMP1,
+      caption: "Support Them",
+      text: "This project is focused on inspiring young minds and edveloping creative thinkers with 21st century job skills. Children from the ages of 5 are introduced to tech skills Robotics, Website Development, Engineering, Programming etc.",
+    },
+    {
+      featuredCamp: FEATUREDCAMP2,
+      caption: "Support Them",
+      text: "The digital and entrepreneurship training for persons living with disabilities (PWDs) is a skills program that equips young persons with disability with technical know how on how to thrive in the work place and earn an income. This project prepares them for the workplace so  that rather than stay hidden, they can  earn and income contribute their skills toward development",
+    },
   ];
 
   const carouselSlides2 = [
@@ -173,75 +426,92 @@ const HomePage = () => {
   const carouselSlides4 = [
     {
       id: 1,
-      image: Gallery1,
-      alt: "Gallery"
+      image: FEATUREDCAMP1,
+      alt: "Gallery",
+      caption:
+        "This project is focused on inspiring young minds and edveloping creative thinkers with 21st century job skills. Children from the ages of 5 are introduced to tech skills Robotics, Website Development, Engineering, Programming etc.",
+      header:
+        "Prepare African Children for the Future - Catch them Young (Ghana)",
     },
     {
       id: 2,
-      image: Gallery2,
-      alt: "Gallery"
+      image: FEATUREDCAMP2,
+      caption: `
+        The digital and entrepreneurship training for persons living with disabilities (PWDs) is a skills program that equips young persons with disability with technical know how on how to thrive in the work place and earn an income. This project prepares them for the workplace so  that rather than stay hidden, they can  earn and income contribute their skills toward development
+      `,
+      alt: "Gallery",
+      header:
+        "Fund a Youth/Person Living with Disability - PWDs Digital and Entrepreneurship Training ",
     },
     {
       id: 3,
-      image: Gallery3,
-      alt: "Gallery"
+      image: Gallery,
+      caption: "",
+      alt: "Gallery",
+      header:
+        "Help Survivors of Domestic Abuse become empowered- Bina Al-Amal Foundation- Nigeria",
     },
     {
       id: 4,
-      image: Gallery1,
-      alt: "Gallery"
+      caption:
+        "provide children and young persons with disabilities access to technology such as robotics, artificial intelligence, digital and vocational skills to become self reliant and unleash the abilities in their disability. ",
+      image: FEATUREDCAMP3,
+      alt: "Gallery",
+      header: "Build A Disability Empowerment Center",
     },
-  ]
+  ];
+
+  // const videoSource = "https://www.youtube.com/watch?v=2po9_CIRW7I";
 
   const stats = [
     {
       id: 1,
       num: "$30M+",
       subTextBold: "Donations",
-      subText: " Delivered"
+      subText: " Raised",
     },
     {
       id: 2,
-      num: "30+",
-      subTextBold: "NGOS",
-      subText: "Registered"
+      num: "500+",
+      subTextBold: "Nonprofits",
+      subText: "Vetted",
     },
     {
       id: 3,
-      num: "50+",
+      num: "100+",
       subTextBold: "DONORS",
-      subText: "Registered"
+      subText: "Registered",
     },
     {
       id: 4,
       num: "100+",
-      subTextBold: "EXPERTS",
-      subText: "Registered"
+      subTextBold: "TECHNICAL EXPERTS",
+      subText: "Registered",
     },
-  ]
+  ];
 
   const donors = [
     {
       id: 1,
       image: Outstreched,
-      alt: "Outstreched"
+      alt: "Outstreched",
     },
     {
       id: 2,
       image: Solutions,
-      alt: "Solutions"
+      alt: "Solutions",
     },
     {
       id: 3,
       image: HelpingHands,
-      alt: "HelpingHands"
+      alt: "HelpingHands",
     },
     {
       id: 4,
       image: Flowers,
-      alt:"Flowers"
+      alt: "Flowers",
     },
-  ]
+  ];
 
   const handleSlideChange = (index) => {
     setActiveSlideIndex(index);
@@ -252,6 +522,12 @@ const HomePage = () => {
       setActiveSlideIndex(
         (prevIndex) => (prevIndex + 1) % carouselSlides.length
       );
+      setActiveSlideIndex3(
+        (prevIndex) => (prevIndex + 1) % carouselSlides3.length
+      );
+      setActiveSlideIndex4(
+        (prevIndex) => (prevIndex + 1) % carouselSlides3.length
+      );
     }, 5000);
 
     return () => {
@@ -259,7 +535,19 @@ const HomePage = () => {
     };
   }, []);
 
+  console.log(activeSlideIndex3);
+
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
     <div>
@@ -272,34 +560,41 @@ const HomePage = () => {
         }}
       ></div> */}
       <div
-        className="relative"
         style={{
-          backgroundImage: `url(${carouselSlides[activeSlideIndex].image})`,
+          // backgroundImage: `url(${carouselSlides[activeSlideIndex].image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           width: "100%",
-          // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
+          // carouselpic2,
+          backgroundColor: "#F9EEFA",
         }}
       >
-      <LoginHeader/>
+        <LoginHeader />
 
-        <div>
+        <div className="bg-black/10">
           <div
-            className={`h-[60vh] lg:h-[90vh] w-full flex items-center justify-center transition-opacity duration-500  bg-gray-900 bg-opacity-75`}
+            className={` lg:h-[90vh] w-full md:px-20 p-4 flex items-center justify-between transition-opacity duration-500 
+             `}
           >
-            <div className="w-full h-full mx-auto justify-center text-center md:p-8 p-4 md:ml-20 flex">
-              <div className="w-8/12 flex flex-col mt-2 md:mt-10 lg:mt-16 ">
+            <div className="w- h-full w-full flex flex-col">
+              <div className="flex flex-col items-center md:items-start md:mt-28 mt-2">
                 <Typography
-                  variant={islg ? "h2" : ismd ? "h3" : "h4"}
-                  className=" font-bold mb-4 text-[#01B6AC] text-center "
+                  variant={islg ? "h1" : ismd ? "h2" : "h2"}
+                  className=" font-bold text-left md:w-4/5 text-[#01B6AC]"
                 >
                   {carouselSlides[activeSlideIndex].caption}
                 </Typography>
+                <Typography
+                  variant={islg ? "h1" : ismd ? "h2" : "h2"}
+                  className=" font-bold mb-4 text-left md:w-4/5 text-[#01B6AC]"
+                >
+                  {carouselSlides[activeSlideIndex].caption2}
+                </Typography>
 
                 <Typography
-                  variant={islg ? "h3" : ismd ? "h4" : "h5"}
-                  className=" font-medium mb-4 text-[#fff] text-center "
+                  variant={islg ? "h5" : ismd ? "h5" : "h6"}
+                  className=" font-medium mb-4 text-[#555555] text-left md:w-[70%] mt-6"
                 >
                   {carouselSlides[activeSlideIndex].subCaption}
                 </Typography>
@@ -314,20 +609,87 @@ const HomePage = () => {
                 {/* <Typography  className="text-white mt-5 md:w-1/2 text-sm md:text-base">
                   {carouselSlides[activeSlideIndex].howItWorks}
                 </Typography> */}
-                <div className="flex flex-col md:flex-row gap-5 justify-center items-center">
-                  <Link className=" py-2" to={RouteEnum.SIGNUP}>
-                    <Button className="flex mx-auto text-[14px] w-44 md:w-full items-center px-4 lg:px-20 lg:py-4 lg:mt-8 border-solid border-2 rounded-full border-white bg-transparent hover:border-[#C654D1] hover:bg-[#C654D1]">
-                      Sign Up as NGO/CSO
-                    </Button>
-                  </Link>
-
-                  <Link  className=" py-2" to={RouteEnum.SIGNUP}>
-                    <Button className="flex mx-auto text-[14px] w-44 md:w-full items-center px-4 lg:px-20 lg:py-4 lg:mt-8 border-solid border-2 rounded-full border-white bg-transparent hover:border-[#C654D1] hover:bg-[#C654D1]">
-                      Fund a Nonprofit
-                    </Button>
-                  </Link>
-                </div>
               </div>
+              <div className="flex md:flex-row gap-5 items-center md:justify-start justify-center w-full mt-12">
+                <Link className=" py-2" to={RouteEnum.SIGNUP}>
+                  <Button className="flex w-full rounded-xl mx-auto text-[14px] px-10 md:w-full items-center   lg:py-4 lg:mt-8 border-solid border-2  border-[#C654D1] bg-[#C654D1] font-bold hover:border-[#C654D1] hover:bg-[#C654D1]">
+                    Sign Up
+                  </Button>
+                </Link>
+
+                <Link className=" py-2" to={RouteEnum.SIGNUP}>
+                  <Button className="flex mx-auto text-[14px] rounded-xl w-full  md:w-full items-center px-4  lg:py-4 lg:mt-8 border-solid border-2  border-white bg-white text-[#C654D1] font-bold">
+                    Fund a Nonprofit
+                  </Button>
+                </Link>
+
+                {/* <Link className=" py-2" to={RouteEnum.SIGNUP}>
+                  <Button className="flex mx-auto text-[14px] rounded-xl w-full  md:w-full items-center px-4  lg:py-4 lg:mt-8 border-solid border-2  border-white bg-transparent hover:border-[#C654D1] hover:bg-[#C654D1]">
+                    Request Technical Expertise
+                  </Button>
+                </Link>
+
+                <Link className=" py-2" to={RouteEnum.SIGNUP}>
+                  <Button className="flex mx-auto text-[14px] rounded-xl w-full  md:w-full items-center px-4  lg:py-4 lg:mt-8 border-solid border-2  border-white bg-transparent hover:border-[#C654D1] hover:bg-[#C654D1]">
+                    Make an In-Kind Donation
+                  </Button>
+                </Link> */}
+              </div>
+            </div>
+
+            <div className="md:flex justify-end w-full hidden">
+              {/* <div className=" relative h-[543px] w-[556px] bg-white px-16 rounded-2xl">
+                <Button className="bg-[#3E40951A] text-[#01B6AC] min-w-[100px] rounded-xl font-bold p-2 mt-8">
+                  Education
+                </Button>
+                <Typography variant="h5" className="font-bold my-5 w-11/12">
+                  Build A Disability Empowerment Center
+                </Typography>{" "}
+                <Typography className="text-[14px] text-[#6F7775] w-11/12">
+                  provide children and young persons with disabilities access to
+                  technology such as robotics, artificial intelligence, digital
+                  and vocational skills to become self reliant and unleash the
+                  abilities in their disability.
+                </Typography>
+                <div className="bg-slate-300/30 py-10 mt-6  items-center w-full rounded-lg p-4">
+                  <div>
+                    <LinearProgress
+                      variant="determinate"
+                      className="h-2 rounded-xl text-[#01B6AC] bg-white"
+                      // color="red"
+                      value={30}
+                      sx={{
+                        "& .MuiLinearProgress-bar": {
+                          backgroundColor: "#01B6AC", // Use the custom color class here
+                        },
+                      }}
+                    />
+                    <div className="flex justify-between font-bold mt-2">
+                      <span>
+                        Raised:<span className="text-[#C654D1]"> $8,000</span>
+                      </span>
+                      <span>
+                        Goal: <spam className="text-[#01B6AC]">$10,000</spam>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-between mt-8 font-bold">
+                  <div className="font-bold">
+                    <Typography className="font-bold">Initiated by:</Typography>
+                    <Typography className="font-bold">
+                      Donor For Africa
+                    </Typography>
+                  </div>
+                  <div>
+                    <Button className="p-4 w-44 bg-[#01B6AC]">
+                      Support Them
+                    </Button>
+                  </div>
+                </div>
+                <div className="absolute rounded-2xl -right-5  w-1/2 -bottom-5 h-[400px] bg-[#01B6AC] -z-10"></div>
+              </div> */}
+              <img src={NewSide} className="w-[90%]" />
             </div>
           </div>
           {/* <div className="w-1/2 ">
@@ -339,75 +701,174 @@ const HomePage = () => {
                     index === activeSlideIndex ? "bg-gray-900" : "bg-gray-400"
                   }`}
                   onClick={() => handleSlideChange(index)}
-                ></button>
+                ></button>/10
               ))}
             </div>
           </div> */}
         </div>
       </div>{" "}
-      <div className="relative px-5 lg:px-0 -top-28  md:-top-14 lg:-top-20 w-full flex justify-center">
-        <div className="grid md:grid-cols-4 bg-[#FCF6FC] shadow-xl bg-white border-white lg:w-[1000px] rounded-2xl grid-cols-2 gap-6 justify-around mt-8">
+      <div className="relative md:px-5 lg:px-0 w-full flex  justify-center">
+        <div className="grid md:grid-cols-4 bg-[#01B6AC] shadow-xl w-full text-white border-white lg:w-full grid-cols-2 md:gap-6 justify-around">
           {stats.map((stat) => (
             <div className="flex">
               <div
                 key={stat.id}
-                className=" rounded-lg p-6 w-full flex flex-col justify-center items-center py-8 text-center"
+                className=" rounded-lg p-6 md:py-16 py-8 w-full flex flex-col md:flex-row justify-center items-center text-center gap-4"
               >
                 {/* <img
                   className="w-full h-32 object-cover rounded-md mb-4"
                   src="path/to/image.jpg"
                   alt="Card Image"
                 /> */}
-                <h2 className="text-xl font-bold mb-2 text-[#3A3A3A]">
+                <Typography variant="h2" className="font-bold mb-2 text-white">
                   {stat.num}
-                </h2>
-                <div className="flex gap-2 ">
-                  <p className="text-[#4B5563] text-sm lg:text-base font-bold">{`${stat.subTextBold}`}</p>
-                  <p className="text-[#4B5563] text-sm lg:text-base font-normal">{`${stat.subText}`}</p>
+                </Typography>
+                <div className=" ">
+                  <Typography className=" text-white text-sm lg:text-base font-bold w-full">{`${stat.subTextBold}`}</Typography>
+                  <Typography className=" text-white text-sm lg:text-base font-normal mt-1">{`${stat.subText}`}</Typography>
                 </div>
               </div>
-              <div className="hidden md:flex mr-1 h-20 w-[1px] my-4 bg-gray-600"></div>
+              <div className="hidden md:flex mr-1 w-[1px] my-4 bg-white/30"></div>
               {/* {idx < 3 && <p className="text-gray-600 text-xl">Registered</p>} */}
             </div>
           ))}
         </div>
       </div>
-      <div className="w-full flex-col mt-5">
-        <Typography
-          variant="h4"
-          className="text-center font-medium text-[#555555]"
-        >
-          Who we Are
-        </Typography>
-        <div className="flex w-full flex-col md:flex-row lg:items-center mt-4 md:mx-10 gap-5">
-          <div className="md:w-6/12 mx-5 md:mx-0">
-            <img
-              src={WhoWeAre}
-              className="md:h-[300px] lg:h-auto"
-              alt="Who We Are"
-            />
-          </div>
-          <div className="flex flex-col gap-4 md:w-5/12 mx-5 items-center md:mt-5 lg:mt-0 lg:items-start md:mx-0">
-            <Typography className="text-sm lg:text-lg">
-              At RAMP, we are a dedicated team driven by a single mission: to
-              empower nonprofit organizations across Africa for sustainable
-              impact. We serve as a bridge, connecting generous donors like you
-              with trusted nonprofits working tirelessly to address
-              life-threatening issues and uplift communities living in poverty.
-              With our comprehensive platform, we provide the resources,
-              support, and funding needed to create lasting change. Together, we
-              can build a brighter future and transform lives across the
-              continent.
+      <div className="w-full flex-col mt-5 md:px-20 mt-12">
+        <div className="flex w-full flex-col md:flex-row mt-4 ">
+          {/* <div className="md:w-5/12 mx-5 md:mx-0 flex flex-col gap-8 mt-12">
+            <Typography variant="h4" className="text-[#C654D1] font-medium">
+              How we help
             </Typography>
-            <Link className="w-full" to={RouteEnum.ABOUT}>
-              <Button className="w-6/12  lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 border-solid border-2 rounded-full border-[#3E4095] bg-[#3E4095]">
-                Learn More
-              </Button>
-            </Link>
+            <Typography className="font-bold" variant="h2">
+              Building a Better Future. Empowering Change
+            </Typography>
+            <Typography
+              variant="h2"
+              className={`font-bold  ${
+                activeSlideIndex3 == 0
+                  ? "font-bold text-[#F49A1C]"
+                  : "text-[#3E409533]"
+              }`}
+            >
+              FOR DONORS
+            </Typography>
+            <Typography
+              variant="h2"
+              className={`font-bold  ${
+                activeSlideIndex3 == 1
+                  ? "font-bold text-[#F49A1C]"
+                  : "text-[#3E409533]"
+              }`}
+            >
+              FOR NGOs,
+            </Typography>
+            <Typography
+              variant="h2"
+              className={`font-bold  ${
+                activeSlideIndex3 == 2
+                  ? "font-bold text-[#F49A1C]"
+                  : "text-[#3E409533]"
+              }`}
+            >
+              FOR TECHNICAL EXPERTS.
+            </Typography>
+          </div> */}
+          <div className=" md:w-full items-center md:mt-5 lg:mt-0 lg:items-start md:mx-0">
+            <Carousel
+              className="mt-4 py-8"
+              responsive={responsive}
+              arrows={false}
+              customButtonGroup={<ButtonGroup />}
+            >
+              <div>
+                {" "}
+                <img
+                  src={WhoWeAre}
+                  className="md:h-[300px] lg:h-[400px] w-full"
+                  alt="Who We Are"
+                />
+                <div className="px-8 ">
+                  <Typography className="font-bold pb-5" variant="h3">
+                    Donors
+                  </Typography>
+                  <Typography className="text-sm lg:text-lg ">
+                    At RAMP, we are a dedicated team driven by a single mission:
+                    to empower nonprofit organizations across Africa for
+                    sustainable impact. We serve as a bridge, connecting
+                    generous donors like you with trusted nonprofits working
+                    tirelessly to address life-threatening issues and uplift
+                    communities living in poverty. With our comprehensive
+                    platform, we provide the resources, support, and funding
+                    needed to create lasting change. Together, we can build a
+                    brighter future and transform lives across the continent.
+                  </Typography>
+                  <Link className="w-full" to={RouteEnum.ABOUT}>
+                    <Button className="w-6/12 lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 mt-4 border-solid border-2 rounded-2xl border-[#01B6AC] bg-[#01B6AC]">
+                      Donate
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="">
+                {" "}
+                <img
+                  src={WhoWeAreNGO}
+                  className="md:h-[300px] lg:h-[400px] w-full"
+                  alt="Who We Are"
+                />
+                <div className="px-8 ">
+                  <Typography className="font-bold pb-5" variant="h3">
+                    NGOs
+                  </Typography>
+                  <Typography className="text-sm lg:text-lg ">
+                    Making a difference is just a click away. Join our cause and
+                    support us in empowering lives through your generous
+                    donation. Visit our website to discover multiple hassle-free
+                    donation options and contribute towards creating a brighter
+                    future for those in need.
+                  </Typography>
+                  <Link className="w-full" to={RouteEnum.ABOUT}>
+                    <Button className="w-6/12 lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 mt-4 border-solid border-2 rounded-2xl border-[#01B6AC] bg-[#01B6AC]">
+                      Donate
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div>
+                {" "}
+                <img
+                  src={WhoWeAre}
+                  className="md:h-[300px] lg:h-[400px] w-full"
+                  alt="Who We Are"
+                />
+                <div className="px-8 ">
+                  <Typography className="font-bold pb-5" variant="h3">
+                    Donors
+                  </Typography>
+                  <Typography className="text-sm lg:text-lg ">
+                    At RAMP, we are a dedicated team driven by a single mission:
+                    to empower nonprofit organizations across Africa for
+                    sustainable impact. We serve as a bridge, connecting
+                    generous donors like you with trusted nonprofits working
+                    tirelessly to address life-threatening issues and uplift
+                    communities living in poverty. With our comprehensive
+                    platform, we provide the resources, support, and funding
+                    needed to create lasting change. Together, we can build a
+                    brighter future and transform lives across the continent.
+                  </Typography>
+                  <Link className="w-full" to={RouteEnum.ABOUT}>
+                    <Button className="w-6/12 lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 mt-4 border-solid border-2 rounded-2xl border-[#01B6AC] bg-[#01B6AC]">
+                      Donate
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </Carousel>
           </div>
         </div>
       </div>
-      <div className="w-full flex gap-5 justify-center items-center mt-10 px-3  md:px-0  md:mt-14">
+      {/* <div className="w-full flex gap-5 justify-center items-center mt-10 px-3  md:px-0  md:mt-14">
         <div className="w-full flex gap-8 justify-center  lg:w-[1010px]">
           <div className="w-[270px] flex flex-col gap-3 items-center text-center">
             <img
@@ -416,7 +877,7 @@ const HomePage = () => {
               className=" w-10 h-10 md:w-[70px] md:h-[70px]"
             />
             <p className="text-[#202020] text-sm md:text-[20px] font-semibold">
-              For Donors
+              Donate Items
             </p>
             <p className="text-[#425466] text-xs md:text-base">
               Collect reviews, Q&A and other content from your customers
@@ -430,7 +891,7 @@ const HomePage = () => {
               className=" w-10 h-10 md:w-[70px] md:h-[70px]"
             />
             <p className="text-[#202020] text-sm md:text-[20px] font-semibold">
-              For Non-Profits
+              Setup a Non-Profit
             </p>
             <p className="text-[#425466] text-xs md:text-base">
               Use your user-generated content in sales and marketing.
@@ -443,7 +904,7 @@ const HomePage = () => {
               className=" w-10 h-10 md:w-[70px] md:h-[70px]"
             />
             <p className="text-[#202020] text-sm md:text-[20px] font-semibold">
-              For Admins
+              Donate Technical Experts
             </p>
             <p className="text-[#425466] text-xs md:text-base">
               In the end, it's all about your customers. Build their trust and
@@ -451,30 +912,275 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-      </div>
-      <div className="bg-white py-12 md:px-12 px-4 ">
+      </div> */}
+      {/* <div className="bg-white py-12 md:px-12 px-4">
         <Typography
           className="text-center text-[#555555] py-6 scrollb"
           variant="h4"
         >
           Featured Campaigns
         </Typography>
-        <div className="flex gap-5 max-w-full overflow-y-scroll scrollbar-hide">
-          {carouselSlides2.map((slides) => (
-            <div className="relative">
-              <img
-                className=" lg:h-[300px] min-w-[300px] lg:min-w-[400px]"
-                src={slides?.image}
-                alt="Gallery"
-              />
-              <Button className="absolute bottom-5 w-[180px] md:w-[200px] h-[40px] mx-auto right-5 left-5 bg-[#3E4095]">
-                {slides?.caption}
-              </Button>
-            </div>
-          ))}
+
+        <div className="md:w-8/12 w-full mx-auto relative md:mb-16">
+          <Slider {...settings2}>
+            {FeaturedCampaign.map((image, index) => (
+              <div
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                key={index}
+              >
+                <div className="cursor-pointer">
+                  <div className="h-[100%] relative">
+                    <img
+                      className="h-full w-full object-cover rounded-3xl"
+                      src={image.featuredCamp}
+                      alt={`Image ${index}`}
+                    />
+                    <Button
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                      className="absolute bottom-5 z-10 w-1/2 py-4 mx-auto right-5 left-5 bg-[#3E4095]"
+                    >
+                      {image?.caption}
+                    </Button>
+                  </div>
+                  {true && (
+                    <div
+                      className={`absolute top-0 left-0 w-full h-full flex items-center rounded-3xl justify-center ${
+                        true && "bg-black/40"
+                      }`}
+                    >
+                      <Typography
+                        className="text-white w-4/5 text-center "
+                        variant="h4"
+                      >
+                        {image.text}
+                      </Typography>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div> */}
+      <div
+        style={{
+          backgroundImage: `url(${carouselpic2})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          width: "100%",
+          carouselpic2,
+          // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
+        }}
+        className=""
+      >
+        <div class="bg-white/90 md:px-20  px-4 py-12 ">
+          <Typography
+            className=" text-[#C654D1] text-semibold py-6 scrollb"
+            variant="h4"
+          >
+            Our Recent Campaigns
+          </Typography>
+          <Typography className="font-bold" variant="h2">
+            You Can Help Lots of People by
+          </Typography>
+          <Typography className="font-bold" variant="h2">
+            Donating Little
+          </Typography>
+          <div className="flex gap-8 mt-8 max-w-full overflow-y-scroll scrollbar-hide ">
+            {carouselSlides4.map((slides) => (
+              <div
+                className="relative flex flex-col justify-between  rounded-2xl bg-white"
+                key={slides?.id}
+              >
+                <div class="">
+                  <img
+                    className=" lg:h-[300px] min-w-[300px] lg:min-w-[400px] rounded-2xl"
+                    src={slides?.image}
+                    alt={slides?.alt}
+                  />
+                  <div class="p-3">
+                    <Button className="bg-[#F49A1C26] mt-4 text-[#F49A1C]">
+                      Ghana
+                    </Button>
+                    <Typography className="mx-auto right-5 font-bold left-5 text-base mt-4">
+                      {slides?.header ||
+                        "Fund a Youth/Person Living with Disability - PWDs Digital and Entrepreneurship Training"}
+                    </Typography>
+                    <Typography className="mx-auto right-5 text-sm mt-4 left-5 bg-[]">
+                      {slides?.caption}
+                    </Typography>
+                  </div>
+                </div>
+                <div className="p-3">
+                  <div className="mt-6  items-center w-full rounded-lg p-4">
+                    <div>
+                      <LinearProgress
+                        variant="determinate"
+                        className="h-2 rounded-xl text-[#01B6AC] bg-slate-300/30"
+                        // color="red"
+                        value={30}
+                        sx={{
+                          "& .MuiLinearProgress-bar": {
+                            backgroundColor: "#01B6AC", // Use the custom color class here
+                          },
+                        }}
+                      />
+                      <div className="flex justify-between font-bold mt-2">
+                        <span>
+                          Raised:<span className="text-[#C654D1]"> $8,000</span>
+                        </span>
+                        <span>
+                          Goal: <spam className="text-[#01B6AC]">$10,000</spam>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-between mt-8 font-bold">
+                    <div className="font-bold">
+                      <Typography className="font-bold">
+                        Initiated by:
+                      </Typography>
+                      <Typography className="font-bold">
+                        Donor For Africa
+                      </Typography>
+                    </div>
+                    <div>
+                      <Button className="p-3 w-44 rounded-2xl bg-[#01B6AC]">
+                        Support Them
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mx-auto flex justify-center items-center text-center flex-col">
+            <Typography
+              className="text-center font-bold text-[#555555] py-6 scrollb"
+              variant="h5"
+            >
+              Campaign Videos{" "}
+            </Typography>
+            <video
+              controls
+              width="940"
+              height=""
+              className="rounded-lg shadow-2xl"
+            >
+              <source src={videoz} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <Typography>Fund a Youth/Person Living with Disability</Typography>
+          </div>
         </div>
       </div>
-      <div className="w-full mt-10 flex flex-col justify-center items-center">
+      <div className="w-full py-10 flex flex-col md:px-20 px-4">
+        <Typography
+          className=" text-[#C654D1] text-semibold py-6 scrollb"
+          variant="h4"
+        >
+          Our Track Record
+        </Typography>
+        <Typography className="font-bold" variant="h2">
+          Empowering Lives, Making a
+        </Typography>
+        <Typography className="font-bold" variant="h2">
+          Proven Impact that Transforms.
+        </Typography>
+
+        <div className="flex gap-10 w-full lg:mt-12">
+          <div className="flex flex-col md:flex-row md:overflow-y-scroll scrollbar-hide  gap-6 lg:px-20 justify-between  w-full">
+            <div className="flex flex-col lg:px-0 gap-5 w-[375px] items-center bg-[#F9F9F9] p-4 rounded-2xl">
+              <img
+                src={Preserving}
+                alt="preserving"
+                className="w-[360px] lg:h-[242px]"
+              />
+              <Typography
+                variant={islg ? "h5" : "h6"}
+                className="text-[#] ml-2 font-bold px-4"
+              >
+                Preserving Nature, Securing Tomorrow
+              </Typography>
+              <Typography className="text-[#555555] text-sm lg:text-base ml-2 px-4">
+                Together, we are making a positive impact on the environment.
+                With your support, RAMP has funded initiatives such as
+                reforestation, renewable energy projects, and waste management
+                programs.
+              </Typography>
+            </div>
+            <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center bg-[#F9F9F9] p-4 rounded-2xl">
+              <img
+                src={Empowerment}
+                alt="Empowerment"
+                className="w-[360px] lg:h-[242px]"
+              />
+              <Typography
+                variant={islg ? "h5" : "h6"}
+                className="text-[#] ml-2 font-bold px-4"
+              >
+                Empowerment Through Entrepreneurship
+              </Typography>
+              <Typography className="text-[#555555] text-sm lg:text-base ml-2 px-4">
+                By connecting nonprofits to donors, RAMP has empowered women to
+                start their own businesses and become self-sufficient. Through
+                training, mentorship, and financial support, we are unlocking
+                the entrepreneurial potential of women and fostering economic
+                growth.
+              </Typography>
+            </div>
+            <div className="flex flex-col px-5 lg:px-0 gap-5 w-[385px] items-center bg-[#F9F9F9] p-4 rounded-2xl">
+              <img
+                src={Knowledge}
+                alt="Knowledge"
+                className="w-[360px] lg:h-[242px]"
+              />
+              <Typography
+                variant={islg ? "h5" : "h6"}
+                className="text-[#] ml-2 font-bold w-[360px] px-4"
+              >
+                Igniting Knowledge, Empowering Communities
+              </Typography>
+              <Typography className="text-[#555555] text-sm lg:text-base ml-2 w-[360px] px-4">
+                Through RAMP's platform, generous donors like you have funded
+                the construction of schools in underserved areas, providing
+                access to education for thousands of children. Together, we are
+                creating brighter futures and breaking the cycle of poverty.
+              </Typography>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full mt-10 md:px-6 px-4 justify-center items-center">
+        <Typography
+          className="text-center text-black text-semibold pt-6 "
+          variant="h3"
+        >
+          Sustainance Development Goals
+        </Typography>
+        <Typography
+          className="text-center text-black py-2 scrollb"
+          variant="h6"
+        >
+          We aim to empower nonprofits through by helping them achieve their
+          goals.
+        </Typography>
+        <div className="md:w-10/12 mx-auto flex justify-center">
+          <img src={SDG} />
+          {/* <Slider {...settings}>
+            {sdg.map((image, index) => (
+              <div className="px-4" key={index}>
+                <img src={image.sdg} alt={`Image ${index}`} />
+              </div>
+            ))}
+          </Slider> */}
+        </div>
+      </div>
+      {/* ******************************************************************************************************************************************************************************* */}
+      {/* <div className="w-full mt-10 flex flex-col justify-center items-center">
         <Typography
           className="text-center text-[#555555] text-semibold py-6 scrollb"
           variant="h4"
@@ -495,128 +1201,67 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-      </div>
-      <div className="w-full mt-10 flex flex-col justify-center items-center">
+      </div> */}
+      {/* ******************************************************************************************************************************************************************************* */}
+      <div className="bg-white md:pt-20 md:px-12 p-4 ">
         <Typography
-          className="text-center text-[#555555] text-semibold py-6 scrollb"
-          variant="h4"
-        >
-          Our Track Record
-        </Typography>
-
-        <div className="flex gap-10 mt-5 w-full justify-center items-center">
-          <div className="flex flex-col md:flex-row md:overflow-y-scroll scrollbar-hide  gap-6 lg:w-[1247px] justify-center">
-            <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center">
-              <img
-                src={Preserving}
-                alt="preserving"
-                className="w-[360px] lg:h-[242px]"
-              />
-              <Typography
-                variant={islg ? "h5" : "h6"}
-                className="text-[#01B6AC] ml-2 font-bold"
-              >
-                Preserving Nature, Securing Tomorrow
-              </Typography>
-              <Typography className="text-[#555555] text-sm lg:text-base ml-2">
-                Together, we are making a positive impact on the environment.
-                With your support, RAMP has funded initiatives such as
-                reforestation, renewable energy projects, and waste management
-                programs.
-              </Typography>
-            </div>
-            <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center">
-              <img
-                src={Empowerment}
-                alt="Empowerment"
-                className="w-[360px] lg:h-[242px]"
-              />
-              <Typography
-                variant={islg ? "h5" : "h6"}
-                className="text-[#01B6AC] ml-2 font-bold"
-              >
-                Empowerment Through Entrepreneurship
-              </Typography>
-              <Typography className="text-[#555555] text-sm lg:text-base ml-2">
-                By connecting nonprofits to donors, RAMP has empowered women to
-                start their own businesses and become self-sufficient. Through
-                training, mentorship, and financial support, we are unlocking
-                the entrepreneurial potential of women and fostering economic
-                growth.
-              </Typography>
-            </div>
-            <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center">
-              <img
-                src={Knowledge}
-                alt="Knowledge"
-                className="w-[360px] lg:h-[242px]"
-              />
-              <Typography
-                variant={islg ? "h5" : "h6"}
-                className="text-[#01B6AC] ml-2 font-bold"
-              >
-                Igniting Knowledge, Empowering Communities
-              </Typography>
-              <Typography className="text-[#555555] text-sm lg:text-base ml-2">
-                Through RAMP's platform, generous donors like you have funded
-                the construction of schools in underserved areas, providing
-                access to education for thousands of children. Together, we are
-                creating brighter futures and breaking the cycle of poverty.
-              </Typography>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-white py-12 md:px-12 px-4 ">
-        <Typography
-          className="text-center text-[#555555] py-6 scrollb"
-          variant="h4"
-        >
-          Gallery
-        </Typography>
-        <div className="flex gap-5 mt-8 max-w-full overflow-y-scroll scrollbar-hide">
-          {carouselSlides4.map((slides) => (
-            <div className="relative" key={slides?.id}>
-              <img
-                className=" lg:h-[300px] min-w-[300px] lg:min-w-[400px]"
-                src={slides?.image}
-                alt={slides?.alt}
-              />
-              {/* <Button className="absolute bottom-5 w-[120px] md:w-[200px] h-[40px] mx-auto right-5 left-5 bg-[#3E4095]">
-                {slides?.caption}
-              </Button> */}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="bg-white md:py-12 md:px-12 p-4 ">
-        <Typography
-          className="text-center text-[#555555] py-6 scrollb"
+          className=" text-[#C654D1] text-semibold py-6 scrollb"
           variant="h4"
         >
           Testimonials
         </Typography>
-        <div className="w-full relative md:h-[400px] mt-5">
+        <Typography className="font-bold" variant="h2">
+          What People Say about
+        </Typography>
+        <Typography className="font-bold text-[#C654D1]" variant="h2">
+          Our Organization
+        </Typography>
+        <div className="w-full relative md:h-[400px] mt-12 ">
+          <Slider {...settings}>
+            {sdg.map((image, index) => (
+              <div className="md:px-12">
+                <div className=" flex justify-between" key={index}>
+                  <img
+                    className="h-[80px]"
+                    src={image.sdg}
+                    alt={`Image ${index}`}
+                  />
+                  <Rating value={5} />
+                </div>
+
+                <Typography variant="h4" className="font-bold mt-4">
+                  Bukola Bamiduro
+                </Typography>
+                <Typography variant="h6" className="font-bold text-[#696969]">
+                  Founder - <span className="text-[#01B6AC]">Karis Elios</span>
+                </Typography>
+
+                <Typography className="font-medium my-4 text-base text-[#696969]">
+                  {image.caption}
+                </Typography>
+              </div>
+            ))}
+          </Slider>
           {/* {carouselSlides3.map((slide, index) => ( */}
-          <div
-            className={`flex flex-col md:flex-row  w-full justify-center items-center gap-6 ${
-              activeSlideIndex % 2 !== 0 &&
+          {/* <div
+            className={`flex flex-col md:flex-row  w-full justify-center items-start gap-6 ${
+              activeSlideIndex3 % 2 !== 0 &&
               "md:flex-row-reverse flex-col-reverse"
             }`}
           >
-            <div className="md:w-6/12 relative mx-auto md:mx-0">
+            <div className="relative mx-auto md:mx-0">
               <img
                 // key={index}
-                src={carouselSlides3[activeSlideIndex]?.image}
-                alt={carouselSlides3[activeSlideIndex]?.captionHeader}
-                className={`w-full transition-opacity duration-500 md:h-[400px]`}
+                src={carouselSlides3[activeSlideIndex3]?.image}
+                alt={carouselSlides3[activeSlideIndex3]?.captionHeader}
+                className={`w-full transition-opacity duration-500 md:h-[600px]`}
               />
               <div className="absolute bottom-4 left-6 flex space-x-2">
                 {carouselSlides3.map((_, index) => (
                   <button
                     key={index}
                     className={`w-[28px] h-[28px] rounded-md ${
-                      index === activeSlideIndex
+                      index === activeSlideIndex3
                         ? "bg-[#FCF6FC]"
                         : "bg-transparent"
                     }`}
@@ -632,18 +1277,21 @@ const HomePage = () => {
                 className="absolute -top-8  -right-6"
               />
             </div>
-            <div className=" md:w-6/12 flex flex-col gap-5">
+            <div className=" md:w-6/12 flex flex-col gap-5 md:mt-12">
               <Typography
                 variant="h4"
                 className="font-medium text-[#555555] text-center md:text-left "
               >
-                {carouselSlides3[activeSlideIndex]?.captionHeader}
+                {carouselSlides3[activeSlideIndex3]?.captionHeader}
               </Typography>
               <Typography className="font-normal mx-5 md:mx-0 text-base lg:text-lg text-[#555555] text-center md:text-left">
-                {carouselSlides3[activeSlideIndex]?.caption}
+                <em>"{carouselSlides3[activeSlideIndex3]?.caption}"</em>
+              </Typography>
+              <Typography className=" mx-5 md:mx-0 text-center lg:text-lg text-black font-bold">
+                {carouselSlides3[activeSlideIndex3]?.name}
               </Typography>
             </div>
-          </div>
+          </div> */}
           {/* ))} */}
         </div>
       </div>
@@ -665,99 +1313,9 @@ const HomePage = () => {
             <Typography variant="h6">+234 890 46746</Typography>
           </div>
         </div>
-      </footer> */}
-      <div className="bg-[#FCF6FC] lg:h-[441px] w-full">
-        <Typography className="text-center pt-14 text-xl lg:text-2xl ">
-          Stay Connected to RAMP:
-        </Typography>
-        <Typography className="text-center pt-3 pb-5 text-xl lg:text-2xl">
-          Subscribe to Our NewsLetter!
-        </Typography>
-        <div className="w-9/12 lg:w-6/12 flex mx-auto">
-          <Typography className="text-center pt-3 pb-5 text-sm">
-            Be the first to know about the inspiring stories of impact, upcoming
-            projects, and exciting updates from RAMP. Our newsletter is your
-            gateway to stay connected with our mission of empowering nonprofit
-            organizations in Africa and creating sustainable change.
-          </Typography>
-        </div>
-        <div class="flex justify-center">
-          <div class="flex flex-col justify-center items-center pb-12 gap-5 md:w-1/2 w-full p-4">
-            <TextField fullWidth placeholder="Email" className="w-full" />
-            <Button className="py-4 px-16">Feed the poor</Button>
-          </div>
-        </div>
-      </div>
-      <div className="w-full lg:h-[256px] py-10 bg-[#3E4095]">
-        <div className="flex flex-col justify-center items-center">
-          <img src={RampFooter} alt="Ramp Footer" />
-          <ul className="flex flex-col items-center lg:flex-row gap-5 lg:justify-center font-normal text-white">
-            <li>About</li>
-            <li>How It Works</li>
-            <li>Blogs</li>
-            <li>Resources</li>
-            <li>Help</li>
-            <li>Privacy Policy</li>
-          </ul>
-        </div>
-
-        <div className="flex md:justify-between mt-6  w-full flex-col md:flex-row md:gap-20 gap-6 items-center px-20 py-5 text-white ">
-          <div className="container text-center">
-            <p className="">
-              &copy; {new Date().getFullYear()} Resource Accessibility and
-              Mobilization Program. All rights reserved.
-            </p>
-          </div>
-          <ul className="flex gap-5 items-center font-bold ">
-            <Link to={RouteEnum.SIGNUP}>
-              <li>DONORS</li>
-            </Link>
-            <Link to={RouteEnum.SIGNUP}>
-              <li>NGOS</li>
-            </Link>
-            <Link to={RouteEnum.SIGNUP}>
-              <li>EXPERTS</li>
-            </Link>
-          </ul>
-          <ul className="flex space-x-4">
-            <li>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Twitter fontSize="large" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Facebook fontSize="large" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram fontSize="large" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <LinkedIn fontSize="large" />
-              </a>
-            </li>
-          </ul>
-        </div>
+ */}
+      <div class="mt-8">
+        <Footer />
       </div>
     </div>
   );

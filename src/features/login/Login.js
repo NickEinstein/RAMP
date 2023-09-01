@@ -6,10 +6,11 @@ import educatiaLogo from "images/Ramp2.png";
 
 import PasswordTextField from "common/PasswordTextField";
 
-import backgroundImage from "../../images/RampHome1.jpg";
-import backgroundImage3 from "../../images/ramphome3.jpg";
-import backgroundImage4 from "../../images/ramphome4.jpg";
-import backgroundImage5 from "../../images/ramphome5.jpg";
+import backgroundImage from "../../images/homepagefirstsection/pexels-curtis-loy-5196014.jpg";
+// import backgroundImage2 from "../../images/rampHome2.jpg";
+import backgroundImage3 from "../../images/homepagefirstsection/smartworks-coworking-cW4lLTavU80-unsplash.jpg";
+// import backgroundImage4 from "../../images/ramphome4.jpg";
+import backgroundImage5 from "../../images/homepagefirstsection/doug-linstedt-jEEYZsaxbH4-unsplash.jpg";
 
 import { Button, Divider, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
@@ -57,10 +58,10 @@ function Login(props) {
       textColor: "text-white",
       image: backgroundImage3,
     },
-    {
-      textColor: "text-secondary-main",
-      image: backgroundImage4,
-    },
+    // {
+    //   textColor: "text-secondary-main",
+    //   image: backgroundImage4,
+    // },
     {
       textColor: "text-secondary-main",
       image: backgroundImage5,
@@ -95,7 +96,7 @@ function Login(props) {
       auth: false,
     });
     console.log(res);
-    if (res.status == 200) {
+    if (res?.status == 200) {
       localStorage.setItem("token", res?.data?.data?.token);
       localStorage.setItem("role", res?.data?.data?.role[0]);
       localStorage.setItem("firstname", res?.data?.data?.firstname);
@@ -126,10 +127,22 @@ function Login(props) {
           }}
           className="lg:block items-stretch hidden relative min-h-screen bg-black/20 text-primary-main px-16 py-10 w-2/5"
         >
-          <img
+          <div
+            // className="relative"
+            className="min-h-screen absolute top-0 -z-20 min-w-[100%] left-0 flex bg-cover "
+            style={{
+              backgroundImage: `url(${configs[stepper.step].image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              width: "100%",
+              // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
+            }}
+          ></div>
+          {/* <img
             className="absolute min-h-screen -z-10 top-0 left-0 w-[100%] h-[100%]"
             src={configs[0]?.image}
-          />
+          /> */}
           <Link to={RouteEnum.LANDING}>
             <img className="w-1/5 -mt-5" src={educatiaLogo} />
           </Link>
@@ -196,11 +209,13 @@ function Login(props) {
 
             <a className="text-left" href="">
               <Typography>Forgot Password</Typography>
-              <Typography className="mt-5">
+              <Typography className="mt-5 flex gap-2">
                 Don't have an account?
-                <a href="/signup" className="ml-1 text-primary-main font-bold ">
-                  Sign Up
-                </a>
+                <Link to={RouteEnum.SIGNUP}>
+                  <Typography className="ml-1 text-primary-main font-bold ">
+                    Sign Up
+                  </Typography>
+                </Link>
               </Typography>
             </a>
           </div>

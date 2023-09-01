@@ -29,7 +29,7 @@ function TabNavigation() {
         <ToDoorSearch />
         <div className="flex justify-between items-center">
           <Typography variant="h4" className="font-bold">
-            Impact/Track Record
+            Campaigns
           </Typography>
 
          
@@ -37,7 +37,7 @@ function TabNavigation() {
       </div>
 
       <Tabs value={activeTab} onChange={handleChange} centered>
-        <Tab label="Add Project" />
+        <Tab label="Create Campaigns" />
         <Tab label="Add Milestones" />
         <Tab label="View All" />
       </Tabs>
