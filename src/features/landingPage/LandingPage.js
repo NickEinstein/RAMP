@@ -24,6 +24,10 @@ import videoz from "images/featuredCampaign/MVI_9411 (1).mp4";
 
 import ReactPlayer from "react-player";
 
+import entrepreneur from "images/homelanding/entrepreneur.png"
+import knowledge from "images/homelanding/knowledge.png"
+import nature from "images/homelanding/nature.png"
+
 import Briefcase from "images/Briefcase.svg";
 import SDG from "images/SDGs (1).png";
 import SDG1 from "images/sdg/E-WEB-Goal-01.png";
@@ -118,6 +122,8 @@ const HomePage = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const [showText, setShowText] = useState(false)
 
   const responsive = {
     superLargeDesktop: {
@@ -549,8 +555,12 @@ const HomePage = () => {
     setIsHovered(false);
   };
 
+  const handleShowText = () => {
+    setShowText(prevCheck => !prevCheck)
+  }
+
   return (
-    <div>
+    <div className="w-full">
       {/* <div
         className="border h-screen"
         style={{
@@ -569,24 +579,25 @@ const HomePage = () => {
           // carouselpic2,
           backgroundColor: "#F9EEFA",
         }}
+        className="w-full"
       >
         <LoginHeader />
 
-        <div className="bg-black/10">
+        <div className="bg-black/10 w-full">
           <div
             className={` lg:h-[90vh] w-full md:px-20 p-4 flex items-center justify-between transition-opacity duration-500 
              `}
           >
-            <div className="w- h-full w-full flex flex-col">
+            <div className="h-full w-full flex flex-col">
               <div className="flex flex-col items-center md:items-start md:mt-28 mt-2">
                 <Typography
-                  variant={islg ? "h1" : ismd ? "h2" : "h2"}
+                  variant={islg ? "h1" : ismd ? "h3" : "h3"}
                   className=" font-bold text-left md:w-4/5 text-[#01B6AC]"
                 >
                   {carouselSlides[activeSlideIndex].caption}
                 </Typography>
                 <Typography
-                  variant={islg ? "h1" : ismd ? "h2" : "h2"}
+                  variant={islg ? "h1" : ismd ? "h4" : "h4"}
                   className=" font-bold mb-4 text-left md:w-4/5 text-[#01B6AC]"
                 >
                   {carouselSlides[activeSlideIndex].caption2}
@@ -607,12 +618,12 @@ const HomePage = () => {
                 </div> */}
 
                 {/* <Typography  className="text-white mt-5 md:w-1/2 text-sm md:text-base">
-                  {carouselSlides[activeSlideIndex].howItWorks}
+                  {carouselSlides[activeSlideIndex].howItWorks} mt-12
                 </Typography> */}
               </div>
-              <div className="flex md:flex-row gap-5 items-center md:justify-start justify-center w-full mt-12">
+              <div className="flex md:flex-row gap-5 items-center md:justify-start justify-center w-full mt-6 lg:mt-2">
                 <Link className=" py-2" to={RouteEnum.SIGNUP}>
-                  <Button className="flex w-full rounded-xl mx-auto text-[14px] px-10 md:w-full items-center   lg:py-4 lg:mt-8 border-solid border-2  border-[#C654D1] bg-[#C654D1] font-bold hover:border-[#C654D1] hover:bg-[#C654D1]">
+                  <Button className="flex w-full rounded-xl mx-auto text-[14px] lg:px-10 md:w-full items-center   lg:py-4 lg:mt-8 border-solid border-2  border-[#C654D1] bg-[#C654D1] font-bold hover:border-[#C654D1] hover:bg-[#C654D1]">
                     Sign Up
                   </Button>
                 </Link>
@@ -707,25 +718,25 @@ const HomePage = () => {
           </div> */}
         </div>
       </div>{" "}
-      <div className="relative md:px-5 lg:px-0 w-full flex  justify-center">
+      <div className="relative px-0 w-full flex  justify-center">
         <div className="grid md:grid-cols-4 bg-[#01B6AC] shadow-xl w-full text-white border-white lg:w-full grid-cols-2 md:gap-6 justify-around">
           {stats.map((stat) => (
             <div className="flex">
               <div
                 key={stat.id}
-                className=" rounded-lg p-6 md:py-16 py-8 w-full flex flex-col md:flex-row justify-center items-center text-center gap-4"
+                className=" rounded-lg  py-8 w-full flex flex-col md:flex-row justify-center items-center text-center gap-4"
               >
                 {/* <img
-                  className="w-full h-32 object-cover rounded-md mb-4"
+                  className="w-full h-32 object-cover rounded-md mb-4" p-6 md:py-16 
                   src="path/to/image.jpg"
                   alt="Card Image"
                 /> */}
-                <Typography variant="h2" className="font-bold mb-2 text-white">
+                <Typography variant={islg ? "h2" : ismd ? "h4" : "h4"} className="font-bold mb-2 text-white">
                   {stat.num}
                 </Typography>
                 <div className=" ">
-                  <Typography className=" text-white text-sm lg:text-base font-bold w-full">{`${stat.subTextBold}`}</Typography>
-                  <Typography className=" text-white text-sm lg:text-base font-normal mt-1">{`${stat.subText}`}</Typography>
+                  <Typography className=" text-white text-xs lg:text-base font-bold w-full">{`${stat.subTextBold}`}</Typography>
+                  <Typography className=" text-white text-xs lg:text-base font-normal mt-1">{`${stat.subText}`}</Typography>
                 </div>
               </div>
               <div className="hidden md:flex mr-1 w-[1px] my-4 bg-white/30"></div>
@@ -775,6 +786,9 @@ const HomePage = () => {
             </Typography>
           </div> */}
           <div className=" md:w-full items-center md:mt-5 lg:mt-0 lg:items-start md:mx-0">
+          <Typography className=" text-[#C654D1] text-semibold px-4 py-6 scrollb" variant="h4">
+            How It Works
+          </Typography>
             <Carousel
               className="mt-4 py-8"
               responsive={responsive}
@@ -789,19 +803,27 @@ const HomePage = () => {
                   alt="Who We Are"
                 />
                 <div className="px-8 ">
-                  <Typography className="font-bold pb-5" variant="h3">
+                  <Typography className="font-bold pb-5" variant={islg ? "h3" : ismd ? "h4" : "h4"} >
                     Donors
                   </Typography>
                   <Typography className="text-sm lg:text-lg ">
-                    At RAMP, we are a dedicated team driven by a single mission:
+                  At RAMP, we are a dedicated team driven by a single mission:
                     to empower nonprofit organizations across Africa for
                     sustainable impact. We serve as a bridge, connecting
                     generous donors like you with trusted nonprofits working
-                    tirelessly to address life-threatening issues and uplift
+                    tirelessly
+                    {showText ? <span> to address life-threatening issues and uplift
                     communities living in poverty. With our comprehensive
                     platform, we provide the resources, support, and funding
                     needed to create lasting change. Together, we can build a
-                    brighter future and transform lives across the continent.
+                    brighter future and transform lives across the continent.</span>  
+                    : null
+                    }
+                    <span 
+                      className={`text-[#01B6AC] cursor-pointer text-sm ml-1`} 
+                      onClick={handleShowText}
+                    > Read {showText ? <span>Less</span> :<span> More</span>}
+                    </span> 
                   </Typography>
                   <Link className="w-full" to={RouteEnum.ABOUT}>
                     <Button className="w-6/12 lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 mt-4 border-solid border-2 rounded-2xl border-[#01B6AC] bg-[#01B6AC]">
@@ -818,7 +840,7 @@ const HomePage = () => {
                   alt="Who We Are"
                 />
                 <div className="px-8 ">
-                  <Typography className="font-bold pb-5" variant="h3">
+                  <Typography className="font-bold pb-5" variant={islg ? "h3" : ismd ? "h4" : "h4"}>
                     NGOs
                   </Typography>
                   <Typography className="text-sm lg:text-lg ">
@@ -843,7 +865,7 @@ const HomePage = () => {
                   alt="Who We Are"
                 />
                 <div className="px-8 ">
-                  <Typography className="font-bold pb-5" variant="h3">
+                  <Typography className="font-bold pb-5" variant={islg ? "h3" : ismd ? "h4" : "h4"} >
                     Donors
                   </Typography>
                   <Typography className="text-sm lg:text-lg ">
@@ -851,11 +873,20 @@ const HomePage = () => {
                     to empower nonprofit organizations across Africa for
                     sustainable impact. We serve as a bridge, connecting
                     generous donors like you with trusted nonprofits working
-                    tirelessly to address life-threatening issues and uplift
+                    tirelessly
+                    {showText ? <span> to address life-threatening issues and uplift
                     communities living in poverty. With our comprehensive
                     platform, we provide the resources, support, and funding
                     needed to create lasting change. Together, we can build a
-                    brighter future and transform lives across the continent.
+                    brighter future and transform lives across the continent. </span>  
+                    : null
+                    }
+                    <span 
+                      className={`text-[#01B6AC] cursor-pointer text-sm ml-1`} 
+                      onClick={handleShowText}
+                    > 
+                      Read {showText ? <span>Less</span> :<span> More</span>}
+                    </span> 
                   </Typography>
                   <Link className="w-full" to={RouteEnum.ABOUT}>
                     <Button className="w-6/12 lg:w-4/12 flex text-[14px] items-start px-10 py-2 lg:mt-8 mt-4 border-solid border-2 rounded-2xl border-[#01B6AC] bg-[#01B6AC]">
@@ -983,10 +1014,10 @@ const HomePage = () => {
           >
             Our Recent Campaigns
           </Typography>
-          <Typography className="font-bold" variant="h2">
+          <Typography className="font-bold" variant={islg ? "h2" : ismd ? "h4" : "h5"}>
             You Can Help Lots of People by
           </Typography>
-          <Typography className="font-bold" variant="h2">
+          <Typography className="font-bold" variant={islg ? "h2" : ismd ? "h4" : "h5"} >
             Donating Little
           </Typography>
           <div className="flex gap-8 mt-8 max-w-full overflow-y-scroll scrollbar-hide ">
@@ -1084,45 +1115,29 @@ const HomePage = () => {
         >
           Our Track Record
         </Typography>
-        <Typography className="font-bold" variant="h2">
+        <Typography className="font-bold" variant={islg ? "h2" : ismd ? "h4" : "h5"} >
           Empowering Lives, Making a
         </Typography>
-        <Typography className="font-bold" variant="h2">
+        <Typography className="font-bold" variant={islg ? "h2" : ismd ? "h4" : "h5"} >
           Proven Impact that Transforms.
         </Typography>
 
-        <div className="flex gap-10 w-full lg:mt-12">
-          <div className="flex flex-col md:flex-row md:overflow-y-scroll scrollbar-hide  gap-6 lg:px-20 justify-between  w-full">
-            <div className="flex flex-col lg:px-0 gap-5 w-[375px] items-center bg-[#F9F9F9] p-4 rounded-2xl">
-              <img
-                src={Preserving}
-                alt="preserving"
-                className="w-[360px] lg:h-[242px]"
-              />
-              <Typography
-                variant={islg ? "h5" : "h6"}
-                className="text-[#] ml-2 font-bold px-4"
-              >
-                Preserving Nature, Securing Tomorrow
-              </Typography>
-              <Typography className="text-[#555555] text-sm lg:text-base ml-2 px-4">
-                Together, we are making a positive impact on the environment.
-                With your support, RAMP has funded initiatives such as
-                reforestation, renewable energy projects, and waste management
-                programs.
-              </Typography>
-            </div>
+        <div className="flex  w-full mt-6 lg:mt-12"> {/* gap-10 */}
+          <div className="flex flex-col md:flex-row md:overflow-y-scroll scrollbar-hide  gap-6 lg:px-20 justify-between md:w-[1500px]  lg:w-full">
             <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center bg-[#F9F9F9] p-4 rounded-2xl">
               <img
-                src={Empowerment}
-                alt="Empowerment"
+                // src={Preserving}
+                src={entrepreneur}
+                alt="Entrepreneur"
+                // className="w-[280px] lg:h-[222px]"
                 className="w-[360px] lg:h-[242px]"
               />
               <Typography
                 variant={islg ? "h5" : "h6"}
-                className="text-[#] ml-2 font-bold px-4"
+                className="text-[#213430] ml-2 font-bold px-4 font-semibold"
               >
-                Empowerment Through Entrepreneurship
+                {/* Preserving Nature, Securing Tomorrow */}
+                Empowerment Through <span className="text-[#5F47F9] ">Entrepreneurship</span>
               </Typography>
               <Typography className="text-[#555555] text-sm lg:text-base ml-2 px-4">
                 By connecting nonprofits to donors, RAMP has empowered women to
@@ -1132,23 +1147,42 @@ const HomePage = () => {
                 growth.
               </Typography>
             </div>
-            <div className="flex flex-col px-5 lg:px-0 gap-5 w-[385px] items-center bg-[#F9F9F9] p-4 rounded-2xl">
+            <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center bg-[#F9F9F9] p-4 rounded-2xl">
               <img
-                src={Knowledge}
+                src={knowledge}
                 alt="Knowledge"
-                className="w-[360px] lg:h-[242px]"
+                className="lg:w-[280px] lg:h-[222px]"
               />
               <Typography
                 variant={islg ? "h5" : "h6"}
-                className="text-[#] ml-2 font-bold w-[360px] px-4"
+                className="text-[#213430] ml-2 font-bold px-4 font-semibold"
               >
-                Igniting Knowledge, Empowering Communities
+                Igniting <span className="text-[#01B6AC]">Knowledge</span>, Empowering <span className="text-[#5F47F9]">Communities</span>
               </Typography>
-              <Typography className="text-[#555555] text-sm lg:text-base ml-2 w-[360px] px-4">
+              <Typography className="text-[#555555] text-sm lg:text-base ml-2 px-4">
                 Through RAMP's platform, generous donors like you have funded
                 the construction of schools in underserved areas, providing
                 access to education for thousands of children. Together, we are
                 creating brighter futures and breaking the cycle of poverty.
+              </Typography>
+            </div>
+            <div className="flex flex-col px-5 lg:px-0 gap-5 w-[375px] items-center bg-[#F9F9F9] p-4 rounded-2xl">
+              <img
+                src={nature}
+                alt="Nature"
+                className="md:w-[280px] lg:w-[340px] lg:h-[222px]"
+              />
+              <Typography
+                variant={islg ? "h5" : "h6"}
+                className="text-[#] ml-2 font-bold w-[360px] px-4 font-semibold"
+              >
+                Preserving <span className="text-[#01B6AC]">Nature</span>, Securing <span className="text-[#5F47F9]">Tommorrow</span>
+              </Typography>
+              <Typography className="text-[#555555] text-sm lg:text-base ml-2 w-[360px] px-4">
+                Together, we are making a positive impact on the environment.
+                With your support, RAMP has funded initiatives such as
+                reforestation, renewable energy projects, and waste management
+                programs.
               </Typography>
             </div>
           </div>
@@ -1210,10 +1244,10 @@ const HomePage = () => {
         >
           Testimonials
         </Typography>
-        <Typography className="font-bold" variant="h2">
+        <Typography className="font-bold" variant={islg ? "h2" : ismd ? "h4" : "h5"}>
           What People Say about
         </Typography>
-        <Typography className="font-bold text-[#C654D1]" variant="h2">
+        <Typography className="font-bold text-[#C654D1]" variant={islg ? "h2" : ismd ? "h4" : "h5"}>
           Our Organization
         </Typography>
         <div className="w-full relative md:h-[400px] mt-12 ">
@@ -1229,7 +1263,7 @@ const HomePage = () => {
                   <Rating value={5} />
                 </div>
 
-                <Typography variant="h4" className="font-bold mt-4">
+                <Typography variant={islg ? "h4" : ismd ? "h4" : "h5"} className="font-bold mt-4">
                   Bukola Bamiduro
                 </Typography>
                 <Typography variant="h6" className="font-bold text-[#696969]">
@@ -1314,7 +1348,7 @@ const HomePage = () => {
           </div>
         </div>
  */}
-      <div class="mt-8">
+      <div class="md:mt-56 lg:mt-8 ">
         <Footer />
       </div>
     </div>

@@ -88,6 +88,7 @@ import Footer from "common/Footer";
 
 function Home(props) {
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
+  const islg = useMediaQuery(MediaQueryBreakpointEnum.lg);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const [age, setAge] = React.useState("");
@@ -109,14 +110,14 @@ function Home(props) {
           // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
         }}
       >
-        <Typography className="text-white" variant="h1" gutterBottom>
+        <Typography className="text-white" variant={islg ? "h1" : ismd ? "h2" : "h2"}  gutterBottom>
           Our Story
         </Typography>
       </div>
 
       <Container className="py-12" maxWidth="xl">
         <Box className="">
-          <Typography className="text-center px-32 pb-16" variant="h4">
+          <Typography className="text-center lg:px-32 pb-16" variant={islg ? "h4" : ismd ? "h4" : "h5"}>
             “With experience gathered from over 14years designing accelerator
             programs, leading changemakers from 20 African countries and
             different continents; RAMP is designed to help organizations scale
@@ -127,7 +128,34 @@ function Home(props) {
             <Typography className=" font-bold mb-5" variant="h4">
               The Power of a Table and Chair
             </Typography>
-            <div className="grid grid-cols-2 items-start justify-between gap-16 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 items-start justify-between gap-6 lg:gap-16 w-full">
+              {/* For Mobile */}
+            <div className="flex flex-col lg:hidden">
+                <div
+                  className="h-[200px] md:h-[500px] w-full pl-40 flex justify-center items-center rounded-3xl"
+                  style={{
+                    backgroundImage: `url(${chidi})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    // width: "100%",
+                    // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
+                  }}
+                >
+                  {/* <img className="w-5/12 h-[400px] rounded-3xl" src={ourStory} /> */}
+                </div>
+                <div className="p-3 ">
+                  <Typography className="text-base font-bold">
+                    Chidi Koldsweat
+                  </Typography>
+                  <Typography className="text-sm italic">
+                    Founder and CEO
+                  </Typography>
+                  <Typography className="text-base font-bold italic">
+                    Donors for Africa Foundation
+                  </Typography>
+                </div>
+              </div>
               <div class="flex flex-col gap- text-base w-full">
                 <Typography className="text-base">
                   In 2017 our founder, sat on her sons chair with her laptop
@@ -208,9 +236,10 @@ function Home(props) {
                   </div>
                 </div> */}
               </div>
-              <div>
+              {/* For Tablet and Laptops */}
+              <div className="hidden lg:flex flex-col">
                 <div
-                  className="h-[500px] w-full pl-40 flex justify-center items-center rounded-3xl"
+                  className="md:h-[400px] w-full pl-40 flex justify-center items-center rounded-3xl"
                   style={{
                     backgroundImage: `url(${chidi})`,
                     backgroundSize: "cover",
@@ -241,8 +270,8 @@ function Home(props) {
               <Typography className="text-center font-bold mb-8" variant="h3">
                 Our Values
               </Typography>
-              <div class="grid grid-cols-3 gap-16">
-                <div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+                <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                   <img src={svg1} />
                   <Typography
                     variant="h4"
@@ -258,7 +287,7 @@ function Home(props) {
                     straight to your inbox with opportunity to verify
                   </Typography>
                 </div>
-                <div className="">
+                <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                   <img src={svg1} />
                   <Typography
                     variant="h4"
@@ -272,7 +301,7 @@ function Home(props) {
                     are automatically reviewed and feedback providied
                   </Typography>
                 </div>
-                <div>
+                <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                   <img src={svg1} />
                   <Typography
                     variant="h4"
@@ -286,7 +315,7 @@ function Home(props) {
                     constant professional.”
                   </Typography>
                 </div>
-                <div>
+                <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                   <img src={svg1} />
                   <Typography
                     variant="h4"
@@ -300,7 +329,7 @@ function Home(props) {
                     all
                   </Typography>
                 </div>
-                <div>
+                <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                   <img src={svg1} />
                   <Typography
                     variant="h4"
@@ -314,7 +343,7 @@ function Home(props) {
                     increased partnership with internal and external stakeholders.
                   </Typography>
                 </div>
-                <div>
+                <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                   <img src={svg1} />
                   <Typography
                     variant="h4"
