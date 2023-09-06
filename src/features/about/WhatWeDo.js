@@ -134,6 +134,7 @@ const Header = () => {
 function Home(props) {
 
   const ismd = useMediaQuery(MediaQueryBreakpointEnum.md);
+  const islg = useMediaQuery(MediaQueryBreakpointEnum.lg);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const [age, setAge] = React.useState("");
@@ -141,7 +142,7 @@ function Home(props) {
   const [verificationOTP, setVerificationOTP] = React.useState("");
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <LoginHeader />
       {/* <Header /> */}
 
@@ -156,15 +157,16 @@ function Home(props) {
           // backgroundColor: carouselSlides[activeSlideIndex].backgroundColor,
         }}
       >
-        <Typography className="text-white" variant="h1" gutterBottom>
+        <Typography className="text-white" variant={islg ? "h1" : ismd ? "h2" : "h2"}  gutterBottom>
           What we do
         </Typography>
       </div>
 
       <Container className="py-12" maxWidth="xl">
         <Box>
-          <div className="w-full  text-lg flex gap-12">
-            <div className="flex flex-col gap-3 w-3/5">
+          <div className="w-full  text-lg flex flex-col lg:flex-row gap-12">
+          <img className="lg:hidden flex" src={miriam}/>
+            <div className="flex flex-col gap-3 lg:w-3/5">
               <Typography
                 className="text-lg
                   "
@@ -231,7 +233,7 @@ function Home(props) {
               </Typography>
             </div>
 
-            <img className="w-2/5" src={miriam}/>
+            <img className="w-2/5 hidden lg:flex" src={miriam}/>
           </div>
         </Box>
       </Container>
